@@ -998,6 +998,10 @@
   });
 
   loadHistory();
+
+  // Expose le moteur de calcul existant pour que les pages course générées
+  // (voir build.js) puissent l'appeler directement — jamais de second moteur.
+  window.MCT = { predict, riegel, coeffs, bucketLookup, TABLE_B, TABLE_C, TABLE_E, TERRAIN, TERRAIN_LABEL, formatTime, formatHM, formatPace, parseTime };
 })();
 
 </script>
