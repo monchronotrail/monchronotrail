@@ -84,6 +84,9 @@ function raceUrlPath(r){
   const formatSlug = r.formatName ? slugify(r.formatName) : slugify(r.distance + 'km');
   return `/${r.slug}/${r.edition}/${formatSlug}/`;
 }
+function eventUrlPath(slug, edition){
+  return `/${slug}/${edition}/`;
+}
 
 const bySlug = {};
 races.forEach(r => { (bySlug[r.slug] = bySlug[r.slug] || []).push(r); });
@@ -94,11 +97,8 @@ races.forEach(r => { (bySlug[r.slug] = bySlug[r.slug] || []).push(r); });
 // ---------------------------------------------------------------------
 const homeCoursesHtml = Object.keys(bySlug).map(slug => {
   const list = bySlug[slug];
-  const eventName = list[0].name;
-  const links = list.map(r =>
-    `<a href="${raceUrlPath(r)}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 12px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${esc(eventName)} ${esc(r.formatName || r.distance + ' km')} →</a>`
-  ).join('');
-  return links;
+  const first = list[0];
+  return `<a href="${eventUrlPath(first.slug, first.edition)}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 12px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${esc(first.name)} ${first.edition} →</a>`;
 }).join('');
 
 const heroCoursesBar = `
@@ -177,9 +177,27 @@ races.forEach(race => {
 })();
 </script>`;
 
+  // Balisage Schema.org (SportsEvent) — aide Google à comprendre qu'il s'agit
+  // d'un événement sportif. La date n'est incluse que si elle est confirmée
+  // (au format ISO), pour ne jamais publier de donnée structurée inventée.
+  const isoDateMatch = (race.date || '').match(/^\d{4}-\d{2}-\d{2}$/);
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'SportsEvent',
+    name: `${race.name} ${formatLabel} ${race.edition}`,
+    sport: 'Trail running',
+    description: race.description || undefined,
+    ...(isoDateMatch ? { startDate: race.date } : {}),
+    location: race.location ? { '@type': 'Place', name: race.location } : undefined,
+    organizer: race.organizer ? { '@type': 'Organization', name: race.organizer, url: race.officialSite || undefined } : undefined,
+    url: url
+  };
+  const structuredDataScript = `<script type="application/ld+json">${JSON.stringify(structuredData)}</script>`;
+
   const body = `
+${structuredDataScript}
 <div style="max-width:720px;margin:0 auto 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;">
-  <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
+  <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a> · <a href="${eventUrlPath(race.slug, race.edition)}" style="color:#2F4A3C;">${esc(race.name)} ${race.edition} — tous les formats</a></p>
   <h1 style="font-family:Georgia,'Iowan Old Style',serif;font-weight:normal;font-size:26px;line-height:1.3;">${esc(race.name)} ${esc(formatLabel)} ${race.edition} : estimez votre temps de course</h1>
   <p style="font-size:14.5px;line-height:1.6;">${esc(race.description || '')} Utilisez le calculateur ci-dessous pour obtenir une estimation personnalisée de votre temps de course.</p>
 
@@ -229,7 +247,48 @@ ${prefillScript}
 });
 
 // ---------------------------------------------------------------------
-// 5. Page calendrier (liste toutes les courses)
+// 5. Pages événement — une par événement/édition, listant les formats.
+//    C'est ici que la page d'accueil renvoie désormais (Trail du Sancy →
+//    choisissez votre format), plutôt que directement vers un format.
+// ---------------------------------------------------------------------
+const byEventEdition = {};
+races.forEach(r => {
+  const key = r.slug + '::' + r.edition;
+  (byEventEdition[key] = byEventEdition[key] || []).push(r);
+});
+
+Object.values(byEventEdition).forEach(list => {
+  const first = list[0];
+  const url = 'https://monchronotrail.netlify.app' + eventUrlPath(first.slug, first.edition);
+  const title = `${first.name} ${first.edition} : choisissez votre format | Monchronotrail`;
+  const description = `${first.name} ${first.edition} : découvrez les formats disponibles (${list.map(r => r.formatName || r.distance + ' km').join(', ')}) et estimez votre temps de course avec Monchronotrail.`;
+
+  const formatCards = list.map(r => {
+    const density = r.distance > 0 ? (r.elevationGain / r.distance) : 0;
+    return `<a href="${raceUrlPath(r)}" style="display:block;text-decoration:none;color:#16211C;border:1px solid #D8DED4;border-radius:8px;padding:16px 18px;margin-bottom:12px;">
+      <div style="font-family:Georgia,serif;font-size:18px;color:#2F4A3C;margin-bottom:4px;">${esc(r.formatName || r.distance + ' km')} →</div>
+      <div style="font-size:13.5px;color:#5C6B66;">${r.distance} km · ${r.elevationGain} m D+ (${density.toFixed(0)} m/km) · ${DIFFICULTY_LABELS[r.difficulty] || '—'}${r.date ? ' · ' + esc(r.date) : ''}</div>
+    </a>`;
+  }).join('');
+
+  const body = `
+<div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;">
+  <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
+  <h1 style="font-family:Georgia,'Iowan Old Style',serif;font-weight:normal;font-size:28px;">${esc(first.name)} ${first.edition}</h1>
+  <p style="font-size:14.5px;line-height:1.6;">${esc(first.description || '')}</p>
+  <p style="font-size:13.5px;color:#5C6B66;">${esc(first.location || '')}</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Choisissez votre format</h2>
+  ${formatCards}
+
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+</div>`;
+
+  const head2 = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.netlify.app/og-image.png' });
+  write(eventUrlPath(first.slug, first.edition).slice(1) + 'index.html', page(head2, body));
+});
+// ---------------------------------------------------------------------
+// 6. Page calendrier (liste tous les formats)
 // ---------------------------------------------------------------------
 const calendarRows = races.map(r =>
   `<li style="margin-bottom:8px;"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;">${esc(r.name)} ${esc(r.formatName || r.distance+' km')}</a> — ${esc(r.date || 'date à confirmer')}, ${esc(r.location || '')}</li>`
@@ -250,11 +309,13 @@ const calendarBody = `
 write('calendrier-trails-2026/index.html', page(calendarHead, calendarBody));
 
 // ---------------------------------------------------------------------
-// 6. Sitemap
+// 7. Sitemap
 // ---------------------------------------------------------------------
+const eventUrls = Object.values(byEventEdition).map(list => 'https://monchronotrail.netlify.app' + eventUrlPath(list[0].slug, list[0].edition));
 const urls = [
   'https://monchronotrail.netlify.app/',
   'https://monchronotrail.netlify.app/calendrier-trails-2026/',
+  ...eventUrls,
   ...races.map(r => 'https://monchronotrail.netlify.app' + raceUrlPath(r))
 ];
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
@@ -263,4 +324,4 @@ ${urls.map(u => `  <url><loc>${u}</loc><changefreq>monthly</changefreq></url>`).
 </urlset>
 `);
 
-console.log(`Build terminé : ${1 + races.length + 1} pages générées dans dist/`);
+console.log(`Build terminé : ${urls.length} pages générées dans dist/`);
