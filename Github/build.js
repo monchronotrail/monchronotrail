@@ -96,18 +96,24 @@ const homeCoursesHtml = Object.keys(bySlug).map(slug => {
   const list = bySlug[slug];
   const eventName = list[0].name;
   const links = list.map(r =>
-    `<a href="${raceUrlPath(r)}" style="color:var(--forest);text-decoration:none;font-weight:600;margin:0 14px 8px 0;display:inline-block;">${esc(r.formatName || r.distance + ' km')} →</a>`
+    `<a href="${raceUrlPath(r)}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 12px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${esc(eventName)} ${esc(r.formatName || r.distance + ' km')} →</a>`
   ).join('');
-  return `<div style="margin-bottom:14px;"><div style="font-size:14.5px;color:var(--ink);margin-bottom:4px;">${esc(eventName)}</div>${links}</div>`;
+  return links;
 }).join('');
 
-const homeCoursesSection = `
-<div class="tc-section" style="max-width:720px;margin:0 auto;">
-  <h2>Courses disponibles</h2>
-  <p class="tc-sub">Des pages dédiées avec les infos officielles et le calculateur pré-rempli pour ces courses.</p>
-  ${homeCoursesHtml || '<p class="tc-sub">Aucune course ajoutée pour le moment.</p>'}
-  <p style="margin-top:8px;"><a href="/calendrier-trails-2026/" style="color:var(--forest);font-size:13.5px;">Voir le calendrier complet →</a></p>
-</div>`;
+const heroCoursesBar = `
+  <div style="background:#2F4A3C;padding:0 28px 24px;">
+    <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9FB5A5;margin-bottom:10px;">Courses disponibles</div>
+    <div>${homeCoursesHtml || '<span style="color:#9FB5A5;font-size:13.5px;">Aucune course ajoutée pour le moment.</span>'}</div>
+    <div style="margin-top:4px;"><a href="/calendrier-trails-2026/" style="color:#F0C179;font-size:13px;text-decoration:none;">Voir le calendrier complet →</a></div>
+  </div>
+`;
+
+// Insère la barre juste après le bandeau (hero), avant la 1re section du formulaire —
+// uniquement sur la page d'accueil, le partial CALCULATOR original reste inchangé
+// pour les pages de courses.
+const heroSplitIdx = CALCULATOR.indexOf('<div class="tc-section">');
+const homeCalculator = CALCULATOR.slice(0, heroSplitIdx) + heroCoursesBar + '\n  ' + CALCULATOR.slice(heroSplitIdx);
 
 const homeHead = headTags({
   title: 'Calculateur de temps trail et ultra-trail gratuit | Monchronotrail',
@@ -115,7 +121,7 @@ const homeHead = headTags({
   canonical: 'https://monchronotrail.netlify.app/',
   ogImage: 'https://monchronotrail.netlify.app/og-image.png'
 });
-write('index.html', page(homeHead, CALCULATOR + homeCoursesSection));
+write('index.html', page(homeHead, homeCalculator));
 
 // ---------------------------------------------------------------------
 // 3. Pages statiques copiées telles quelles
