@@ -67,27 +67,8 @@ ${bodyHtml}
 }
 
 // ---------------------------------------------------------------------
-// 1. Page d'accueil — identique à la version actuelle, juste réassemblée
-//    à partir du même partial calculateur que les pages de courses.
-// ---------------------------------------------------------------------
-const homeHead = headTags({
-  title: 'Calculateur de temps trail et ultra-trail gratuit | Monchronotrail',
-  description: "Monchronotrail : calculez gratuitement votre temps prévisionnel sur un trail ou un ultra-trail (30, 60, 80, 100 km...) à partir d'un chrono de référence, du dénivelé positif et du terrain. Pensé pour les néo-traileurs.",
-  canonical: 'https://monchronotrail.netlify.app/',
-  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
-});
-write('index.html', page(homeHead, CALCULATOR));
-
-// ---------------------------------------------------------------------
-// 2. Pages statiques copiées telles quelles
-// ---------------------------------------------------------------------
-copyFile('mentions-legales.html', 'mentions-legales.html');
-copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
-copyFile('favicon.svg', 'favicon.svg');
-copyFile('og-image.png', 'og-image.png');
-
-// ---------------------------------------------------------------------
-// 3. Pages de courses — générées depuis _data/races.json
+// 1. Chargement des données de courses (avant la home, pour pouvoir y
+//    lister les courses disponibles)
 // ---------------------------------------------------------------------
 const races = JSON.parse(read('races.json'));
 
@@ -107,6 +88,46 @@ function raceUrlPath(r){
 const bySlug = {};
 races.forEach(r => { (bySlug[r.slug] = bySlug[r.slug] || []).push(r); });
 
+// ---------------------------------------------------------------------
+// 2. Page d'accueil — le calculateur identique à avant, plus une section
+//    "Courses disponibles" générée automatiquement depuis races.json.
+// ---------------------------------------------------------------------
+const homeCoursesHtml = Object.keys(bySlug).map(slug => {
+  const list = bySlug[slug];
+  const eventName = list[0].name;
+  const links = list.map(r =>
+    `<a href="${raceUrlPath(r)}" style="color:var(--forest);text-decoration:none;font-weight:600;margin:0 14px 8px 0;display:inline-block;">${esc(r.formatName || r.distance + ' km')} →</a>`
+  ).join('');
+  return `<div style="margin-bottom:14px;"><div style="font-size:14.5px;color:var(--ink);margin-bottom:4px;">${esc(eventName)}</div>${links}</div>`;
+}).join('');
+
+const homeCoursesSection = `
+<div class="tc-section" style="max-width:720px;margin:0 auto;">
+  <h2>Courses disponibles</h2>
+  <p class="tc-sub">Des pages dédiées avec les infos officielles et le calculateur pré-rempli pour ces courses.</p>
+  ${homeCoursesHtml || '<p class="tc-sub">Aucune course ajoutée pour le moment.</p>'}
+  <p style="margin-top:8px;"><a href="/calendrier-trails-2026/" style="color:var(--forest);font-size:13.5px;">Voir le calendrier complet →</a></p>
+</div>`;
+
+const homeHead = headTags({
+  title: 'Calculateur de temps trail et ultra-trail gratuit | Monchronotrail',
+  description: "Monchronotrail : calculez gratuitement votre temps prévisionnel sur un trail ou un ultra-trail (30, 60, 80, 100 km...) à partir d'un chrono de référence, du dénivelé positif et du terrain. Pensé pour les néo-traileurs.",
+  canonical: 'https://monchronotrail.netlify.app/',
+  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+});
+write('index.html', page(homeHead, CALCULATOR + homeCoursesSection));
+
+// ---------------------------------------------------------------------
+// 3. Pages statiques copiées telles quelles
+// ---------------------------------------------------------------------
+copyFile('mentions-legales.html', 'mentions-legales.html');
+copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
+copyFile('favicon.svg', 'favicon.svg');
+copyFile('og-image.png', 'og-image.png');
+
+// ---------------------------------------------------------------------
+// 4. Pages de courses — générées depuis races.json
+// ---------------------------------------------------------------------
 races.forEach(race => {
   const url = 'https://monchronotrail.netlify.app' + raceUrlPath(race);
   const formatLabel = race.formatName || (race.distance + ' km');
@@ -202,7 +223,7 @@ ${prefillScript}
 });
 
 // ---------------------------------------------------------------------
-// 4. Page calendrier (liste toutes les courses)
+// 5. Page calendrier (liste toutes les courses)
 // ---------------------------------------------------------------------
 const calendarRows = races.map(r =>
   `<li style="margin-bottom:8px;"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;">${esc(r.name)} ${esc(r.formatName || r.distance+' km')}</a> — ${esc(r.date || 'date à confirmer')}, ${esc(r.location || '')}</li>`
@@ -223,7 +244,7 @@ const calendarBody = `
 write('calendrier-trails-2026/index.html', page(calendarHead, calendarBody));
 
 // ---------------------------------------------------------------------
-// 5. Sitemap
+// 6. Sitemap
 // ---------------------------------------------------------------------
 const urls = [
   'https://monchronotrail.netlify.app/',
