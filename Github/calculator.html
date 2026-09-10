@@ -1,0 +1,1003 @@
+<style>
+  :root{
+    --ink:#16211C;
+    --paper:#F1F3EE;
+    --panel:#FFFFFF;
+    --forest:#2F4A3C;
+    --forest-dark:#22362B;
+    --ochre:#C97B2E;
+    --ochre-dark:#A9611D;
+    --slate:#5C6B66;
+    --line:#D8DED4;
+  }
+  *{box-sizing:border-box;}
+  #trailcalc{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.5;
+    max-width:720px;
+    margin:0 auto;
+    padding:0;
+  }
+  #trailcalc h1,#trailcalc h2{
+    font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;
+    font-weight:normal;
+    margin:0;
+  }
+  .tc-hero{
+    position:relative;
+    background:var(--forest);
+    color:#EFEFE8;
+    padding:32px 28px 28px;
+    overflow:hidden;
+  }
+  .tc-hero svg{position:absolute;inset:0;width:100%;height:100%;opacity:.16;}
+  .tc-brand{font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;color:#F0C179;margin-bottom:8px;opacity:.9;}
+  .tc-hero-content{position:relative;}
+  .tc-hero h1{font-size:26px;}
+  .tc-hero p{margin:10px 0 0;font-size:14px;color:#CFE0D3;max-width:52ch;}
+  .tc-section{padding:24px 28px;border-bottom:1px solid var(--line);}
+  .tc-section:last-child{border-bottom:none;}
+  .tc-section h2{font-size:17px;margin-bottom:4px;}
+  .tc-sub{font-size:13px;color:var(--slate);margin:0 0 16px;}
+  .tc-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+  .tc-field{flex:1;min-width:150px;display:flex;flex-direction:column;gap:6px;}
+  .tc-field label{font-size:13px;color:var(--slate);}
+  .tc-field input,.tc-field select{
+    font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:6px;
+    background:var(--panel);color:var(--ink);
+  }
+  .tc-field input:focus,.tc-field select:focus{outline:2px solid var(--ochre);outline-offset:1px;}
+  .tc-radio-group{display:flex;gap:8px;flex-wrap:wrap;}
+  .tc-radio-group label{
+    display:flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid var(--line);
+    border-radius:6px;font-size:13.5px;cursor:pointer;background:var(--panel);
+  }
+  .tc-radio-group input{margin:0;}
+  .tc-radio-group label.checked{border-color:var(--forest);background:#EAF0EB;}
+  .tc-btn{
+    font:inherit;font-size:15px;padding:11px 22px;background:var(--ochre);color:#fff;
+    border:none;border-radius:6px;cursor:pointer;
+  }
+  .tc-btn:hover{background:var(--ochre-dark);}
+  .tc-btn.secondary{background:transparent;color:var(--forest);border:1px solid var(--forest);}
+  .tc-btn.secondary:hover{background:#EAF0EB;}
+  .tc-gpx-import{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    margin-bottom:16px;padding:12px 14px;background:#EAF0EB;border-radius:6px;
+  }
+  .tc-gpx-label{cursor:pointer;font-size:13.5px;padding:8px 14px;white-space:nowrap;}
+  .tc-gpx-status{font-size:12.5px;color:var(--slate);line-height:1.4;}
+  .tc-gpx-status.tc-gpx-ok{color:var(--forest);font-weight:600;}
+  .tc-gpx-status.tc-gpx-error{color:#B4442E;font-weight:600;}
+  .tc-mode-toggle{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;width:fit-content;margin-bottom:16px;}
+  .tc-mode-toggle button{
+    font:inherit;font-size:13px;padding:8px 14px;border:none;background:var(--panel);
+    color:var(--slate);cursor:pointer;
+  }
+  .tc-mode-toggle button.active{background:var(--forest);color:#fff;}
+  .tc-result{
+    background:var(--forest-dark);color:#EFEFE8;border-radius:10px;padding:30px 28px;display:none;
+    border:1px solid rgba(240,193,121,.35);
+    box-shadow:0 4px 20px rgba(22,33,28,.15);
+  }
+  .tc-result.show{display:block;}
+  .tc-result-label{
+    font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#9FB5A5;margin-bottom:6px;
+  }
+  .tc-time{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:56px;color:#F0C179;letter-spacing:.5px;line-height:1.1;
+  }
+  .tc-time-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .tc-pace{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:16px;color:#CFE0D3;background:rgba(255,255,255,.08);
+    padding:4px 10px;border-radius:20px;white-space:nowrap;
+  }
+  .tc-range{font-size:13.5px;color:#B9C9BC;margin-top:2px;}
+  .tc-narrative{
+    margin-top:16px;padding:12px 14px;background:rgba(240,193,121,.1);
+    border:1px solid rgba(240,193,121,.28);border-radius:6px;
+    font-size:13.5px;color:#E7EDE4;line-height:1.55;
+  }
+  .tc-disclaimer{
+    margin-top:14px;font-size:12px;color:#9FB5A5;line-height:1.5;
+  }
+  .tc-detail-toggle{
+    margin-top:16px;background:transparent;border:1px solid rgba(255,255,255,.25);
+    color:#F0C179;font-size:13px;padding:8px 14px;border-radius:6px;cursor:pointer;
+    font-family:inherit;
+  }
+  .tc-detail-toggle:hover{background:rgba(255,255,255,.08);}
+  .tc-splits-panel{
+    margin-top:14px;padding:16px;background:rgba(255,255,255,.06);border-radius:8px;
+  }
+  .tc-splits-help{font-size:12.5px;color:#B9C9BC;margin:0 0 14px;line-height:1.5;}
+  .tc-splits-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;align-items:flex-end;}
+  .tc-splits-row .tc-field{flex:1;min-width:110px;display:flex;flex-direction:column;gap:5px;}
+  .tc-splits-row .tc-field label{font-size:11.5px;color:#9FB5A5;}
+  .tc-splits-row .tc-field input{
+    font:inherit;padding:7px 9px;border:1px solid rgba(255,255,255,.2);border-radius:6px;
+    background:rgba(255,255,255,.95);color:var(--ink);font-size:13px;
+  }
+  .tc-splits-row-remove{
+    background:none;border:1px solid rgba(255,255,255,.25);color:#F0C179;border-radius:6px;
+    padding:6px 10px;cursor:pointer;font-size:13px;
+  }
+  .tc-splits-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  .tc-splits-total{font-size:12px;color:#9FB5A5;margin-top:10px;}
+  .tc-splits-result{margin-top:14px;}
+  .tc-splits-result-row{
+    display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .tc-splits-result-row:last-child{border-bottom:none;}
+  .tc-splits-result-row .tc-splits-point{color:#E7EDE4;}
+  .tc-splits-result-row .tc-splits-point small{display:block;color:#9FB5A5;font-size:11.5px;margin-top:1px;}
+  .tc-splits-result-row .tc-splits-time{
+    color:#F0C179;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;
+  }
+  .tc-splits-warning{font-size:12px;color:#F0C179;margin-top:8px;}
+  .tc-steps{margin-top:18px;border-top:1px solid rgba(255,255,255,.15);padding-top:14px;}
+  .tc-step-row{
+    display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:7px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .tc-step-row:last-child{border-bottom:none;}
+  .tc-step-label{color:#CFE0D3;}
+  .tc-step-label small{display:block;color:#9FB5A5;font-size:11.5px;margin-top:1px;}
+  .tc-step-val{
+    color:#F0C179;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-align:right;white-space:nowrap;
+  }
+  .tc-foot{font-size:12.5px;color:var(--slate);}
+  .tc-formula-details summary{
+    font-size:12.5px;color:var(--slate);cursor:pointer;user-select:none;
+  }
+  .tc-formula-details summary:hover{color:var(--forest);}
+  .tc-formula-details[open] summary{margin-bottom:4px;}
+  .tc-history-wrap{overflow-x:auto;}
+  .tc-history-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:12px;min-width:560px;}
+  .tc-history-table th{text-align:left;color:var(--slate);font-weight:normal;font-size:12px;padding:6px 8px;border-bottom:1px solid var(--line);}
+  .tc-history-table td{padding:7px 8px;border-bottom:1px solid var(--line);}
+  .tc-history-table tr:last-child td{border-bottom:none;}
+  .tc-tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:20px;}
+  .tc-tag.faster{background:#E4EFE6;color:#2F6B45;}
+  .tc-tag.slower{background:#F6E5E1;color:#B4442E;}
+  .tc-empty{color:var(--slate);font-size:13.5px;font-style:italic;}
+  .tc-delete{background:none;border:none;color:#B4442E;cursor:pointer;font-size:13px;padding:2px 6px;}
+  .tc-cap-note{font-size:12.5px;color:var(--slate);margin-top:10px;}
+</style>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b4220372b2ed47b498cfdbfc75cd491d"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body style="margin:0;background:#F1F3EE;padding:24px 12px;">
+<div id="trailcalc">
+  <div class="tc-hero">
+    <svg viewBox="0 0 760 160" preserveAspectRatio="none">
+      <path d="M0,120 C100,60 180,140 280,90 C380,40 460,110 560,70 C650,35 700,90 760,60" fill="none" stroke="#F0C179" stroke-width="1.5"/>
+      <path d="M0,150 C110,90 200,160 300,110 C400,60 480,130 580,95 C670,60 720,110 760,90" fill="none" stroke="#F0C179" stroke-width="1"/>
+      <path d="M0,90 C90,40 170,100 260,60 C350,20 440,80 540,45 C630,15 690,60 760,35" fill="none" stroke="#F0C179" stroke-width="1"/>
+    </svg>
+    <div class="tc-hero-content">
+      <div class="tc-brand">Monchronotrail</div>
+      <h1>Calculateur de chrono trail &amp; ultra</h1>
+      <p>Estimez votre temps de course sur un trail ou un ultra-trail, pour partir avec un objectif réaliste plutôt qu'une simple intuition.</p>
+    </div>
+  </div>
+
+  <div class="tc-section">
+    <p class="tc-sub" style="margin-bottom:0;">
+      Vous préparez votre premier trail long ou votre premier ultra-trail (40, 60, 80, 100 km...) et vous vous demandez combien de temps il vous faudra pour finir ? Ce calculateur gratuit estime votre chrono à partir d'une performance de référence (route ou trail), ajustée au dénivelé positif et à la technicité du parcours — pensé spécifiquement pour les néo-traileurs qui passent d'un format court à un format long ou ultra.
+    </p>
+  </div>
+
+  <div class="tc-section">
+    <h2>1. Votre référence</h2>
+    <p class="tc-sub">Un chrono récent sert de point de départ au calcul. Route ou trail, au choix.</p>
+
+    <div class="tc-mode-toggle" id="tc-reftype-toggle">
+      <button data-reftype="route" class="active" type="button">Référence route</button>
+      <button data-reftype="trail" type="button">Référence trail</button>
+    </div>
+
+    <div id="tc-ref-route-fields">
+      <div class="tc-row">
+        <div class="tc-field">
+          <label for="tc-ref-dist">Distance de référence</label>
+          <select id="tc-ref-dist">
+            <option value="10">10 km</option>
+            <option value="21.1" selected>Semi-marathon (21,1 km)</option>
+            <option value="42.195">Marathon (42,195 km)</option>
+            <option value="custom">Autre distance</option>
+          </select>
+        </div>
+        <div class="tc-field" id="tc-ref-dist-custom-wrap" style="display:none;">
+          <label for="tc-ref-dist-custom">Distance (km)</label>
+          <input type="number" id="tc-ref-dist-custom" min="1" step="0.1" placeholder="ex : 15">
+        </div>
+        <div class="tc-field">
+          <label for="tc-ref-time">Chrono (h:mm:ss)</label>
+          <input type="text" id="tc-ref-time" placeholder="ex : 1:45:00">
+        </div>
+      </div>
+    </div>
+
+    <div id="tc-ref-trail-fields" style="display:none;">
+      <p class="tc-sub" style="margin-bottom:12px;">Le D+ et le terrain de cette course de référence servent à en extraire un temps "équivalent route", avant d'appliquer la même formule vers votre trail visé.</p>
+      <div class="tc-row">
+        <div class="tc-field">
+          <label for="tc-reftrail-dist">Distance (km)</label>
+          <input type="number" id="tc-reftrail-dist" min="1" step="0.1" placeholder="ex : 45">
+        </div>
+        <div class="tc-field">
+          <label for="tc-reftrail-dplus">D+ (m)</label>
+          <input type="number" id="tc-reftrail-dplus" min="0" step="10" placeholder="ex : 1800">
+        </div>
+      </div>
+      <div class="tc-row">
+        <div class="tc-field" style="flex:2;">
+          <label>Terrain</label>
+          <div class="tc-radio-group" id="tc-reftrail-terrain-group">
+            <label><input type="radio" name="tc-reftrail-terrain" value="roulant" checked> 🟢 Roulant</label>
+            <label><input type="radio" name="tc-reftrail-terrain" value="modere"> 🟠 Modéré</label>
+            <label><input type="radio" name="tc-reftrail-terrain" value="technique"> 🔴 Technique</label>
+            <label><input type="radio" name="tc-reftrail-terrain" value="montagne"> 🏔️ Montagne très technique</label>
+          </div>
+        </div>
+        <div class="tc-field">
+          <label for="tc-reftrail-time">Chrono (h:mm:ss)</label>
+          <input type="text" id="tc-reftrail-time" placeholder="ex : 4:30:00">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tc-section">
+    <h2>2. Le trail visé</h2>
+    <p class="tc-sub">Distance, dénivelé positif et terrain de la course visée.</p>
+
+    <div class="tc-gpx-import">
+      <label for="tc-gpx-input" class="tc-btn secondary tc-gpx-label">📂 Importer un tracé GPX (optionnel)</label>
+      <input type="file" id="tc-gpx-input" accept=".gpx" style="display:none;">
+      <span class="tc-gpx-status" id="tc-gpx-status">Remplit automatiquement la distance et le D+ à partir du vrai tracé — plus fiable qu'une donnée d'édition qui peut changer chaque année.</span>
+    </div>
+
+    <div class="tc-row">
+      <div class="tc-field">
+        <label for="tc-target-dist">Distance (km)</label>
+        <input type="number" id="tc-target-dist" min="1" step="0.1" placeholder="ex : 60">
+      </div>
+      <div class="tc-field">
+        <label for="tc-target-dplus">D+ (mètres)</label>
+        <input type="number" id="tc-target-dplus" min="0" step="10" placeholder="ex : 2800">
+      </div>
+    </div>
+    <div class="tc-row">
+      <div class="tc-field" style="flex:2;">
+        <label>Terrain</label>
+        <div class="tc-radio-group" id="tc-terrain-group">
+          <label><input type="radio" name="tc-terrain" value="roulant" checked> 🟢 Roulant</label>
+          <label><input type="radio" name="tc-terrain" value="modere"> 🟠 Modéré</label>
+          <label><input type="radio" name="tc-terrain" value="technique"> 🔴 Technique</label>
+          <label><input type="radio" name="tc-terrain" value="montagne"> 🏔️ Montagne très technique</label>
+        </div>
+      </div>
+    </div>
+    <button class="tc-btn" id="tc-calc-btn" type="button">Calculer mon chrono</button>
+  </div>
+
+  <div class="tc-section" id="tc-result-section" style="display:none;">
+    <div class="tc-result show" id="tc-result">
+      <div class="tc-result-label">Votre chrono estimé</div>
+      <div class="tc-time-row">
+        <div class="tc-time" id="tc-time-display">--:--:--</div>
+        <div class="tc-pace" id="tc-pace-display"></div>
+      </div>
+      <div class="tc-range" id="tc-range-display"></div>
+      <div class="tc-narrative" id="tc-narrative"></div>
+      <div class="tc-disclaimer">⚠️ Estimation indicative<br>Le résultat dépend notamment de votre niveau, de la météo, des ravitaillements, de la gestion d'allure et de votre expérience sur longue distance.</div>
+      <button class="tc-detail-toggle" id="tc-detail-toggle" type="button">🔎 Voir comment le chrono est calculé</button>
+      <div class="tc-steps" id="tc-steps" style="display:none;"></div>
+
+      <button class="tc-detail-toggle" id="tc-splits-toggle" type="button">➕ Calculer mes temps de passage (optionnel)</button>
+      <div class="tc-splits-panel" id="tc-splits-panel" style="display:none;">
+        <p class="tc-splits-help">Ajoutez la distance et le D+ entre chaque ravitaillement (depuis le point précédent). Les temps de passage tiennent compte de la fatigue croissante au fil de la course, pas seulement de la distance.</p>
+        <div id="tc-splits-rows"></div>
+        <div class="tc-splits-actions">
+          <button class="tc-btn secondary" id="tc-splits-add" type="button">+ Ajouter un ravitaillement</button>
+          <button class="tc-btn" id="tc-splits-calc" type="button">Calculer les temps de passage</button>
+        </div>
+        <p class="tc-splits-total" id="tc-splits-total"></p>
+        <div id="tc-splits-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tc-section">
+    <h2>3. Vos anciens chronos</h2>
+    <p class="tc-sub">Jusqu'à 4 courses passées. La prédiction est recalculée avec la formule ci-dessus et votre référence route (étape 1), pour comparer directement au réel.</p>
+
+    <div class="tc-row">
+      <div class="tc-field">
+        <label for="tc-h-name">Nom de la course</label>
+        <input type="text" id="tc-h-name" placeholder="ex : Ultra-Marin 60 km">
+      </div>
+      <div class="tc-field">
+        <label for="tc-h-dist">Distance (km)</label>
+        <input type="number" id="tc-h-dist" min="1" step="0.1">
+      </div>
+      <div class="tc-field">
+        <label for="tc-h-dplus">D+ (m)</label>
+        <input type="number" id="tc-h-dplus" min="0" step="10">
+      </div>
+    </div>
+    <div class="tc-row">
+      <div class="tc-field">
+        <label for="tc-h-terrain">Terrain</label>
+        <select id="tc-h-terrain">
+          <option value="roulant">🟢 Roulant</option>
+          <option value="modere">🟠 Modéré</option>
+          <option value="technique">🔴 Technique</option>
+          <option value="montagne">🏔️ Montagne très technique</option>
+        </select>
+      </div>
+      <div class="tc-field">
+        <label for="tc-h-time">Temps réel (h:mm:ss)</label>
+        <input type="text" id="tc-h-time" placeholder="ex : 6:36:00">
+      </div>
+      <div class="tc-field" style="justify-content:flex-end;">
+        <button class="tc-btn secondary" id="tc-h-add" type="button">Ajouter cette course</button>
+      </div>
+    </div>
+    <p class="tc-cap-note" id="tc-cap-note">Historique limité à 4 courses — supprimez-en une pour en ajouter une nouvelle.</p>
+
+    <div id="tc-history-loading" class="tc-empty">Chargement de votre historique…</div>
+    <div class="tc-history-wrap">
+      <table class="tc-history-table" id="tc-history-table" style="display:none;">
+        <thead>
+          <tr><th>Course</th><th>Dist. / D+ / terrain</th><th>Prédit</th><th>Réel</th><th>Écart</th><th></th></tr>
+        </thead>
+        <tbody id="tc-history-body"></tbody>
+      </table>
+    </div>
+    <p class="tc-empty" id="tc-history-empty" style="display:none;">Aucune course enregistrée pour l'instant.</p>
+  </div>
+
+  <div class="tc-section">
+    <h2>Questions fréquentes</h2>
+
+    <p class="tc-sub" style="margin-bottom:6px;"><strong>Combien de temps pour faire un trail de 60 km ?</strong></p>
+    <p class="tc-sub">Ça dépend surtout de trois choses : votre niveau actuel (via un chrono de référence récent), le dénivelé positif du parcours, et la technicité du terrain. Un même 60 km peut se courir en 6h sur un parcours roulant et peu de D+, ou en 9h+ sur un parcours technique et très vallonné. Le calculateur ci-dessus vous donne une estimation personnalisée en tenant compte de ces trois facteurs.</p>
+
+    <p class="tc-sub" style="margin-bottom:6px;margin-top:16px;"><strong>Comment estimer son temps sur un premier ultra-trail ?</strong></p>
+    <p class="tc-sub">La méthode la plus fiable consiste à partir d'un chrono récent (route ou trail) et à l'ajuster progressivement pour la distance, le dénivelé et le terrain visés, plutôt que d'extrapoler à la louche depuis un temps sur marathon. C'est exactement ce que fait ce calculateur, avec en plus la possibilité d'enregistrer vos propres courses passées pour affiner l'estimation au fil du temps.</p>
+
+    <p class="tc-sub" style="margin-bottom:6px;margin-top:16px;"><strong>Pourquoi mon temps réel est différent de la prédiction ?</strong></p>
+    <p class="tc-sub">La météo, le ravitaillement, la gestion d'allure, la nuit, ou simplement la forme du jour font varier le résultat réel de ±10 à 20 % par rapport à n'importe quel modèle mathématique. C'est pour ça que l'outil affiche une fourchette plutôt qu'un chiffre unique, et s'affine avec votre historique de courses.</p>
+
+    <p class="tc-sub" style="margin-bottom:6px;margin-top:16px;"><strong>Ce calculateur de trail est-il gratuit ?</strong></p>
+    <p class="tc-sub">Oui, entièrement gratuit et sans inscription. Vos données restent stockées uniquement dans votre navigateur.</p>
+  </div>
+
+  <div class="tc-section">
+    <details class="tc-formula-details">
+      <summary>Voir la formule complète du calcul</summary>
+      <p class="tc-foot" style="margin-top:12px;">
+        <strong>Formule appliquée (telle quelle, sans modification) :</strong><br>
+        Étape A — T_base = T_réf × (D_trail / D_réf)^1,06<br>
+        Étape B — coefficient distance : ≤25 km → 1,00 · 26–35 → 1,02 · 36–45 → 1,05 · 46–60 → 1,08 · 61–80 → 1,12 · 81–100 → 1,17 · &gt;100 → 1,22+<br>
+        Étape C — coefficient densité D+ (m/km) : &lt;5 → 1,00 · 5–15 → 1,05 · 15–25 → 1,09 · 25–40 → 1,14 · 40–60 → 1,20 · &gt;60 → 1,27+<br>
+        Étape D — coefficient technicité : 🟢 Roulant 1,00 · 🟠 Modéré 1,05 · 🔴 Technique 1,12 · 🏔️ Montagne très technique 1,60<br>
+        Étape E — coefficient fatigue liée à la distance : &lt;30 km → 1,00 · 30–40 → 1,02 · 40–50 → 1,04 · 50–60 → 1,07 · 60–80 → 1,10 · 80–100 → 1,15 · 100–120 → 1,22 · &gt;120 → 1,30+<br>
+        Temps final = T_base × Coef. B × Coef. C × Coef. D × Coef. E
+      </p>
+    </details>
+  </div>
+
+  <div class="tc-section">
+    <p class="tc-foot">
+      <a href="mentions-legales.html" style="color:var(--slate);">Mentions légales</a>
+      &nbsp;·&nbsp;
+      <a href="politique-confidentialite.html" style="color:var(--slate);">Politique de confidentialité</a>
+    </p>
+  </div>
+</div>
+<script>
+
+(function(){
+  const root = document.getElementById('trailcalc');
+
+  // Stockage local au navigateur (remplace window.storage, disponible uniquement dans Claude)
+  const storage = {
+    async get(key){
+      try{
+        const v = localStorage.getItem('trailcalc:'+key);
+        return v!==null ? { value: v } : null;
+      }catch(e){ return null; }
+    },
+    async set(key, value){
+      try{
+        localStorage.setItem('trailcalc:'+key, value);
+        return { value };
+      }catch(e){ return null; }
+    }
+  };
+
+
+  function parseTime(str){
+    if(!str) return null;
+    const parts = str.trim().split(':').map(s=>s.trim());
+    if(parts.some(p=>p==='' || isNaN(Number(p)))) return null;
+    let h=0,m=0,s=0;
+    if(parts.length===3){ [h,m,s]=parts.map(Number); }
+    else if(parts.length===2){ [h,m]=parts.map(Number); }
+    else if(parts.length===1){ h=Number(parts[0]); }
+    else return null;
+    return h*3600+m*60+s;
+  }
+  function formatTime(totalSeconds){
+    if(!isFinite(totalSeconds) || totalSeconds<=0) return '--:--:--';
+    const s = Math.round(totalSeconds);
+    const h = Math.floor(s/3600);
+    const m = Math.floor((s%3600)/60);
+    return h+'h'+String(m).padStart(2,'0');
+  }
+  function formatHM(totalSeconds){
+    const s = Math.round(totalSeconds);
+    const h = Math.floor(s/3600);
+    const m = Math.floor((s%3600)/60);
+    const sec = s%60;
+    return String(h)+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+  }
+  function formatPace(secPerKm){
+    if(!isFinite(secPerKm) || secPerKm<=0) return '';
+    let m = Math.floor(secPerKm/60);
+    let s = Math.round(secPerKm%60);
+    if(s===60){ s=0; m+=1; }
+    return m+"'"+String(s).padStart(2,'0')+'/km';
+  }
+
+  // ---------- GPX parsing: distance (haversine) + smoothed elevation gain ----------
+  function parseGPX(xmlText){
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlText, 'application/xml');
+    if(doc.querySelector('parsererror')) throw new Error('Fichier GPX invalide ou corrompu.');
+
+    let pts = Array.from(doc.getElementsByTagName('trkpt'));
+    if(pts.length < 2) pts = Array.from(doc.getElementsByTagName('rtept'));
+    if(pts.length < 2) throw new Error('Pas assez de points dans ce fichier GPX.');
+
+    const points = pts.map(pt=>{
+      const lat = parseFloat(pt.getAttribute('lat'));
+      const lon = parseFloat(pt.getAttribute('lon'));
+      const eleNode = pt.getElementsByTagName('ele')[0];
+      const ele = eleNode ? parseFloat(eleNode.textContent) : null;
+      return { lat, lon, ele };
+    }).filter(p=> isFinite(p.lat) && isFinite(p.lon));
+
+    if(points.length < 2) throw new Error('Coordonnées GPS illisibles dans ce fichier.');
+
+    function haversine(a,b){
+      const R = 6371000;
+      const toRad = x=>x*Math.PI/180;
+      const dLat = toRad(b.lat-a.lat), dLon = toRad(b.lon-a.lon);
+      const s = Math.sin(dLat/2)**2 + Math.cos(toRad(a.lat))*Math.cos(toRad(b.lat))*Math.sin(dLon/2)**2;
+      return 2*R*Math.asin(Math.sqrt(s));
+    }
+    let distM = 0;
+    for(let i=1;i<points.length;i++) distM += haversine(points[i-1], points[i]);
+    const distKm = distM/1000;
+
+    const elevations = points.map(p=>p.ele).filter(e=> e!=null && isFinite(e));
+    let dPlus = null;
+    if(elevations.length > 5){
+      // moving-average smoothing to reduce GPS elevation jitter, then sum positive deltas
+      const window = 9;
+      const half = Math.floor(window/2);
+      const smoothed = elevations.map((_,i)=>{
+        const start = Math.max(0, i-half);
+        const end = Math.min(elevations.length, i+half+1);
+        const slice = elevations.slice(start, end);
+        return slice.reduce((a,b)=>a+b,0)/slice.length;
+      });
+      dPlus = 0;
+      for(let i=1;i<smoothed.length;i++){
+        const diff = smoothed[i]-smoothed[i-1];
+        if(diff>0) dPlus += diff;
+      }
+    }
+
+    return { distKm, dPlus, pointCount: points.length, hasElevation: elevations.length>5 };
+  }
+
+  root.querySelector('#tc-gpx-input').addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    const statusEl = root.querySelector('#tc-gpx-status');
+    if(!file) return;
+
+    statusEl.className = 'tc-gpx-status';
+    statusEl.textContent = 'Lecture du fichier…';
+
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      try{
+        const result = parseGPX(ev.target.result);
+        root.querySelector('#tc-target-dist').value = result.distKm.toFixed(1);
+        if(result.hasElevation){
+          root.querySelector('#tc-target-dplus').value = Math.round(result.dPlus);
+          statusEl.className = 'tc-gpx-status tc-gpx-ok';
+          statusEl.textContent = '✓ Importé depuis "'+file.name+'" : '+result.distKm.toFixed(1)+' km / '+Math.round(result.dPlus)+' m D+ (calculés à partir du tracé réel).';
+        } else {
+          statusEl.className = 'tc-gpx-status tc-gpx-ok';
+          statusEl.textContent = '✓ Distance importée depuis "'+file.name+'" : '+result.distKm.toFixed(1)+' km. Ce fichier ne contient pas de données d\'altitude — merci de renseigner le D+ manuellement.';
+        }
+      }catch(err){
+        statusEl.className = 'tc-gpx-status tc-gpx-error';
+        statusEl.textContent = '✗ '+(err.message || 'Impossible de lire ce fichier GPX.')+' Vous pouvez toujours renseigner distance et D+ manuellement.';
+      }
+    };
+    reader.onerror = ()=>{
+      statusEl.className = 'tc-gpx-status tc-gpx-error';
+      statusEl.textContent = '✗ Erreur de lecture du fichier. Réessayez ou renseignez les champs manuellement.';
+    };
+    reader.readAsText(file);
+  });
+
+  function bucketLookup(value, buckets, overflow){
+    for(const [max,c] of buckets){ if(value<=max) return c; }
+    const x = Math.max(0, value-overflow.start);
+    const quad = overflow.quad || 0;
+    const raw = overflow.base + overflow.step*x + quad*x*x;
+    return overflow.cap ? Math.min(overflow.cap, raw) : raw;
+  }
+
+  // Exact tables from the original formula (Étapes B, C, D, E).
+  // Beyond each table's last threshold, the coefficient keeps growing instead of
+  // flattening out — a 175 km race is not treated the same as a 121 km race.
+  // Table E (fatigue liée à la distance) grows with a slight acceleration (quad term):
+  // real ultra fatigue compounds over very long efforts rather than scaling linearly.
+  const TABLE_B = { buckets:[[25,1.00],[35,1.02],[45,1.05],[60,1.08],[80,1.12],[100,1.17]], overflow:{base:1.22,start:100,step:0.0015,cap:2.0} };
+  const TABLE_C = { buckets:[[5,1.00],[15,1.05],[25,1.09],[40,1.14],[60,1.20]], overflow:{base:1.27,start:60,step:0.0018,cap:2.0} };
+  const TABLE_E = { buckets:[[30,1.00],[40,1.02],[50,1.04],[60,1.07],[80,1.10],[100,1.15],[120,1.22]], overflow:{base:1.30,start:120,step:0.0024,quad:0.000024,cap:3.5} };
+  const TERRAIN = { roulant:1.00, modere:1.05, technique:1.12, montagne:1.60 };
+  const TERRAIN_LABEL = { roulant:'🟢 Roulant', modere:'🟠 Modéré', technique:'🔴 Technique', montagne:'🏔️ Montagne très technique' };
+
+  function riegel(TrefSec, Dref, Dtarget){
+    return TrefSec * Math.pow(Dtarget/Dref, 1.06);
+  }
+
+  function coeffs(D, Dplus, terrain){
+    const density = D>0 ? Dplus/D : 0;
+    const Cb = bucketLookup(D, TABLE_B.buckets, TABLE_B.overflow);
+    const Cc = bucketLookup(density, TABLE_C.buckets, TABLE_C.overflow);
+    const Cd = TERRAIN[terrain] ?? 1.00;
+    const Ce = bucketLookup(D, TABLE_E.buckets, TABLE_E.overflow);
+    return { Cb, Cc, Cd, Ce, density, product: Cb*Cc*Cd*Ce };
+  }
+
+  function getRefDistance(){
+    const sel = root.querySelector('#tc-ref-dist').value;
+    if(sel==='custom'){
+      const v = parseFloat(root.querySelector('#tc-ref-dist-custom').value);
+      return isFinite(v) && v>0 ? v : null;
+    }
+    return parseFloat(sel);
+  }
+
+  let refType = 'route';
+
+  root.querySelectorAll('#tc-reftype-toggle button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      root.querySelectorAll('#tc-reftype-toggle button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      refType = btn.getAttribute('data-reftype');
+      root.querySelector('#tc-ref-route-fields').style.display = refType==='route' ? 'block' : 'none';
+      root.querySelector('#tc-ref-trail-fields').style.display = refType==='trail' ? 'block' : 'none';
+    });
+  });
+
+  root.querySelectorAll('#tc-reftrail-terrain-group input').forEach(inp=>{
+    inp.addEventListener('change', ()=>{
+      root.querySelectorAll('#tc-reftrail-terrain-group label').forEach(l=>l.classList.remove('checked'));
+      inp.closest('label').classList.add('checked');
+    });
+  });
+  root.querySelector('#tc-reftrail-terrain-group input:checked').closest('label').classList.add('checked');
+
+  // Returns {Dref, TrefSec, note} where TrefSec is always a road-equivalent time usable in riegel().
+  // For a trail reference, the trail's own D+/terrain/distance coefficients are divided out first.
+  function getReference(){
+    if(refType==='route'){
+      const Dref = getRefDistance();
+      const TrefSec = parseTime(root.querySelector('#tc-ref-time').value);
+      if(!Dref || TrefSec===null) return null;
+      return { Dref, TrefSec, note: null };
+    }
+    const Dref = parseFloat(root.querySelector('#tc-reftrail-dist').value);
+    const Dplus = parseFloat(root.querySelector('#tc-reftrail-dplus').value);
+    const terrain = root.querySelector('input[name="tc-reftrail-terrain"]:checked').value;
+    const TrawSec = parseTime(root.querySelector('#tc-reftrail-time').value);
+    if(!isFinite(Dref) || Dref<=0 || !isFinite(Dplus) || Dplus<0 || TrawSec===null) return null;
+    const c = coeffs(Dref, Dplus, terrain);
+    const TrefSec = TrawSec / c.product;
+    return {
+      Dref, TrefSec,
+      note: { TrawSec, product: c.product, Cb:c.Cb, Cc:c.Cc, Cd:c.Cd, Ce:c.Ce, terrain, Dplus }
+    };
+  }
+
+  root.querySelector('#tc-ref-dist').addEventListener('change', (e)=>{
+    root.querySelector('#tc-ref-dist-custom-wrap').style.display = e.target.value==='custom' ? 'flex' : 'none';
+  });
+
+  root.querySelectorAll('#tc-terrain-group input').forEach(inp=>{
+    inp.addEventListener('change', ()=>{
+      root.querySelectorAll('#tc-terrain-group label').forEach(l=>l.classList.remove('checked'));
+      inp.closest('label').classList.add('checked');
+    });
+  });
+  root.querySelector('#tc-terrain-group input:checked').closest('label').classList.add('checked');
+
+  function predict(TrefSec, Dref, Dtarget, Dplus, terrain){
+    const Tbase = riegel(TrefSec, Dref, Dtarget);
+    const c = coeffs(Dtarget, Dplus, terrain);
+    return { total: Tbase*c.product, Tbase, Cb:c.Cb, Cc:c.Cc, Cd:c.Cd, Ce:c.Ce, density:c.density };
+  }
+
+  // ---------- uncertainty range ----------
+  function baseUncertaintyPct(D){
+    if(D<=30) return 6;
+    if(D<=60) return 8;
+    if(D<=100) return 11;
+    return 15;
+  }
+  function historicalUncertaintyPct(){
+    const entries = races.filter(r=>r.predicted);
+    if(entries.length<2) return null;
+    const abs = entries.map(r=>Math.abs((r.realSeconds-r.predicted)/r.predicted)*100);
+    const avg = abs.reduce((a,b)=>a+b,0)/abs.length;
+    return Math.min(25, Math.max(4, avg));
+  }
+  function rangePct(D){
+    const hist = historicalUncertaintyPct();
+    return hist!==null ? hist : baseUncertaintyPct(D);
+  }
+
+  // ---------- literary narrative about the result itself ----------
+  function buildNarrative(Dtarget, terrain){
+    let base;
+    if(Dtarget<=30) base = "un format où l'on peut encore courir la majorité du parcours et viser une allure assez linéaire";
+    else if(Dtarget<=60) base = "un format long qui demande de bien gérer l'alimentation et l'allure dès le départ pour ne pas craquer sur la deuxième moitié";
+    else if(Dtarget<=100) base = "un vrai ultra, où la gestion de la fatigue (et souvent de la nuit) pèsera plus lourd que la vitesse pure";
+    else base = "un très gros format où l'expérience et le mental comptent autant que la préparation physique";
+
+    let terrainClause;
+    if(terrain==='roulant') terrainClause = "Le terrain plutôt roulant permet de tenir un rythme régulier.";
+    else if(terrain==='modere') terrainClause = "Le terrain vallonné cassera un peu le rythme par moments, sans être piégeux.";
+    else if(terrain==='montagne') terrainClause = "Le terrain de haute montagne, très technique, imposera de marcher une grande partie du parcours et de composer avec des passages exigeants (câbles, pierriers, portions aériennes selon le tracé).";
+    else terrainClause = "Le terrain technique sollicitera beaucoup vos appuis et vous fera sûrement marcher par endroits.";
+
+    return "C'est "+base+". "+terrainClause;
+  }
+
+  // ---------- commentary from history (short, personalized) ----------
+  function buildComment(Dtarget){
+    if(races.length===0) return null;
+    const entries = races.filter(r=>r.predicted);
+    if(entries.length===0) return null;
+
+    const withDelta = entries.map(r=>({ ...r, deltaSec: r.realSeconds - r.predicted }));
+    const similar = withDelta.filter(r=> Math.abs(r.distance-Dtarget)/Dtarget <= 0.4);
+    const pool = similar.length>0 ? similar : withDelta;
+    const avgDeltaSec = pool.reduce((a,r)=>a+r.deltaSec,0)/pool.length;
+    const avgMin = Math.round(Math.abs(avgDeltaSec)/60);
+    const onSimilar = similar.length>0;
+
+    const namesOf = (list)=> list.map(r=>r.name || (r.distance+' km')).join(' et ');
+    const refLabel = onSimilar
+      ? (similar.length===1 ? 'sur votre course '+namesOf(similar) : 'sur vos courses '+namesOf(similar))
+      : (entries.length===1 ? 'sur votre course '+namesOf(entries) : 'sur l\'ensemble de vos '+entries.length+' courses enregistrées');
+
+    let text;
+    if(avgMin < 8){
+      text = 'D\'après vos données ('+refLabel+'), vous êtes toujours resté proche de la prédiction : vous pouvez viser le milieu de la fourchette en confiance.';
+    } else if(avgDeltaSec < 0){
+      text = 'D\'après vos données ('+refLabel+'), vous finissez en général plus vite que prévu (environ '+avgMin+' min d\'avance) : comptez plutôt sur le bas de la fourchette.';
+    } else {
+      text = 'D\'après vos données ('+refLabel+'), vous mettez en général un peu plus de temps que prévu (environ '+avgMin+' min) : comptez plutôt sur le haut de la fourchette.';
+    }
+    return text;
+  }
+
+  const MAX_HISTORY = 4;
+  let races = [];
+
+  root.querySelector('#tc-calc-btn').addEventListener('click', ()=>{
+    const ref = getReference();
+    const Dtarget = parseFloat(root.querySelector('#tc-target-dist').value);
+    const Dplus = parseFloat(root.querySelector('#tc-target-dplus').value);
+    const terrain = root.querySelector('input[name="tc-terrain"]:checked').value;
+
+    if(!ref){
+      alert(refType==='route'
+        ? 'Merci de renseigner votre distance et votre chrono de référence.'
+        : 'Merci de renseigner la distance, le D+ et le chrono de votre trail de référence.');
+      return;
+    }
+    if(!isFinite(Dtarget) || Dtarget<=0){ alert('Merci de renseigner la distance du trail.'); return; }
+    if(!isFinite(Dplus) || Dplus<0){ alert('Merci de renseigner le D+ du trail.'); return; }
+
+    const { Dref, TrefSec, note } = ref;
+    const { total, Tbase, Cb, Cc, Cd, Ce, density } = predict(TrefSec, Dref, Dtarget, Dplus, terrain);
+
+    const steps = [];
+    if(note){
+      steps.push(['Étape A0 — référence trail déflatée', '<small>'+formatHM(note.TrawSec)+' ÷ ('+note.Cb.toFixed(2)+'×'+note.Cc.toFixed(2)+'×'+note.Cd.toFixed(2)+'×'+note.Ce.toFixed(2)+')</small>', formatHM(TrefSec)+' équiv. route']);
+    }
+    let running = Tbase;
+    steps.push(['Étape A — T_base (Riegel)', '<small>T_réf équiv. × (D_trail/D_réf)^1,06</small>', formatHM(running)]);
+    running *= Cb;
+    steps.push(['Étape B — distance ('+Dtarget+' km)', '<small>coef. '+Cb.toFixed(2)+'</small>', formatHM(running)]);
+    running *= Cc;
+    steps.push(['Étape C — densité D+ ('+density.toFixed(1)+' m/km)', '<small>coef. '+Cc.toFixed(2)+'</small>', formatHM(running)]);
+    running *= Cd;
+    steps.push(['Étape D — technicité ('+TERRAIN_LABEL[terrain]+')', '<small>coef. '+Cd.toFixed(2)+'</small>', formatHM(running)]);
+    running *= Ce;
+    steps.push(['Étape E — fatigue distance ('+Dtarget+' km)', '<small>coef. '+Ce.toFixed(2)+'</small>', formatHM(running)]);
+
+    root.querySelector('#tc-result-section').style.display = 'block';
+    root.querySelector('#tc-time-display').textContent = formatTime(running);
+    root.querySelector('#tc-pace-display').textContent = '≈ '+formatPace(running/Dtarget)+' de moyenne';
+
+    const pct = rangePct(Dtarget);
+    const low = running*(1-pct/100), high = running*(1+pct/100);
+    root.querySelector('#tc-range-display').textContent = 'Fourchette indicative : '+formatTime(low)+' – '+formatTime(high);
+
+    const stepsEl = root.querySelector('#tc-steps');
+    stepsEl.innerHTML = steps.map(([label,sub,val])=>
+      '<div class="tc-step-row"><span class="tc-step-label">'+label+sub+'</span><span class="tc-step-val">'+val+'</span></div>'
+    ).join('');
+    stepsEl.style.display = 'none';
+    const toggleBtn = root.querySelector('#tc-detail-toggle');
+    toggleBtn.textContent = '🔎 Voir comment le chrono est calculé';
+
+    const narrativeEl = root.querySelector('#tc-narrative');
+    const historyNote = buildComment(Dtarget);
+    narrativeEl.textContent = buildNarrative(Dtarget, terrain) + (historyNote ? ' ' + historyNote : '');
+
+    lastResult = { total: running, Dtarget, terrain };
+    root.querySelector('#tc-splits-result').innerHTML = '';
+    root.querySelector('#tc-splits-total').textContent = '';
+
+    root.querySelector('#tc-result-section').scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+
+  // ---------- history (up to 4 past chronos) ----------
+
+  async function loadHistory(){
+    try{
+      const res = await storage.get('races');
+      races = res && res.value ? JSON.parse(res.value) : [];
+    }catch(e){
+      races = [];
+    }
+    renderHistory();
+  }
+
+  async function saveHistory(){
+    try{
+      await storage.set('races', JSON.stringify(races));
+    }catch(e){
+      console.error('Erreur de sauvegarde', e);
+    }
+  }
+
+  function renderHistory(){
+    root.querySelector('#tc-history-loading').style.display = 'none';
+    const table = root.querySelector('#tc-history-table');
+    const empty = root.querySelector('#tc-history-empty');
+    const body = root.querySelector('#tc-history-body');
+    root.querySelector('#tc-cap-note').style.display = races.length>=MAX_HISTORY ? 'block' : 'none';
+
+    if(races.length===0){
+      table.style.display='none';
+      empty.style.display='block';
+      return;
+    }
+    empty.style.display='none';
+    table.style.display='table';
+    body.innerHTML = '';
+    races.forEach((r, idx)=>{
+      const tr = document.createElement('tr');
+      let tag = '—';
+      if(r.predicted){
+        const diffPct = Math.round(((r.realSeconds - r.predicted)/r.predicted)*100);
+        tag = diffPct<0
+          ? '<span class="tc-tag faster">'+Math.abs(diffPct)+'% plus rapide</span>'
+          : '<span class="tc-tag slower">'+diffPct+'% plus lent</span>';
+      }
+      tr.innerHTML =
+        '<td>'+(r.name || '—')+'</td>'+
+        '<td>'+r.distance+' km / '+r.dplus+' m / '+TERRAIN_LABEL[r.terrain]+'</td>'+
+        '<td>'+(r.predicted ? formatTime(r.predicted) : '—')+'</td>'+
+        '<td>'+formatTime(r.realSeconds)+'</td>'+
+        '<td>'+tag+'</td>'+
+        '<td><button class="tc-delete" data-idx="'+idx+'" type="button">Suppr.</button></td>';
+      body.appendChild(tr);
+    });
+    body.querySelectorAll('.tc-delete').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        const i = parseInt(btn.getAttribute('data-idx'),10);
+        races.splice(i,1);
+        await saveHistory();
+        renderHistory();
+      });
+    });
+  }
+
+  async function addRace(){
+    if(races.length>=MAX_HISTORY){
+      alert('Historique limité à '+MAX_HISTORY+' courses. Supprimez-en une avant d\'en ajouter une nouvelle.');
+      return;
+    }
+    const name = root.querySelector('#tc-h-name').value.trim();
+    const distance = parseFloat(root.querySelector('#tc-h-dist').value);
+    const dplus = parseFloat(root.querySelector('#tc-h-dplus').value);
+    const terrain = root.querySelector('#tc-h-terrain').value;
+    const realSeconds = parseTime(root.querySelector('#tc-h-time').value);
+
+    if(!isFinite(distance) || distance<=0){ alert('Merci de renseigner la distance.'); return; }
+    if(!isFinite(dplus) || dplus<0){ alert('Merci de renseigner le D+.'); return; }
+    if(realSeconds===null){ alert('Format de temps invalide (attendu h:mm:ss).'); return; }
+
+    const ref = getReference();
+    let predicted = null;
+    if(ref){
+      predicted = predict(ref.TrefSec, ref.Dref, distance, dplus, terrain).total;
+    }
+
+    races.push({ name, distance, dplus, terrain, realSeconds, predicted });
+    await saveHistory();
+    renderHistory();
+
+    root.querySelector('#tc-h-name').value = '';
+    root.querySelector('#tc-h-dist').value = '';
+    root.querySelector('#tc-h-dplus').value = '';
+    root.querySelector('#tc-h-time').value = '';
+  }
+
+  root.querySelector('#tc-h-add').addEventListener('click', addRace);
+
+  root.querySelector('#tc-detail-toggle').addEventListener('click', ()=>{
+    const stepsEl = root.querySelector('#tc-steps');
+    const btn = root.querySelector('#tc-detail-toggle');
+    const isHidden = stepsEl.style.display === 'none';
+    stepsEl.style.display = isHidden ? 'block' : 'none';
+    btn.textContent = isHidden ? '🔼 Masquer le détail du calcul' : '🔎 Voir comment le chrono est calculé';
+  });
+
+  // ---------- temps de passage (optionnel) ----------
+  let lastResult = null; // {total, Dtarget, terrain} from the last main calculation
+  let splitRows = [{ name:'', dist:'', dplus:'' }];
+
+  function renderSplitRows(){
+    const container = root.querySelector('#tc-splits-rows');
+    container.innerHTML = splitRows.map((r,i)=>
+      '<div class="tc-splits-row">'+
+        '<div class="tc-field"><label>Point '+(i+1)+' (nom)</label>'+
+        '<input type="text" class="tc-split-name" data-idx="'+i+'" value="'+(r.name||'').replace(/"/g,'&quot;')+'" placeholder="ex : Ravito 1"></div>'+
+        '<div class="tc-field"><label>Distance depuis le point précédent (km)</label>'+
+        '<input type="number" class="tc-split-dist" data-idx="'+i+'" value="'+r.dist+'" min="0" step="0.1"></div>'+
+        '<div class="tc-field"><label>D+ du segment (m)</label>'+
+        '<input type="number" class="tc-split-dplus" data-idx="'+i+'" value="'+r.dplus+'" min="0" step="10"></div>'+
+        '<button type="button" class="tc-splits-row-remove" data-idx="'+i+'">✕</button>'+
+      '</div>'
+    ).join('');
+
+    container.querySelectorAll('.tc-split-name').forEach(inp=>{
+      inp.addEventListener('input', ()=>{ splitRows[+inp.dataset.idx].name = inp.value; });
+    });
+    container.querySelectorAll('.tc-split-dist').forEach(inp=>{
+      inp.addEventListener('input', ()=>{ splitRows[+inp.dataset.idx].dist = inp.value; updateSplitsTotal(); });
+    });
+    container.querySelectorAll('.tc-split-dplus').forEach(inp=>{
+      inp.addEventListener('input', ()=>{ splitRows[+inp.dataset.idx].dplus = inp.value; });
+    });
+    container.querySelectorAll('.tc-splits-row-remove').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(splitRows.length<=1) return;
+        splitRows.splice(+btn.dataset.idx, 1);
+        renderSplitRows();
+        updateSplitsTotal();
+      });
+    });
+    updateSplitsTotal();
+  }
+
+  function updateSplitsTotal(){
+    const total = splitRows.reduce((a,r)=>a+(parseFloat(r.dist)||0), 0);
+    const totalEl = root.querySelector('#tc-splits-total');
+    if(lastResult){
+      totalEl.textContent = 'Total renseigné : '+total.toFixed(1)+' km / '+lastResult.Dtarget+' km visés';
+    } else {
+      totalEl.textContent = 'Total renseigné : '+total.toFixed(1)+' km';
+    }
+  }
+
+  root.querySelector('#tc-splits-toggle').addEventListener('click', ()=>{
+    const panel = root.querySelector('#tc-splits-panel');
+    const btn = root.querySelector('#tc-splits-toggle');
+    const isHidden = panel.style.display === 'none';
+    panel.style.display = isHidden ? 'block' : 'none';
+    btn.textContent = isHidden ? '➖ Masquer les temps de passage' : '➕ Calculer mes temps de passage (optionnel)';
+    if(isHidden) renderSplitRows();
+  });
+
+  root.querySelector('#tc-splits-add').addEventListener('click', ()=>{
+    splitRows.push({ name:'', dist:'', dplus:'' });
+    renderSplitRows();
+  });
+
+  root.querySelector('#tc-splits-calc').addEventListener('click', ()=>{
+    if(!lastResult){
+      alert('Calculez d\'abord votre chrono principal ci-dessus.');
+      return;
+    }
+    const valid = splitRows
+      .map(r=>({ name:r.name.trim(), dist:parseFloat(r.dist), dplus:parseFloat(r.dplus) }))
+      .filter(r=> isFinite(r.dist) && r.dist>0);
+
+    if(valid.length===0){
+      alert('Ajoutez au moins un segment avec une distance.');
+      return;
+    }
+
+    const terrainCd = TERRAIN[lastResult.terrain] ?? 1.00;
+    let cum = 0;
+    const segs = valid.map(r=>{
+      const dplus = isFinite(r.dplus) ? r.dplus : 0;
+      const density = r.dist>0 ? dplus/r.dist : 0;
+      const CcSeg = bucketLookup(density, TABLE_C.buckets, TABLE_C.overflow);
+      const cumMid = cum + r.dist/2;
+      const CeAtPoint = bucketLookup(cumMid, TABLE_E.buckets, TABLE_E.overflow);
+      const weight = r.dist * CcSeg * terrainCd * CeAtPoint;
+      cum += r.dist;
+      return { name:r.name, dist:r.dist, dplus, cumDist:cum, weight };
+    });
+
+    const totalWeight = segs.reduce((a,s)=>a+s.weight, 0);
+    let cumDplus = 0, elapsed = 0;
+    const rows = segs.map((s,i)=>{
+      const segTime = lastResult.total * (s.weight/totalWeight);
+      elapsed += segTime;
+      cumDplus += s.dplus;
+      return {
+        label: s.name || ('Point '+(i+1)),
+        cumDist: s.cumDist,
+        cumDplus,
+        cumTime: elapsed
+      };
+    });
+
+    const resultEl = root.querySelector('#tc-splits-result');
+    resultEl.innerHTML = rows.map(r=>
+      '<div class="tc-splits-result-row">'+
+        '<span class="tc-splits-point">'+r.label+'<small>'+r.cumDist.toFixed(1)+' km cumulés · '+Math.round(r.cumDplus)+' m D+ cumulés</small></span>'+
+        '<span class="tc-splits-time">'+formatTime(r.cumTime)+'</span>'+
+      '</div>'
+    ).join('');
+
+    const totalSeg = cum;
+    const diffPct = Math.abs(totalSeg-lastResult.Dtarget)/lastResult.Dtarget*100;
+    if(diffPct>5){
+      resultEl.innerHTML += '<p class="tc-splits-warning">⚠️ Le total de vos segments ('+totalSeg.toFixed(1)+' km) diffère de la distance de la course ('+lastResult.Dtarget+' km) — les temps restent proportionnels entre eux, mais vérifiez vos distances pour un résultat plus fiable.</p>';
+    }
+
+    updateSplitsTotal();
+  });
+
+  loadHistory();
+})();
+
+</script>
