@@ -29,7 +29,7 @@ function esc(s){
   return String(s==null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-const CALCULATOR = read('partials/calculator.html');
+const CALCULATOR = read('calculator.html');
 
 function headTags({ title, description, canonical, ogImage }){
   return `<meta charset="UTF-8">
@@ -81,15 +81,15 @@ write('index.html', page(homeHead, CALCULATOR));
 // ---------------------------------------------------------------------
 // 2. Pages statiques copiées telles quelles
 // ---------------------------------------------------------------------
-copyFile('static/mentions-legales.html', 'mentions-legales.html');
-copyFile('static/politique-confidentialite.html', 'politique-confidentialite.html');
-copyFile('static/favicon.svg', 'favicon.svg');
-copyFile('static/og-image.png', 'og-image.png');
+copyFile('mentions-legales.html', 'mentions-legales.html');
+copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
+copyFile('favicon.svg', 'favicon.svg');
+copyFile('og-image.png', 'og-image.png');
 
 // ---------------------------------------------------------------------
 // 3. Pages de courses — générées depuis _data/races.json
 // ---------------------------------------------------------------------
-const races = JSON.parse(read('_data/races.json'));
+const races = JSON.parse(read('races.json'));
 
 const DIFFICULTY_LABELS = { 1:'Roulant', 2:'Vallonné', 3:'Montagne', 4:'Montagne technique', 5:'Très montagneux / très technique' };
 const STATUS_LABELS = {
