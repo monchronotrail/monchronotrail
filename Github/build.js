@@ -121,7 +121,35 @@ const homeHead = headTags({
   canonical: 'https://monchronotrail.netlify.app/',
   ogImage: 'https://monchronotrail.netlify.app/og-image.png'
 });
-write('index.html', page(homeHead, homeCalculator));
+// FAQ générique — vit uniquement sur la page d'accueil désormais (elle
+// vivait avant dans le partial calculateur partagé, donc dupliquée mot
+// pour mot sur les 53 pages course ; chaque page course a sa propre FAQ
+// spécifique générée plus bas, pas besoin de doublon générique en plus).
+const homeFaqItems = [
+  { q: 'Combien de temps pour faire un trail de 60 km ?',
+    a: "Ça dépend surtout de trois choses : votre niveau actuel (via un chrono de référence récent), le dénivelé positif du parcours, et la technicité du terrain. Un même 60 km peut se courir en 6h sur un parcours roulant et peu de D+, ou en 9h+ sur un parcours technique et très vallonné. Le calculateur ci-dessus vous donne une estimation personnalisée en tenant compte de ces trois facteurs." },
+  { q: 'Comment estimer son temps sur un premier ultra-trail ?',
+    a: "La méthode la plus fiable consiste à partir d'un chrono récent (route ou trail) et à l'ajuster progressivement pour la distance, le dénivelé et le terrain visés, plutôt que d'extrapoler à la louche depuis un temps sur marathon. C'est exactement ce que fait ce calculateur, avec en plus la possibilité d'enregistrer vos propres courses passées pour affiner l'estimation au fil du temps." },
+  { q: 'Pourquoi mon temps réel est différent de la prédiction ?',
+    a: "La météo, le ravitaillement, la gestion d'allure, la nuit, ou simplement la forme du jour font varier le résultat réel de ±10 à 20 % par rapport à n'importe quel modèle mathématique. C'est pour ça que l'outil affiche une fourchette plutôt qu'un chiffre unique, et s'affine avec votre historique de courses." },
+  { q: 'Ce calculateur de trail est-il gratuit ?',
+    a: 'Oui, entièrement gratuit et sans inscription. Vos données restent stockées uniquement dans votre navigateur.' },
+];
+const homeFaqHtml = homeFaqItems.map((item,i) =>
+  `<p class="tc-sub" style="margin-bottom:6px;${i>0?'margin-top:16px;':''}"><strong>${esc(item.q)}</strong></p><p class="tc-sub">${esc(item.a)}</p>`
+).join('\n');
+const homeFaqStructuredData = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: homeFaqItems.map(item => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } }))
+};
+const homeFaqSection = `
+<script type="application/ld+json">${JSON.stringify(homeFaqStructuredData)}</script>
+<div class="tc-section" style="max-width:720px;margin:0 auto;">
+  <h2>Questions fréquentes</h2>
+  ${homeFaqHtml}
+</div>`;
+
+write('index.html', page(homeHead, homeCalculator + homeFaqSection));
 
 // ---------------------------------------------------------------------
 // 3. Pages statiques copiées telles quelles
@@ -292,6 +320,17 @@ races.forEach(race => {
   };
   const structuredDataScript = `<script type="application/ld+json">${JSON.stringify(structuredData)}</script>`;
 
+  const breadcrumbData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Monchronotrail', item: 'https://monchronotrail.netlify.app/' },
+      { '@type': 'ListItem', position: 2, name: `${race.name} ${race.edition}`, item: 'https://monchronotrail.netlify.app' + eventUrlPath(race.slug, race.edition) },
+      { '@type': 'ListItem', position: 3, name: formatLabel, item: url }
+    ]
+  };
+  const breadcrumbScript = `<script type="application/ld+json">${JSON.stringify(breadcrumbData)}</script>`;
+
   // Contenu FAQ — défini une seule fois ici, réutilisé à la fois pour
   // l'affichage visible (visite normale) ET pour le balisage FAQPage
   // (Google), pour ne jamais avoir de contenu structuré différent de ce
@@ -340,6 +379,7 @@ races.forEach(race => {
   const body = `
 ${structuredDataScript}
 ${faqStructuredDataScript}
+${breadcrumbScript}
 <div style="max-width:720px;margin:0 auto 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;">
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a> · <a href="${eventUrlPath(race.slug, race.edition)}" style="color:#2F4A3C;">${esc(race.name)} ${race.edition} — tous les formats</a></p>
   <h1 style="font-family:Georgia,'Iowan Old Style',serif;font-weight:normal;font-size:26px;line-height:1.3;">${esc(race.name)} ${esc(formatLabel)} ${race.edition} : estimez votre temps de course</h1>
@@ -387,7 +427,7 @@ ${CALCULATOR}
 
   ${relatedHtml ? `<h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Vous préparez une autre course ?</h2><p style="font-size:14px;">${relatedHtml}</p>` : ''}
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>
 ${prefillScript}
 ${profilesScript}
@@ -432,7 +472,7 @@ Object.values(byEventEdition).forEach(list => {
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Choisissez votre format</h2>
   ${formatCards}
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 
   const head2 = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.netlify.app/og-image.png' });
@@ -535,6 +575,85 @@ const coursesBody = `
 write('courses/index.html', page(coursesHead, coursesBody));
 
 // ---------------------------------------------------------------------
+// 6ter. Pages de contenu : Méthodologie et À propos — profondeur de
+//       contenu réelle (pas un blog), liées depuis le pied de page de
+//       toutes les pages courses et depuis l'accueil.
+// ---------------------------------------------------------------------
+const methodoHead = headTags({
+  title: 'Comment fonctionne le calculateur Monchronotrail ? | Méthodologie',
+  description: "Détail de la méthode de calcul de Monchronotrail : formule de Riegel, coefficients de distance, de dénivelé, de technicité et de fatigue, calibration personnelle.",
+  canonical: 'https://monchronotrail.netlify.app/methodologie/',
+  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+});
+const methodoBody = `
+<div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;line-height:1.6;">
+  <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
+  <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:28px;">Comment fonctionne le calculateur Monchronotrail ?</h1>
+  <p style="font-size:14.5px;">Monchronotrail estime votre temps de course sur un trail ou un ultra-trail à partir d'une performance de référence (route ou trail), ajustée à la distance, au dénivelé positif, à la technicité du terrain, et à la fatigue qui s'accumule sur les longs efforts.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 1 — La base : la formule de Riegel</h2>
+  <p style="font-size:14px;">Tout part d'un chrono récent (marathon, semi, 10 km, ou une course de trail). Cette performance est projetée sur la distance visée grâce à la formule de Riegel (exposant 1,06), qui modélise la perte de vitesse liée à l'endurance sur une distance plus longue.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 2 — Les ajustements trail</h2>
+  <p style="font-size:14px;">Cette base "route" est ensuite corrigée par trois coefficients indépendants :</p>
+  <ul style="font-size:14px;padding-left:20px;">
+    <li><strong>Densité de D+</strong> (mètres de dénivelé par kilomètre) : plus ça grimpe au kilomètre, plus le rythme ralentit.</li>
+    <li><strong>Technicité du terrain</strong> : roulant, modéré, technique, ou montagne très technique.</li>
+    <li><strong>Fatigue liée à la distance</strong> : au-delà d'un certain kilométrage, la fatigue s'accumule de façon non linéaire — un 100 km n'est pas juste "un peu plus" qu'un 80 km.</li>
+  </ul>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 3 — La calibration personnelle</h2>
+  <p style="font-size:14px;">Si vous enregistrez vos propres courses passées (temps prédit vs temps réel), Monchronotrail calcule un facteur de correction personnel (moyenne des écarts observés, plafonnée à ±30 % pour éviter qu'une seule course inhabituelle ne fausse tout) et l'applique aux futures estimations. C'est volontairement simple : une moyenne, pas un modèle prédictif complexe.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Pourquoi une fourchette plutôt qu'un chiffre unique ?</h2>
+  <p style="font-size:14px;">Aucun modèle ne peut prédire la météo, un coup de mou à 3h du matin, ou une mauvaise gestion des ravitaillements. La fourchette affichée reflète cette incertitude réelle plutôt que de donner une fausse precision.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Les limites, honnêtement</h2>
+  <p style="font-size:14px;">Le modèle reste une estimation mathématique. Il ne remplace pas l'expérience, un avis médical, ou une bonne préparation. Certaines données de courses affichées sur le site sont encore au statut "à vérifier" — c'est indiqué explicitement sur chaque page concernée plutôt que masqué.</p>
+
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+</div>`;
+write('methodologie/index.html', page(methodoHead, methodoBody));
+
+const aboutHead = headTags({
+  title: 'À propos de Monchronotrail | Pourquoi ce calculateur existe',
+  description: "L'histoire derrière Monchronotrail : deux courses où l'estimation de temps s'est révélée totalement fausse, et la décision d'y remédier.",
+  canonical: 'https://monchronotrail.netlify.app/a-propos/',
+  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+});
+const aboutBody = `
+<div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;line-height:1.6;">
+  <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
+  <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:28px;">Pourquoi Monchronotrail existe</h1>
+  <p style="font-size:14.5px;">Sur mes deux premières longues courses, j'ai complètement raté mes estimations de temps.</p>
+  <p style="font-size:14px;">Sur l'Ultra-Marin (60 km, Golfe du Morbihan), je visais 7 à 8 heures. Réel : 6h36. Sur un 80 km / 3200 m D+ en Auvergne, je visais 13 à 15 heures. Réel : 11h30. Dans les deux cas, un écart énorme entre ce à quoi je m'attendais et la réalité — au point de fausser complètement ma stratégie de course, mes ravitaillements, et mon mental en cours de route.</p>
+  <p style="font-size:14px;">Je me suis rendu compte qu'il n'existait pas d'outil simple, gratuit et honnête pour estimer son temps sur un trail long ou un ultra quand on découvre ce format. Alors je l'ai construit.</p>
+  <p style="font-size:14px;">Monchronotrail est gratuit, sans publicité, et le restera pendant sa phase de test. Le modèle de calcul évolue au fil des retours réels de coureurs — s'il vous semble faux sur une course en particulier, c'est justement ce genre de retour qui permet de l'améliorer.</p>
+  <p style="font-size:14px;">Pour comprendre comment le calcul fonctionne en détail, voir la <a href="/methodologie/" style="color:#2F4A3C;">page méthodologie</a>.</p>
+
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+</div>`;
+write('a-propos/index.html', page(aboutHead, aboutBody));
+
+// ---------------------------------------------------------------------
+// 6quater. Page 404 personnalisée (Netlify la sert automatiquement si
+//          nommée 404.html à la racine du site publié).
+// ---------------------------------------------------------------------
+const notFoundHead = headTags({
+  title: 'Page introuvable | Monchronotrail',
+  description: "Cette page n'existe pas ou plus sur Monchronotrail.",
+  canonical: 'https://monchronotrail.netlify.app/404.html',
+  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+});
+const notFoundBody = `
+<div style="max-width:600px;margin:80px auto;text-align:center;font-family:-apple-system,sans-serif;color:#16211C;">
+  <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:26px;">Page introuvable</h1>
+  <p style="font-size:14.5px;color:#5C6B66;">Cette page n'existe pas, ou plus — la course a peut-être changé d'adresse.</p>
+  <p style="margin-top:20px;"><a href="/" style="color:#fff;background:#C97B2E;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;">Retour au calculateur</a> &nbsp; <a href="/courses/" style="color:#2F4A3C;text-decoration:none;font-size:14px;">Chercher une course →</a></p>
+</div>`;
+write('404.html', page(notFoundHead, notFoundBody));
+
+// ---------------------------------------------------------------------
 // 7. Sitemap
 // ---------------------------------------------------------------------
 const eventUrls = Object.values(byEventEdition).map(list => 'https://monchronotrail.netlify.app' + eventUrlPath(list[0].slug, list[0].edition));
@@ -542,6 +661,8 @@ const urls = [
   'https://monchronotrail.netlify.app/',
   'https://monchronotrail.netlify.app/courses/',
   'https://monchronotrail.netlify.app/calendrier-trails-2026/',
+  'https://monchronotrail.netlify.app/methodologie/',
+  'https://monchronotrail.netlify.app/a-propos/',
   ...eventUrls,
   ...races.map(r => 'https://monchronotrail.netlify.app' + raceUrlPath(r))
 ];

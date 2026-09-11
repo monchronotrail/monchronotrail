@@ -105,6 +105,20 @@
   .tc-disclaimer{
     margin-top:14px;font-size:12px;color:#9FB5A5;line-height:1.5;
   }
+  .tc-calib-toggle{
+    margin-top:12px;font-size:13px;color:#CFE0D3;
+  }
+  .tc-calib-toggle label{display:flex;align-items:flex-start;gap:8px;cursor:pointer;line-height:1.4;}
+  .tc-calib-toggle input{margin-top:3px;}
+  .tc-share-panel{margin-top:10px;padding:14px;background:rgba(255,255,255,.06);border-radius:8px;}
+  .tc-share-buttons{display:flex;gap:8px;flex-wrap:wrap;}
+  .tc-share-btn{
+    font:inherit;font-size:13px;padding:7px 12px;background:transparent;
+    border:1px solid rgba(255,255,255,.25);color:#F0C179;border-radius:6px;cursor:pointer;
+    text-decoration:none;display:inline-block;
+  }
+  .tc-share-btn:hover{background:rgba(255,255,255,.08);}
+  .tc-share-note{font-size:12px;color:#9FB5A5;margin:10px 0 0;line-height:1.4;}
   .tc-detail-toggle{
     margin-top:16px;background:transparent;border:1px solid rgba(255,255,255,.25);
     color:#F0C179;font-size:13px;padding:8px 14px;border-radius:6px;cursor:pointer;
@@ -295,8 +309,24 @@
         <div class="tc-pace" id="tc-pace-display"></div>
       </div>
       <div class="tc-range" id="tc-range-display"></div>
+      <div class="tc-calib-toggle" id="tc-calib-toggle" style="display:none;">
+        <label><input type="checkbox" id="tc-calib-checkbox" checked> <span id="tc-calib-label"></span></label>
+      </div>
       <div class="tc-narrative" id="tc-narrative"></div>
       <div class="tc-disclaimer">⚠️ Estimation indicative<br>Le résultat dépend notamment de votre niveau, de la météo, des ravitaillements, de la gestion d'allure et de votre expérience sur longue distance.</div>
+
+      <button class="tc-detail-toggle" id="tc-share-toggle" type="button">📤 Partager mon résultat</button>
+      <div class="tc-share-panel" id="tc-share-panel" style="display:none;">
+        <div class="tc-share-buttons">
+          <button class="tc-share-btn" id="tc-share-native" type="button" style="display:none;">📱 Partager</button>
+          <a class="tc-share-btn" id="tc-share-whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="tc-share-btn" id="tc-share-facebook" href="#" target="_blank" rel="noopener">Facebook</a>
+          <a class="tc-share-btn" id="tc-share-x" href="#" target="_blank" rel="noopener">X</a>
+          <button class="tc-share-btn" id="tc-share-copy" type="button">🔗 Copier le lien</button>
+        </div>
+        <p class="tc-share-note" id="tc-share-note">Ce lien réutilise vos paramètres : la personne qui l'ouvre retrouve directement votre calcul.</p>
+      </div>
+
       <button class="tc-detail-toggle" id="tc-detail-toggle" type="button">🔎 Voir comment le chrono est calculé</button>
       <div class="tc-steps" id="tc-steps" style="display:none;"></div>
 
@@ -365,22 +395,6 @@
   </div>
 
   <div class="tc-section">
-    <h2>Questions fréquentes</h2>
-
-    <p class="tc-sub" style="margin-bottom:6px;"><strong>Combien de temps pour faire un trail de 60 km ?</strong></p>
-    <p class="tc-sub">Ça dépend surtout de trois choses : votre niveau actuel (via un chrono de référence récent), le dénivelé positif du parcours, et la technicité du terrain. Un même 60 km peut se courir en 6h sur un parcours roulant et peu de D+, ou en 9h+ sur un parcours technique et très vallonné. Le calculateur ci-dessus vous donne une estimation personnalisée en tenant compte de ces trois facteurs.</p>
-
-    <p class="tc-sub" style="margin-bottom:6px;margin-top:16px;"><strong>Comment estimer son temps sur un premier ultra-trail ?</strong></p>
-    <p class="tc-sub">La méthode la plus fiable consiste à partir d'un chrono récent (route ou trail) et à l'ajuster progressivement pour la distance, le dénivelé et le terrain visés, plutôt que d'extrapoler à la louche depuis un temps sur marathon. C'est exactement ce que fait ce calculateur, avec en plus la possibilité d'enregistrer vos propres courses passées pour affiner l'estimation au fil du temps.</p>
-
-    <p class="tc-sub" style="margin-bottom:6px;margin-top:16px;"><strong>Pourquoi mon temps réel est différent de la prédiction ?</strong></p>
-    <p class="tc-sub">La météo, le ravitaillement, la gestion d'allure, la nuit, ou simplement la forme du jour font varier le résultat réel de ±10 à 20 % par rapport à n'importe quel modèle mathématique. C'est pour ça que l'outil affiche une fourchette plutôt qu'un chiffre unique, et s'affine avec votre historique de courses.</p>
-
-    <p class="tc-sub" style="margin-bottom:6px;margin-top:16px;"><strong>Ce calculateur de trail est-il gratuit ?</strong></p>
-    <p class="tc-sub">Oui, entièrement gratuit et sans inscription. Vos données restent stockées uniquement dans votre navigateur.</p>
-  </div>
-
-  <div class="tc-section">
     <details class="tc-formula-details">
       <summary>Voir la formule complète du calcul</summary>
       <p class="tc-foot" style="margin-top:12px;">
@@ -397,9 +411,13 @@
 
   <div class="tc-section">
     <p class="tc-foot">
-      <a href="mentions-legales.html" style="color:var(--slate);">Mentions légales</a>
+      <a href="/methodologie/" style="color:var(--slate);">Méthodologie</a>
       &nbsp;·&nbsp;
-      <a href="politique-confidentialite.html" style="color:var(--slate);">Politique de confidentialité</a>
+      <a href="/a-propos/" style="color:var(--slate);">À propos</a>
+      &nbsp;·&nbsp;
+      <a href="/mentions-legales.html" style="color:var(--slate);">Mentions légales</a>
+      &nbsp;·&nbsp;
+      <a href="/politique-confidentialite.html" style="color:var(--slate);">Politique de confidentialité</a>
     </p>
   </div>
 </div>
@@ -682,10 +700,35 @@
   }
 
   // ---------- commentary from history (short, personalized) ----------
-  function buildComment(Dtarget){
+  // ---------- calibration personnelle simple (moyenne des écarts passés) ----------
+  // Volontairement basique (pas de pseudo-IA) : moyenne du ratio réel/prédit sur
+  // les courses enregistrées, priorité aux courses de distance proche, et
+  // bornée à ±30% pour éviter qu'une seule course aberrante ne fausse tout.
+  function computeCalibration(Dtarget){
+    const entries = races.filter(r=>r.predicted);
+    if(entries.length===0) return null;
+    const similar = entries.filter(r=> Math.abs(r.distance-Dtarget)/Dtarget <= 0.4);
+    const pool = similar.length>0 ? similar : entries;
+    const ratios = pool.map(r=> r.realSeconds/r.predicted);
+    const avgRatio = ratios.reduce((a,b)=>a+b,0)/ratios.length;
+    const clamped = Math.min(1.3, Math.max(0.7, avgRatio));
+    return { ratio: clamped, n: pool.length, onSimilar: similar.length>0 };
+  }
+
+  function buildComment(Dtarget, calibApplied, calib){
     if(races.length===0) return null;
     const entries = races.filter(r=>r.predicted);
     if(entries.length===0) return null;
+
+    const namesOf = (list)=> list.map(r=>r.name || (r.distance+' km')).join(' et ');
+
+    if(calibApplied && calib){
+      const pct = Math.round((calib.ratio-1)*100);
+      const refLabel = calib.onSimilar ? 'vos courses de distance proche' : 'l\'ensemble de votre historique';
+      return pct===0
+        ? 'Le chrono ci-dessus intègre déjà votre historique ('+calib.n+' course'+(calib.n>1?'s':'')+') : vos performances passées collent bien au modèle de base.'
+        : 'Le chrono ci-dessus intègre déjà votre historique, ajusté de '+(pct>0?'+':'')+pct+'% d\'après '+refLabel+' ('+calib.n+' course'+(calib.n>1?'s':'')+').';
+    }
 
     const withDelta = entries.map(r=>({ ...r, deltaSec: r.realSeconds - r.predicted }));
     const similar = withDelta.filter(r=> Math.abs(r.distance-Dtarget)/Dtarget <= 0.4);
@@ -694,7 +737,6 @@
     const avgMin = Math.round(Math.abs(avgDeltaSec)/60);
     const onSimilar = similar.length>0;
 
-    const namesOf = (list)=> list.map(r=>r.name || (r.distance+' km')).join(' et ');
     const refLabel = onSimilar
       ? (similar.length===1 ? 'sur votre course '+namesOf(similar) : 'sur vos courses '+namesOf(similar))
       : (entries.length===1 ? 'sur votre course '+namesOf(entries) : 'sur l\'ensemble de vos '+entries.length+' courses enregistrées');
@@ -712,6 +754,48 @@
 
   const MAX_HISTORY = 4;
   let races = [];
+
+  let lastRawTotal = null, lastDtarget = null, lastTerrain = null, lastSteps = null;
+
+  function renderResult(scrollTo){
+    const running = (root.querySelector('#tc-calib-checkbox').checked && lastCalib)
+      ? lastRawTotal * lastCalib.ratio
+      : lastRawTotal;
+    const applied = (root.querySelector('#tc-calib-checkbox').checked && !!lastCalib);
+
+    root.querySelector('#tc-result-section').style.display = 'block';
+    root.querySelector('#tc-time-display').textContent = formatTime(running);
+    root.querySelector('#tc-pace-display').textContent = '≈ '+formatPace(running/lastDtarget)+' de moyenne';
+
+    const pct = rangePct(lastDtarget);
+    const low = running*(1-pct/100), high = running*(1+pct/100);
+    root.querySelector('#tc-range-display').textContent = 'Fourchette indicative : '+formatTime(low)+' – '+formatTime(high);
+
+    const stepsEl = root.querySelector('#tc-steps');
+    stepsEl.innerHTML = lastSteps.map(([label,sub,val])=>
+      '<div class="tc-step-row"><span class="tc-step-label">'+label+sub+'</span><span class="tc-step-val">'+val+'</span></div>'
+    ).join('') + (applied ? '<div class="tc-step-row"><span class="tc-step-label">Calibration personnelle<small>facteur '+lastCalib.ratio.toFixed(2)+'× appliqué au total ci-dessus</small></span><span class="tc-step-val">'+formatHM(running)+'</span></div>' : '');
+
+    const narrativeEl = root.querySelector('#tc-narrative');
+    const historyNote = buildComment(lastDtarget, applied, lastCalib);
+    narrativeEl.textContent = buildNarrative(lastDtarget, lastTerrain) + (historyNote ? ' ' + historyNote : '');
+
+    const toggleWrap = root.querySelector('#tc-calib-toggle');
+    if(lastCalib){
+      toggleWrap.style.display = 'block';
+      const pctCalib = Math.round((lastCalib.ratio-1)*100);
+      root.querySelector('#tc-calib-label').textContent =
+        'Appliquer ma calibration personnelle (' + lastCalib.n + ' course' + (lastCalib.n>1?'s':'') + ', facteur ' + lastCalib.ratio.toFixed(2) + '×' + (pctCalib!==0 ? ', '+(pctCalib>0?'+':'')+pctCalib+'%' : '') + ')';
+    } else {
+      toggleWrap.style.display = 'none';
+    }
+
+    lastResult = { total: running, Dtarget: lastDtarget, terrain: lastTerrain };
+    root.querySelector('#tc-splits-result').innerHTML = '';
+    root.querySelector('#tc-splits-total').textContent = '';
+
+    if(scrollTo) root.querySelector('#tc-result-section').scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
 
   root.querySelector('#tc-calc-btn').addEventListener('click', ()=>{
     const ref = getReference();
@@ -746,32 +830,118 @@
     running *= Ce;
     steps.push(['Étape E — fatigue distance ('+Dtarget+' km)', '<small>coef. '+Ce.toFixed(2)+'</small>', formatHM(running)]);
 
-    root.querySelector('#tc-result-section').style.display = 'block';
-    root.querySelector('#tc-time-display').textContent = formatTime(running);
-    root.querySelector('#tc-pace-display').textContent = '≈ '+formatPace(running/Dtarget)+' de moyenne';
+    lastRawTotal = running; lastDtarget = Dtarget; lastTerrain = terrain; lastSteps = steps;
+    lastCalib = computeCalibration(Dtarget);
 
-    const pct = rangePct(Dtarget);
-    const low = running*(1-pct/100), high = running*(1+pct/100);
-    root.querySelector('#tc-range-display').textContent = 'Fourchette indicative : '+formatTime(low)+' – '+formatTime(high);
-
-    const stepsEl = root.querySelector('#tc-steps');
-    stepsEl.innerHTML = steps.map(([label,sub,val])=>
-      '<div class="tc-step-row"><span class="tc-step-label">'+label+sub+'</span><span class="tc-step-val">'+val+'</span></div>'
-    ).join('');
-    stepsEl.style.display = 'none';
     const toggleBtn = root.querySelector('#tc-detail-toggle');
     toggleBtn.textContent = '🔎 Voir comment le chrono est calculé';
+    root.querySelector('#tc-steps').style.display = 'none';
 
-    const narrativeEl = root.querySelector('#tc-narrative');
-    const historyNote = buildComment(Dtarget);
-    narrativeEl.textContent = buildNarrative(Dtarget, terrain) + (historyNote ? ' ' + historyNote : '');
-
-    lastResult = { total: running, Dtarget, terrain };
-    root.querySelector('#tc-splits-result').innerHTML = '';
-    root.querySelector('#tc-splits-total').textContent = '';
-
-    root.querySelector('#tc-result-section').scrollIntoView({behavior:'smooth', block:'nearest'});
+    renderResult(true);
   });
+
+  root.querySelector('#tc-calib-checkbox').addEventListener('change', ()=>{
+    if(lastRawTotal!==null) renderResult(false);
+  });
+
+  // ---------- partage du résultat ----------
+  function buildShareUrl(){
+    const p = new URLSearchParams();
+    p.set('reftype', refType);
+    if(refType==='route'){
+      p.set('refdist', getRefDistance() || '');
+      p.set('reftime', root.querySelector('#tc-ref-time').value || '');
+    } else {
+      p.set('reftraildist', root.querySelector('#tc-reftrail-dist').value || '');
+      p.set('reftraildplus', root.querySelector('#tc-reftrail-dplus').value || '');
+      p.set('reftrailterrain', root.querySelector('input[name="tc-reftrail-terrain"]:checked').value);
+      p.set('reftrailtime', root.querySelector('#tc-reftrail-time').value || '');
+    }
+    p.set('dist', lastDtarget);
+    p.set('dplus', root.querySelector('#tc-target-dplus').value || '');
+    p.set('terrain', lastTerrain);
+    const url = new URL(location.href);
+    url.search = p.toString();
+    url.hash = '';
+    return url.toString();
+  }
+
+  function buildShareText(){
+    const running = (root.querySelector('#tc-calib-checkbox').checked && lastCalib) ? lastRawTotal*lastCalib.ratio : lastRawTotal;
+    const dplus = root.querySelector('#tc-target-dplus').value;
+    return '🏃 Mon objectif : '+lastDtarget+' km / '+dplus+' m D+\n🎯 Estimation Monchronotrail : '+formatTime(running)+'\n';
+  }
+
+  root.querySelector('#tc-share-toggle').addEventListener('click', ()=>{
+    const panel = root.querySelector('#tc-share-panel');
+    const isHidden = panel.style.display === 'none';
+    panel.style.display = isHidden ? 'block' : 'none';
+    if(!isHidden) return;
+
+    const shareUrl = buildShareUrl();
+    const text = buildShareText();
+
+    root.querySelector('#tc-share-whatsapp').href = 'https://wa.me/?text='+encodeURIComponent(text+shareUrl);
+    root.querySelector('#tc-share-facebook').href = 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(shareUrl);
+    root.querySelector('#tc-share-x').href = 'https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(shareUrl);
+
+    const nativeBtn = root.querySelector('#tc-share-native');
+    if(navigator.share){
+      nativeBtn.style.display = 'inline-block';
+      nativeBtn.onclick = ()=> navigator.share({ text, url: shareUrl }).catch(()=>{});
+    }
+
+    root.querySelector('#tc-share-copy').onclick = ()=>{
+      const noteEl = root.querySelector('#tc-share-note');
+      navigator.clipboard.writeText(shareUrl).then(()=>{
+        noteEl.textContent = '✓ Lien copié dans le presse-papiers.';
+        setTimeout(()=>{ noteEl.textContent = 'Ce lien réutilise vos paramètres : la personne qui l\'ouvre retrouve directement votre calcul.'; }, 2500);
+      }).catch(()=>{
+        noteEl.textContent = 'Copie impossible ici — sélectionnez le lien manuellement : '+shareUrl;
+      });
+    };
+  });
+
+  // Pré-remplissage depuis un lien partagé (paramètres d'URL), puis calcul automatique.
+  function prefillFromShareUrl(){
+    const p = new URLSearchParams(location.search);
+    if(!p.has('dist')) return false;
+
+    const rt = p.get('reftype');
+    if(rt==='trail'){
+      root.querySelector('[data-reftype="trail"]').click();
+      if(p.get('reftraildist')) root.querySelector('#tc-reftrail-dist').value = p.get('reftraildist');
+      if(p.get('reftraildplus')) root.querySelector('#tc-reftrail-dplus').value = p.get('reftraildplus');
+      if(p.get('reftrailterrain')){
+        const r = root.querySelector('input[name="tc-reftrail-terrain"][value="'+p.get('reftrailterrain')+'"]');
+        if(r) r.checked = true;
+      }
+      if(p.get('reftrailtime')) root.querySelector('#tc-reftrail-time').value = p.get('reftrailtime');
+    } else {
+      if(p.get('refdist')){
+        const opt = root.querySelector('#tc-ref-dist option[value="'+p.get('refdist')+'"]');
+        if(opt){ root.querySelector('#tc-ref-dist').value = p.get('refdist'); }
+        else {
+          root.querySelector('#tc-ref-dist').value = 'custom';
+          root.querySelector('#tc-ref-dist-custom-wrap').style.display = 'flex';
+          root.querySelector('#tc-ref-dist-custom').value = p.get('refdist');
+        }
+      }
+      if(p.get('reftime')) root.querySelector('#tc-ref-time').value = p.get('reftime');
+    }
+
+    if(p.get('dist')) root.querySelector('#tc-target-dist').value = p.get('dist');
+    if(p.get('dplus')) root.querySelector('#tc-target-dplus').value = p.get('dplus');
+    if(p.get('terrain')){
+      const r = root.querySelector('input[name="tc-terrain"][value="'+p.get('terrain')+'"]');
+      if(r){
+        r.checked = true;
+        root.querySelectorAll('#tc-terrain-group label').forEach(l=>l.classList.remove('checked'));
+        r.closest('label').classList.add('checked');
+      }
+    }
+    return true;
+  }
 
   // ---------- history (up to 4 past chronos) ----------
 
@@ -879,6 +1049,7 @@
 
   // ---------- temps de passage (optionnel) ----------
   let lastResult = null; // {total, Dtarget, terrain} from the last main calculation
+  let lastCalib = null; // {ratio, n, onSimilar} from computeCalibration(), set on each Calculer click
   let splitRows = [{ name:'', dist:'', dplus:'' }];
 
   function renderSplitRows(){
@@ -997,7 +1168,11 @@
     updateSplitsTotal();
   });
 
-  loadHistory();
+  loadHistory().then(()=>{
+    if(prefillFromShareUrl()){
+      root.querySelector('#tc-calc-btn').click();
+    }
+  });
 
   // Expose le moteur de calcul existant pour que les pages course générées
   // (voir build.js) puissent l'appeler directement — jamais de second moteur.

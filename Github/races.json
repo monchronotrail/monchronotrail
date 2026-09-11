@@ -94,9 +94,9 @@
       "utmb-2026-mcc"
     ],
     "sourceUrl": "https://therunningchannel.com/utmb-occ-ccc-whats-the-difference/",
-    "verificationDate": "2026-09-10",
+    "verificationDate": "2026-09-11",
     "status": "SECONDARY_SOURCE",
-    "notes": "Chiffres cohérents sur plusieurs sources indépendantes (therunningchannel, tonton-outdoor, stadion-actu) pour l'édition 2026, mais non vérifiés directement sur utmb.world."
+    "notes": "60 km / 3500 m D+ confirmés à l'identique par 2 sources indépendantes (therunningchannel, deux articles distincts)."
   },
   {
     "id": "utmb-2026-ccc",
@@ -129,9 +129,9 @@
       "utmb-2026-mcc"
     ],
     "sourceUrl": "https://therunningchannel.com/utmb-occ-ccc-whats-the-difference/",
-    "verificationDate": "2026-09-10",
+    "verificationDate": "2026-09-11",
     "status": "SECONDARY_SOURCE",
-    "notes": "Chiffres cohérents sur plusieurs sources indépendantes pour l'édition 2026, non vérifiés directement sur utmb.world."
+    "notes": "101 km / 6050 m D+ confirmés par plusieurs sources convergentes (6050-6100 m selon la source, écart mineur)."
   },
   {
     "id": "utmb-2026-tds",
@@ -146,7 +146,7 @@
     "location": "Courmayeur (Italie) → Chamonix (France)",
     "description": "Réputée comme la plus technique des courses de la semaine UTMB : un tracé sauvage et exigeant sur les traces des Ducs de Savoie.",
     "distance": 145,
-    "elevationGain": 9500,
+    "elevationGain": 9130,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Haute montagne alpine, très technique",
@@ -164,9 +164,9 @@
       "utmb-2026-mcc"
     ],
     "sourceUrl": "https://stadion-actu.fr/?p=146223",
-    "verificationDate": "2026-09-10",
+    "verificationDate": "2026-09-11",
     "status": "SECONDARY_SOURCE",
-    "notes": "Chiffres cohérents sur plusieurs sources indépendantes pour l'édition 2026, non vérifiés directement sur utmb.world."
+    "notes": "Corrigé suite à vérification : plusieurs sources convergent sur 145 km / 9100-9176 m D+ (valeur médiane retenue : 9130 m), et non 9500 m comme précédemment indiqué."
   },
   {
     "id": "utmb-2026-utmb",
@@ -199,9 +199,9 @@
       "utmb-2026-mcc"
     ],
     "sourceUrl": "https://therunningchannel.com/how-to-watch-utmb/",
-    "verificationDate": "2026-09-10",
+    "verificationDate": "2026-09-11",
     "status": "SECONDARY_SOURCE",
-    "notes": "174 km / 9900 m D+ confirmés sur plusieurs sources indépendantes pour l'édition 2026 (dates 24-30 août 2026)."
+    "notes": "174 km / 9900 m D+ confirmés de façon convergente par au moins 4 sources indépendantes (therunningchannel, barnes-montblanc, auvergnerhonealpes-tourisme). Non fetché directement sur utmb.world (accès direct bloqué), d'où un statut prudent plutôt que VERIFIED."
   },
   {
     "id": "utmb-2026-mcc",
@@ -216,7 +216,7 @@
     "location": "Martigny-Combe (Suisse) → Chamonix (France)",
     "description": "Le format le plus accessible de la semaine UTMB, pensé pour une première expérience en montagne dans l'ambiance UTMB.",
     "distance": 40,
-    "elevationGain": 2350,
+    "elevationGain": 2300,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Moyenne montagne alpine",
@@ -234,9 +234,9 @@
       "utmb-2026-utmb"
     ],
     "sourceUrl": "https://stadion-actu.fr/?p=146223",
-    "verificationDate": "2026-09-10",
+    "verificationDate": "2026-09-11",
     "status": "SECONDARY_SOURCE",
-    "notes": "Deux sources donnent 2300 m et 2350 m de D+ (écart mineur) — à confirmer sur utmb.world."
+    "notes": "Corrigé suite à vérification : 40 km / 2300 m D+ confirmés par plusieurs sources convergentes (dacia UTMB Mont-Blanc officiel cité par auvergnerhonealpes-tourisme, et barnes-montblanc)."
   },
   {
     "id": "templiers-2026-endurance",
@@ -268,9 +268,9 @@
       "templiers-2026-boffi"
     ],
     "sourceUrl": "https://www.tourisme-occitanie.com/fr/fiche/fete-et-manifestation/le-festival-des-templiers-millau_TFOFMACRTLFESTITEMP/",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "Distance/D+ varient légèrement d'une source à l'autre (99.2-99.5 km, 4292-4314 m D+) et d'une édition à l'autre — à reconfirmer sur le site officiel avant publication."
+    "verificationDate": "2026-09-11",
+    "status": "SECONDARY_SOURCE",
+    "notes": "99,5 km confirmés à l'identique sur une source indépendante supplémentaire (calendrier officiel des inscriptions, TrainerDay) pour l'édition 2026 (15-18 octobre)."
   },
   {
     "id": "templiers-2026-grand-trail",
@@ -302,9 +302,9 @@
       "templiers-2026-boffi"
     ],
     "sourceUrl": "https://www.tourisme-occitanie.com/fr/fiche/fete-et-manifestation/le-festival-des-templiers-millau_TFOFMACRTLFESTITEMP/",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "Distance/D+ varient légèrement selon les éditions (80.4-80.7 km, 3429-3477 m D+) — à reconfirmer sur le site officiel."
+    "verificationDate": "2026-09-11",
+    "status": "SECONDARY_SOURCE",
+    "notes": "80,7 km confirmés à l'identique sur une source indépendante supplémentaire pour l'édition 2026."
   },
   {
     "id": "templiers-2026-integrale",
@@ -336,9 +336,9 @@
       "templiers-2026-boffi"
     ],
     "sourceUrl": "https://www.festivalenfrance.com/festival/festival-des-templiers",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "À reconfirmer sur le site officiel avant publication."
+    "verificationDate": "2026-09-11",
+    "status": "SECONDARY_SOURCE",
+    "notes": "62,1 km confirmés (très proche des 62 km déjà indiqués) sur une source indépendante supplémentaire pour l'édition 2026."
   },
   {
     "id": "templiers-2026-boffi",
@@ -370,9 +370,9 @@
       "templiers-2026-integrale"
     ],
     "sourceUrl": "https://www.festivalenfrance.com/festival/festival-des-templiers",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "À reconfirmer sur le site officiel avant publication."
+    "verificationDate": "2026-09-11",
+    "status": "SECONDARY_SOURCE",
+    "notes": "47,3 km confirmés à l'identique sur une source indépendante supplémentaire pour l'édition 2026."
   },
   {
     "id": "gta-2026-175",
