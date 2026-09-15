@@ -181,8 +181,8 @@ homeCalculator = homeCalculator.replace(
 const homeHead = headTags({
   title: 'Calculateur de temps trail et ultra-trail | Monchronotrail',
   description: "Calculez gratuitement votre temps prévisionnel sur un trail ou un ultra-trail selon votre niveau, le dénivelé et le terrain. Pensé pour les néo-traileurs.",
-  canonical: 'https://monchronotrail.netlify.app/',
-  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+  canonical: 'https://monchronotrail.fr/',
+  ogImage: 'https://monchronotrail.fr/og-image.png'
 });
 // FAQ générique — vit uniquement sur la page d'accueil désormais (elle
 // vivait avant dans le partial calculateur partagé, donc dupliquée mot
@@ -227,7 +227,7 @@ copyFile('og-image.png', 'og-image.png');
 // ---------------------------------------------------------------------
 races.forEach(race => {
 
-  const url = 'https://monchronotrail.netlify.app' + raceUrlPath(race);
+  const url = 'https://monchronotrail.fr' + raceUrlPath(race);
   const formatLabel = race.formatName || (race.distance + ' km');
   const displayName = race.shortName || race.name;
   const distRound = Math.round(race.distance);
@@ -334,8 +334,8 @@ races.forEach(race => {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Monchronotrail', item: 'https://monchronotrail.netlify.app/' },
-      { '@type': 'ListItem', position: 2, name: `${race.name} ${race.edition}`, item: 'https://monchronotrail.netlify.app' + eventUrlPath(race.slug, race.edition) },
+      { '@type': 'ListItem', position: 1, name: 'Monchronotrail', item: 'https://monchronotrail.fr/' },
+      { '@type': 'ListItem', position: 2, name: `${race.name} ${race.edition}`, item: 'https://monchronotrail.fr' + eventUrlPath(race.slug, race.edition) },
       { '@type': 'ListItem', position: 3, name: formatLabel, item: url }
     ]
   };
@@ -440,7 +440,7 @@ ${prefillScript}
 ${profilesScript}
 `;
 
-  const head = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.netlify.app/og-image.png' });
+  const head = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.fr/og-image.png' });
   write(raceUrlPath(race).slice(1) + 'index.html', page(head, body));
 });
 
@@ -458,7 +458,7 @@ races.forEach(r => {
 Object.values(byEventEdition).forEach(list => {
   const first = list[0];
   const displayName = first.shortName || first.name;
-  const url = 'https://monchronotrail.netlify.app' + eventUrlPath(first.slug, first.edition);
+  const url = 'https://monchronotrail.fr' + eventUrlPath(first.slug, first.edition);
   const title = `${displayName} ${first.edition} : formats | Monchronotrail`;
   const distances = list.map(r => Math.round(r.distance) + 'km').join(', ');
   const description = `${displayName} ${first.edition} : ${list.length} format${list.length>1?'s':''} disponible${list.length>1?'s':''} (${distances}). Estimez votre temps avec Monchronotrail, calculateur gratuit.`;
@@ -484,7 +484,7 @@ Object.values(byEventEdition).forEach(list => {
   <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 
-  const head2 = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.netlify.app/og-image.png' });
+  const head2 = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.fr/og-image.png' });
   write(eventUrlPath(first.slug, first.edition).slice(1) + 'index.html', page(head2, body));
 });
 // ---------------------------------------------------------------------
@@ -493,8 +493,8 @@ Object.values(byEventEdition).forEach(list => {
 const calendarHead = headTags({
   title: 'Calendrier des trails 2026 | Monchronotrail',
   description: 'Les principales courses de trail disponibles sur Monchronotrail, classées par mois, avec calculateur de temps intégré pour chacune.',
-  canonical: 'https://monchronotrail.netlify.app/calendrier-trails-2026/',
-  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+  canonical: 'https://monchronotrail.fr/calendrier-trails-2026/',
+  ogImage: 'https://monchronotrail.fr/og-image.png'
 });
 
 function raceRow(r){
@@ -539,8 +539,8 @@ const coursesSearchData = races.map(r => ({
 const coursesHead = headTags({
   title: 'Toutes les courses | Monchronotrail',
   description: 'Recherchez une course de trail ou ultra-trail par nom, distance ou dénivelé, et obtenez une estimation de temps personnalisée.',
-  canonical: 'https://monchronotrail.netlify.app/courses/',
-  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+  canonical: 'https://monchronotrail.fr/courses/',
+  ogImage: 'https://monchronotrail.fr/og-image.png'
 });
 const coursesBody = `
 <div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;">
@@ -610,8 +610,8 @@ write('courses/index.html', page(coursesHead, coursesBody));
 const methodoHead = headTags({
   title: 'Comment fonctionne Monchronotrail ? | Méthodologie',
   description: "Méthode de calcul de Monchronotrail : kilomètre-effort (référence ITRA), formule de Riegel, technicité du terrain, calibration personnelle.",
-  canonical: 'https://monchronotrail.netlify.app/methodologie/',
-  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+  canonical: 'https://monchronotrail.fr/methodologie/',
+  ogImage: 'https://monchronotrail.fr/og-image.png'
 });
 const methodoBody = `
 <div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;line-height:1.6;">
@@ -647,8 +647,8 @@ write('methodologie/index.html', page(methodoHead, methodoBody));
 const aboutHead = headTags({
   title: 'À propos de Monchronotrail | Pourquoi ce calculateur existe',
   description: "L'histoire derrière Monchronotrail : deux courses où l'estimation de temps s'est révélée totalement fausse, et la décision d'y remédier.",
-  canonical: 'https://monchronotrail.netlify.app/a-propos/',
-  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+  canonical: 'https://monchronotrail.fr/a-propos/',
+  ogImage: 'https://monchronotrail.fr/og-image.png'
 });
 const aboutBody = `
 <div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;line-height:1.6;">
@@ -671,8 +671,8 @@ write('a-propos/index.html', page(aboutHead, aboutBody));
 const notFoundHead = headTags({
   title: 'Page introuvable | Monchronotrail',
   description: "Cette page n'existe pas ou plus sur Monchronotrail.",
-  canonical: 'https://monchronotrail.netlify.app/404.html',
-  ogImage: 'https://monchronotrail.netlify.app/og-image.png'
+  canonical: 'https://monchronotrail.fr/404.html',
+  ogImage: 'https://monchronotrail.fr/og-image.png'
 });
 const notFoundBody = `
 <div style="max-width:600px;margin:80px auto;text-align:center;font-family:-apple-system,sans-serif;color:#16211C;">
@@ -685,15 +685,15 @@ write('404.html', page(notFoundHead, notFoundBody));
 // ---------------------------------------------------------------------
 // 7. Sitemap
 // ---------------------------------------------------------------------
-const eventUrls = Object.values(byEventEdition).map(list => 'https://monchronotrail.netlify.app' + eventUrlPath(list[0].slug, list[0].edition));
+const eventUrls = Object.values(byEventEdition).map(list => 'https://monchronotrail.fr' + eventUrlPath(list[0].slug, list[0].edition));
 const urls = [
-  'https://monchronotrail.netlify.app/',
-  'https://monchronotrail.netlify.app/courses/',
-  'https://monchronotrail.netlify.app/calendrier-trails-2026/',
-  'https://monchronotrail.netlify.app/methodologie/',
-  'https://monchronotrail.netlify.app/a-propos/',
+  'https://monchronotrail.fr/',
+  'https://monchronotrail.fr/courses/',
+  'https://monchronotrail.fr/calendrier-trails-2026/',
+  'https://monchronotrail.fr/methodologie/',
+  'https://monchronotrail.fr/a-propos/',
   ...eventUrls,
-  ...races.map(r => 'https://monchronotrail.netlify.app' + raceUrlPath(r))
+  ...races.map(r => 'https://monchronotrail.fr' + raceUrlPath(r))
 ];
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -706,7 +706,7 @@ ${urls.map(u => `  <url><loc>${u}</loc><changefreq>monthly</changefreq></url>`).
 // ---------------------------------------------------------------------
 write('robots.txt', IS_CLOUDFLARE_BUILD
   ? `User-agent: *\nDisallow: /\n`
-  : `User-agent: *\nAllow: /\n\nSitemap: https://monchronotrail.netlify.app/sitemap.xml\n`
+  : `User-agent: *\nAllow: /\n\nSitemap: https://monchronotrail.fr/sitemap.xml\n`
 );
 
 console.log(`Build terminé : ${urls.length} pages générées dans dist/`);
