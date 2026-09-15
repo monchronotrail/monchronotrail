@@ -254,9 +254,8 @@
           <label>Terrain</label>
           <div class="tc-radio-group" id="tc-reftrail-terrain-group">
             <label><input type="radio" name="tc-reftrail-terrain" value="roulant" checked> 🟢 Roulant</label>
-            <label><input type="radio" name="tc-reftrail-terrain" value="modere"> 🟠 Modéré</label>
             <label><input type="radio" name="tc-reftrail-terrain" value="technique"> 🔴 Technique</label>
-            <label><input type="radio" name="tc-reftrail-terrain" value="montagne"> 🏔️ Montagne très technique</label>
+            <label><input type="radio" name="tc-reftrail-terrain" value="montagne"> 🏔️ Haute montagne</label>
           </div>
         </div>
         <div class="tc-field">
@@ -292,9 +291,8 @@
         <label>Terrain</label>
         <div class="tc-radio-group" id="tc-terrain-group">
           <label><input type="radio" name="tc-terrain" value="roulant" checked> 🟢 Roulant</label>
-          <label><input type="radio" name="tc-terrain" value="modere"> 🟠 Modéré</label>
           <label><input type="radio" name="tc-terrain" value="technique"> 🔴 Technique</label>
-          <label><input type="radio" name="tc-terrain" value="montagne"> 🏔️ Montagne très technique</label>
+          <label><input type="radio" name="tc-terrain" value="montagne"> 🏔️ Haute montagne</label>
         </div>
       </div>
     </div>
@@ -367,9 +365,8 @@
         <label for="tc-h-terrain">Terrain</label>
         <select id="tc-h-terrain">
           <option value="roulant">🟢 Roulant</option>
-          <option value="modere">🟠 Modéré</option>
           <option value="technique">🔴 Technique</option>
-          <option value="montagne">🏔️ Montagne très technique</option>
+          <option value="montagne">🏔️ Haute montagne</option>
         </select>
       </div>
       <div class="tc-field">
@@ -398,12 +395,11 @@
     <details class="tc-formula-details">
       <summary>Voir la formule complète du calcul</summary>
       <p class="tc-foot" style="margin-top:12px;">
-        <strong>Formule appliquée (telle quelle, sans modification) :</strong><br>
-        Étape A — T_base = T_réf × (D_trail / D_réf)^1,06<br>
-        Étape B — coefficient distance : ≤25 km → 1,00 · 26–35 → 1,02 · 36–45 → 1,05 · 46–60 → 1,08 · 61–80 → 1,12 · 81–100 → 1,17 · &gt;100 → 1,22+<br>
-        Étape C — coefficient densité D+ (m/km) : &lt;5 → 1,00 · 5–15 → 1,05 · 15–25 → 1,09 · 25–40 → 1,14 · 40–60 → 1,20 · &gt;60 → 1,27+<br>
-        Étape D — coefficient technicité : 🟢 Roulant 1,00 · 🟠 Modéré 1,05 · 🔴 Technique 1,12 · 🏔️ Montagne très technique 1,60<br>
-        Étape E — coefficient fatigue liée à la distance : &lt;30 km → 1,00 · 30–40 → 1,02 · 40–50 → 1,04 · 50–60 → 1,07 · 60–80 → 1,10 · 80–100 → 1,15 · 100–120 → 1,22 · &gt;120 → 1,30+<br>
+        <strong>Formule appliquée (méthode du kilomètre-effort, référence ITRA) :</strong><br>
+        Étape A — Distance-effort = D_trail + D+ / 100 (1 km-effort = 1 km à plat, ou 100 m de D+)<br>
+        Étape B — T_base = T_réf × (Distance-effort_trail / Distance-effort_réf)^1,06<br>
+        Étape C — coefficient technicité : 🟢 Roulant 1,00 · 🔴 Technique 1,10 · 🏔️ Haute montagne 1,18<br>
+        Temps final = T_base × Coef. technicité
         Temps final = T_base × Coef. B × Coef. C × Coef. D × Coef. E
       </p>
     </details>
@@ -570,28 +566,28 @@
     return overflow.cap ? Math.min(overflow.cap, raw) : raw;
   }
 
-  // Exact tables from the original formula (Étapes B, C, D, E).
-  // Beyond each table's last threshold, the coefficient keeps growing instead of
-  // flattening out — a 175 km race is not treated the same as a 121 km race.
-  // Table E (fatigue liée à la distance) grows with a slight acceleration (quad term):
-  // real ultra fatigue compounds over very long efforts rather than scaling linearly.
-  const TABLE_B = { buckets:[[25,1.00],[35,1.02],[45,1.05],[60,1.08],[80,1.12],[100,1.17]], overflow:{base:1.22,start:100,step:0.0015,cap:2.0} };
-  const TABLE_C = { buckets:[[5,1.00],[15,1.05],[25,1.09],[40,1.14],[60,1.20]], overflow:{base:1.27,start:60,step:0.0018,cap:2.0} };
-  const TABLE_E = { buckets:[[30,1.00],[40,1.02],[50,1.04],[60,1.07],[80,1.10],[100,1.15],[120,1.22]], overflow:{base:1.30,start:120,step:0.0024,quad:0.000024,cap:3.5} };
-  const TERRAIN = { roulant:1.00, modere:1.05, technique:1.12, montagne:1.60 };
-  const TERRAIN_LABEL = { roulant:'🟢 Roulant', modere:'🟠 Modéré', technique:'🔴 Technique', montagne:'🏔️ Montagne très technique' };
+  // ---------- Moteur de calcul : méthode du "kilomètre-effort" (ITRA) ----------
+  // 1 km-effort = 1 km à plat, ou 100 m de D+. C'est la référence utilisée par
+  // l'ITRA pour normaliser la difficulté d'un parcours. On applique Riegel sur
+  // cette distance-effort plutôt que sur la distance brute : la pénalité liée
+  // au dénivelé est donc directement intégrée à la projection d'endurance,
+  // au lieu d'être ajoutée par-dessus via des coefficients séparés (l'ancien
+  // système empilait 4 tables indépendantes, ce qui écrasait les estimations
+  // sur les parcours montagneux — voir le retour utilisateur sur le Trail du
+  // Sancy : 12h19 prédits pour un profil qui se classe en réalité vers le
+  // milieu de peloton, pas en queue de course).
+  // Reste un seul facteur indépendant : la technicité du terrain (l'aspect
+  // "pénible à courir" indépendant du volume de D+, déjà capté par le
+  // kilomètre-effort).
+  const TERRAIN = { roulant:1.00, technique:1.10, montagne:1.18 };
+  const TERRAIN_LABEL = { roulant:'🟢 Roulant', technique:'🔴 Technique', montagne:'🏔️ Haute montagne' };
 
-  function riegel(TrefSec, Dref, Dtarget){
-    return TrefSec * Math.pow(Dtarget/Dref, 1.06);
+  function effortKm(D, Dplus){
+    return D + (Dplus||0)/100;
   }
 
-  function coeffs(D, Dplus, terrain){
-    const density = D>0 ? Dplus/D : 0;
-    const Cb = bucketLookup(D, TABLE_B.buckets, TABLE_B.overflow);
-    const Cc = bucketLookup(density, TABLE_C.buckets, TABLE_C.overflow);
-    const Cd = TERRAIN[terrain] ?? 1.00;
-    const Ce = bucketLookup(D, TABLE_E.buckets, TABLE_E.overflow);
-    return { Cb, Cc, Cd, Ce, density, product: Cb*Cc*Cd*Ce };
+  function riegel(TrefSec, effortRef, effortTarget){
+    return TrefSec * Math.pow(effortTarget/effortRef, 1.06);
   }
 
   function getRefDistance(){
@@ -623,8 +619,11 @@
   });
   root.querySelector('#tc-reftrail-terrain-group input:checked').closest('label').classList.add('checked');
 
-  // Returns {Dref, TrefSec, note} where TrefSec is always a road-equivalent time usable in riegel().
-  // For a trail reference, the trail's own D+/terrain/distance coefficients are divided out first.
+  // Retourne {Dref, TrefSec, note} où Dref est en réalité une distance-effort
+  // (km-effort) — pour une référence route, D+ = 0 donc distance-effort =
+  // distance brute, aucun changement. Pour une référence trail, on neutralise
+  // uniquement la technicité propre à cette course de référence (le D+ reste
+  // intégré via le km-effort, pas besoin de le "déflater" séparément).
   function getReference(){
     if(refType==='route'){
       const Dref = getRefDistance();
@@ -632,16 +631,17 @@
       if(!Dref || TrefSec===null) return null;
       return { Dref, TrefSec, note: null };
     }
-    const Dref = parseFloat(root.querySelector('#tc-reftrail-dist').value);
+    const Draw = parseFloat(root.querySelector('#tc-reftrail-dist').value);
     const Dplus = parseFloat(root.querySelector('#tc-reftrail-dplus').value);
     const terrain = root.querySelector('input[name="tc-reftrail-terrain"]:checked').value;
     const TrawSec = parseTime(root.querySelector('#tc-reftrail-time').value);
-    if(!isFinite(Dref) || Dref<=0 || !isFinite(Dplus) || Dplus<0 || TrawSec===null) return null;
-    const c = coeffs(Dref, Dplus, terrain);
-    const TrefSec = TrawSec / c.product;
+    if(!isFinite(Draw) || Draw<=0 || !isFinite(Dplus) || Dplus<0 || TrawSec===null) return null;
+    const Ct = TERRAIN[terrain] ?? 1.00;
+    const effortRef = effortKm(Draw, Dplus);
+    const TrefSec = TrawSec / Ct;
     return {
-      Dref, TrefSec,
-      note: { TrawSec, product: c.product, Cb:c.Cb, Cc:c.Cc, Cd:c.Cd, Ce:c.Ce, terrain, Dplus }
+      Dref: effortRef, TrefSec,
+      note: { TrawSec, Ct, terrain, Draw, Dplus, effortRef }
     };
   }
 
@@ -657,10 +657,12 @@
   });
   root.querySelector('#tc-terrain-group input:checked').closest('label').classList.add('checked');
 
-  function predict(TrefSec, Dref, Dtarget, Dplus, terrain){
-    const Tbase = riegel(TrefSec, Dref, Dtarget);
-    const c = coeffs(Dtarget, Dplus, terrain);
-    return { total: Tbase*c.product, Tbase, Cb:c.Cb, Cc:c.Cc, Cd:c.Cd, Ce:c.Ce, density:c.density };
+  function predict(TrefSec, effortRef, Dtarget, Dplus, terrain, extra){
+    const effortTarget = effortKm(Dtarget, Dplus);
+    const Tbase = riegel(TrefSec, effortRef, effortTarget);
+    const Ct = TERRAIN[terrain] ?? 1.00;
+    const Cx = extra || 1.00;
+    return { total: Tbase*Ct*Cx, Tbase, Ct, Cx, effortTarget, density: Dtarget>0 ? Dplus/Dtarget : 0 };
   }
 
   // ---------- uncertainty range ----------
@@ -692,8 +694,7 @@
 
     let terrainClause;
     if(terrain==='roulant') terrainClause = "Le terrain plutôt roulant permet de tenir un rythme régulier.";
-    else if(terrain==='modere') terrainClause = "Le terrain vallonné cassera un peu le rythme par moments, sans être piégeux.";
-    else if(terrain==='montagne') terrainClause = "Le terrain de haute montagne, très technique, imposera de marcher une grande partie du parcours et de composer avec des passages exigeants (câbles, pierriers, portions aériennes selon le tracé).";
+    else if(terrain==='montagne') terrainClause = "Le terrain de haute montagne imposera de marcher une grande partie du parcours et de composer avec des passages exigeants (câbles, pierriers, portions aériennes selon le tracé).";
     else terrainClause = "Le terrain technique sollicitera beaucoup vos appuis et vous fera sûrement marcher par endroits.";
 
     return "C'est "+base+". "+terrainClause;
@@ -813,22 +814,22 @@
     if(!isFinite(Dplus) || Dplus<0){ alert('Merci de renseigner le D+ du trail.'); return; }
 
     const { Dref, TrefSec, note } = ref;
-    const { total, Tbase, Cb, Cc, Cd, Ce, density } = predict(TrefSec, Dref, Dtarget, Dplus, terrain);
+    const raceExtra = (typeof window!=='undefined' && window.MCT_RACE_EXTRA) ? window.MCT_RACE_EXTRA : 1.00;
+    const { total, Tbase, Ct, Cx, effortTarget } = predict(TrefSec, Dref, Dtarget, Dplus, terrain, raceExtra);
 
     const steps = [];
     if(note){
-      steps.push(['Étape A0 — référence trail déflatée', '<small>'+formatHM(note.TrawSec)+' ÷ ('+note.Cb.toFixed(2)+'×'+note.Cc.toFixed(2)+'×'+note.Cd.toFixed(2)+'×'+note.Ce.toFixed(2)+')</small>', formatHM(TrefSec)+' équiv. route']);
+      steps.push(['Étape A0 — référence trail déflatée', '<small>'+formatHM(note.TrawSec)+' ÷ '+note.Ct.toFixed(2)+' (technicité) — D+ intégré via le km-effort ('+note.effortRef.toFixed(1)+' km-effort)</small>', formatHM(TrefSec)+' équiv. roulant']);
     }
     let running = Tbase;
-    steps.push(['Étape A — T_base (Riegel)', '<small>T_réf équiv. × (D_trail/D_réf)^1,06</small>', formatHM(running)]);
-    running *= Cb;
-    steps.push(['Étape B — distance ('+Dtarget+' km)', '<small>coef. '+Cb.toFixed(2)+'</small>', formatHM(running)]);
-    running *= Cc;
-    steps.push(['Étape C — densité D+ ('+density.toFixed(1)+' m/km)', '<small>coef. '+Cc.toFixed(2)+'</small>', formatHM(running)]);
-    running *= Cd;
-    steps.push(['Étape D — technicité ('+TERRAIN_LABEL[terrain]+')', '<small>coef. '+Cd.toFixed(2)+'</small>', formatHM(running)]);
-    running *= Ce;
-    steps.push(['Étape E — fatigue distance ('+Dtarget+' km)', '<small>coef. '+Ce.toFixed(2)+'</small>', formatHM(running)]);
+    steps.push(['Étape A — distance-effort', '<small>'+Dtarget+' km + '+Dplus+' m D+ ÷ 100 = '+effortTarget.toFixed(1)+' km-effort</small>', '—']);
+    steps.push(['Étape B — T_base (Riegel sur km-effort)', '<small>T_réf équiv. × (km-effort trail/km-effort réf)^1,06</small>', formatHM(running)]);
+    running *= Ct;
+    steps.push(['Étape C — technicité ('+TERRAIN_LABEL[terrain]+')', '<small>coef. '+Ct.toFixed(2)+'</small>', formatHM(running)]);
+    if(Cx !== 1){
+      running *= Cx;
+      steps.push(['Étape D — facteur spécifique à cette course', '<small>coef. '+Cx.toFixed(2)+' — climat/isolement/technicité non capturés par le km-effort seul</small>', formatHM(running)]);
+    }
 
     lastRawTotal = running; lastDtarget = Dtarget; lastTerrain = terrain; lastSteps = steps;
     lastCalib = computeCalibration(Dtarget);
@@ -1124,17 +1125,24 @@
       return;
     }
 
+    // Poids de chaque segment : le km-effort du segment (distance + D+/100, donc
+    // un segment plus raide pèse mécaniquement plus lourd), la technicité globale
+    // de la course, et un facteur de fatigue continu qui grossit avec l'avancement
+    // dans la course (jusqu'à +30% en fin de parcours par rapport au départ) —
+    // remplace l'ancienne table de fatigue par paliers, sur le même principe que
+    // le reste du moteur (voir Étape A/B/C du calcul).
     const terrainCd = TERRAIN[lastResult.terrain] ?? 1.00;
-    let cum = 0;
+    const totalEffort = valid.reduce((a,r)=> a + effortKm(r.dist, isFinite(r.dplus) ? r.dplus : 0), 0);
+    let cumRaw = 0, cumEffort = 0;
     const segs = valid.map(r=>{
       const dplus = isFinite(r.dplus) ? r.dplus : 0;
-      const density = r.dist>0 ? dplus/r.dist : 0;
-      const CcSeg = bucketLookup(density, TABLE_C.buckets, TABLE_C.overflow);
-      const cumMid = cum + r.dist/2;
-      const CeAtPoint = bucketLookup(cumMid, TABLE_E.buckets, TABLE_E.overflow);
-      const weight = r.dist * CcSeg * terrainCd * CeAtPoint;
-      cum += r.dist;
-      return { name:r.name, dist:r.dist, dplus, cumDist:cum, weight };
+      const segEffort = effortKm(r.dist, dplus);
+      const midEffort = cumEffort + segEffort/2;
+      const fatigueFactor = 1 + 0.30 * (totalEffort>0 ? midEffort/totalEffort : 0);
+      const weight = segEffort * terrainCd * fatigueFactor;
+      cumRaw += r.dist;
+      cumEffort += segEffort;
+      return { name:r.name, dist:r.dist, dplus, cumDist:cumRaw, weight };
     });
 
     const totalWeight = segs.reduce((a,s)=>a+s.weight, 0);
@@ -1176,7 +1184,7 @@
 
   // Expose le moteur de calcul existant pour que les pages course générées
   // (voir build.js) puissent l'appeler directement — jamais de second moteur.
-  window.MCT = { predict, riegel, coeffs, bucketLookup, TABLE_B, TABLE_C, TABLE_E, TERRAIN, TERRAIN_LABEL, formatTime, formatHM, formatPace, parseTime };
+  window.MCT = { predict, riegel, effortKm, TERRAIN, TERRAIN_LABEL, formatTime, formatHM, formatPace, parseTime };
 })();
 
 </script>

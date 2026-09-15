@@ -308,13 +308,14 @@ races.forEach(race => {
   const prefillScript = `
 <script>
 (function(){
+  window.MCT_RACE_EXTRA = ${JSON.stringify(race.extraDifficultyFactor || 1.00)};
   function prefill(){
     var d = document.getElementById('tc-target-dist');
     var dp = document.getElementById('tc-target-dplus');
     if(d) d.value = ${JSON.stringify(race.distance)};
     if(dp) dp.value = ${JSON.stringify(race.elevationGain)};
-    var terrainMap = {1:'roulant',2:'roulant',3:'modere',4:'technique',5:'montagne'};
-    var terrainVal = terrainMap[${JSON.stringify(race.technicalDifficulty || 3)}] || 'modere';
+    var terrainMap = {1:'roulant',2:'roulant',3:'technique',4:'technique',5:'montagne'};
+    var terrainVal = terrainMap[${JSON.stringify(race.technicalDifficulty || 3)}] || 'technique';
     var radio = document.querySelector('input[name="tc-terrain"][value="'+terrainVal+'"]');
     if(radio) radio.checked = true;
     document.querySelectorAll('#tc-terrain-group label').forEach(function(l){ l.classList.remove('checked'); });
@@ -341,11 +342,12 @@ races.forEach(race => {
       {label:"Marathon en 4h00", h:4, m:0},
       {label:"Marathon en 4h20", h:4, m:20}
     ];
-    var terrainMap = {1:'roulant',2:'roulant',3:'modere',4:'technique',5:'montagne'};
-    var terrain = terrainMap[${JSON.stringify(race.technicalDifficulty || 3)}] || 'modere';
+    var terrainMap = {1:'roulant',2:'roulant',3:'technique',4:'technique',5:'montagne'};
+    var terrain = terrainMap[${JSON.stringify(race.technicalDifficulty || 3)}] || 'technique';
+    var extra = ${JSON.stringify(race.extraDifficultyFactor || 1.00)};
     var rows = profiles.map(function(p){
       var refSec = p.h*3600 + p.m*60;
-      var r = window.MCT.predict(refSec, 42.195, ${JSON.stringify(race.distance)}, ${JSON.stringify(race.elevationGain)}, terrain);
+      var r = window.MCT.predict(refSec, 42.195, ${JSON.stringify(race.distance)}, ${JSON.stringify(race.elevationGain)}, terrain, extra);
       return '<div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #D8DED4;font-size:13.5px;">'+
         '<span>'+p.label+'</span>'+
         '<span style="color:#2F4A3C;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">'+window.MCT.formatTime(r.total)+'</span>'+
@@ -408,7 +410,7 @@ races.forEach(race => {
     { q: `Quel temps faut-il pour terminer ${race.name} ${formatLabel} ?`,
       a: `Sur ce parcours de ${race.distance} km et ${race.elevationGain} m D+ (soit environ ${density.toFixed(0)} m/km), le temps dépend surtout de votre niveau. Utilisez le calculateur ci-dessus avec un chrono récent pour une estimation personnalisée, ou repérez-vous dans les profils par niveau ci-dessous.` },
     { q: `Le dénivelé est-il pris en compte ?`,
-      a: `Oui : à ${density.toFixed(0)} m/km, ce parcours est classé ${race.difficulty}/5 sur l'échelle Monchronotrail, et cette densité de D+ fait directement partie du calcul, avec la technicité du terrain.` },
+      a: `Oui : à ${density.toFixed(0)} m/km, ce parcours est classé ${race.difficulty}/5 sur l'échelle Monchronotrail. Le D+ est intégré au calcul via la méthode du "kilomètre-effort" (référence ITRA : 100 m de D+ = 1 km-effort), avec la technicité du terrain en complément.` },
     { q: `Peut-on obtenir des temps de passage ?`,
       a: race.aidStations && race.aidStations.length
         ? `Oui — les ${race.aidStations.length} ravitaillements officiels de ${race.name} sont listés plus bas ; utilisez le bouton "➕ Calculer mes temps de passage" ci-dessus pour obtenir une estimation à chacun.`
@@ -655,7 +657,7 @@ write('courses/index.html', page(coursesHead, coursesBody));
 // ---------------------------------------------------------------------
 const methodoHead = headTags({
   title: 'Comment fonctionne le calculateur Monchronotrail ? | Méthodologie',
-  description: "Détail de la méthode de calcul de Monchronotrail : formule de Riegel, coefficients de distance, de dénivelé, de technicité et de fatigue, calibration personnelle.",
+  description: "Détail de la méthode de calcul de Monchronotrail : méthode du kilomètre-effort (référence ITRA), formule de Riegel, coefficient de technicité, calibration personnelle.",
   canonical: 'https://monchronotrail.netlify.app/methodologie/',
   ogImage: 'https://monchronotrail.netlify.app/og-image.png'
 });
@@ -663,24 +665,25 @@ const methodoBody = `
 <div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;line-height:1.6;">
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
   <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:28px;">Comment fonctionne le calculateur Monchronotrail ?</h1>
-  <p style="font-size:14.5px;">Monchronotrail estime votre temps de course sur un trail ou un ultra-trail à partir d'une performance de référence (route ou trail), ajustée à la distance, au dénivelé positif, à la technicité du terrain, et à la fatigue qui s'accumule sur les longs efforts.</p>
+  <p style="font-size:14.5px;">Monchronotrail estime votre temps de course sur un trail ou un ultra-trail à partir d'une performance de référence (route ou trail), ajustée à la distance, au dénivelé positif et à la technicité du terrain.</p>
 
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 1 — La base : la formule de Riegel</h2>
-  <p style="font-size:14px;">Tout part d'un chrono récent (marathon, semi, 10 km, ou une course de trail). Cette performance est projetée sur la distance visée grâce à la formule de Riegel (exposant 1,06), qui modélise la perte de vitesse liée à l'endurance sur une distance plus longue.</p>
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 1 — Le kilomètre-effort (méthode ITRA)</h2>
+  <p style="font-size:14px;">Distance et dénivelé sont d'abord combinés en une seule "distance-effort", selon la règle utilisée par l'ITRA pour classer la difficulté des courses : <strong>1 km à plat = 1 km-effort, et chaque 100 m de D+ = 1 km-effort supplémentaire</strong>. Un trail de 60 km avec 3000 m de D+ pèse donc 90 km-effort — l'équivalent, en termes d'effort, d'un peu plus qu'un 90 km plat.</p>
 
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 2 — Les ajustements trail</h2>
-  <p style="font-size:14px;">Cette base "route" est ensuite corrigée par trois coefficients indépendants :</p>
-  <ul style="font-size:14px;padding-left:20px;">
-    <li><strong>Densité de D+</strong> (mètres de dénivelé par kilomètre) : plus ça grimpe au kilomètre, plus le rythme ralentit.</li>
-    <li><strong>Technicité du terrain</strong> : roulant, modéré, technique, ou montagne très technique.</li>
-    <li><strong>Fatigue liée à la distance</strong> : au-delà d'un certain kilométrage, la fatigue s'accumule de façon non linéaire — un 100 km n'est pas juste "un peu plus" qu'un 80 km.</li>
-  </ul>
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 2 — La formule de Riegel</h2>
+  <p style="font-size:14px;">Un chrono récent (marathon, semi, 10 km, ou une course de trail) est projeté sur cette distance-effort grâce à la formule de Riegel (exposant 1,06), qui modélise la perte de vitesse liée à l'endurance sur un effort plus long.</p>
 
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 3 — La calibration personnelle</h2>
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 3 — La technicité du terrain</h2>
+  <p style="font-size:14px;">Un dernier coefficient, indépendant du volume de D+ (déjà intégré à l'étape 1), tient compte du caractère technique du terrain lui-même : roulant, technique, ou haute montagne.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Étape 4 — La calibration personnelle</h2>
   <p style="font-size:14px;">Si vous enregistrez vos propres courses passées (temps prédit vs temps réel), Monchronotrail calcule un facteur de correction personnel (moyenne des écarts observés, plafonnée à ±30 % pour éviter qu'une seule course inhabituelle ne fausse tout) et l'applique aux futures estimations. C'est volontairement simple : une moyenne, pas un modèle prédictif complexe.</p>
 
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Pourquoi une fourchette plutôt qu'un chiffre unique ?</h2>
   <p style="font-size:14px;">Aucun modèle ne peut prédire la météo, un coup de mou à 3h du matin, ou une mauvaise gestion des ravitaillements. La fourchette affichée reflète cette incertitude réelle plutôt que de donner une fausse precision.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Un modèle qui s'ajuste avec des retours réels</h2>
+  <p style="font-size:14px;">La méthode a évolué après un premier retour terrain : sur le Trail du Sancy (61 km, 3200 m D+), le modèle initial donnait une estimation largement en dehors des chronos réellement observés au classement. La méthode du kilomètre-effort a corrigé cet écart et reste, à notre connaissance, la meilleure base disponible pour continuer à affiner le modèle au fil des retours.</p>
 
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Les limites, honnêtement</h2>
   <p style="font-size:14px;">Le modèle reste une estimation mathématique. Il ne remplace pas l'expérience, un avis médical, ou une bonne préparation. Certaines données de courses affichées sur le site sont encore au statut "à vérifier" — c'est indiqué explicitement sur chaque page concernée plutôt que masqué.</p>

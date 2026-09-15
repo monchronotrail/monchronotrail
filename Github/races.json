@@ -541,7 +541,8 @@
     "sourceUrl": "https://www.outside.fr/diagonale-des-fous-2023-favoris-outsiders-quels-sont-les-athletes-a-suivre-cette-annee",
     "verificationDate": "2026-09-10",
     "status": "TO_VERIFY",
-    "notes": "Distance/D+ varient sensiblement d'une édition à l'autre (70-74 km, 4000-4010 m D+) — à reconfirmer sur le site officiel du Grand Raid."
+    "notes": "Distance/D+ varient sensiblement d'une édition à l'autre (70-74 km, 4000-4010 m D+) — à reconfirmer sur le site officiel du Grand Raid. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
+    "extraDifficultyFactor": 1.25
   },
   {
     "id": "diagonale-2026-bourbon",
@@ -574,7 +575,8 @@
     "sourceUrl": "https://www.outside.fr/diagonale-des-fous-2023-favoris-outsiders-quels-sont-les-athletes-a-suivre-cette-annee",
     "verificationDate": "2026-09-10",
     "status": "TO_VERIFY",
-    "notes": "Distance/D+ varient fortement d'une édition à l'autre (100-112 km, 5800-6300 m D+ selon les années) — à reconfirmer impérativement sur le site officiel."
+    "notes": "Distance/D+ varient fortement d'une édition à l'autre (100-112 km, 5800-6300 m D+ selon les années) — à reconfirmer impérativement sur le site officiel. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
+    "extraDifficultyFactor": 1.25
   },
   {
     "id": "diagonale-2026-diagonale",
@@ -607,7 +609,8 @@
     "sourceUrl": "https://www.tonton-outdoor.com/fr_FR/destinations/grand-raid-diagonale-des-fous",
     "verificationDate": "2026-09-10",
     "status": "TO_VERIFY",
-    "notes": "Écart important selon les sources et les éditions (165-178 km, 9890-12107 m D+) : c'est l'événement où la variabilité observée est la plus grande de toute la base. À reconfirmer impérativement sur le site officiel avant publication."
+    "notes": "Écart important selon les sources et les éditions (165-178 km, 9890-12107 m D+) : c'est l'événement où la variabilité observée est la plus grande de toute la base. À reconfirmer impérativement sur le site officiel avant publication. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
+    "extraDifficultyFactor": 1.25
   },
   {
     "id": "saintelyon-2026-80km",
