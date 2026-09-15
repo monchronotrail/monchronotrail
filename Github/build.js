@@ -168,7 +168,15 @@ const heroCoursesBar = `
 // uniquement sur la page d'accueil, le partial CALCULATOR original reste inchangé
 // pour les pages de courses.
 const heroSplitIdx = CALCULATOR.indexOf('<div class="tc-section">');
-const homeCalculator = CALCULATOR.slice(0, heroSplitIdx) + heroCoursesBar + '\n  ' + CALCULATOR.slice(heroSplitIdx);
+let homeCalculator = CALCULATOR.slice(0, heroSplitIdx) + heroCoursesBar + '\n  ' + CALCULATOR.slice(heroSplitIdx);
+// Sur toutes les pages course, ce titre est volontairement une <div> (pas un H1) car
+// chaque page a déjà son propre H1 spécifique (voir plus bas) — deux H1 par page
+// dilueraient le signal SEO. La page d'accueil est la seule où ce texte EST le sujet
+// principal de la page : on lui restitue donc un vrai <h1> ici.
+homeCalculator = homeCalculator.replace(
+  '<div class="tc-hero-title">Calculateur de chrono trail &amp; ultra</div>',
+  '<h1 class="tc-hero-title">Calculateur de chrono trail &amp; ultra</h1>'
+);
 
 const homeHead = headTags({
   title: 'Calculateur de temps trail et ultra-trail gratuit | Monchronotrail',
