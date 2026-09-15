@@ -179,8 +179,8 @@ homeCalculator = homeCalculator.replace(
 );
 
 const homeHead = headTags({
-  title: 'Calculateur de temps trail et ultra-trail gratuit | Monchronotrail',
-  description: "Monchronotrail : calculez gratuitement votre temps prévisionnel sur un trail ou un ultra-trail (30, 60, 80, 100 km...) à partir d'un chrono de référence, du dénivelé positif et du terrain. Pensé pour les néo-traileurs.",
+  title: 'Calculateur de temps trail et ultra-trail | Monchronotrail',
+  description: "Calculez gratuitement votre temps prévisionnel sur un trail ou un ultra-trail selon votre niveau, le dénivelé et le terrain. Pensé pour les néo-traileurs.",
   canonical: 'https://monchronotrail.netlify.app/',
   ogImage: 'https://monchronotrail.netlify.app/og-image.png'
 });
@@ -229,8 +229,10 @@ races.forEach(race => {
 
   const url = 'https://monchronotrail.netlify.app' + raceUrlPath(race);
   const formatLabel = race.formatName || (race.distance + ' km');
-  const title = `${race.name} ${formatLabel} ${race.edition} : estimez votre temps de course | Monchronotrail`;
-  const description = `Estimez votre temps sur ${race.name} (${race.distance} km, ${race.elevationGain} m D+) avec Monchronotrail, calculateur gratuit basé sur votre niveau et le profil du parcours.`;
+  const displayName = race.shortName || race.name;
+  const distRound = Math.round(race.distance);
+  const title = `${displayName} ${distRound}km ${race.edition} : temps | Monchronotrail`;
+  const description = `${displayName} ${distRound}km / ${race.elevationGain}m D+ : estimez votre temps avec Monchronotrail, calculateur gratuit selon votre niveau et le profil du parcours.`;
 
   const formatButtons = bySlug[race.slug].map(r => {
     const active = r.id === race.id;
@@ -455,9 +457,11 @@ races.forEach(r => {
 
 Object.values(byEventEdition).forEach(list => {
   const first = list[0];
+  const displayName = first.shortName || first.name;
   const url = 'https://monchronotrail.netlify.app' + eventUrlPath(first.slug, first.edition);
-  const title = `${first.name} ${first.edition} : choisissez votre format | Monchronotrail`;
-  const description = `${first.name} ${first.edition} : découvrez les formats disponibles (${list.map(r => r.formatName || r.distance + ' km').join(', ')}) et estimez votre temps de course avec Monchronotrail.`;
+  const title = `${displayName} ${first.edition} : formats | Monchronotrail`;
+  const distances = list.map(r => Math.round(r.distance) + 'km').join(', ');
+  const description = `${displayName} ${first.edition} : ${list.length} format${list.length>1?'s':''} disponible${list.length>1?'s':''} (${distances}). Estimez votre temps avec Monchronotrail, calculateur gratuit.`;
 
   const formatCards = list.map(r => {
     const density = r.distance > 0 ? (r.elevationGain / r.distance) : 0;
@@ -604,8 +608,8 @@ write('courses/index.html', page(coursesHead, coursesBody));
 //       toutes les pages courses et depuis l'accueil.
 // ---------------------------------------------------------------------
 const methodoHead = headTags({
-  title: 'Comment fonctionne le calculateur Monchronotrail ? | Méthodologie',
-  description: "Détail de la méthode de calcul de Monchronotrail : méthode du kilomètre-effort (référence ITRA), formule de Riegel, coefficient de technicité, calibration personnelle.",
+  title: 'Comment fonctionne Monchronotrail ? | Méthodologie',
+  description: "Méthode de calcul de Monchronotrail : kilomètre-effort (référence ITRA), formule de Riegel, technicité du terrain, calibration personnelle.",
   canonical: 'https://monchronotrail.netlify.app/methodologie/',
   ogImage: 'https://monchronotrail.netlify.app/og-image.png'
 });

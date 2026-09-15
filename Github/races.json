@@ -542,7 +542,8 @@
     "verificationDate": "2026-09-10",
     "status": "TO_VERIFY",
     "notes": "Distance/D+ varient sensiblement d'une édition à l'autre (70-74 km, 4000-4010 m D+) — à reconfirmer sur le site officiel du Grand Raid. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
-    "extraDifficultyFactor": 1.25
+    "extraDifficultyFactor": 1.25,
+    "shortName": "Diagonale des Fous"
   },
   {
     "id": "diagonale-2026-bourbon",
@@ -576,7 +577,8 @@
     "verificationDate": "2026-09-10",
     "status": "TO_VERIFY",
     "notes": "Distance/D+ varient fortement d'une édition à l'autre (100-112 km, 5800-6300 m D+ selon les années) — à reconfirmer impérativement sur le site officiel. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
-    "extraDifficultyFactor": 1.25
+    "extraDifficultyFactor": 1.25,
+    "shortName": "Diagonale des Fous"
   },
   {
     "id": "diagonale-2026-diagonale",
@@ -610,7 +612,8 @@
     "verificationDate": "2026-09-10",
     "status": "TO_VERIFY",
     "notes": "Écart important selon les sources et les éditions (165-178 km, 9890-12107 m D+) : c'est l'événement où la variabilité observée est la plus grande de toute la base. À reconfirmer impérativement sur le site officiel avant publication. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
-    "extraDifficultyFactor": 1.25
+    "extraDifficultyFactor": 1.25,
+    "shortName": "Diagonale des Fous"
   },
   {
     "id": "saintelyon-2026-80km",
@@ -801,7 +804,8 @@
     "sourceUrl": "https://www.maxi-race.org/en/",
     "verificationDate": "2026-09-10",
     "status": "SECONDARY_SOURCE",
-    "notes": "Le site officiel donne une fourchette (100-105 km, 5800-6200 m D+) car le tracé varie légèrement chaque année ; valeurs médianes retenues ici."
+    "notes": "Le site officiel donne une fourchette (100-105 km, 5800-6200 m D+) car le tracé varie légèrement chaque année ; valeurs médianes retenues ici.",
+    "shortName": "MaXi-Race"
   },
   {
     "id": "maxirace-2026-demitour",
@@ -834,7 +838,8 @@
     "sourceUrl": "https://www.maxi-race.org/en/",
     "verificationDate": "2026-09-10",
     "status": "SECONDARY_SOURCE",
-    "notes": "Fourchette officielle 52-57 km / 3000-3500 m D+ ; valeurs médianes retenues ici."
+    "notes": "Fourchette officielle 52-57 km / 3000-3500 m D+ ; valeurs médianes retenues ici.",
+    "shortName": "MaXi-Race"
   },
   {
     "id": "maxirace-2026-marathon",
@@ -867,7 +872,8 @@
     "sourceUrl": "https://www.maxi-race.org/en/",
     "verificationDate": "2026-09-10",
     "status": "SECONDARY_SOURCE",
-    "notes": "Fourchette officielle 38-42 km / 1600-1800 m D+ ; valeurs médianes retenues ici."
+    "notes": "Fourchette officielle 38-42 km / 1600-1800 m D+ ; valeurs médianes retenues ici.",
+    "shortName": "MaXi-Race"
   },
   {
     "id": "grp-2026-ultra",
@@ -1036,7 +1042,8 @@
     "sourceUrl": "https://itra.run/Races/RaceDetails/L.Ultra.Marin.Grand.Raid.175km/2026/112303",
     "verificationDate": "2026-09-10",
     "status": "CONFLICT",
-    "notes": "Le D+ varie fortement selon les sources pour ce format (1020 à 1430 m) — valeur médiane retenue en attendant confirmation officielle."
+    "notes": "Le D+ varie fortement selon les sources pour ce format (1020 à 1430 m) — valeur médiane retenue en attendant confirmation officielle.",
+    "shortName": "Ultra Marin"
   },
   {
     "id": "ultramarin-2026-raid",
@@ -1069,7 +1076,8 @@
     "sourceUrl": "https://www.festivalenfrance.com/es/festival/ultra-marin-raid-golfe-du-morbihan",
     "verificationDate": "2026-09-10",
     "status": "TO_VERIFY",
-    "notes": "À reconfirmer sur le site officiel de l'Ultra Marin."
+    "notes": "À reconfirmer sur le site officiel de l'Ultra Marin.",
+    "shortName": "Ultra Marin"
   },
   {
     "id": "ultramarin-2026-arvor",
@@ -1102,7 +1110,8 @@
     "sourceUrl": "https://utmb.world/fr/runner/5325232.sylvain.durandperdriel",
     "verificationDate": "2026-09-10",
     "status": "SECONDARY_SOURCE",
-    "notes": "Distance/D+ mesurés (UTMB Index) pour une édition récente : 59,5 km / 600 m D+, cohérent avec l'annonce officielle de 56 km."
+    "notes": "Distance/D+ mesurés (UTMB Index) pour une édition récente : 59,5 km / 600 m D+, cohérent avec l'annonce officielle de 56 km.",
+    "shortName": "Ultra Marin"
   },
   {
     "id": "ultramarin-2026-ronde",
@@ -1135,7 +1144,8 @@
     "sourceUrl": "https://utmb.world/fr/runner/5325232.sylvain.durandperdriel",
     "verificationDate": "2026-09-10",
     "status": "SECONDARY_SOURCE",
-    "notes": "Distance/D+ mesurés (UTMB Index) : 33 km / 510 m D+, cohérent avec l'annonce officielle de 34 km."
+    "notes": "Distance/D+ mesurés (UTMB Index) : 33 km / 510 m D+, cohérent avec l'annonce officielle de 34 km.",
+    "shortName": "Ultra Marin"
   },
   {
     "id": "lut-2026-30km",
