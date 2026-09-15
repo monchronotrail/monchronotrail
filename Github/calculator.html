@@ -397,7 +397,7 @@
       <p class="tc-foot" style="margin-top:12px;">
         <strong>Formule appliquée (méthode du kilomètre-effort, référence ITRA) :</strong><br>
         Étape A — Distance-effort = D_trail + D+ / 100 (1 km-effort = 1 km à plat, ou 100 m de D+)<br>
-        Étape B — T_base = T_réf × (Distance-effort_trail / Distance-effort_réf)^1,06<br>
+        Étape B — T_base = T_réf × (Distance-effort_trail / Distance-effort_réf)^b, avec b variable selon la catégorie ITRA/FFA de la course : ≤115 km-effort → 1,06 · 115–210 km-effort (ultra-trail / FFA "XL") → 1,11 · &gt;210 km-effort (FFA "XXL", 100 miles et +) → 1,17<br>
         Étape C — coefficient technicité : 🟢 Roulant 1,00 · 🔴 Technique 1,10 · 🏔️ Haute montagne 1,18<br>
         Temps final = T_base × Coef. technicité
       </p>
@@ -585,8 +585,22 @@
     return D + (Dplus||0)/100;
   }
 
+  // L'exposant de Riegel (1,06) n'a été validé par son auteur que jusqu'au
+  // marathon (~3h50 d'effort) — au-delà, la perte de rythme n'est plus
+  // linéaire de la même façon. On fait donc varier l'exposant par palier,
+  // aligné sur les catégories OFFICIELLES ITRA/FFA basées sur le km-effort
+  // (pas un chiffre inventé) :
+  //   ≤ 115 km-effort  : format standard (seuil ITRA "ultra-trail")   → 1,06
+  //   115–210 km-effort : ultra-trail / catégorie FFA "XL"            → 1,11
+  //   > 210 km-effort   : catégorie FFA "XXL" (100 miles et plus)     → 1,17
+  function riegelExponent(effortTarget){
+    if(effortTarget <= 115) return 1.06;
+    if(effortTarget <= 210) return 1.11;
+    return 1.17;
+  }
+
   function riegel(TrefSec, effortRef, effortTarget){
-    return TrefSec * Math.pow(effortTarget/effortRef, 1.06);
+    return TrefSec * Math.pow(effortTarget/effortRef, riegelExponent(effortTarget));
   }
 
   function getRefDistance(){
@@ -822,7 +836,7 @@
     }
     let running = Tbase;
     steps.push(['Étape A — distance-effort', '<small>'+Dtarget+' km + '+Dplus+' m D+ ÷ 100 = '+effortTarget.toFixed(1)+' km-effort</small>', '—']);
-    steps.push(['Étape B — T_base (Riegel sur km-effort)', '<small>T_réf équiv. × (km-effort trail/km-effort réf)^1,06</small>', formatHM(running)]);
+    steps.push(['Étape B — T_base (Riegel sur km-effort)', '<small>T_réf équiv. × (km-effort trail/km-effort réf)^'+riegelExponent(effortTarget).toFixed(2)+' — exposant selon la catégorie ITRA/FFA de la course</small>', formatHM(running)]);
     running *= Ct;
     steps.push(['Étape C — technicité ('+TERRAIN_LABEL[terrain]+')', '<small>coef. '+Ct.toFixed(2)+'</small>', formatHM(running)]);
     if(Cx !== 1){
