@@ -31,13 +31,20 @@ function esc(s){
 
 const CALCULATOR = read('calculator.html');
 
+// Détecte si ce build tourne sur Cloudflare (variable CF_PAGES=1, fixée
+// automatiquement par Cloudflare pendant ses propres builds, jamais présente
+// chez Netlify). Sert uniquement à empêcher Google d'indexer cette copie
+// "miroir" utilisée pour prévisualiser le développement — la version Netlify
+// n'est jamais affectée par cette variable et reste indexable normalement.
+const IS_CLOUDFLARE_BUILD = process.env.CF_PAGES === '1';
+
 function headTags({ title, description, canonical, ogImage }){
   return `<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="6RNrLnFiwV0YLz-zANz05xXeqNK1txyjKySIgYK1_Cs" />
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+${IS_CLOUDFLARE_BUILD ? '<meta name="robots" content="noindex, nofollow">\n' : ''}<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="canonical" href="${esc(canonical)}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
@@ -742,10 +749,9 @@ ${urls.map(u => `  <url><loc>${u}</loc><changefreq>monthly</changefreq></url>`).
 // ---------------------------------------------------------------------
 // 8. robots.txt
 // ---------------------------------------------------------------------
-write('robots.txt', `User-agent: *
-Allow: /
-
-Sitemap: https://monchronotrail.netlify.app/sitemap.xml
-`);
+write('robots.txt', IS_CLOUDFLARE_BUILD
+  ? `User-agent: *\nDisallow: /\n`
+  : `User-agent: *\nAllow: /\n\nSitemap: https://monchronotrail.netlify.app/sitemap.xml\n`
+);
 
 console.log(`Build terminé : ${urls.length} pages générées dans dist/`);
