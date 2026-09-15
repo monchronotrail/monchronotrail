@@ -215,63 +215,6 @@ copyFile('favicon.svg', 'favicon.svg');
 copyFile('og-image.png', 'og-image.png');
 
 // ---------------------------------------------------------------------
-// Moteur de calcul (copie build-time) — IMPORTANT : ceci est une copie
-// exacte des tables et fonctions pures du calculateur (partials/calculator.html),
-// utilisée uniquement pour pré-calculer le tableau "profils types" en HTML
-// statique (nécessaire pour le SEO, un calcul fait en JS navigateur seul
-// n'est pas garanti d'être vu par Google). Le calculateur interactif lui-même
-// n'est jamais dupliqué : une seule copie (partials/calculator.html) est
-// injectée telle quelle sur toutes les pages.
-// ⚠️ Si la formule change dans partials/calculator.html, reporter le
-// changement ici aussi pour garder les deux cohérents.
-function engineBucketLookup(value, buckets, overflow){
-  for(const [max,c] of buckets){ if(value<=max) return c; }
-  const x = Math.max(0, value-overflow.start);
-  const quad = overflow.quad || 0;
-  const raw = overflow.base + overflow.step*x + quad*x*x;
-  return overflow.cap ? Math.min(overflow.cap, raw) : raw;
-}
-const ENGINE_TABLE_B = { buckets:[[25,1.00],[35,1.02],[45,1.05],[60,1.08],[80,1.12],[100,1.17]], overflow:{base:1.22,start:100,step:0.0015,cap:2.0} };
-const ENGINE_TABLE_C = { buckets:[[5,1.00],[15,1.05],[25,1.09],[40,1.14],[60,1.20]], overflow:{base:1.27,start:60,step:0.0018,cap:2.0} };
-const ENGINE_TABLE_E = { buckets:[[30,1.00],[40,1.02],[50,1.04],[60,1.07],[80,1.10],[100,1.15],[120,1.22]], overflow:{base:1.30,start:120,step:0.0024,quad:0.000024,cap:3.5} };
-const ENGINE_TERRAIN = { roulant:1.00, modere:1.05, technique:1.12, montagne:1.60 };
-function enginePredict(TrefSec, Dref, Dtarget, Dplus, terrain){
-  const Tbase = TrefSec * Math.pow(Dtarget/Dref, 1.06);
-  const density = Dtarget>0 ? Dplus/Dtarget : 0;
-  const Cb = engineBucketLookup(Dtarget, ENGINE_TABLE_B.buckets, ENGINE_TABLE_B.overflow);
-  const Cc = engineBucketLookup(density, ENGINE_TABLE_C.buckets, ENGINE_TABLE_C.overflow);
-  const Cd = ENGINE_TERRAIN[terrain] ?? 1.00;
-  const Ce = engineBucketLookup(Dtarget, ENGINE_TABLE_E.buckets, ENGINE_TABLE_E.overflow);
-  return Tbase*Cb*Cc*Cd*Ce;
-}
-function engineFormatTime(totalSeconds){
-  const s = Math.round(totalSeconds);
-  const h = Math.floor(s/3600);
-  const m = Math.floor((s%3600)/60);
-  return h+'h'+String(m).padStart(2,'0');
-}
-function terrainFromDifficulty(technicalDifficulty){
-  const map = {1:'roulant',2:'roulant',3:'modere',4:'technique',5:'montagne'};
-  return map[technicalDifficulty] ?? 'modere';
-}
-const PROFILE_MARATHON_TIMES = [
-  { label:'2h45 au marathon', sec: 2*3600+45*60 },
-  { label:'3h00 au marathon', sec: 3*3600 },
-  { label:'3h30 au marathon', sec: 3*3600+30*60 },
-  { label:'4h00 au marathon', sec: 4*3600 },
-  { label:'4h20 au marathon', sec: 4*3600+20*60 },
-];
-function buildProfileTableHtml(race){
-  const terrain = terrainFromDifficulty(race.technicalDifficulty);
-  const rows = PROFILE_MARATHON_TIMES.map(p=>{
-    const total = enginePredict(p.sec, 42.195, race.distance, race.elevationGain, terrain);
-    return `<tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">${p.label}</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#2F4A3C;font-weight:600;">≈ ${engineFormatTime(total)}</td></tr>`;
-  }).join('');
-  return `<table style="width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 8px;">${rows}</table>
-  <p style="font-size:12px;color:#5C6B66;">Estimations calculées avec le même moteur que le calculateur ci-dessus, à partir d'une référence marathon route. Utilisez le calculateur pour une estimation avec votre propre référence.</p>`;
-}
-
-// ---------------------------------------------------------------------
 // 4. Pages de courses — générées depuis races.json
 // ---------------------------------------------------------------------
 races.forEach(race => {
@@ -455,9 +398,6 @@ ${breadcrumbScript}
     <tr><td style="padding:7px 0;color:#5C6B66;">Lieu</td><td style="padding:7px 0;text-align:right;">${esc(race.location || '—')}</td></tr>
   </table>
   <p style="font-size:12px;color:#5C6B66;line-height:1.5;">Statut des données : ${STATUS_LABELS[race.status] || esc(race.status)} — vérifié le ${race.verificationDate || '—'}.${race.notes ? ' ' + esc(race.notes) : ''} ${race.sourceUrl ? `<a href="${esc(race.sourceUrl)}" style="color:#2F4A3C;">Source</a>` : ''}</p>
-
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:22px;">Quel temps sur ${esc(race.name)} ${esc(formatLabel)} selon votre niveau ?</h2>
-  ${buildProfileTableHtml(race)}
 </div>
 
 ${CALCULATOR}
