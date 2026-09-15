@@ -92,20 +92,68 @@ const bySlug = {};
 races.forEach(r => { (bySlug[r.slug] = bySlug[r.slug] || []).push(r); });
 
 // ---------------------------------------------------------------------
-// 2. Page d'accueil — le calculateur identique à avant, plus une section
-//    "Courses disponibles" générée automatiquement depuis races.json.
+// Regroupement par mois — sert à la fois au bandeau d'accueil et à la
+// page calendrier. La plupart des dates sont au format ISO (2026-08-27) ;
+// certaines sont encore au format texte ("à confirmer, habituellement
+// fin septembre") tant que l'édition n'est pas officiellement annoncée —
+// dans ce cas on essaie de repérer le nom du mois dans le texte, sinon
+// la course part dans le groupe "Dates à confirmer".
+const MONTHS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const MONTH_SLUGS = ['janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
+
+function monthIndexOf(dateStr){
+  if(!dateStr) return null;
+  const iso = dateStr.match(/^(\d{4})-(\d{2})-\d{2}/);
+  if(iso) return parseInt(iso[2],10) - 1;
+  const lower = dateStr.toLowerCase();
+  for(let i=0;i<MONTHS.length;i++){
+    if(lower.indexOf(MONTHS[i]) !== -1) return i;
+  }
+  return null;
+}
+
+const byMonth = {}; // 0-11 -> [races]
+const undatedRaces = [];
+races.forEach(r => {
+  const m = monthIndexOf(r.date);
+  if(m===null){ undatedRaces.push(r); return; }
+  (byMonth[m] = byMonth[m] || []).push(r);
+});
+const monthsPresent = Object.keys(byMonth).map(Number).sort((a,b)=>a-b);
+
 // ---------------------------------------------------------------------
-const homeCoursesHtml = Object.keys(bySlug).map(slug => {
-  const list = bySlug[slug];
-  const first = list[0];
-  return `<a href="${eventUrlPath(first.slug, first.edition)}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 12px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${esc(first.name)} ${first.edition} →</a>`;
-}).join('');
+// 2. Page d'accueil — le calculateur identique à avant, plus un calendrier
+//    par mois généré automatiquement depuis races.json (remplace l'ancienne
+//    liste plate "Courses disponibles", qui ne passait pas bien à l'échelle).
+// ---------------------------------------------------------------------
+const homeMonthsHtml = monthsPresent.map(m =>
+  `<a href="/calendrier-trails-2026/#${MONTH_SLUGS[m]}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 14px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${MONTHS[m].charAt(0).toUpperCase()+MONTHS[m].slice(1)} <span style="opacity:.7;">(${byMonth[m].length})</span></a>`
+).join('');
+
+// Sélection resserrée de courses "phares" mises en avant à gauche du bandeau
+// (à ajuster à la main ici — pas piloté par races.json, c'est un choix éditorial).
+const FEATURED_SLUGS = ['utmb', 'diagonale-des-fous', 'marathon-du-mont-blanc', 'ultra-marin'];
+const homeFeaturedHtml = FEATURED_SLUGS
+  .filter(slug => bySlug[slug])
+  .map(slug => {
+    const first = bySlug[slug][0];
+    return `<a href="${eventUrlPath(first.slug, first.edition)}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 14px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${esc(first.name)} →</a>`;
+  }).join('');
 
 const heroCoursesBar = `
   <div style="background:#2F4A3C;padding:0 28px 24px;">
-    <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9FB5A5;margin-bottom:10px;">Courses disponibles</div>
-    <div>${homeCoursesHtml || '<span style="color:#9FB5A5;font-size:13.5px;">Aucune course ajoutée pour le moment.</span>'}</div>
-    <div style="margin-top:4px;"><a href="/courses/" style="color:#F0C179;font-size:13px;text-decoration:none;">Rechercher une course →</a> &nbsp;·&nbsp; <a href="/calendrier-trails-2026/" style="color:#F0C179;font-size:13px;text-decoration:none;">Voir le calendrier complet →</a></div>
+    <div style="display:flex;gap:28px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:220px;">
+        <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9FB5A5;margin-bottom:10px;">Courses phares</div>
+        <div>${homeFeaturedHtml || '<span style="color:#9FB5A5;font-size:13.5px;">Aucune course ajoutée pour le moment.</span>'}</div>
+        <div style="margin-top:4px;"><a href="/courses/" style="color:#F0C179;font-size:13px;text-decoration:none;">Rechercher une course par nom →</a></div>
+      </div>
+      <div style="flex:1;min-width:220px;">
+        <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9FB5A5;margin-bottom:10px;">Calendrier</div>
+        <div>${homeMonthsHtml || '<span style="color:#9FB5A5;font-size:13.5px;">Aucune course ajoutée pour le moment.</span>'}</div>
+        <div style="margin-top:4px;"><a href="/calendrier-trails-2026/" style="color:#F0C179;font-size:13px;text-decoration:none;">Voir le calendrier complet →</a></div>
+      </div>
+    </div>
   </div>
 `;
 
@@ -481,21 +529,40 @@ Object.values(byEventEdition).forEach(list => {
 // ---------------------------------------------------------------------
 // 6. Page calendrier (liste tous les formats)
 // ---------------------------------------------------------------------
-const calendarRows = races.map(r =>
-  `<li style="margin-bottom:8px;"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;">${esc(r.name)} ${esc(r.formatName || r.distance+' km')}</a> — ${esc(r.date || 'date à confirmer')}, ${esc(r.location || '')}</li>`
-).join('\n');
 const calendarHead = headTags({
   title: 'Calendrier des trails 2026 | Monchronotrail',
-  description: 'Les principales courses de trail disponibles sur Monchronotrail, avec calculateur de temps intégré pour chacune.',
+  description: 'Les principales courses de trail disponibles sur Monchronotrail, classées par mois, avec calculateur de temps intégré pour chacune.',
   canonical: 'https://monchronotrail.netlify.app/calendrier-trails-2026/',
   ogImage: 'https://monchronotrail.netlify.app/og-image.png'
 });
+
+function raceRow(r){
+  return `<li style="margin-bottom:8px;"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;text-decoration:none;">${esc(r.name)} ${esc(r.formatName || r.distance+' km')}</a> — ${esc(r.date || 'date à confirmer')}${r.location ? ', '+esc(r.location) : ''}</li>`;
+}
+
+const monthNav = monthsPresent.map(m =>
+  `<a href="#${MONTH_SLUGS[m]}" style="color:#2F4A3C;font-size:13px;text-decoration:none;border:1px solid #D8DED4;border-radius:20px;padding:5px 12px;margin:0 6px 6px 0;display:inline-block;">${MONTHS[m].charAt(0).toUpperCase()+MONTHS[m].slice(1)}</a>`
+).join('');
+
+const monthSections = monthsPresent.map(m => `
+  <h2 id="${MONTH_SLUGS[m]}" style="font-family:Georgia,serif;font-weight:normal;font-size:20px;margin-top:30px;border-top:1px solid #D8DED4;padding-top:20px;">${MONTHS[m].charAt(0).toUpperCase()+MONTHS[m].slice(1)}</h2>
+  <ul style="font-size:14.5px;line-height:1.6;padding-left:20px;">${byMonth[m].map(raceRow).join('\n')}</ul>
+`).join('');
+
+const undatedSection = undatedRaces.length ? `
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:20px;margin-top:30px;border-top:1px solid #D8DED4;padding-top:20px;">Dates à confirmer</h2>
+  <ul style="font-size:14.5px;line-height:1.6;padding-left:20px;">${undatedRaces.map(raceRow).join('\n')}</ul>
+` : '';
+
 const calendarBody = `
 <div style="max-width:720px;margin:0 auto;font-family:-apple-system,sans-serif;color:#16211C;">
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
   <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:26px;">Calendrier des trails 2026</h1>
-  <p style="font-size:14px;">Les courses disponibles sur Monchronotrail, avec calculateur de temps personnalisé pour chacune.</p>
-  <ul style="font-size:14.5px;line-height:1.6;padding-left:20px;">${calendarRows}</ul>
+  <p style="font-size:14px;">Les courses disponibles sur Monchronotrail, classées par mois, avec calculateur de temps personnalisé pour chacune.</p>
+  <div style="margin:16px 0;">${monthNav}</div>
+  ${monthSections}
+  ${undatedSection}
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 write('calendrier-trails-2026/index.html', page(calendarHead, calendarBody));
 
