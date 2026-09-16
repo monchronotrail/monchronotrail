@@ -221,6 +221,7 @@ copyFile('mentions-legales.html', 'mentions-legales.html');
 copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
 copyFile('favicon.svg', 'favicon.svg');
 copyFile('og-image.png', 'og-image.png');
+copyFile('_redirects', '_redirects');
 
 // ---------------------------------------------------------------------
 // 4. Pages de courses — générées depuis races.json
