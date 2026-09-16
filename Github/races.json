@@ -4,15 +4,15 @@
     "name": "Trail du Sancy",
     "slug": "trail-du-sancy",
     "organizer": "Club XTTR63",
-    "officialSite": "https://www.sancy.com/decouvrir/toutes-les-communes/le-mont-dore/les-trails-du-sancy-mont-dore/",
+    "officialSite": "https://www.xttr63.com/nos-evenements/trails-du-sancy-oxsitis-gr-invest/",
     "season": 2026,
     "edition": 2026,
     "formatName": "33 km",
-    "date": "à confirmer (habituellement fin septembre, samedi)",
+    "date": "2026-09-26",
     "location": "Le Mont-Dore, Puy-de-Dôme",
     "description": "Le format intermédiaire du Trail du Sancy Mont-Dore : traversée de la vallée glaciaire de Chaudefour et ascension du Puy de Sancy, point culminant du Massif central.",
-    "distance": 33,
-    "elevationGain": 2000,
+    "distance": 30.0,
+    "elevationGain": 1652,
     "elevationLoss": null,
     "maxElevation": 1886,
     "terrainType": "Montagne, sentiers et arêtes",
@@ -26,25 +26,25 @@
     "relatedRaces": [
       "trail-du-sancy-2026-60km"
     ],
-    "sourceUrl": "https://www.sancy.com/fr/fiche/fete-et-manifestation/les-trails-du-sancy-mont-dore_TFO4812020/",
-    "verificationDate": "2026-09-08",
-    "status": "TO_VERIFY",
-    "notes": "Données 2025 (33 km / 2000 m D+) reprises en attendant l'ouverture des inscriptions 2026. Une source GPX 2020 indique 2020 m D+ — écart mineur, à confirmer sur le site officiel dès publication du parcours 2026."
+    "sourceUrl": "https://www.xttr63.com/nos-evenements/trails-du-sancy-oxsitis-gr-invest/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel de l'organisateur (XTTR63) pour l'édition 2026 (26-27 septembre). Le format nommé « Le Trail du Sancy » est annoncé à 30 km / 1652 m D+ pour 2026 (parcours de repli : 37 km / 1268 m D+) — distance différente du libellé historique « 33 km » conservé dans cette colonne (nom de format non modifié conformément à la consigne). Départ samedi 26/09 à 10h30, Parc municipal du Mont-Dore."
   },
   {
     "id": "trail-du-sancy-2026-60km",
     "name": "Trail du Sancy",
     "slug": "trail-du-sancy",
     "organizer": "Club XTTR63",
-    "officialSite": "https://www.sancy.com/decouvrir/toutes-les-communes/le-mont-dore/les-trails-du-sancy-mont-dore/",
+    "officialSite": "https://www.xttr63.com/nos-evenements/trails-du-sancy-oxsitis-gr-invest/",
     "season": 2026,
     "edition": 2026,
     "formatName": "Grand Trail du Sancy 60 km",
-    "date": "à confirmer (habituellement fin septembre, dimanche)",
+    "date": "2026-09-27",
     "location": "Le Mont-Dore, Puy-de-Dôme",
     "description": "Le format long du Trail du Sancy Mont-Dore, à la frontière de l'ultra : Banne d'Ordanche, puy Loup, Guéry, grande cascade et roc de Cuzeau, au cœur du Massif central volcanique.",
-    "distance": 61.4,
-    "elevationGain": 3200,
+    "distance": 60.0,
+    "elevationGain": 2900,
     "elevationLoss": null,
     "maxElevation": 1886,
     "terrainType": "Haute montagne, sentiers techniques",
@@ -58,24 +58,24 @@
     "relatedRaces": [
       "trail-du-sancy-2026-33km"
     ],
-    "sourceUrl": "https://www.sancy.com/fr/fiche/fete-et-manifestation/les-trails-du-sancy-mont-dore_TFO4812020/",
-    "verificationDate": "2026-09-08",
-    "status": "CONFLICT",
-    "notes": "Sources en conflit sur ce format : sancy.com 2025 indique 61,4 km / 3200 m D+, une trace GPX 2020 indique 60 km / 3350 m D+, un aperçu 2026 tiers indique ~60 km sans D+ précisé. À confirmer impérativement sur le site officiel avant publication de la page."
+    "sourceUrl": "https://www.xttr63.com/nos-evenements/trails-du-sancy-oxsitis-gr-invest/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Conflit résolu : site officiel XTTR63 confirme le Grand Trail du Sancy à 60 km / 2900 m D+ pour l'édition 2026 (parcours de repli : 60 km / 2340 m D+), et non 61,4 km / 3200 m comme précédemment retenu. Départ dimanche 27/09 à 5h30, Parc municipal du Mont-Dore."
   },
   {
     "id": "utmb-2026-occ",
     "name": "UTMB",
     "slug": "utmb",
     "organizer": "UTMB World",
-    "officialSite": "https://utmb.world/",
+    "officialSite": "https://montblanc.utmb.world/",
     "season": 2026,
     "edition": 2026,
     "formatName": "OCC (Orsières-Champex-Chamonix)",
     "date": "2026-08-27",
     "location": "Orsières (Suisse) → Chamonix (France)",
     "description": "Le plus court des trois finales de l'UTMB World Series : un format déjà exigeant en haute montagne suisse et française, idéal pour découvrir l'ambiance UTMB.",
-    "distance": 60,
+    "distance": 60.0,
     "elevationGain": 3500,
     "elevationLoss": null,
     "maxElevation": null,
@@ -93,24 +93,24 @@
       "utmb-2026-utmb",
       "utmb-2026-mcc"
     ],
-    "sourceUrl": "https://therunningchannel.com/utmb-occ-ccc-whats-the-difference/",
-    "verificationDate": "2026-09-11",
-    "status": "SECONDARY_SOURCE",
-    "notes": "60 km / 3500 m D+ confirmés à l'identique par 2 sources indépendantes (therunningchannel, deux articles distincts)."
+    "sourceUrl": "https://montblanc.utmb.world/fr/races/occ",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/OCC) : 60 km / 3500 m D+, départ jeudi 27 août 2026 à 8h15, Orsières. Confirme les valeurs déjà retenues."
   },
   {
     "id": "utmb-2026-ccc",
     "name": "UTMB",
     "slug": "utmb",
     "organizer": "UTMB World",
-    "officialSite": "https://utmb.world/",
+    "officialSite": "https://montblanc.utmb.world/",
     "season": 2026,
     "edition": 2026,
     "formatName": "CCC (Courmayeur-Champex-Chamonix)",
     "date": "2026-08-28",
     "location": "Courmayeur (Italie) → Chamonix (France)",
     "description": "Traversée de l'Italie à la Suisse puis la France, une des courses les plus prestigieuses au monde en dehors de l'UTMB lui-même.",
-    "distance": 101,
+    "distance": 101.0,
     "elevationGain": 6050,
     "elevationLoss": null,
     "maxElevation": null,
@@ -128,24 +128,24 @@
       "utmb-2026-utmb",
       "utmb-2026-mcc"
     ],
-    "sourceUrl": "https://therunningchannel.com/utmb-occ-ccc-whats-the-difference/",
-    "verificationDate": "2026-09-11",
-    "status": "SECONDARY_SOURCE",
-    "notes": "101 km / 6050 m D+ confirmés par plusieurs sources convergentes (6050-6100 m selon la source, écart mineur)."
+    "sourceUrl": "https://montblanc.utmb.world/fr/races/ccc",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "CORRECTION : la page officielle de la course (montblanc.utmb.world/races/CCC) indique 108 km / 6200 m D+ pour l'édition 2026, et non 101 km / 6050 m D+ comme précédemment retenu (valeurs qui correspondaient à un tracé historique/moyenne pluriannuelle). Départ vendredi 28 août 2026 à 9h00, Courmayeur."
   },
   {
     "id": "utmb-2026-tds",
     "name": "UTMB",
     "slug": "utmb",
     "organizer": "UTMB World",
-    "officialSite": "https://utmb.world/",
+    "officialSite": "https://montblanc.utmb.world/",
     "season": 2026,
     "edition": 2026,
     "formatName": "TDS (Sur les Traces des Ducs de Savoie)",
     "date": "2026-08-24",
     "location": "Courmayeur (Italie) → Chamonix (France)",
     "description": "Réputée comme la plus technique des courses de la semaine UTMB : un tracé sauvage et exigeant sur les traces des Ducs de Savoie.",
-    "distance": 145,
+    "distance": 145.0,
     "elevationGain": 9130,
     "elevationLoss": null,
     "maxElevation": null,
@@ -163,24 +163,24 @@
       "utmb-2026-utmb",
       "utmb-2026-mcc"
     ],
-    "sourceUrl": "https://stadion-actu.fr/?p=146223",
-    "verificationDate": "2026-09-11",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Corrigé suite à vérification : plusieurs sources convergent sur 145 km / 9100-9176 m D+ (valeur médiane retenue : 9130 m), et non 9500 m comme précédemment indiqué."
+    "sourceUrl": "https://montblanc.utmb.world/fr/races/tds",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "CORRECTION : la page officielle de la course (montblanc.utmb.world/races/TDS) indique 145 km / 9500 m D+ pour l'édition 2026. La valeur de 9130 m D+ retenue le mois dernier (médiane de sources secondaires convergentes) est donc remplacée par le chiffre officiel. Départ lundi 24 août 2026 à 23h50, Courmayeur."
   },
   {
     "id": "utmb-2026-utmb",
     "name": "UTMB",
     "slug": "utmb",
     "organizer": "UTMB World",
-    "officialSite": "https://utmb.world/",
+    "officialSite": "https://montblanc.utmb.world/",
     "season": 2026,
     "edition": 2026,
     "formatName": "UTMB (tour complet du Mont-Blanc)",
     "date": "2026-08-28",
     "location": "Chamonix (France), via Italie et Suisse",
     "description": "La course reine : le tour complet du massif du Mont-Blanc à travers la France, l'Italie et la Suisse. La référence mondiale de l'ultra-trail.",
-    "distance": 174,
+    "distance": 174.0,
     "elevationGain": 9900,
     "elevationLoss": null,
     "maxElevation": null,
@@ -198,24 +198,24 @@
       "utmb-2026-tds",
       "utmb-2026-mcc"
     ],
-    "sourceUrl": "https://therunningchannel.com/how-to-watch-utmb/",
-    "verificationDate": "2026-09-11",
-    "status": "SECONDARY_SOURCE",
-    "notes": "174 km / 9900 m D+ confirmés de façon convergente par au moins 4 sources indépendantes (therunningchannel, barnes-montblanc, auvergnerhonealpes-tourisme). Non fetché directement sur utmb.world (accès direct bloqué), d'où un statut prudent plutôt que VERIFIED."
+    "sourceUrl": "https://montblanc.utmb.world/fr/races/UTMB",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/UTMB) et recoupé avec plusieurs sources indépendantes : 174 km / 9900 m D+, départ vendredi 28 août 2026 à 17h45, Chamonix. Confirme les valeurs déjà retenues (passage en VERIFIED, accès direct à la page officielle désormais possible)."
   },
   {
     "id": "utmb-2026-mcc",
     "name": "UTMB",
     "slug": "utmb",
     "organizer": "UTMB World",
-    "officialSite": "https://utmb.world/",
+    "officialSite": "https://montblanc.utmb.world/",
     "season": 2026,
     "edition": 2026,
     "formatName": "MCC (Martigny-Combe à Chamonix)",
     "date": "2026-08-24",
     "location": "Martigny-Combe (Suisse) → Chamonix (France)",
     "description": "Le format le plus accessible de la semaine UTMB, pensé pour une première expérience en montagne dans l'ambiance UTMB.",
-    "distance": 40,
+    "distance": 40.0,
     "elevationGain": 2300,
     "elevationLoss": null,
     "maxElevation": null,
@@ -233,10 +233,10 @@
       "utmb-2026-tds",
       "utmb-2026-utmb"
     ],
-    "sourceUrl": "https://stadion-actu.fr/?p=146223",
-    "verificationDate": "2026-09-11",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Corrigé suite à vérification : 40 km / 2300 m D+ confirmés par plusieurs sources convergentes (dacia UTMB Mont-Blanc officiel cité par auvergnerhonealpes-tourisme, et barnes-montblanc)."
+    "sourceUrl": "https://montblanc.utmb.world/fr/races/mcc",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/MCC) : 40 km / 2300 m D+, départ lundi 24 août 2026 à 10h00, Martigny-Combe. Confirme les valeurs déjà retenues."
   },
   {
     "id": "templiers-2026-endurance",
@@ -267,8 +267,8 @@
       "templiers-2026-integrale",
       "templiers-2026-boffi"
     ],
-    "sourceUrl": "https://www.tourisme-occitanie.com/fr/fiche/fete-et-manifestation/le-festival-des-templiers-millau_TFOFMACRTLFESTITEMP/",
-    "verificationDate": "2026-09-11",
+    "sourceUrl": "https://itra.run/Races/RaceCourse/Festival.Des.Templiers.ENDURANCE.TRAIL/2026/117073",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "99,5 km confirmés à l'identique sur une source indépendante supplémentaire (calendrier officiel des inscriptions, TrainerDay) pour l'édition 2026 (15-18 octobre)."
   },
@@ -301,8 +301,8 @@
       "templiers-2026-integrale",
       "templiers-2026-boffi"
     ],
-    "sourceUrl": "https://www.tourisme-occitanie.com/fr/fiche/fete-et-manifestation/le-festival-des-templiers-millau_TFOFMACRTLFESTITEMP/",
-    "verificationDate": "2026-09-11",
+    "sourceUrl": "https://itra.run/Races/RaceCourse/Festival.Des.Templiers.Grand.Trail.des.Templiers/2026/117072",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "80,7 km confirmés à l'identique sur une source indépendante supplémentaire pour l'édition 2026."
   },
@@ -318,7 +318,7 @@
     "date": "2026-10-17",
     "location": "Millau, Aveyron",
     "description": "Un format intermédiaire entre causses et vallées, sur les mêmes terrains techniques que la course phare.",
-    "distance": 62,
+    "distance": 62.0,
     "elevationGain": 2695,
     "elevationLoss": null,
     "maxElevation": null,
@@ -335,8 +335,8 @@
       "templiers-2026-grand-trail",
       "templiers-2026-boffi"
     ],
-    "sourceUrl": "https://www.festivalenfrance.com/festival/festival-des-templiers",
-    "verificationDate": "2026-09-11",
+    "sourceUrl": "https://itra.run/Races/RaceCourse/Festival.Des.Templiers.Integrale.des.Causses/2026/117074",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "62,1 km confirmés (très proche des 62 km déjà indiqués) sur une source indépendante supplémentaire pour l'édition 2026."
   },
@@ -369,8 +369,8 @@
       "templiers-2026-grand-trail",
       "templiers-2026-integrale"
     ],
-    "sourceUrl": "https://www.festivalenfrance.com/festival/festival-des-templiers",
-    "verificationDate": "2026-09-11",
+    "sourceUrl": "https://itra.run/Races/RaceDetails/Festival.Des.Templiers.Boffi.Fifty/2026/117079",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "47,3 km confirmés à l'identique sur une source indépendante supplémentaire pour l'édition 2026."
   },
@@ -386,8 +386,8 @@
     "date": "2026-10-09",
     "location": "Aubusson-d'Auvergne, Puy-de-Dôme",
     "description": "Le format ultra intégral des Grands Trails d'Auvergne, au cœur du Massif central volcanique, au départ et à l'arrivée du lac d'Aubusson-d'Auvergne.",
-    "distance": 177.4,
-    "elevationGain": 6694,
+    "distance": 175.0,
+    "elevationGain": 7000,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Moyenne montagne volcanique",
@@ -403,10 +403,10 @@
       "gta-2026-80",
       "gta-2026-50"
     ],
-    "sourceUrl": "https://tracedetrail.fr/fr/event/grands-trails-d-auvergne-2026",
-    "verificationDate": "2026-09-10",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Chiffres issus d'une trace GPX (tracedetrail.fr) pour l'édition 2026 — cohérents avec les distances annoncées par l'organisateur (175 km), non vérifiés directement sur le site officiel."
+    "sourceUrl": "https://www.grandstrailsauvergne.fr/100miles-lintegral-173km/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel grandstrailsauvergne.fr : 175 km / 7000 m D+, départ vendredi 9 octobre 2026 à 18h00, Lac d'Aubusson d'Auvergne. Remplace les valeurs GPX tierces (177,4 km / 6694 m D+) précédemment retenues."
   },
   {
     "id": "gta-2026-130",
@@ -420,8 +420,8 @@
     "date": "2026-10-10",
     "location": "Aubusson-d'Auvergne, Puy-de-Dôme",
     "description": "Un tour complet des paysages du Massif central volcanique autour du lac d'Aubusson-d'Auvergne.",
-    "distance": 129.8,
-    "elevationGain": 4984,
+    "distance": 130.0,
+    "elevationGain": 5300,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Moyenne montagne volcanique",
@@ -437,10 +437,10 @@
       "gta-2026-80",
       "gta-2026-50"
     ],
-    "sourceUrl": "https://tracedetrail.fr/fr/event/grands-trails-d-auvergne-2026",
-    "verificationDate": "2026-09-10",
-    "status": "CONFLICT",
-    "notes": "tracedetrail.fr indique 129.8 km / 4984 m D+, tandis qu'ITRA indique 129 km / 5540 m D+ pour la version équipe — écart de D+ notable, à confirmer sur le site officiel."
+    "sourceUrl": "https://www.grandstrailsauvergne.fr/les-courses/360-ultra-trail/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Conflit résolu : site officiel grandstrailsauvergne.fr confirme 130 km / 5300 m D+ pour le 360° Ultra-Trail, édition 2026 (départ samedi 10 octobre à 3h30, Lac d'Aubusson d'Auvergne). Remplace les valeurs tracedetrail.fr (129,8 km / 4984 m D+) et ITRA (129 km / 5540 m D+, version équipe) précédemment en conflit."
   },
   {
     "id": "gta-2026-80",
@@ -454,8 +454,8 @@
     "date": "2026-10-10",
     "location": "Aubusson-d'Auvergne, Puy-de-Dôme",
     "description": "Le format intermédiaire des Grands Trails d'Auvergne, dans le Massif central volcanique.",
-    "distance": 79.2,
-    "elevationGain": 2941,
+    "distance": 80.0,
+    "elevationGain": 3200,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Moyenne montagne volcanique",
@@ -471,10 +471,10 @@
       "gta-2026-130",
       "gta-2026-50"
     ],
-    "sourceUrl": "https://tracedetrail.fr/fr/event/grands-trails-d-auvergne-2026",
-    "verificationDate": "2026-09-10",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Chiffres issus d'une trace GPX (tracedetrail.fr) pour l'édition 2026, non vérifiés directement sur le site officiel."
+    "sourceUrl": "https://www.grandstrailsauvergne.fr/les-courses/x-ultra-trail/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel grandstrailsauvergne.fr : 80 km / 3200 m D+, départ samedi 10 octobre 2026 à 6h00, Lac d'Aubusson d'Auvergne."
   },
   {
     "id": "gta-2026-50",
@@ -488,8 +488,8 @@
     "date": "2026-10-10",
     "location": "Aubusson-d'Auvergne, Puy-de-Dôme",
     "description": "Le format le plus accessible des Grands Trails d'Auvergne, pour découvrir le Massif central volcanique.",
-    "distance": 50.4,
-    "elevationGain": 1898,
+    "distance": 50.0,
+    "elevationGain": 2000,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Moyenne montagne volcanique",
@@ -505,10 +505,10 @@
       "gta-2026-130",
       "gta-2026-80"
     ],
-    "sourceUrl": "https://tracedetrail.fr/fr/event/grands-trails-d-auvergne-2026",
-    "verificationDate": "2026-09-10",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Chiffres issus d'une trace GPX (tracedetrail.fr) pour l'édition 2026, non vérifiés directement sur le site officiel."
+    "sourceUrl": "https://www.grandstrailsauvergne.fr/les-courses/trail-des-druides/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel grandstrailsauvergne.fr : 50 km / 2000 m D+, départ samedi 10 octobre 2026 à 8h00, Lac d'Aubusson d'Auvergne."
   },
   {
     "id": "diagonale-2026-mascareignes",
@@ -519,11 +519,11 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "La Mascareignes",
-    "date": "2026-10-15",
+    "date": "2026-10-16",
     "location": "Île de la Réunion",
     "description": "Le format le plus court des ultras du Grand Raid, à travers les paysages volcaniques de l'île de la Réunion.",
-    "distance": 71,
-    "elevationGain": 4000,
+    "distance": 74.0,
+    "elevationGain": 3800,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Volcanique tropical, très technique",
@@ -538,10 +538,10 @@
       "diagonale-2026-bourbon",
       "diagonale-2026-diagonale"
     ],
-    "sourceUrl": "https://www.outside.fr/diagonale-des-fous-2023-favoris-outsiders-quels-sont-les-athletes-a-suivre-cette-annee",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "Distance/D+ varient sensiblement d'une édition à l'autre (70-74 km, 4000-4010 m D+) — à reconfirmer sur le site officiel du Grand Raid. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
+    "sourceUrl": "https://www.grandraid-reunion.com/fr/les-courses/la-mascareignes/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel grandraid-reunion.com : 74 km / 3800 m D+, départ vendredi 16 octobre 2026 à 1h00 depuis Hell-Bourg, arrivée stade de la Redoute à Saint-Denis.",
     "extraDifficultyFactor": 1.25,
     "shortName": "Diagonale des Fous"
   },
@@ -557,8 +557,8 @@
     "date": "2026-10-16",
     "location": "Île de la Réunion",
     "description": "Souvent considéré comme l'ultime test avant la Diagonale des Fous, un format déjà exigeant à travers l'île.",
-    "distance": 100,
-    "elevationGain": 6000,
+    "distance": 106.0,
+    "elevationGain": 6200,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Volcanique tropical, très technique",
@@ -573,10 +573,10 @@
       "diagonale-2026-mascareignes",
       "diagonale-2026-diagonale"
     ],
-    "sourceUrl": "https://www.outside.fr/diagonale-des-fous-2023-favoris-outsiders-quels-sont-les-athletes-a-suivre-cette-annee",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "Distance/D+ varient fortement d'une édition à l'autre (100-112 km, 5800-6300 m D+ selon les années) — à reconfirmer impérativement sur le site officiel. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
+    "sourceUrl": "https://www.grandraid-reunion.com/fr/les-courses/le-trail-de-bourbon/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel grandraid-reunion.com : 106 km / 6200 m D+, départ vendredi 16 octobre 2026 à 20h00 depuis Cilaos.",
     "extraDifficultyFactor": 1.25,
     "shortName": "Diagonale des Fous"
   },
@@ -592,8 +592,8 @@
     "date": "2026-10-15",
     "location": "Île de la Réunion",
     "description": "L'épreuve reine du Grand Raid : traversée intégrale de l'île du sud au nord, considérée comme l'un des ultra-trails les plus difficiles au monde.",
-    "distance": 165,
-    "elevationGain": 10000,
+    "distance": 180.0,
+    "elevationGain": 10200,
     "elevationLoss": null,
     "maxElevation": 2476,
     "terrainType": "Volcanique tropical, extrêmement technique",
@@ -608,10 +608,10 @@
       "diagonale-2026-mascareignes",
       "diagonale-2026-bourbon"
     ],
-    "sourceUrl": "https://www.tonton-outdoor.com/fr_FR/destinations/grand-raid-diagonale-des-fous",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "Écart important selon les sources et les éditions (165-178 km, 9890-12107 m D+) : c'est l'événement où la variabilité observée est la plus grande de toute la base. À reconfirmer impérativement sur le site officiel avant publication. Facteur correctif de 1,25 appliqué (climat tropical, isolement, technicité du terrain volcanique) : le vainqueur 2025 (23h32, ~276 km-effort) tourne à ~27% de km-effort/heure de moins que le vainqueur UTMB 2026 (18h16, 273 km-effort) sur un parcours pourtant comparable en distance-effort — preuve que le kilomètre-effort seul sous-estime la difficulté propre à cette course.",
+    "sourceUrl": "https://www.grandraid-reunion.com/fr/les-courses/la-diagonale-des-fous/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel grandraid-reunion.com : 180 km / 10200 m D+, départ jeudi 15 octobre 2026 à 22h00, Ravine Blanche Saint-Pierre. Nouveau tracé 2026 via le cirque de Salazie (le parcours ne passe plus par Cilaos). Remplace la fourchette tierce (165-178 km / 9890-12107 m D+) précédemment retenue.",
     "extraDifficultyFactor": 1.25,
     "shortName": "Diagonale des Fous"
   },
@@ -627,7 +627,7 @@
     "date": "2026-11-28",
     "location": "Saint-Étienne → Lyon",
     "description": "La plus grande course nature de France : une traversée nocturne de Saint-Étienne à Lyon à travers les Monts du Lyonnais, à la frontale.",
-    "distance": 80,
+    "distance": 80.0,
     "elevationGain": 2000,
     "elevationLoss": null,
     "maxElevation": null,
@@ -642,10 +642,10 @@
     "relatedRaces": [
       "saintelyon-2026-45km"
     ],
-    "sourceUrl": "https://trainerday.com/events/fr/asics-saint-lyon-2026",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "Le tracé change chaque édition (au moins 2000 m de D+ selon les années, parfois annoncé à 1800 m pour un format légèrement différent) — à reconfirmer sur saintelyon.com."
+    "sourceUrl": "https://www.saintelyon.com/races/80km-saintelyon",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Date et lieu vérifiés sur le site officiel saintelyon.com : départ 28 novembre 2026 à 23h30, Saint-Étienne. L'organisateur annonce un tracé qui varie chaque année, « autour de 80 km » pour un D+ minimum de 2000 m ; le D+ précis 2026 reste « à venir » (trace GPX non encore publiée) — valeur de 2000 m conservée dans l'attente."
   },
   {
     "id": "saintelyon-2026-45km",
@@ -659,7 +659,7 @@
     "date": "2026-11-28",
     "location": "Monts du Lyonnais → Lyon",
     "description": "Le format « marathon » de la SaintéLyon, sur un tracé plus court mais dans la même ambiance nocturne.",
-    "distance": 45,
+    "distance": 45.0,
     "elevationGain": 950,
     "elevationLoss": null,
     "maxElevation": null,
@@ -674,10 +674,10 @@
     "relatedRaces": [
       "saintelyon-2026-80km"
     ],
-    "sourceUrl": "https://www.lyoncapitale.fr/Sport/Course-SainteLyon-l-autre-Fete-des-Lumieres",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "À reconfirmer sur saintelyon.com, le tracé évoluant chaque édition."
+    "sourceUrl": "https://www.saintelyon.com/races/45km-saint-express",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Distance et date vérifiées sur le site officiel saintelyon.com : 45 km, départ 28 novembre 2026 à 23h00, Sainte-Catherine. Le D+ précis 2026 reste « à venir » sur le site officiel (trace GPX non encore publiée) ; valeur de 950 m conservée dans l'attente d'une publication officielle."
   },
   {
     "id": "mmb-2026-90km",
@@ -691,7 +691,7 @@
     "date": "2026-06-26",
     "location": "Vallée de Chamonix",
     "description": "L'épreuve ultra la plus exigeante du Marathon du Mont-Blanc, dans un terrain alpin technique.",
-    "distance": 90,
+    "distance": 90.0,
     "elevationGain": 6300,
     "elevationLoss": null,
     "maxElevation": null,
@@ -706,8 +706,8 @@
     "relatedRaces": [
       "mmb-2026-42km"
     ],
-    "sourceUrl": "https://www.salomon.com/fr-fr/sg/a/90k-marathon-du-mont-blanc-guide",
-    "verificationDate": "2026-09-10",
+    "sourceUrl": "https://itra.run/Races/RaceCourse/Marathon.du.Mont.Blanc.90km.du.Mont.Blanc/2026/120004",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "90 km / ~6300 m D+ confirmés par Salomon (partenaire officiel) ; une autre source (UTMB Index) indique 90.2 km / 7000 m+ — écart mineur."
   },
@@ -723,7 +723,7 @@
     "date": "2026-06-28",
     "location": "Chamonix",
     "description": "La course phare de l'événement, culminant à l'Aiguillette des Posettes (2200 m) : un condensé technique du trail alpin.",
-    "distance": 42,
+    "distance": 42.0,
     "elevationGain": 2540,
     "elevationLoss": null,
     "maxElevation": 2200,
@@ -738,8 +738,8 @@
     "relatedRaces": [
       "mmb-2026-90km"
     ],
-    "sourceUrl": "https://stadion-actu.fr/?p=144128",
-    "verificationDate": "2026-09-10",
+    "sourceUrl": "https://itra.run/Races/RaceCourse/Marathon.du.Mont.Blanc.42km.du.Mont.Blanc/2026/120003",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "42 km / 2540 m D+ confirmés par plusieurs sources pour l'édition 2026."
   },
@@ -755,7 +755,7 @@
     "date": "2026-03-21",
     "location": "Élancourt → tour Eiffel, Paris",
     "description": "La distance historique de l'EcoTrail Paris depuis 2008, de la colline d'Élancourt à la tour Eiffel, via l'observatoire de Meudon et le domaine de Saint-Cloud.",
-    "distance": 83,
+    "distance": 83.0,
     "elevationGain": 1200,
     "elevationLoss": null,
     "maxElevation": null,
@@ -768,8 +768,8 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [],
-    "sourceUrl": "https://en.ecotrailparis.com/course/trail-80-km",
-    "verificationDate": "2026-09-10",
+    "sourceUrl": "https://itra.run/Races/RaceCourse/Salomon.EcoTrail.Paris...Printemps.Trail.80km/2026/105808",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "Distance et D+ tirés directement du site officiel ecotrailparis.com pour l'édition du 21 mars 2026."
   },
@@ -785,7 +785,7 @@
     "date": "2026-05-31",
     "location": "Lac d'Annecy",
     "description": "Le tour complet du lac d'Annecy par les montagnes environnantes (Mont Veyrier, Semnoz, Tournette) : la référence de l'ultra-trail alpin accessible.",
-    "distance": 102,
+    "distance": 102.0,
     "elevationGain": 6000,
     "elevationLoss": null,
     "maxElevation": null,
@@ -801,8 +801,8 @@
       "maxirace-2026-demitour",
       "maxirace-2026-marathon"
     ],
-    "sourceUrl": "https://www.maxi-race.org/en/",
-    "verificationDate": "2026-09-10",
+    "sourceUrl": "https://itra.run/Races/RaceCourse/adidas.TERREX.MaXi.Race.tOur.du.Lac.d.Annecy.100km..1.jour/2026/113088",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "Le site officiel donne une fourchette (100-105 km, 5800-6200 m D+) car le tracé varie légèrement chaque année ; valeurs médianes retenues ici.",
     "shortName": "MaXi-Race"
@@ -819,7 +819,7 @@
     "date": "2026-05-30",
     "location": "Doussard → Annecy",
     "description": "La moitié du tour du lac d'Annecy, dans le même esprit montagnard que le format complet.",
-    "distance": 54,
+    "distance": 54.0,
     "elevationGain": 3250,
     "elevationLoss": null,
     "maxElevation": null,
@@ -835,8 +835,8 @@
       "maxirace-2026-tourdulac",
       "maxirace-2026-marathon"
     ],
-    "sourceUrl": "https://www.maxi-race.org/en/",
-    "verificationDate": "2026-09-10",
+    "sourceUrl": "https://itra.run/Races/RaceDetails/adidas.TERREX.MaXi.Race.Shokz.Demi.tOur.du.Lac.55k/2026/113095",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "Fourchette officielle 52-57 km / 3000-3500 m D+ ; valeurs médianes retenues ici.",
     "shortName": "MaXi-Race"
@@ -853,7 +853,7 @@
     "date": "2026-05-30",
     "location": "Lac d'Annecy",
     "description": "Le format le plus accessible du week-end MaXi-Race, en boucle autour du lac d'Annecy, sans esprit de compétition (pas de classement elite).",
-    "distance": 40,
+    "distance": 40.0,
     "elevationGain": 1700,
     "elevationLoss": null,
     "maxElevation": null,
@@ -869,8 +869,8 @@
       "maxirace-2026-tourdulac",
       "maxirace-2026-demitour"
     ],
-    "sourceUrl": "https://www.maxi-race.org/en/",
-    "verificationDate": "2026-09-10",
+    "sourceUrl": "https://itra.run/Races/RaceDetails/adidas.TERREX.MaXi.Race.Marathon.eXp%C3%A9rience.40k/2026/113089",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "Fourchette officielle 38-42 km / 1600-1800 m D+ ; valeurs médianes retenues ici.",
     "shortName": "MaXi-Race"
@@ -887,8 +887,8 @@
     "date": "2026-08-21",
     "location": "Vielle-Aure, Hautes-Pyrénées",
     "description": "L'épreuve reine du Grand Raid des Pyrénées, une grande boucle en haute montagne pyrénéenne au départ et à l'arrivée de Vielle-Aure.",
-    "distance": 160,
-    "elevationGain": 10000,
+    "distance": 174.2,
+    "elevationGain": 10406,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Haute montagne pyrénéenne",
@@ -904,10 +904,10 @@
       "grp-2026-lacs",
       "grp-2026-moudang"
     ],
-    "sourceUrl": "https://www.tourisme-occitanie.com/fr/fiche/fete-et-manifestation/grand-raid-des-pyrenees-aragnouet_TFOFMAMIP065V52OXCY/",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "La distance officielle annoncée (160 km) diffère de la distance mesurée par GPS certaines années (jusqu'à 174 km) — à reconfirmer sur grandraidpyrenees.com."
+    "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/ultra-tour-solo/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié via le roadbook officiel (grandraidpyrenees.com) : le total du roadbook aboutit à 174,2 km / 10406 m D+, départ vendredi 21 août 2026 à 5h00, Vielle-Aure. L'organisateur continue de commercialiser ce format sous le nom « Ultra Tour 160 km » (description : « environ 174 km et 10400 m D+ ») ; nom de format conservé, distance/D+ mis à jour sur la base du roadbook chiffré, confirmant l'écart entre distance annoncée et distance réelle déjà signalé en note."
   },
   {
     "id": "grp-2026-cirques",
@@ -921,8 +921,8 @@
     "date": "2026-08-21",
     "location": "Piau-Engaly → Vielle-Aure",
     "description": "Un grand format à travers les cirques pyrénéens, au départ de la station de Piau-Engaly.",
-    "distance": 120,
-    "elevationGain": 7500,
+    "distance": 126.7,
+    "elevationGain": 7036,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Haute montagne pyrénéenne",
@@ -938,10 +938,10 @@
       "grp-2026-lacs",
       "grp-2026-moudang"
     ],
-    "sourceUrl": "https://www.tourisme-occitanie.com/fr/fiche/fete-et-manifestation/grand-raid-des-pyrenees-aragnouet_TFOFMAMIP065V52OXCY/",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "À reconfirmer sur grandraidpyrenees.com."
+    "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/tour-des-cirques/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié via le roadbook officiel (grandraidpyrenees.com) : total 126,7 km / 7036 m D+, départ vendredi 21 août 2026 à 7h00, Piau-Engaly. Le format reste commercialisé sous le nom « Tour des Cirques 120 km » (description : « environ 125 km, 7000 m D+ »)."
   },
   {
     "id": "grp-2026-lacs",
@@ -955,8 +955,8 @@
     "date": "2026-08-22",
     "location": "Vielle-Aure, Hautes-Pyrénées",
     "description": "Un format intermédiaire du Grand Raid des Pyrénées, entre lacs d'altitude et cols.",
-    "distance": 80,
-    "elevationGain": 5100,
+    "distance": 80.5,
+    "elevationGain": 5187,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Haute montagne pyrénéenne",
@@ -972,10 +972,10 @@
       "grp-2026-cirques",
       "grp-2026-moudang"
     ],
-    "sourceUrl": "https://www.tourisme-occitanie.com/fr/fiche/fete-et-manifestation/grand-raid-des-pyrenees-aragnouet_TFOFMAMIP065V52OXCY/",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "À reconfirmer sur grandraidpyrenees.com."
+    "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/tour-des-lacs/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié via le roadbook officiel (grandraidpyrenees.com) : total 80,5 km / 5187 m D+, départ samedi 22 août 2026 à 5h00, Vielle-Aure."
   },
   {
     "id": "grp-2026-moudang",
@@ -989,8 +989,8 @@
     "date": "2026-08-20",
     "location": "Piau-Engaly → Vielle-Aure",
     "description": "Le format le plus accessible du Grand Raid des Pyrénées, pour découvrir la haute montagne pyrénéenne.",
-    "distance": 60,
-    "elevationGain": 3500,
+    "distance": 60.8,
+    "elevationGain": 3515,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Haute montagne pyrénéenne",
@@ -1006,10 +1006,10 @@
       "grp-2026-cirques",
       "grp-2026-lacs"
     ],
-    "sourceUrl": "https://www.tourisme-occitanie.com/fr/fiche/fete-et-manifestation/grand-raid-des-pyrenees-aragnouet_TFOFMAMIP065V52OXCY/",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "À reconfirmer sur grandraidpyrenees.com."
+    "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/tour-du-moudang-60-km/",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié via le roadbook officiel (grandraidpyrenees.com) : total 60,8 km / 3515 m D+, départ jeudi 20 août 2026 à 5h30, Piau-Engaly."
   },
   {
     "id": "ultramarin-2026-grandraid",
@@ -1023,8 +1023,8 @@
     "date": "2026-06-26",
     "location": "Vannes, Golfe du Morbihan",
     "description": "Le tour complet du Golfe du Morbihan, avec une traversée en bateau à mi-parcours. Le format qui a inspiré la création de Monchronotrail.",
-    "distance": 175,
-    "elevationGain": 1200,
+    "distance": 175.0,
+    "elevationGain": 1430,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Sentiers côtiers, peu de dénivelé mais très long",
@@ -1039,10 +1039,10 @@
       "ultramarin-2026-raid",
       "ultramarin-2026-arvor"
     ],
-    "sourceUrl": "https://itra.run/Races/RaceDetails/L.Ultra.Marin.Grand.Raid.175km/2026/112303",
-    "verificationDate": "2026-09-10",
-    "status": "CONFLICT",
-    "notes": "Le D+ varie fortement selon les sources pour ce format (1020 à 1430 m) — valeur médiane retenue en attendant confirmation officielle.",
+    "sourceUrl": "https://www.ultra-marin.fr/grand-raid-ultramarin",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Conflit résolu : le site officiel ultra-marin.fr indique 175 km / 1430 m D+ environ pour le Grand Raid. L'édition 2026 (dernière connue, tenue le 26 juin 2026) a eu lieu à cette date ; l'édition 2027 n'est pas encore annoncée sur le site officiel (date « communiquée prochainement ») — données de l'édition 2026 reprises en attendant l'annonce, conformément à la règle des éditions de moins d'un an.",
     "shortName": "Ultra Marin"
   },
   {
@@ -1057,8 +1057,8 @@
     "date": "2026-06-25",
     "location": "Saint-Gildas-de-Rhuys, Golfe du Morbihan",
     "description": "Un format solo de 100 km autour du Golfe du Morbihan, sans la traversée en bateau du Grand Raid.",
-    "distance": 100,
-    "elevationGain": 800,
+    "distance": 100.0,
+    "elevationGain": 810,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Sentiers côtiers, peu de dénivelé",
@@ -1073,10 +1073,10 @@
       "ultramarin-2026-grandraid",
       "ultramarin-2026-arvor"
     ],
-    "sourceUrl": "https://www.festivalenfrance.com/es/festival/ultra-marin-raid-golfe-du-morbihan",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "À reconfirmer sur le site officiel de l'Ultra Marin.",
+    "sourceUrl": "https://www.ultra-marin.fr/raid-ultramarin",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel ultra-marin.fr : 100 km / 810 m D+ environ, départ Saint-Gildas-de-Rhuys. L'édition 2026 (prévue le 25 juin) a été annulée en cours d'événement pour cause de vigilance rouge canicule ; l'édition 2027 n'est pas encore annoncée (date « communiquée prochainement ») — caractéristiques du parcours reprises du site officiel, date à reconfirmer.",
     "shortName": "Ultra Marin"
   },
   {
@@ -1107,8 +1107,8 @@
       "ultramarin-2026-grandraid",
       "ultramarin-2026-raid"
     ],
-    "sourceUrl": "https://utmb.world/fr/runner/5325232.sylvain.durandperdriel",
-    "verificationDate": "2026-09-10",
+    "sourceUrl": "https://itra.run/Races/RaceCourse/L.Ultra.Marin.Arvor.56km/2026/112305",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "Distance/D+ mesurés (UTMB Index) pour une édition récente : 59,5 km / 600 m D+, cohérent avec l'annonce officielle de 56 km.",
     "shortName": "Ultra Marin"
@@ -1125,7 +1125,7 @@
     "date": "2026-06-27",
     "location": "Golfe du Morbihan",
     "description": "Le format le plus accessible de l'Ultra Marin, pour découvrir les sentiers côtiers du golfe.",
-    "distance": 33,
+    "distance": 33.0,
     "elevationGain": 510,
     "elevationLoss": null,
     "maxElevation": null,
@@ -1141,8 +1141,8 @@
       "ultramarin-2026-grandraid",
       "ultramarin-2026-arvor"
     ],
-    "sourceUrl": "https://utmb.world/fr/runner/5325232.sylvain.durandperdriel",
-    "verificationDate": "2026-09-10",
+    "sourceUrl": "https://itra.run/Races/RaceDetails/L.Ultra.Marin.Ronde.des.Douaniers.34km/2026/112306",
+    "verificationDate": "2026-09-16",
     "status": "SECONDARY_SOURCE",
     "notes": "Distance/D+ mesurés (UTMB Index) : 33 km / 510 m D+, cohérent avec l'annonce officielle de 34 km.",
     "shortName": "Ultra Marin"
@@ -1156,11 +1156,11 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "30 km",
-    "date": "2026-10-31",
+    "date": "2026-11-07",
     "location": "Lyon (Fourvière)",
     "description": "L'édition nocturne du Lyon Urban Trail, sur les hauteurs de Lyon entre Rhône et Saône, avec environ 2000 marches au programme.",
-    "distance": 30,
-    "elevationGain": 800,
+    "distance": 30.0,
+    "elevationGain": 1100,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Urbain, escaliers et collines",
@@ -1174,10 +1174,10 @@
     "relatedRaces": [
       "lut-2026-20km"
     ],
-    "sourceUrl": "https://trainerday.com/events/fr/lyon-urban-trail-by-night-2026",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "Date annoncée différemment selon les sources (31 octobre ou 7 novembre 2026) — à reconfirmer sur le site officiel."
+    "sourceUrl": "https://lutbynight.com/races/30km",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel lutbynight.com : 30 km / 1100 m D+, départ samedi 7 novembre 2026 à 18h30, Place des Minimes, Lyon. La date officielle 2026 est le 7 novembre (et non le 31 octobre comme précédemment indiqué)."
   },
   {
     "id": "lut-2026-20km",
@@ -1188,11 +1188,11 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "20 km",
-    "date": "2026-10-31",
+    "date": "2026-11-07",
     "location": "Lyon (Fourvière)",
     "description": "Une version plus courte du Lyon Urban Trail by Night, dans la même ambiance urbaine nocturne.",
-    "distance": 20,
-    "elevationGain": 550,
+    "distance": 20.0,
+    "elevationGain": 750,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Urbain, escaliers et collines",
@@ -1206,9 +1206,9 @@
     "relatedRaces": [
       "lut-2026-30km"
     ],
-    "sourceUrl": "https://trainerday.com/events/fr/lyon-urban-trail-by-night-2026",
-    "verificationDate": "2026-09-10",
-    "status": "TO_VERIFY",
-    "notes": "Date annoncée différemment selon les sources — à reconfirmer sur le site officiel."
+    "sourceUrl": "https://lutbynight.com/races/20km",
+    "verificationDate": "2026-09-16",
+    "status": "VERIFIED",
+    "notes": "Vérifié sur le site officiel lutbynight.com : 20 km / 750 m D+, départ samedi 7 novembre 2026 à 20h45, Place des Minimes, Lyon."
   }
 ]
