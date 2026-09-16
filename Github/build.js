@@ -635,6 +635,9 @@ const methodoBody = `
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Pourquoi une fourchette plutôt qu'un chiffre unique ?</h2>
   <p style="font-size:14px;">Aucun modèle ne peut prédire la météo, un coup de mou à 3h du matin, ou une mauvaise gestion des ravitaillements. La fourchette affichée reflète cette incertitude réelle plutôt que de donner une fausse precision.</p>
 
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Pourquoi un outil dédié plutôt qu'un module dans un gros logiciel ?</h2>
+  <p style="font-size:14px;">Il existe de très bons outils de gestion de traces GPX qui proposent, parmi de nombreuses fonctionnalités, une estimation de temps de passage. Monchronotrail fait le choix inverse : ne faire qu'une seule chose, l'estimation de temps, et la rendre aussi simple que possible — pas de compte à créer, pas de trace GPX obligatoire, un résultat en moins d'une minute. C'est un choix de simplicité, pas une critique des outils plus complets qui répondent à d'autres besoins (planification de parcours, cartographie...).</p>
+
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Un modèle qui s'ajuste avec des retours réels</h2>
   <p style="font-size:14px;">La méthode a évolué après un premier retour terrain : sur le Trail du Sancy (61 km, 3200 m D+), le modèle initial donnait une estimation largement en dehors des chronos réellement observés au classement. La méthode du kilomètre-effort a corrigé cet écart et reste, à notre connaissance, la meilleure base disponible pour continuer à affiner le modèle au fil des retours.</p>
 
