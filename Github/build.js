@@ -221,13 +221,14 @@ copyFile('mentions-legales.html', 'mentions-legales.html');
 copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
 copyFile('favicon.svg', 'favicon.svg');
 copyFile('og-image.png', 'og-image.png');
-// Le fichier _redirects (syntaxe Netlify, avec le suffixe "!" pour forcer la
-// redirection même sur un chemin qui a du contenu) casse le déploiement
-// Cloudflare, qui interprète aussi ce fichier mais avec un parseur plus
-// strict ne comprenant pas ce suffixe. Il n'est donc copié QUE pour Netlify.
-if (!IS_CLOUDFLARE_BUILD) {
-  copyFile('_redirects', '_redirects');
-}
+// Le fichier _redirects (préparé pour rediriger l'ancien Netlify vers le
+// nouveau domaine) a été retiré : il cassait systématiquement le déploiement
+// Cloudflare (parseur plus strict que Netlify sur la syntaxe des redirections),
+// et la détection d'environnement censée l'exclure du build Cloudflare ne
+// fonctionne pas de façon fiable dans cet environnement. La redirection
+// Netlify → monchronotrail.fr sera configurée plus tard directement depuis
+// le tableau de bord Netlify (indépendant d'un fichier commité), une fois
+// Netlify de nouveau actif.
 
 // ---------------------------------------------------------------------
 // 4. Pages de courses — générées depuis races.json
