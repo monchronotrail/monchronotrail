@@ -221,7 +221,13 @@ copyFile('mentions-legales.html', 'mentions-legales.html');
 copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
 copyFile('favicon.svg', 'favicon.svg');
 copyFile('og-image.png', 'og-image.png');
-copyFile('_redirects', '_redirects');
+// Le fichier _redirects (syntaxe Netlify, avec le suffixe "!" pour forcer la
+// redirection même sur un chemin qui a du contenu) casse le déploiement
+// Cloudflare, qui interprète aussi ce fichier mais avec un parseur plus
+// strict ne comprenant pas ce suffixe. Il n'est donc copié QUE pour Netlify.
+if (!IS_CLOUDFLARE_BUILD) {
+  copyFile('_redirects', '_redirects');
+}
 
 // ---------------------------------------------------------------------
 // 4. Pages de courses — générées depuis races.json
