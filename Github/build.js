@@ -265,11 +265,13 @@ races.forEach(race => {
   }).filter(Boolean).join(' · ');
 
   const density = race.distance > 0 ? (race.elevationGain / race.distance) : 0;
+  const effortKmValue = race.distance + (race.elevationGain || 0) / 100;
 
   const prefillScript = `
 <script>
 (function(){
   window.MCT_RACE_EXTRA = ${JSON.stringify(race.extraDifficultyFactor || 1.00)};
+  window.MCT_RACE_CUTOFF_HOURS = ${JSON.stringify(race.cutoffHours || null)};
   function prefill(){
     var d = document.getElementById('tc-target-dist');
     var dp = document.getElementById('tc-target-dplus');
@@ -412,6 +414,8 @@ ${breadcrumbScript}
     <tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">Altitude max</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${race.maxElevation ? race.maxElevation + ' m' : '—'}</td></tr>
     <tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">Terrain</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${esc(race.terrainType || '—')}</td></tr>
     <tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">Difficulté Monchronotrail</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${race.difficulty}/5 — ${DIFFICULTY_LABELS[race.difficulty] || '—'}</td></tr>
+    <tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">Km-effort</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${effortKmValue.toFixed(0)} km-effort</td></tr>
+    ${race.cutoffHours ? `<tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">Barrière horaire</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${race.cutoffHours} h</td></tr>` : ''}
     <tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">Date</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${esc(race.date || 'à confirmer')}</td></tr>
     <tr><td style="padding:7px 0;color:#5C6B66;">Lieu</td><td style="padding:7px 0;text-align:right;">${esc(race.location || '—')}</td></tr>
   </table>
@@ -435,7 +439,7 @@ ${CALCULATOR}
   <p style="font-size:14px;line-height:1.6;">L'estimation tient compte de votre niveau (via un chrono de référence route ou trail), de la distance, du dénivelé positif, du profil du parcours et de sa technicité. Ce n'est pas une prédiction exacte, mais une aide pour préparer votre course et fixer un objectif réaliste.</p>
 
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Quelle est la difficulté de ${esc(race.name)} ${esc(formatLabel)} ?</h2>
-  <p style="font-size:14px;line-height:1.6;">Avec ${race.elevationGain} m de D+ sur ${race.distance} km (soit environ ${density.toFixed(0)} m/km), ce format est classé ${race.difficulty}/5 sur l'échelle Monchronotrail : ${DIFFICULTY_LABELS[race.difficulty] || '—'}.</p>
+  <p style="font-size:14px;line-height:1.6;">Avec ${race.elevationGain} m de D+ sur ${race.distance} km (soit environ ${density.toFixed(0)} m/km, ${effortKmValue.toFixed(0)} km-effort), ce format est classé ${race.difficulty}/5 sur l'échelle Monchronotrail : ${DIFFICULTY_LABELS[race.difficulty] || '—'}.</p>
 
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">FAQ</h2>
   ${faqHtml}

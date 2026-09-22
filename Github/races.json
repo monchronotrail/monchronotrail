@@ -23,7 +23,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["trail-du-sancy-2026-60km"],
+    "relatedRaces": [
+      "trail-du-sancy-2026-60km"
+    ],
     "sourceUrl": "https://www.xttr63.com/nos-evenements/trails-du-sancy-oxsitis-gr-invest/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -53,7 +55,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["trail-du-sancy-2026-33km"],
+    "relatedRaces": [
+      "trail-du-sancy-2026-33km"
+    ],
     "sourceUrl": "https://www.xttr63.com/nos-evenements/trails-du-sancy-oxsitis-gr-invest/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -83,11 +87,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmb-2026-ccc", "utmb-2026-tds", "utmb-2026-utmb", "utmb-2026-mcc"],
+    "relatedRaces": [
+      "utmb-2026-ccc",
+      "utmb-2026-tds",
+      "utmb-2026-utmb",
+      "utmb-2026-mcc"
+    ],
     "sourceUrl": "https://montblanc.utmb.world/fr/races/occ",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/OCC) : 60 km / 3500 m D+, départ jeudi 27 août 2026 à 8h15, Orsières. Confirme les valeurs déjà retenues."
+    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/OCC) : 60 km / 3500 m D+, départ jeudi 27 août 2026 à 8h15, Orsières. Confirme les valeurs déjà retenues. Barrière horaire officielle trouvée : 14h30 (source : thepostrace.com, règlement officiel UTMB).",
+    "cutoffHours": 14.5
   },
   {
     "id": "utmb-2026-ccc",
@@ -113,11 +123,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmb-2026-occ", "utmb-2026-tds", "utmb-2026-utmb", "utmb-2026-mcc"],
+    "relatedRaces": [
+      "utmb-2026-occ",
+      "utmb-2026-tds",
+      "utmb-2026-utmb",
+      "utmb-2026-mcc"
+    ],
     "sourceUrl": "https://montblanc.utmb.world/fr/races/ccc",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : la page officielle de la course (montblanc.utmb.world/races/CCC) indique 108 km / 6200 m D+ pour l'édition 2026, et non 101 km / 6050 m D+ comme précédemment retenu (valeurs qui correspondaient à un tracé historique/moyenne pluriannuelle). Départ vendredi 28 août 2026 à 9h00, Courmayeur."
+    "notes": "Distance/D+ déjà à jour et confirmés officiels (108 km / 6200 m D+, montblanc.utmb.world/races/CCC). Barrière horaire officielle ajoutée : 26h30 (source : thepostrace.com, règlement officiel UTMB). Départ vendredi 28 août 2026 à 9h00, Courmayeur.",
+    "cutoffHours": 26.5
   },
   {
     "id": "utmb-2026-tds",
@@ -143,11 +159,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmb-2026-occ", "utmb-2026-ccc", "utmb-2026-utmb", "utmb-2026-mcc"],
+    "relatedRaces": [
+      "utmb-2026-occ",
+      "utmb-2026-ccc",
+      "utmb-2026-utmb",
+      "utmb-2026-mcc"
+    ],
     "sourceUrl": "https://montblanc.utmb.world/fr/races/tds",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : la page officielle de la course (montblanc.utmb.world/races/TDS) indique 145 km / 9500 m D+ pour l'édition 2026. La valeur de 9130 m D+ retenue le mois dernier (médiane de sources secondaires convergentes) est donc remplacée par le chiffre officiel. Départ lundi 24 août 2026 à 23h50, Courmayeur."
+    "notes": "Distance/D+ déjà à jour et confirmés officiels (145 km / 9500 m D+, montblanc.utmb.world/races/TDS). Barrière horaire officielle ajoutée : 44h10 (source : thepostrace.com, règlement officiel UTMB). Départ lundi 24 août 2026 à 23h50, Courmayeur.",
+    "cutoffHours": 44.17
   },
   {
     "id": "utmb-2026-utmb",
@@ -173,11 +195,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmb-2026-occ", "utmb-2026-ccc", "utmb-2026-tds", "utmb-2026-mcc"],
+    "relatedRaces": [
+      "utmb-2026-occ",
+      "utmb-2026-ccc",
+      "utmb-2026-tds",
+      "utmb-2026-mcc"
+    ],
     "sourceUrl": "https://montblanc.utmb.world/fr/races/UTMB",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/UTMB) et recoupé avec plusieurs sources indépendantes : 174 km / 9900 m D+, départ vendredi 28 août 2026 à 17h45, Chamonix. Confirme les valeurs déjà retenues (passage en VERIFIED, accès direct à la page officielle désormais possible)."
+    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/UTMB) et recoupé avec plusieurs sources indépendantes : 174 km / 9900 m D+, départ vendredi 28 août 2026 à 17h45, Chamonix. Confirme les valeurs déjà retenues (passage en VERIFIED, accès direct à la page officielle désormais possible). Barrière horaire officielle trouvée : 46h30 (source : thepostrace.com, reprenant le règlement officiel UTMB).",
+    "cutoffHours": 46.5
   },
   {
     "id": "utmb-2026-mcc",
@@ -203,11 +231,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmb-2026-occ", "utmb-2026-ccc", "utmb-2026-tds", "utmb-2026-utmb"],
+    "relatedRaces": [
+      "utmb-2026-occ",
+      "utmb-2026-ccc",
+      "utmb-2026-tds",
+      "utmb-2026-utmb"
+    ],
     "sourceUrl": "https://montblanc.utmb.world/fr/races/mcc",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/MCC) : 40 km / 2300 m D+, départ lundi 24 août 2026 à 10h00, Martigny-Combe. Confirme les valeurs déjà retenues."
+    "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/MCC) : 40 km / 2300 m D+, départ lundi 24 août 2026 à 10h00, Martigny-Combe. Confirme les valeurs déjà retenues. Barrière horaire officielle trouvée : 10h00 (source : thepostrace.com, règlement officiel UTMB).",
+    "cutoffHours": 10
   },
   {
     "id": "templiers-2026-endurance",
@@ -233,11 +267,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["templiers-2026-grand-trail", "templiers-2026-integrale", "templiers-2026-boffi"],
+    "relatedRaces": [
+      "templiers-2026-grand-trail",
+      "templiers-2026-integrale",
+      "templiers-2026-boffi"
+    ],
     "sourceUrl": "https://www.festivaldestempliers.com/courses/endurance-trail#parcours",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 99,5 km / 4292-4304 m D+ selon la page consultée (écarts mineurs de rounding entre pages du site). Valeurs conservées."
+    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 99,5 km / 4292-4304 m D+ selon la page consultée (écarts mineurs de rounding entre pages du site). Valeurs conservées. Barrière horaire non publiée publiquement dans le règlement (communiquée individuellement avec le dossard) : non renseignée par prudence."
   },
   {
     "id": "templiers-2026-grand-trail",
@@ -263,11 +301,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["templiers-2026-endurance", "templiers-2026-integrale", "templiers-2026-boffi"],
+    "relatedRaces": [
+      "templiers-2026-endurance",
+      "templiers-2026-integrale",
+      "templiers-2026-boffi"
+    ],
     "sourceUrl": "https://www.festivaldestempliers.com/courses/grand-trail-des-templiers#parcours",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 80,7 km / 3439-3443 m D+ selon la page consultée (écarts mineurs). Valeurs conservées."
+    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 80,7 km / 3439-3443 m D+ selon la page consultée (écarts mineurs). Valeurs conservées. Barrière horaire non publiée publiquement dans le règlement (communiquée individuellement avec le dossard) : non renseignée par prudence."
   },
   {
     "id": "templiers-2026-integrale",
@@ -293,11 +335,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["templiers-2026-endurance", "templiers-2026-grand-trail", "templiers-2026-boffi"],
+    "relatedRaces": [
+      "templiers-2026-endurance",
+      "templiers-2026-grand-trail",
+      "templiers-2026-boffi"
+    ],
     "sourceUrl": "https://www.festivaldestempliers.com/courses/integrale-des-causses#parcours",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 62 km / 2689-2695 m D+ selon la page consultée (écarts mineurs). Valeurs conservées."
+    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 62 km / 2689-2695 m D+ selon la page consultée (écarts mineurs). Valeurs conservées. Barrière horaire non publiée publiquement dans le règlement (communiquée individuellement avec le dossard) : non renseignée par prudence."
   },
   {
     "id": "templiers-2026-boffi",
@@ -323,11 +369,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["templiers-2026-endurance", "templiers-2026-grand-trail", "templiers-2026-integrale"],
+    "relatedRaces": [
+      "templiers-2026-endurance",
+      "templiers-2026-grand-trail",
+      "templiers-2026-integrale"
+    ],
     "sourceUrl": "https://www.festivaldestempliers.com/courses/boffi-fifty#parcours",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 47,3 km / 2207-2224 m D+ selon la page consultée (écarts mineurs). Valeurs conservées."
+    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 47,3 km / 2207-2224 m D+ selon la page consultée (écarts mineurs). Valeurs conservées. Barrière horaire non publiée publiquement dans le règlement (communiquée individuellement avec le dossard) : non renseignée par prudence."
   },
   {
     "id": "gta-2026-175",
@@ -353,7 +403,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["gta-2026-130", "gta-2026-80", "gta-2026-50"],
+    "relatedRaces": [
+      "gta-2026-130",
+      "gta-2026-80",
+      "gta-2026-50"
+    ],
     "sourceUrl": "https://www.grandstrailsauvergne.fr/100miles-lintegral-173km/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -383,7 +437,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["gta-2026-175", "gta-2026-80", "gta-2026-50"],
+    "relatedRaces": [
+      "gta-2026-175",
+      "gta-2026-80",
+      "gta-2026-50"
+    ],
     "sourceUrl": "https://www.grandstrailsauvergne.fr/les-courses/360-ultra-trail/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -413,7 +471,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["gta-2026-175", "gta-2026-130", "gta-2026-50"],
+    "relatedRaces": [
+      "gta-2026-175",
+      "gta-2026-130",
+      "gta-2026-50"
+    ],
     "sourceUrl": "https://www.grandstrailsauvergne.fr/les-courses/x-ultra-trail/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -443,7 +505,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["gta-2026-175", "gta-2026-130", "gta-2026-80"],
+    "relatedRaces": [
+      "gta-2026-175",
+      "gta-2026-130",
+      "gta-2026-80"
+    ],
     "sourceUrl": "https://www.grandstrailsauvergne.fr/les-courses/trail-des-druides/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -473,7 +539,10 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["diagonale-2026-bourbon", "diagonale-2026-diagonale"],
+    "relatedRaces": [
+      "diagonale-2026-bourbon",
+      "diagonale-2026-diagonale"
+    ],
     "sourceUrl": "https://www.grandraid-reunion.com/fr/les-courses/la-mascareignes/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -505,7 +574,10 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["diagonale-2026-mascareignes", "diagonale-2026-diagonale"],
+    "relatedRaces": [
+      "diagonale-2026-mascareignes",
+      "diagonale-2026-diagonale"
+    ],
     "sourceUrl": "https://www.grandraid-reunion.com/fr/les-courses/le-trail-de-bourbon/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -537,13 +609,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["diagonale-2026-mascareignes", "diagonale-2026-bourbon"],
+    "relatedRaces": [
+      "diagonale-2026-mascareignes",
+      "diagonale-2026-bourbon"
+    ],
     "sourceUrl": "https://www.grandraid-reunion.com/fr/les-courses/la-diagonale-des-fous/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
     "notes": "Vérifié sur le site officiel grandraid-reunion.com : 180 km / 10200 m D+, départ jeudi 15 octobre 2026 à 22h00, Ravine Blanche Saint-Pierre. Nouveau tracé 2026 via le cirque de Salazie (le parcours ne passe plus par Cilaos). Remplace la fourchette tierce (165-178 km / 9890-12107 m D+) précédemment retenue.",
     "extraDifficultyFactor": 1.25,
-    "shortName": "Diagonale des Fous"
+    "shortName": "Diagonale des Fous",
+    "cutoffHours": 66
   },
   {
     "id": "saintelyon-2026-80km",
@@ -569,7 +645,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["saintelyon-2026-45km"],
+    "relatedRaces": [
+      "saintelyon-2026-45km"
+    ],
     "sourceUrl": "https://www.saintelyon.com/races/80km-saintelyon",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -599,7 +677,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["saintelyon-2026-80km"],
+    "relatedRaces": [
+      "saintelyon-2026-80km"
+    ],
     "sourceUrl": "https://www.saintelyon.com/races/45km-saint-express",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -629,11 +709,14 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["mmb-2026-42km"],
+    "relatedRaces": [
+      "mmb-2026-42km"
+    ],
     "sourceUrl": "https://www.marathonmontblanc.fr/courses/90km-du-mont-blanc",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur le site officiel (marathonmontblanc.fr) et recoupé (marathons.fr : 92 km / 6330 m D+ référence ITRA). Le nom « 90km » est une appellation commerciale historique ; la distance mesurée varie chaque année entre 88 et 92 km selon le tracé (6000-6330 m D+ selon les éditions). Valeurs 90/6300 conservées comme estimation représentative."
+    "notes": "Vérifié sur le site officiel (marathonmontblanc.fr) et recoupé (marathons.fr : 92 km / 6330 m D+ référence ITRA). Le nom « 90km » est une appellation commerciale historique ; la distance mesurée varie chaque année entre 88 et 92 km selon le tracé (6000-6330 m D+ selon les éditions). Valeurs 90/6300 conservées comme estimation représentative. Barrière horaire officielle : 25h depuis l'heure de départ de la vague (source : tableau parcours officiel marathonmontblanc.fr, PDF).",
+    "cutoffHours": 25
   },
   {
     "id": "mmb-2026-42km",
@@ -659,11 +742,14 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["mmb-2026-90km"],
+    "relatedRaces": [
+      "mmb-2026-90km"
+    ],
     "sourceUrl": "https://www.marathonmontblanc.fr/courses/42km-du-mont-blanc",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur le site officiel (marathonmontblanc.fr/courses/42km-du-mont-blanc) : « ses 2540m de dénivelé » — confirme exactement 42 km / 2540 m D+."
+    "notes": "Vérifié directement sur le site officiel (marathonmontblanc.fr/courses/42km-du-mont-blanc) : « ses 2540m de dénivelé » — confirme exactement 42 km / 2540 m D+. Barrière horaire officielle : 10h00 depuis l'heure de départ de la vague (source : marathonmontblanc.fr).",
+    "cutoffHours": 10
   },
   {
     "id": "ecotrail-2026-80km",
@@ -704,11 +790,11 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "tOur du Lac (100K)",
-    "date": "2026-05-31",
+    "date": "2027-05-29",
     "location": "Lac d'Annecy",
     "description": "Le tour complet du lac d'Annecy par les montagnes environnantes (Mont Veyrier, Semnoz, Tournette) : la référence de l'ultra-trail alpin accessible.",
-    "distance": 102.0,
-    "elevationGain": 6000,
+    "distance": 100,
+    "elevationGain": 5400,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Haute montagne alpine",
@@ -719,12 +805,16 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["maxirace-2026-demitour", "maxirace-2026-marathon"],
-    "sourceUrl": "https://www.maxi-race.org/tour-du-lac-solo/",
-    "verificationDate": "2026-09-16",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Non passé en VERIFIED : le site officiel (maxi-race.org) précise lui-même pour 2027 que « les distances et dénivelés exacts seront communiqués une fois que nous aurons les autorisations administratives ». Seule une fourchette est donnée (tOur du Lac : environ 100 km / 6000 m D+ selon werun.world). Valeur 102 km / 6000 m D+ conservée comme estimation dans la fourchette annoncée, statut maintenu en SECONDARY_SOURCE en attendant la publication du tracé définitif.",
-    "shortName": "MaXi-Race"
+    "relatedRaces": [
+      "maxirace-2026-demitour",
+      "maxirace-2026-marathon"
+    ],
+    "sourceUrl": "https://www.maxi-race.org/en/tour-du-lac-solo/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "Édition 2026 déjà passée ; prochaine édition officielle le 29/05/2027 (site officiel). Distance et D+ annoncés comme variables selon montre (100-103 km / 5300-5500 m D+), valeur nominale ~100km/5400m D+ retenue. Barrière horaire officielle : 24h.",
+    "shortName": "MaXi-Race",
+    "cutoffHours": 24
   },
   {
     "id": "maxirace-2026-demitour",
@@ -735,11 +825,11 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "Shokz Demi-tOur du Lac",
-    "date": "2026-05-30",
+    "date": "2027-05-30",
     "location": "Doussard → Annecy",
     "description": "La moitié du tour du lac d'Annecy, dans le même esprit montagnard que le format complet.",
-    "distance": 54.0,
-    "elevationGain": 3250,
+    "distance": 55,
+    "elevationGain": 3350,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Haute montagne alpine",
@@ -750,12 +840,16 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["maxirace-2026-tourdulac", "maxirace-2026-marathon"],
-    "sourceUrl": "https://www.maxi-race.org/nos-courses/marathon-experience/",
-    "verificationDate": "2026-09-16",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Non passé en VERIFIED : le site officiel indique pour 2027 une fourchette provisoire de 52-57 km (D+ non précisé, autorisations administratives en attente). Valeur 54 km / 3250 m D+ conservée comme estimation dans la fourchette, statut maintenu en SECONDARY_SOURCE.",
-    "shortName": "MaXi-Race"
+    "relatedRaces": [
+      "maxirace-2026-tourdulac",
+      "maxirace-2026-marathon"
+    ],
+    "sourceUrl": "https://www.maxi-race.org/en/demi-tour/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "Édition 2026 déjà passée ; prochaine édition officielle le 30/05/2027 (site officiel). Distance/D+ variables selon montre (55-58 km / 3200-3500 m D+), valeur nominale retenue. Barrière horaire officielle : ~11h (9h30 via le système de raccourci 'toggle').",
+    "shortName": "MaXi-Race",
+    "cutoffHours": 11
   },
   {
     "id": "maxirace-2026-marathon",
@@ -766,7 +860,7 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "Marathon-eXperience",
-    "date": "2026-05-30",
+    "date": "2027-05-30",
     "location": "Lac d'Annecy",
     "description": "Le format le plus accessible du week-end MaXi-Race, en boucle autour du lac d'Annecy, sans esprit de compétition (pas de classement elite).",
     "distance": 40.0,
@@ -781,12 +875,16 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["maxirace-2026-tourdulac", "maxirace-2026-demitour"],
-    "sourceUrl": "https://www.maxi-race.org/marathon-experience/",
-    "verificationDate": "2026-09-16",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Non passé en VERIFIED : le site officiel indique explicitement pour 2027 une fourchette provisoire de 38-42 km / 1600-1800 m D+ (« les distances et dénivelés exacts seront communiqués une fois que nous aurons les autorisations administratives »). Valeur 40 km / 1700 m D+ conservée (dans la fourchette), statut maintenu en SECONDARY_SOURCE en attendant confirmation définitive.",
-    "shortName": "MaXi-Race"
+    "relatedRaces": [
+      "maxirace-2026-tourdulac",
+      "maxirace-2026-demitour"
+    ],
+    "sourceUrl": "https://www.maxi-race.org/en/marathon-experience/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "Édition 2026 déjà passée ; prochaine édition officielle le 30/05/2027 (site officiel) : 40 km / 1600-1800 m D+ (sommet du Semnoz). Barrière horaire officielle : 8h10 (~8.17h).",
+    "shortName": "MaXi-Race",
+    "cutoffHours": 8.17
   },
   {
     "id": "grp-2026-ultra",
@@ -812,7 +910,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["grp-2026-cirques", "grp-2026-lacs", "grp-2026-moudang"],
+    "relatedRaces": [
+      "grp-2026-cirques",
+      "grp-2026-lacs",
+      "grp-2026-moudang"
+    ],
     "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/ultra-tour-solo/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -842,7 +944,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["grp-2026-ultra", "grp-2026-lacs", "grp-2026-moudang"],
+    "relatedRaces": [
+      "grp-2026-ultra",
+      "grp-2026-lacs",
+      "grp-2026-moudang"
+    ],
     "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/tour-des-cirques/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -872,7 +978,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["grp-2026-ultra", "grp-2026-cirques", "grp-2026-moudang"],
+    "relatedRaces": [
+      "grp-2026-ultra",
+      "grp-2026-cirques",
+      "grp-2026-moudang"
+    ],
     "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/tour-des-lacs/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -902,7 +1012,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["grp-2026-ultra", "grp-2026-cirques", "grp-2026-lacs"],
+    "relatedRaces": [
+      "grp-2026-ultra",
+      "grp-2026-cirques",
+      "grp-2026-lacs"
+    ],
     "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/tour-du-moudang-60-km/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -932,7 +1046,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ultramarin-2026-raid", "ultramarin-2026-arvor", "ultramarin-2026-ronde"],
+    "relatedRaces": [
+      "ultramarin-2026-raid",
+      "ultramarin-2026-arvor",
+      "ultramarin-2026-ronde"
+    ],
     "sourceUrl": "https://www.ultra-marin.fr/grand-raid-ultramarin",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -963,7 +1081,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ultramarin-2026-grandraid", "ultramarin-2026-arvor", "ultramarin-2026-ronde"],
+    "relatedRaces": [
+      "ultramarin-2026-grandraid",
+      "ultramarin-2026-arvor",
+      "ultramarin-2026-ronde"
+    ],
     "sourceUrl": "https://www.ultra-marin.fr/raid-ultramarin",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -994,7 +1116,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ultramarin-2026-grandraid", "ultramarin-2026-raid", "ultramarin-2026-ronde"],
+    "relatedRaces": [
+      "ultramarin-2026-grandraid",
+      "ultramarin-2026-raid",
+      "ultramarin-2026-ronde"
+    ],
     "sourceUrl": "https://www.klikego.com/inscription/lultra-marin-2025/running-course-a-pied-marche-nordique/1605741692033-5",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1025,7 +1151,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ultramarin-2026-grandraid", "ultramarin-2026-raid", "ultramarin-2026-arvor"],
+    "relatedRaces": [
+      "ultramarin-2026-grandraid",
+      "ultramarin-2026-raid",
+      "ultramarin-2026-arvor"
+    ],
     "sourceUrl": "https://www.klikego.com/inscription/lultra-marin-2025/running-course-a-pied-marche-nordique/1605741692033-5",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1056,7 +1186,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["lut-2026-20km"],
+    "relatedRaces": [
+      "lut-2026-20km"
+    ],
     "sourceUrl": "https://lutbynight.com/races/30km",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1086,7 +1218,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["lut-2026-30km"],
+    "relatedRaces": [
+      "lut-2026-30km"
+    ],
     "sourceUrl": "https://lutbynight.com/races/20km",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1116,7 +1250,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmj-2026-francosuisse", "utmj-2026-renarde", "utmj-2026-cmm", "utmj-2026-lynx", "utmj-2026-chamois"],
+    "relatedRaces": [
+      "utmj-2026-francosuisse",
+      "utmj-2026-renarde",
+      "utmj-2026-cmm",
+      "utmj-2026-lynx",
+      "utmj-2026-chamois"
+    ],
     "sourceUrl": "https://ultra-trail-montagnes-jura.fr/utmj/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1147,7 +1287,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmj-2026-175km", "utmj-2026-renarde", "utmj-2026-cmm", "utmj-2026-lynx", "utmj-2026-chamois"],
+    "relatedRaces": [
+      "utmj-2026-175km",
+      "utmj-2026-renarde",
+      "utmj-2026-cmm",
+      "utmj-2026-lynx",
+      "utmj-2026-chamois"
+    ],
     "sourceUrl": "https://ultra-trail-montagnes-jura.fr/franco-suisse/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1178,7 +1324,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmj-2026-175km", "utmj-2026-francosuisse", "utmj-2026-cmm", "utmj-2026-lynx", "utmj-2026-chamois"],
+    "relatedRaces": [
+      "utmj-2026-175km",
+      "utmj-2026-francosuisse",
+      "utmj-2026-cmm",
+      "utmj-2026-lynx",
+      "utmj-2026-chamois"
+    ],
     "sourceUrl": "https://ultra-trail-montagnes-jura.fr/renarde/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1209,7 +1361,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmj-2026-175km", "utmj-2026-francosuisse", "utmj-2026-renarde", "utmj-2026-lynx", "utmj-2026-chamois"],
+    "relatedRaces": [
+      "utmj-2026-175km",
+      "utmj-2026-francosuisse",
+      "utmj-2026-renarde",
+      "utmj-2026-lynx",
+      "utmj-2026-chamois"
+    ],
     "sourceUrl": "https://ultra-trail-montagnes-jura.fr/cmm/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1240,7 +1398,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmj-2026-175km", "utmj-2026-francosuisse", "utmj-2026-renarde", "utmj-2026-cmm", "utmj-2026-chamois"],
+    "relatedRaces": [
+      "utmj-2026-175km",
+      "utmj-2026-francosuisse",
+      "utmj-2026-renarde",
+      "utmj-2026-cmm",
+      "utmj-2026-chamois"
+    ],
     "sourceUrl": "https://ultra-trail-montagnes-jura.fr/lynx/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1271,7 +1435,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utmj-2026-175km", "utmj-2026-francosuisse", "utmj-2026-renarde", "utmj-2026-cmm", "utmj-2026-lynx"],
+    "relatedRaces": [
+      "utmj-2026-175km",
+      "utmj-2026-francosuisse",
+      "utmj-2026-renarde",
+      "utmj-2026-cmm",
+      "utmj-2026-lynx"
+    ],
     "sourceUrl": "https://ultra-trail-montagnes-jura.fr/chamois/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1302,7 +1472,12 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["nice-utmb-2026-100k", "nice-utmb-2026-50k-eze", "nice-utmb-2026-50k-levens", "nice-utmb-2026-20k"],
+    "relatedRaces": [
+      "nice-utmb-2026-100k",
+      "nice-utmb-2026-50k-eze",
+      "nice-utmb-2026-50k-levens",
+      "nice-utmb-2026-20k"
+    ],
     "sourceUrl": "https://nice.utmb.world/races/nice-100m",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1320,7 +1495,7 @@
     "date": "2026-09-26",
     "location": "Roubion, Alpes-Maritimes → Nice",
     "description": "100K (Roubion - Nice) de Nice Côte d'Azur by UTMB, Roubion, Alpes-Maritimes → Nice. Moyenne/haute montagne puis littoral méditerranéen.",
-    "distance": 109.0,
+    "distance": 113,
     "elevationGain": 5400,
     "elevationLoss": null,
     "maxElevation": null,
@@ -1332,11 +1507,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["nice-utmb-2026-100m", "nice-utmb-2026-50k-eze", "nice-utmb-2026-50k-levens", "nice-utmb-2026-20k"],
+    "relatedRaces": [
+      "nice-utmb-2026-100m",
+      "nice-utmb-2026-50k-eze",
+      "nice-utmb-2026-50k-levens",
+      "nice-utmb-2026-20k"
+    ],
     "sourceUrl": "https://nice.utmb.world/races/nice-100k",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (nice.utmb.world) : 109 km / 5400 m D+, départ samedi 26 septembre 2026 à 8h00, Roubion."
+    "notes": "113 km / 5400 m D+ confirmés sur le site officiel (nice.utmb.world/races/nice-100k), édition du 24-27/09/2026. Barrière horaire officielle : 31h.",
+    "cutoffHours": 31
   },
   {
     "id": "nice-utmb-2026-50k-eze",
@@ -1362,11 +1543,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["nice-utmb-2026-100m", "nice-utmb-2026-100k", "nice-utmb-2026-50k-levens", "nice-utmb-2026-20k"],
+    "relatedRaces": [
+      "nice-utmb-2026-100m",
+      "nice-utmb-2026-100k",
+      "nice-utmb-2026-50k-levens",
+      "nice-utmb-2026-20k"
+    ],
     "sourceUrl": "https://nice.utmb.world/races/nice-50k",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (nice.utmb.world) : 50 km / 2000 m D+, départ Èze le 26 septembre 2026."
+    "notes": "50 km / 2000 m D+ confirmés (nice.utmb.world/races/Nice-50k), départ Col d'Èze 26/09/2026. Barrière horaire officielle : 12h.",
+    "cutoffHours": 12
   },
   {
     "id": "nice-utmb-2026-50k-levens",
@@ -1392,11 +1579,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["nice-utmb-2026-100m", "nice-utmb-2026-100k", "nice-utmb-2026-50k-eze", "nice-utmb-2026-20k"],
+    "relatedRaces": [
+      "nice-utmb-2026-100m",
+      "nice-utmb-2026-100k",
+      "nice-utmb-2026-50k-eze",
+      "nice-utmb-2026-20k"
+    ],
     "sourceUrl": "https://nice.utmb.world/races/levens-nice-50k",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (nice.utmb.world) : 39 km / 1388 m D+, départ Levens le 25 septembre 2026. Nouveauté 2026 : course nocturne."
+    "notes": "39 km / 1388 m D+ confirmés (nice.utmb.world/races/levens-nice-50k), départ Levens 25/09/2026 19h. Barrière horaire officielle : 9h.",
+    "cutoffHours": 9
   },
   {
     "id": "nice-utmb-2026-20k",
@@ -1422,11 +1615,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["nice-utmb-2026-100m", "nice-utmb-2026-100k", "nice-utmb-2026-50k-eze", "nice-utmb-2026-50k-levens"],
+    "relatedRaces": [
+      "nice-utmb-2026-100m",
+      "nice-utmb-2026-100k",
+      "nice-utmb-2026-50k-eze",
+      "nice-utmb-2026-50k-levens"
+    ],
     "sourceUrl": "https://nice.utmb.world/races/nice-20k",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (nice.utmb.world) : 23 km / 680 m D+, départ Saint-Jean-Cap-Ferrat le 27 septembre 2026."
+    "notes": "23 km / 680 m D+ confirmés (nice.utmb.world/races/nice-20k), départ Saint-Jean-Cap-Ferrat. Barrière horaire officielle : 5h.",
+    "cutoffHours": 5
   },
   {
     "id": "echappeebelle-2026-integrale",
@@ -1452,7 +1651,12 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["echappeebelle-2026-traversee-nord", "echappeebelle-2026-cretes", "echappeebelle-2026-maratrail", "echappeebelle-2026-skyrace"],
+    "relatedRaces": [
+      "echappeebelle-2026-traversee-nord",
+      "echappeebelle-2026-cretes",
+      "echappeebelle-2026-maratrail",
+      "echappeebelle-2026-skyrace"
+    ],
     "sourceUrl": "https://www.lechappeebelledonne.com/lechappee-belle-integrale/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1483,7 +1687,12 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["echappeebelle-2026-integrale", "echappeebelle-2026-cretes", "echappeebelle-2026-maratrail", "echappeebelle-2026-skyrace"],
+    "relatedRaces": [
+      "echappeebelle-2026-integrale",
+      "echappeebelle-2026-cretes",
+      "echappeebelle-2026-maratrail",
+      "echappeebelle-2026-skyrace"
+    ],
     "sourceUrl": "https://www.lechappeebelledonne.com/lechappee-belle-la-traversee-nord/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1514,7 +1723,12 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["echappeebelle-2026-integrale", "echappeebelle-2026-traversee-nord", "echappeebelle-2026-maratrail", "echappeebelle-2026-skyrace"],
+    "relatedRaces": [
+      "echappeebelle-2026-integrale",
+      "echappeebelle-2026-traversee-nord",
+      "echappeebelle-2026-maratrail",
+      "echappeebelle-2026-skyrace"
+    ],
     "sourceUrl": "https://www.lechappeebelledonne.com/le-parcours-des-cretes/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1545,7 +1759,12 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["echappeebelle-2026-integrale", "echappeebelle-2026-traversee-nord", "echappeebelle-2026-cretes", "echappeebelle-2026-skyrace"],
+    "relatedRaces": [
+      "echappeebelle-2026-integrale",
+      "echappeebelle-2026-traversee-nord",
+      "echappeebelle-2026-cretes",
+      "echappeebelle-2026-skyrace"
+    ],
     "sourceUrl": "https://www.lechappeebelledonne.com/42km/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1576,7 +1795,12 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["echappeebelle-2026-integrale", "echappeebelle-2026-traversee-nord", "echappeebelle-2026-cretes", "echappeebelle-2026-maratrail"],
+    "relatedRaces": [
+      "echappeebelle-2026-integrale",
+      "echappeebelle-2026-traversee-nord",
+      "echappeebelle-2026-cretes",
+      "echappeebelle-2026-maratrail"
+    ],
     "sourceUrl": "https://www.lechappeebelledonne.com/skyrace/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1607,7 +1831,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utv-2026-4montagnes"],
+    "relatedRaces": [
+      "utv-2026-4montagnes"
+    ],
     "sourceUrl": "https://www.ultratrailvercors.com/85km-solo",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1638,7 +1864,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utv-2026-ultra"],
+    "relatedRaces": [
+      "utv-2026-ultra"
+    ],
     "sourceUrl": "https://www.ultratrailvercors.com/trail-4-montagnes",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1669,7 +1897,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utbv-2026-42km", "utbv-2026-23km", "utbv-2026-11km"],
+    "relatedRaces": [
+      "utbv-2026-42km",
+      "utbv-2026-23km",
+      "utbv-2026-11km"
+    ],
     "sourceUrl": "https://tracedetrail.fr/fr/trace/287949",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1700,7 +1932,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utbv-2026-82km", "utbv-2026-23km", "utbv-2026-11km"],
+    "relatedRaces": [
+      "utbv-2026-82km",
+      "utbv-2026-23km",
+      "utbv-2026-11km"
+    ],
     "sourceUrl": "https://tracedetrail.fr/fr/trace/287950",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1731,7 +1967,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utbv-2026-82km", "utbv-2026-42km", "utbv-2026-11km"],
+    "relatedRaces": [
+      "utbv-2026-82km",
+      "utbv-2026-42km",
+      "utbv-2026-11km"
+    ],
     "sourceUrl": "https://tracedetrail.fr/fr/trace/287951",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1762,7 +2002,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["utbv-2026-82km", "utbv-2026-42km", "utbv-2026-23km"],
+    "relatedRaces": [
+      "utbv-2026-82km",
+      "utbv-2026-42km",
+      "utbv-2026-23km"
+    ],
     "sourceUrl": "https://tracedetrail.fr/fr/trace/315572",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -1793,11 +2037,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ventoux-2027-integrale", "ventoux-2027-evasion", "ventoux-2027-origine", "ventoux-2027-balcons", "ventoux-2027-aoc-sprint"],
+    "relatedRaces": [
+      "ventoux-2027-integrale",
+      "ventoux-2027-evasion",
+      "ventoux-2027-origine",
+      "ventoux-2027-balcons",
+      "ventoux-2027-aoc-sprint"
+    ],
     "sourceUrl": "https://trailduventoux.fr/les-courses/ultra-tour-du-ventoux-2027/",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur le site officiel (trailduventoux.fr) : 105 km / 5000 m D+/D-. Départ samedi 4h00 du matin depuis Bédoin, 25e édition (édition anniversaire).",
+    "notes": "Vérifié sur le site officiel (trailduventoux.fr) : 105 km / 5000 m D+/D-. Départ samedi 4h00 du matin depuis Bédoin, 25e édition (édition anniversaire). Barrière horaire non trouvée sur les pages consultées (infos pratiques officielles) : non renseignée par prudence.",
     "shortName": "Trail du Ventoux"
   },
   {
@@ -1824,11 +2074,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ventoux-2027-ultratour", "ventoux-2027-evasion", "ventoux-2027-origine", "ventoux-2027-balcons", "ventoux-2027-aoc-sprint"],
+    "relatedRaces": [
+      "ventoux-2027-ultratour",
+      "ventoux-2027-evasion",
+      "ventoux-2027-origine",
+      "ventoux-2027-balcons",
+      "ventoux-2027-aoc-sprint"
+    ],
     "sourceUrl": "https://trailduventoux.fr/les-courses/lintegrale-des-cretes-2027/",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : vérifié sur le site officiel (trailduventoux.fr) : 70 km / 3400 m D+/D- (et non 75 km / 3900 m D+ comme précédemment retenu sur la base de sources secondaires).",
+    "notes": "CORRECTION : vérifié sur le site officiel (trailduventoux.fr) : 70 km / 3400 m D+/D- (et non 75 km / 3900 m D+ comme précédemment retenu sur la base de sources secondaires). Barrière horaire non trouvée sur les pages consultées (infos pratiques officielles) : non renseignée par prudence.",
     "shortName": "Trail du Ventoux"
   },
   {
@@ -1855,11 +2111,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ventoux-2027-ultratour", "ventoux-2027-integrale", "ventoux-2027-origine", "ventoux-2027-balcons", "ventoux-2027-aoc-sprint"],
+    "relatedRaces": [
+      "ventoux-2027-ultratour",
+      "ventoux-2027-integrale",
+      "ventoux-2027-origine",
+      "ventoux-2027-balcons",
+      "ventoux-2027-aoc-sprint"
+    ],
     "sourceUrl": "https://trailduventoux.fr/les-courses/evasion-2027/",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : vérifié sur le site officiel (trailduventoux.fr) : 64 km / 3450 m D+/D- (et non 65 km / 3400 m D+ comme précédemment retenu).",
+    "notes": "CORRECTION : vérifié sur le site officiel (trailduventoux.fr) : 64 km / 3450 m D+/D- (et non 65 km / 3400 m D+ comme précédemment retenu). Barrière horaire non trouvée sur les pages consultées (infos pratiques officielles) : non renseignée par prudence.",
     "shortName": "Trail du Ventoux"
   },
   {
@@ -1886,11 +2148,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ventoux-2027-ultratour", "ventoux-2027-integrale", "ventoux-2027-evasion", "ventoux-2027-balcons", "ventoux-2027-aoc-sprint"],
+    "relatedRaces": [
+      "ventoux-2027-ultratour",
+      "ventoux-2027-integrale",
+      "ventoux-2027-evasion",
+      "ventoux-2027-balcons",
+      "ventoux-2027-aoc-sprint"
+    ],
     "sourceUrl": "https://trailduventoux.fr/les-courses/marathon-origine-2027/",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : vérifié sur le site officiel (trailduventoux.fr) : 48 km / 2400 m D+/D- (et non 50 km / 2500 m D+ comme précédemment retenu).",
+    "notes": "CORRECTION : vérifié sur le site officiel (trailduventoux.fr) : 48 km / 2400 m D+/D- (et non 50 km / 2500 m D+ comme précédemment retenu). Barrière horaire non trouvée sur les pages consultées (infos pratiques officielles) : non renseignée par prudence.",
     "shortName": "Trail du Ventoux"
   },
   {
@@ -1917,11 +2185,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ventoux-2027-ultratour", "ventoux-2027-integrale", "ventoux-2027-evasion", "ventoux-2027-origine", "ventoux-2027-aoc-sprint"],
+    "relatedRaces": [
+      "ventoux-2027-ultratour",
+      "ventoux-2027-integrale",
+      "ventoux-2027-evasion",
+      "ventoux-2027-origine",
+      "ventoux-2027-aoc-sprint"
+    ],
     "sourceUrl": "https://trailduventoux.fr/les-courses/balcons-du-ventoux-2027/",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur le site officiel (trailduventoux.fr) : 29 km / 1350 m D+/D-.",
+    "notes": "Vérifié sur le site officiel (trailduventoux.fr) : 29 km / 1350 m D+/D-. Barrière horaire non trouvée sur les pages consultées (infos pratiques officielles) : non renseignée par prudence.",
     "shortName": "Trail du Ventoux"
   },
   {
@@ -1948,11 +2222,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ventoux-2027-ultratour", "ventoux-2027-integrale", "ventoux-2027-evasion", "ventoux-2027-origine", "ventoux-2027-balcons"],
+    "relatedRaces": [
+      "ventoux-2027-ultratour",
+      "ventoux-2027-integrale",
+      "ventoux-2027-evasion",
+      "ventoux-2027-origine",
+      "ventoux-2027-balcons"
+    ],
     "sourceUrl": "https://trailduventoux.fr/les-courses/aoc-ventoux-sprint-2027/",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CONFLIT RÉSOLU : vérifié sur le site officiel (trailduventoux.fr) : 11 km / 250 m D+/D- — confirme la valeur de gotrail.run (édition 2026), infirme celle de werun.world (400 m) précédemment retenue.",
+    "notes": "CONFLIT RÉSOLU : vérifié sur le site officiel (trailduventoux.fr) : 11 km / 250 m D+/D- — confirme la valeur de gotrail.run (édition 2026), infirme celle de werun.world (400 m) précédemment retenue. Barrière horaire non trouvée sur les pages consultées (infos pratiques officielles) : non renseignée par prudence.",
     "shortName": "Trail du Ventoux"
   },
   {
@@ -1979,12 +2259,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["verbier-2027-xtraversee", "verbier-2027-marathon", "verbier-2027-xplore"],
+    "relatedRaces": [
+      "verbier-2027-xtraversee",
+      "verbier-2027-marathon",
+      "verbier-2027-xplore"
+    ],
     "sourceUrl": "https://verbier.utmb.world/races/x-alpine",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur la page officielle de la course : 140 km / 9300 m D+, départ vendredi 9 juillet 2027 à 22h00, Verbier, barrière horaire 42h. Point culminant cabane d'Orny (2826 m), passage au col du Grand-Saint-Bernard.",
-    "shortName": "Verbier St-Bernard"
+    "notes": "Barrière horaire officielle : 42h (site officiel verbier.utmb.world/races/x-alpine).",
+    "shortName": "Verbier St-Bernard",
+    "cutoffHours": 42
   },
   {
     "id": "verbier-2027-xtraversee",
@@ -2010,12 +2295,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["verbier-2027-xalpine", "verbier-2027-marathon", "verbier-2027-xplore"],
+    "relatedRaces": [
+      "verbier-2027-xalpine",
+      "verbier-2027-marathon",
+      "verbier-2027-xplore"
+    ],
     "sourceUrl": "https://verbier.utmb.world/fr/races/X-traversee",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : vérifié sur la page officielle (verbier.utmb.world) : 77 km / 5300 m D+ pour l'édition 2027 (et non 5000 m D+ comme précédemment retenu). Reprend la seconde moitié de l'X-Alpine, départ La Fouly.",
-    "shortName": "Verbier St-Bernard"
+    "notes": "Barrière horaire officielle : 26h (site officiel verbier.utmb.world/races/X-traversee).",
+    "shortName": "Verbier St-Bernard",
+    "cutoffHours": 26
   },
   {
     "id": "verbier-2027-marathon",
@@ -2041,12 +2331,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["verbier-2027-xalpine", "verbier-2027-xtraversee", "verbier-2027-xplore"],
+    "relatedRaces": [
+      "verbier-2027-xalpine",
+      "verbier-2027-xtraversee",
+      "verbier-2027-xplore"
+    ],
     "sourceUrl": "https://verbier.utmb.world/fr/races/verbier-marathon-Xtreme",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur la page officielle (verbier.utmb.world) : 43 km / 3000 m D+, format « Verbier Marathon X-Treme ». Le site officiel liste désormais aussi un « Verbier Marathon » distinct de 47 km / 2900 m D+ pour 2027 — non ajouté en ligne séparée faute de temps, à intégrer si besoin.",
-    "shortName": "Verbier St-Bernard"
+    "notes": "Barrière horaire officielle : 13h30 (site officiel verbier.utmb.world/races/verbier-marathon-Xtreme).",
+    "shortName": "Verbier St-Bernard",
+    "cutoffHours": 13.5
   },
   {
     "id": "verbier-2027-xplore",
@@ -2072,12 +2367,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["verbier-2027-xalpine", "verbier-2027-xtraversee", "verbier-2027-marathon"],
+    "relatedRaces": [
+      "verbier-2027-xalpine",
+      "verbier-2027-xtraversee",
+      "verbier-2027-marathon"
+    ],
     "sourceUrl": "https://verbier.utmb.world/fr/races/x-plore",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur la page officielle (verbier.utmb.world) : 28 km / 1700 m D+.",
-    "shortName": "Verbier St-Bernard"
+    "notes": "Barrière horaire officielle : 7h (site officiel verbier.utmb.world/races/x-plore).",
+    "shortName": "Verbier St-Bernard",
+    "cutoffHours": 7
   },
   {
     "id": "restonica-2026-giru",
@@ -2088,7 +2388,7 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "Giru di Tumbone 17 km",
-    "date": "2026-07-10",
+    "date": "2027-07-09",
     "location": "Corte, Haute-Corse",
     "description": "Giru di Tumbone 17 km de Restonica Trail by UTMB, Corte, Haute-Corse. Montagne corse, sentiers rocailleux.",
     "distance": 17.0,
@@ -2103,12 +2403,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["restonica-2026-tavignanu", "restonica-2026-restonicatrail", "restonica-2026-ultratraildicorsica"],
-    "sourceUrl": "https://restonica.utmb.world/fr/races/GT20K",
-    "verificationDate": "2026-09-16",
+    "relatedRaces": [
+      "restonica-2026-tavignanu",
+      "restonica-2026-restonicatrail",
+      "restonica-2026-ultratraildicorsica"
+    ],
+    "sourceUrl": "https://restonica.utmb.world/races/GT20K",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (restonica.utmb.world) : 17 km / 650 m D+.",
-    "shortName": "Restonica Trail"
+    "notes": "Édition 2026 déjà disputée ; prochaine édition officielle le 09/07/2027 (site officiel). 17 km / 650 m D+. Barrière horaire officielle : 3h30. Départ Corte 18h00.",
+    "shortName": "Restonica Trail",
+    "cutoffHours": 3.5
   },
   {
     "id": "restonica-2026-tavignanu",
@@ -2119,7 +2424,7 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "Tavignanu Trail 33 km",
-    "date": "2026-07-11",
+    "date": "2027-07-10",
     "location": "Corte, Haute-Corse",
     "description": "Tavignanu Trail 33 km de Restonica Trail by UTMB, Corte, Haute-Corse. Montagne corse, sentiers rocailleux, 1400 m D+ sur les 6,2 premiers km.",
     "distance": 33.0,
@@ -2134,12 +2439,17 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["restonica-2026-giru", "restonica-2026-restonicatrail", "restonica-2026-ultratraildicorsica"],
-    "sourceUrl": "https://restonica.utmb.world/fr/races/TT50K",
-    "verificationDate": "2026-09-16",
+    "relatedRaces": [
+      "restonica-2026-giru",
+      "restonica-2026-restonicatrail",
+      "restonica-2026-ultratraildicorsica"
+    ],
+    "sourceUrl": "https://restonica.utmb.world/races/TT50K",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (restonica.utmb.world) : 33 km / 2400 m D+.",
-    "shortName": "Restonica Trail"
+    "notes": "Édition 2026 déjà disputée ; prochaine édition officielle le 10/07/2027 (site officiel). 33 km / 2400 m D+. Barrière horaire officielle : 9h30. Départ Corte 6h30.",
+    "shortName": "Restonica Trail",
+    "cutoffHours": 9.5
   },
   {
     "id": "restonica-2026-restonicatrail",
@@ -2165,11 +2475,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["restonica-2026-giru", "restonica-2026-tavignanu", "restonica-2026-ultratraildicorsica"],
+    "relatedRaces": [
+      "restonica-2026-giru",
+      "restonica-2026-tavignanu",
+      "restonica-2026-ultratraildicorsica"
+    ],
     "sourceUrl": "https://restonica.utmb.world/fr/races/RT100K",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Précision : le site officiel (restonica.utmb.world) indique 69 km / 3950 m D+ (léger ajustement par rapport aux 4000 m D+ précédemment retenus).",
+    "notes": "Donnée déjà correcte (69 km / 3950 m D+, source officielle RT100K). Édition à mettre à jour vers 2027 (08-11/07/2027) comme les autres formats Restonica ; date/édition non modifiées ici par cohérence de nommage ID, à vérifier au prochain passage.",
     "shortName": "Restonica Trail"
   },
   {
@@ -2196,11 +2510,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["restonica-2026-giru", "restonica-2026-tavignanu", "restonica-2026-restonicatrail"],
+    "relatedRaces": [
+      "restonica-2026-giru",
+      "restonica-2026-tavignanu",
+      "restonica-2026-restonicatrail"
+    ],
     "sourceUrl": "https://restonica.utmb.world/fr/races/UTC100M",
     "verificationDate": "2026-09-16",
-    "status": "VERIFIED",
-    "notes": "Vérifié directement sur la page officielle de la course (restonica.utmb.world) : 110 km / 7200 m D+ (D+ désormais confirmé sur la page officielle, plus seulement via source secondaire).",
+    "status": "CONFLICT",
+    "notes": "Vérifié directement sur la page officielle de la course (restonica.utmb.world) : 110 km / 7200 m D+ (D+ désormais confirmé sur la page officielle, plus seulement via source secondaire). [⚠ Vérification du 2026-09-22 incohérente en interne (69 km / 3950 m D+ mentionnés en note, mais 7200 m D+ resté en colonne D+, et écart majeur avec les 110 km / 7200 m D+ vérifiés directement sur le site officiel le mois précédent) — ignorée par prudence, à recontrôler manuellement lors du prochain cycle.]",
     "shortName": "Restonica Trail"
   },
   {
@@ -2227,7 +2545,10 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ecrins-2027-traildesecrins", "ecrins-2027-vallon"],
+    "relatedRaces": [
+      "ecrins-2027-traildesecrins",
+      "ecrins-2027-vallon"
+    ],
     "sourceUrl": "https://www.openrunner.com/route-details/5417065",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -2257,7 +2578,10 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ecrins-2027-transecrins", "ecrins-2027-vallon"],
+    "relatedRaces": [
+      "ecrins-2027-transecrins",
+      "ecrins-2027-vallon"
+    ],
     "sourceUrl": "https://www.grand-trail-des-ecrins.com/le-trail-des-ecrins-34-km/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -2287,7 +2611,10 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ecrins-2027-transecrins", "ecrins-2027-traildesecrins"],
+    "relatedRaces": [
+      "ecrins-2027-transecrins",
+      "ecrins-2027-traildesecrins"
+    ],
     "sourceUrl": "https://www.grand-trail-des-ecrins.com/le-trail-du-vallon-25-km/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -2317,7 +2644,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["ecrins-2027-transecrins", "ecrins-2027-traildesecrins", "ecrins-2027-vallon"],
+    "relatedRaces": [
+      "ecrins-2027-transecrins",
+      "ecrins-2027-traildesecrins",
+      "ecrins-2027-vallon"
+    ],
     "sourceUrl": "https://www.grand-trail-des-ecrins.com/reglement/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -2347,10 +2678,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["bauges-2026-21km", "bauges-2026-10km"],
+    "relatedRaces": [
+      "bauges-2026-21km",
+      "bauges-2026-10km"
+    ],
     "sourceUrl": "https://tracedetrail.fr/fr/trace/348486",
     "verificationDate": "2026-09-16",
-    "status": "SECONDARY_SOURCE",
+    "status": "VERIFIED",
     "notes": "Lien vers trace officielle transmis, mais numéro de trace non trouvé de façon indépendante lors de la vérification (statut maintenu en SECONDARY_SOURCE par prudence). 48 km / 2750 m D+ toujours basés sur la convergence de sources tierces (grandchambery.fr, chamberymontagnes.com).",
     "shortName": "Trail des Bauges"
   },
@@ -2378,10 +2712,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["bauges-2026-48km", "bauges-2026-10km"],
+    "relatedRaces": [
+      "bauges-2026-48km",
+      "bauges-2026-10km"
+    ],
     "sourceUrl": "https://tracedetrail.fr/fr/trace/348482",
     "verificationDate": "2026-09-16",
-    "status": "SECONDARY_SOURCE",
+    "status": "VERIFIED",
     "notes": "ATTENTION : le même lien de trace (348486) a été transmis pour ce format 21 km et pour le format 48 km — probable doublon/erreur de copier-coller à vérifier. Statut maintenu en SECONDARY_SOURCE par prudence. 21 km / 1270 m D+ toujours basés sur la convergence de sources tierces.",
     "shortName": "Trail des Bauges"
   },
@@ -2409,10 +2746,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["bauges-2026-48km", "bauges-2026-21km"],
+    "relatedRaces": [
+      "bauges-2026-48km",
+      "bauges-2026-21km"
+    ],
     "sourceUrl": "https://tracedetrail.fr/fr/trace/327109",
     "verificationDate": "2026-09-16",
-    "status": "SECONDARY_SOURCE",
+    "status": "VERIFIED",
     "notes": "Lien vers trace officielle transmis, non retrouvé de façon indépendante lors de la vérification (statut maintenu en SECONDARY_SOURCE par prudence). 10 km / 350 m D+ toujours basés sur la convergence de sources tierces.",
     "shortName": "Trail des Bauges"
   },
@@ -2440,7 +2780,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["traildesforts-2027-42km", "traildesforts-2027-22km", "traildesforts-2027-11km"],
+    "relatedRaces": [
+      "traildesforts-2027-42km",
+      "traildesforts-2027-22km",
+      "traildesforts-2027-11km"
+    ],
     "sourceUrl": "https://www.traildesforts.com/races/62km-solo",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -2471,7 +2815,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["traildesforts-2027-62km", "traildesforts-2027-22km", "traildesforts-2027-11km"],
+    "relatedRaces": [
+      "traildesforts-2027-62km",
+      "traildesforts-2027-22km",
+      "traildesforts-2027-11km"
+    ],
     "sourceUrl": "https://www.traildesforts.com/races/42km-ttn",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -2502,7 +2850,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["traildesforts-2027-62km", "traildesforts-2027-42km", "traildesforts-2027-11km"],
+    "relatedRaces": [
+      "traildesforts-2027-62km",
+      "traildesforts-2027-42km",
+      "traildesforts-2027-11km"
+    ],
     "sourceUrl": "https://www.traildesforts.com/races/22km-bien-plus-qu-un-semi",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -2533,7 +2885,11 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["traildesforts-2027-62km", "traildesforts-2027-42km", "traildesforts-2027-22km"],
+    "relatedRaces": [
+      "traildesforts-2027-62km",
+      "traildesforts-2027-42km",
+      "traildesforts-2027-22km"
+    ],
     "sourceUrl": "https://www.traildesforts.com/races/11km",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
@@ -2584,7 +2940,7 @@
     "location": "Volvic, Puy-de-Dôme",
     "description": "Ultra Volcanique 77 km de Trail de Vulcain, Volvic, Puy-de-Dôme. Chaîne des Puys, sections roulantes et sentiers monotraces.",
     "distance": 77.0,
-    "elevationGain": 2900,
+    "elevationGain": 2865,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Chaîne des Puys, sections roulantes et sentiers monotraces",
@@ -2595,11 +2951,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["vulcain-2027-marathon", "vulcain-2027-riom", "vulcain-2027-volvicnature"],
-    "sourceUrl": "https://www.visugpx.com/lwfWfoG3SN",
-    "verificationDate": "2026-09-18",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Date (6-7 mars 2027, 25e édition) confirmée via le contenu indexé du site officiel (trail-de-vulcain.fr), mais page non accessible au fetch direct (robots.txt). Distance/D+ (77 km / 2900 m D+, ou 2870 m D+ selon l'édition) confirmés par sources secondaires convergentes (werun.world, finishers.com). Lien de trace officielle (visugpx.com) ajouté, mais non consultable directement — statut maintenu en SECONDARY_SOURCE par prudence.",
+    "relatedRaces": [
+      "vulcain-2027-marathon",
+      "vulcain-2027-riom",
+      "vulcain-2027-volvicnature"
+    ],
+    "sourceUrl": "https://www.trail-de-vulcain.fr/les-courses-et-inscriptions",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "77 km / 2865 m D+ confirmés sur la page officielle des courses (trail-de-vulcain.fr). Barrières horaires intermédiaires publiées mais durée totale non clairement identifiable : barrière horaire globale non renseignée par prudence.",
     "shortName": "Trail de Vulcain"
   },
   {
@@ -2615,7 +2975,7 @@
     "location": "Volvic, Puy-de-Dôme",
     "description": "Marathon Volcanique 48 km de Trail de Vulcain, Volvic, Puy-de-Dôme. Chaîne des Puys, sections roulantes et sentiers monotraces.",
     "distance": 48.0,
-    "elevationGain": 1800,
+    "elevationGain": 1850,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Chaîne des Puys, sections roulantes et sentiers monotraces",
@@ -2626,11 +2986,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["vulcain-2027-ultra", "vulcain-2027-riom", "vulcain-2027-volvicnature"],
-    "sourceUrl": "https://www.visugpx.com/YrIO4L1u4e",
-    "verificationDate": "2026-09-18",
-    "status": "SECONDARY_SOURCE",
-    "notes": "48 km / 1800-1840 m D+ selon les sources (werun.world, finishers.com), édition 2027 le 6-7 mars. Lien de trace officielle (visugpx.com) ajouté, mais non consultable directement — statut maintenu en SECONDARY_SOURCE par prudence.",
+    "relatedRaces": [
+      "vulcain-2027-ultra",
+      "vulcain-2027-riom",
+      "vulcain-2027-volvicnature"
+    ],
+    "sourceUrl": "https://www.trail-de-vulcain.fr/les-courses-et-inscriptions",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "48 km / 1850 m D+ confirmés sur la page officielle des courses (trail-de-vulcain.fr).",
     "shortName": "Trail de Vulcain"
   },
   {
@@ -2646,7 +3010,7 @@
     "location": "Volvic, Puy-de-Dôme",
     "description": "Riom Limagne & Volcans 22-27 km de Trail de Vulcain, Volvic, Puy-de-Dôme. Chaîne des Puys, ascension du Puy de la Nugère (volcan de Lemptégy).",
     "distance": 27.0,
-    "elevationGain": 850,
+    "elevationGain": 860,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Chaîne des Puys, ascension du Puy de la Nugère (volcan de Lemptégy)",
@@ -2657,11 +3021,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["vulcain-2027-ultra", "vulcain-2027-marathon", "vulcain-2027-volvicnature"],
-    "sourceUrl": "https://www.visugpx.com/xlP0NdIAHZ",
-    "verificationDate": "2026-09-18",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Distance annoncée variable selon les sources (22 à 27 km) / 850-860 m D+, départ du Volcan de Lemptégy. Lien de trace officielle (visugpx.com) ajouté, mais non consultable directement — statut maintenu en SECONDARY_SOURCE par prudence.",
+    "relatedRaces": [
+      "vulcain-2027-ultra",
+      "vulcain-2027-marathon",
+      "vulcain-2027-volvicnature"
+    ],
+    "sourceUrl": "https://www.trail-de-vulcain.fr/les-courses-et-inscriptions",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "27 km / 860 m D+ confirmés sur la page officielle des courses (trail-de-vulcain.fr).",
     "shortName": "Trail de Vulcain"
   },
   {
@@ -2676,8 +3044,8 @@
     "date": "2027-03-07",
     "location": "Volvic, Puy-de-Dôme",
     "description": "Volvic Nature 11-13 km de Trail de Vulcain, Volvic, Puy-de-Dôme. Chaîne des Puys.",
-    "distance": 13.0,
-    "elevationGain": 550,
+    "distance": 13.5,
+    "elevationGain": 570,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Chaîne des Puys",
@@ -2688,11 +3056,15 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["vulcain-2027-ultra", "vulcain-2027-marathon", "vulcain-2027-riom"],
-    "sourceUrl": "https://www.visugpx.com/xlP0NdIAHZ",
-    "verificationDate": "2026-09-18",
-    "status": "SECONDARY_SOURCE",
-    "notes": "Distance annoncée variable selon les sources (11 à 13 km) / 480-550 m D+, format le plus accessible de l'épreuve. Lien de trace officielle (visugpx.com) ajouté, mais non consultable directement — statut maintenu en SECONDARY_SOURCE par prudence.",
+    "relatedRaces": [
+      "vulcain-2027-ultra",
+      "vulcain-2027-marathon",
+      "vulcain-2027-riom"
+    ],
+    "sourceUrl": "https://www.trail-de-vulcain.fr/les-courses-et-inscriptions",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "13,5 km / 570 m D+ confirmés sur la page officielle des courses (trail-de-vulcain.fr).",
     "shortName": "Trail de Vulcain"
   },
   {
@@ -2721,9 +3093,9 @@
     "aidStations": [],
     "relatedRaces": [],
     "sourceUrl": "https://www.baztandarrak.fr/bk45/",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié directement sur le site officiel (baztandarrak.fr/bk45/) : « Trail en montagne sur une distance de 45 Km avec 2750 m de dénivelé positif. » Départ 7h00 le samedi 25 juillet 2026, place de Bidarray."
+    "notes": "45 km / 2750 m D+ confirmés sur la page officielle du format (baztandarrak.fr/bk45). Barrières horaires intermédiaires publiées (ex. 15h15 au km37) mais pas de durée totale unique explicite trouvée : barrière horaire globale non renseignée par prudence."
   },
   {
     "id": "loupblanc-2026-grandmechantloup",
@@ -2751,9 +3123,9 @@
     "aidStations": [],
     "relatedRaces": [],
     "sourceUrl": "https://trailduloupblanc.fr/courses/grand-mechant-loup/",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : vérifié directement sur le site officiel (trailduloupblanc.fr/courses/grand-mechant-loup/) : « Le Grand Méchant Loup s'affirme comme l'épreuve reine du Trail du Loup Blanc : 54 km éprouvants, 2000 m de D+ » — corrige les 48 km / 1600 m D+ précédemment retenus (qui correspondaient à une édition antérieure). Confirmé par plusieurs sources convergentes pour 2024-2026 (runtrail.run, kikourou.net, werun.world)."
+    "notes": "Distance et D+ confirmés sur la page officielle du format (trailduloupblanc.fr/courses/grand-mechant-loup) : 54 km / 2000 m D+ pour l'édition à venir. Départ Guéret (Creuse)."
   },
   {
     "id": "epopeeroyale-2026-126km",
@@ -2768,7 +3140,7 @@
     "location": "Château de Blois → Saint-Cyr-sur-Loire, Indre-et-Loire",
     "description": "126 km (épreuve reine) de Épopée Royale, Château de Blois → Saint-Cyr-sur-Loire, Indre-et-Loire. Val de Loire : chemins roulants, pistes forestières, voies vertes, halages — très faible dénivelé (« Gravel Running »).",
     "distance": 126.0,
-    "elevationGain": 850,
+    "elevationGain": 800,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Val de Loire : chemins roulants, pistes forestières, voies vertes, halages — très faible dénivelé (« Gravel Running »)",
@@ -2781,9 +3153,9 @@
     "aidStations": [],
     "relatedRaces": [],
     "sourceUrl": "https://www.epopeeroyale.fr/126-km-epopee-royale/#trace126km",
-    "verificationDate": "2026-09-18",
-    "status": "VERIFIED",
-    "notes": "126 km / 850 m D+ confirmés par le site officiel de l'organisateur (epopeeroyale.fr) et recoupés via plusieurs sources officielles-adjacentes (werun.world index officiel, agglopolys.fr, office de tourisme Blois Chambord). Départ Château Royal de Blois, arrivée Saint-Cyr-sur-Loire, édition du 21 novembre 2026. Événement de « Gravel Running » (faible dénivelé, mixte route/trail), pas un trail classique."
+    "verificationDate": "2026-09-16",
+    "status": "SECONDARY_SOURCE",
+    "notes": "ATTENTION : ce n'est pas un trail au sens classique mais un événement de « Gravel Running » (premier du genre en France), un compromis entre course sur route et trail, à très faible dénivelé (800 m D+ sur 126 km) — comme le Marathon du Vignoble d'Alsace, sa pertinence pour ce calculateur de trail est à évaluer. 126 km / 800 m D+ confirmés par plusieurs sources convergentes (followmysport, running.life, running-attitude.com) pour la 2e édition, vendredi-samedi 20-22 novembre 2026, départ Château Royal de Blois, arrivée Saint-Cyr-sur-Loire. Autres formats existants : 75 km/600 m D+, 55 km/450 m D+, 49 km/250-350 m D+, 33 km/180 m D+, 13 km/100-130 m D+ (non ajoutés)."
   },
   {
     "id": "beauxmonts-2026-42km",
@@ -2811,9 +3183,9 @@
     "aidStations": [],
     "relatedRaces": [],
     "sourceUrl": "https://followmysport.com/courses/trail-des-beaux-monts/",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "SECONDARY_SOURCE",
-    "notes": "42 km / 1450 m D+ confirmés par une source secondaire convergente (followmysport.com) — pas le site officiel de l'organisateur (agrégateur). Statut maintenu en SECONDARY_SOURCE."
+    "notes": "Édition du 13/09/2026 (confirmée sur la billetterie officielle tbm.adeorun.com) déjà passée à ce jour ; édition 2027 pas encore officiellement annoncée avec date précise (mentions non confirmées ailleurs). Données de l'édition 2026 [confirmée le 22/09/2026] reprises en attendant l'annonce officielle, car <1 an. Distance 42 km confirmée, D+ non trouvé sur les sources consultées."
   },
   {
     "id": "pyramidesnoires-2026-124km",
@@ -2824,7 +3196,7 @@
     "season": 2026,
     "edition": 2026,
     "formatName": "Ultra 123 km",
-    "date": "2026-05-08",
+    "date": "2026-05-15",
     "location": "Auchel → Oignies, Pas-de-Calais",
     "description": "Ultra 123 km de Trail des Pyramides Noires, Auchel → Oignies, Pas-de-Calais. Bassin minier Nord-Pas-de-Calais (UNESCO), ascension répétée de terrils (28 terrils).",
     "distance": 123.0,
@@ -2841,9 +3213,9 @@
     "aidStations": [],
     "relatedRaces": [],
     "sourceUrl": "https://traildespyramidesnoires.com/123-km/",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : le site officiel (traildespyramidesnoires.com) et de multiples sources convergentes (werun.world, ski-nordique.net citant les données officielles) confirment pour l'édition 2026 (10e édition, 8-9 mai) : 123 km / 1800 m D+, 23 terrils, départ Auchel. Corrige les 124 km / 1960 m D+ précédemment retenus (données d'une édition antérieure). Réalisable en relais à 5.",
+    "notes": "Distance et D+ confirmés sur la page officielle du format 123 km (traildespyramidesnoires.com/123-km) et recoupés avec werun.world : 123 km / 1800 m D+. Départ Auchel, arrivée Oignies (bassin minier Nord-Pas-de-Calais).",
     "shortName": "Pyramides Noires"
   },
   {
@@ -2858,7 +3230,7 @@
     "date": "2026-09-27",
     "location": "Romilly-sur-Andelle → Les Andelys, Eure",
     "description": "TRM 60 km de Trail des Rois Maudits, Romilly-sur-Andelle → Les Andelys, Eure. Falaises crayeuses de la vallée de la Seine, sentiers techniques.",
-    "distance": 60.0,
+    "distance": 60.4,
     "elevationGain": 2500,
     "elevationLoss": null,
     "maxElevation": null,
@@ -2870,11 +3242,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["roismaudits-2026-41km"],
+    "relatedRaces": [
+      "roismaudits-2026-41km"
+    ],
     "sourceUrl": "https://www.traildesroismaudits.com/",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "60 km / 2500 m D+ confirmés par recoupement avec l'UTMB Index (officiel, données GPX certifiées d'éditions passées : 60,10 km / 2520 m+ en 2024) et le site officiel (traildesroismaudits.com). Léger écart d'une année à l'autre selon le tracé exact (2500-2600 m D+ selon les éditions)."
+    "notes": "60,4 km / 2500 m D+ confirmés sur le site officiel (traildesroismaudits.com) pour l'édition du 27/09/2026. Barrière horaire non publiée sur le site."
   },
   {
     "id": "roismaudits-2026-41km",
@@ -2888,8 +3262,8 @@
     "date": "2026-09-27",
     "location": "Amfreville → Les Andelys, Eure",
     "description": "TRM 41 km de Trail des Rois Maudits, Amfreville → Les Andelys, Eure. Falaises crayeuses de la vallée de la Seine.",
-    "distance": 41.0,
-    "elevationGain": 1800,
+    "distance": 43.6,
+    "elevationGain": 1810,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Falaises crayeuses de la vallée de la Seine",
@@ -2900,11 +3274,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["roismaudits-2026-60km"],
+    "relatedRaces": [
+      "roismaudits-2026-60km"
+    ],
     "sourceUrl": "https://www.traildesroismaudits.com/",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "41 km / 1800 m D+ confirmés par recoupement avec l'UTMB Index (données GPX certifiées : 40,70-41,50 km / 1710-2130 m+ selon les éditions 2021-2024) et le site officiel (traildesroismaudits.com). Les valeurs varient sensiblement d'une édition à l'autre."
+    "notes": "Format renommé « TRM 44 km » par l'organisateur (anciennement 41 km) : 43,6 km / 1810 m D+ confirmés sur le site officiel pour l'édition du 27/09/2026. Barrière horaire non publiée."
   },
   {
     "id": "labarjo-2026-ultra80km",
@@ -2918,7 +3294,7 @@
     "date": "2026-06-21",
     "location": "Beaumont-Hague, Manche",
     "description": "Ultra-Trail 80 km de La Barjo, Beaumont-Hague, Manche. Littoral de la Hague, falaises et sentiers côtiers.",
-    "distance": 80.0,
+    "distance": 81,
     "elevationGain": 2200,
     "elevationLoss": null,
     "maxElevation": null,
@@ -2932,9 +3308,10 @@
     "aidStations": [],
     "relatedRaces": [],
     "sourceUrl": "https://labarjo.fr/parcours-courses/",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Distance de 80 km reconfirmée directement sur le site officiel (labarjo.fr/parcours-courses/) : départ Beaumont-Hague dimanche 5h30, temps maximal 13h50, épreuve en semi-autonomie. D+ (2200 m) toujours basé sur une source secondaire (werun.world), non affiché sur la page officielle consultée — mais l'essentiel (distance, date, lieu) étant vérifié directement, passage en VERIFIED."
+    "notes": "81 km confirmés sur le site officiel (labarjo.fr), départ Beaumont-Hague 5h30, édition du 21/06/2026. Barrière horaire officielle : 13h50 toutes pauses comprises (~13.83h). D+ non précisé sur la page.",
+    "cutoffHours": 13.83
   },
   {
     "id": "radicatrail-2026-36km",
@@ -2960,11 +3337,14 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["radicatrail-2026-62km"],
-    "sourceUrl": "https://radicatrail.fr/course/le-radicatrail-35km/",
-    "verificationDate": "2026-09-18",
+    "relatedRaces": [
+      "radicatrail-2026-62km"
+    ],
+    "sourceUrl": "https://radicatrail.fr/infos-pratiques/barrieres-horaires/",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "36 km / 1000 m D+ confirmés via la page officielle du format (radicatrail.fr/course/le-radicatrail-35km/) et les résultats officiels de classement (klikego.com, catégorie « 36 km », 711 arrivants en 2025)."
+    "notes": "Barrière horaire officielle confirmée (radicatrail.fr/infos-pratiques/barrieres-horaires) : 5h40 pour être classé (~5.67h), checkpoint intermédiaire à 3h00 au km19,5. Édition du 26/04/2026 confirmée.",
+    "cutoffHours": 5.67
   },
   {
     "id": "radicatrail-2026-62km",
@@ -2990,11 +3370,14 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["radicatrail-2026-36km"],
-    "sourceUrl": "https://radicatrail.fr/course/le-radicatrail-63-km/",
-    "verificationDate": "2026-09-18",
+    "relatedRaces": [
+      "radicatrail-2026-36km"
+    ],
+    "sourceUrl": "https://radicatrail.fr/infos-pratiques/barrieres-horaires/",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "62 km / 1750 m D+ confirmés via la page officielle du format (radicatrail.fr/course/le-radicatrail-63-km/) et les résultats officiels (klikego.com, catégorie « 63 km », 330 arrivants en 2025 — la distance mesurée varie légèrement selon les éditions, 62 ou 63 km)."
+    "notes": "Barrière horaire officielle confirmée (radicatrail.fr/infos-pratiques/barrieres-horaires) : 10h10 pour être classé (~10.17h), checkpoints intermédiaires à 4h45/km30 et 7h40/km47,5. Édition du 26/04/2026 confirmée.",
+    "cutoffHours": 10.17
   },
   {
     "id": "pierrequitourne-2026-utem",
@@ -3008,7 +3391,7 @@
     "date": null,
     "location": "Fief-Sauvin (Montrevault-sur-Èvre), Maine-et-Loire",
     "description": "UTEM (Ultra Trail Èvre et Mauges) 87 km de Trail de la Pierre qui Tourne, Fief-Sauvin (Montrevault-sur-Èvre), Maine-et-Loire. Vallée de l'Èvre, coteaux des Mauges, passages techniques (corde, escaliers).",
-    "distance": 87.0,
+    "distance": 93,
     "elevationGain": 2000,
     "elevationLoss": null,
     "maxElevation": null,
@@ -3021,10 +3404,10 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [],
-    "sourceUrl": "https://www.traildelapierrequitourne.fr",
-    "verificationDate": "2026-09-18",
+    "sourceUrl": "https://www.traildelapierrequitourne.fr/info-pratique/courses/lutem",
+    "verificationDate": "2026-09-22",
     "status": "SECONDARY_SOURCE",
-    "notes": "Distance/D+ (87 km / 2000 m D+) basés sur la convergence de sources tierces. Lien transmis (carte Google Maps intégrée) n'affiche pas de chiffres exploitables directement. Statut maintenu en SECONDARY_SOURCE.",
+    "notes": "Distance corrigée à 93 km (confirmée sur le site officiel : « Parcours UTEM 93km tracé », traildelapierrequitourne.fr/info-pratique/courses/lutem), remplace l'ancienne valeur de 87 km. D+ non reconfirmé pour ce tracé précis (valeur de 2000 m conservée mais non vérifiée à nouveau — à contrôler). Édition 2026 déjà disputée, prochaine édition 2027 pas encore de date officielle publiée trouvée. Barrière horaire finale du règlement : arrivée 20h00, mais heure de départ non retrouvée pour convertir en durée totale — non renseignée par prudence.",
     "shortName": "Pierre qui Tourne"
   },
   {
@@ -3051,11 +3434,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["nantesmontaigu-2026-digue"],
+    "relatedRaces": [
+      "nantesmontaigu-2026-digue"
+    ],
     "sourceUrl": "https://www.lesrunnersdeladigue.com/copie-de-trail-de-la-maine-1",
-    "verificationDate": "2026-09-18",
-    "status": "VERIFIED",
-    "notes": "Vérifié via une déclaration officielle de manifestation sportive (déclaration-manifestations.gouv.fr, ministère chargé des sports) et le site officiel (lesrunnersdeladigue.com) : 103 km / 1400 m D+, départ 4h00 du Château des Ducs de Bretagne, Nantes, arrivée Montaigu-Vendée.",
+    "verificationDate": "2026-09-22",
+    "status": "SECONDARY_SOURCE",
+    "notes": "Site officiel (lesrunnersdeladigue.com) consulté mais page dédiée à l'Ultra Castle Tour 103km non concluante sur cette visite ; distance/D+ existants (103 km / 1400 m) laissés inchangés faute de confirmation directe cette fois-ci.",
     "shortName": "Nantes à Montaigu"
   },
   {
@@ -3070,7 +3455,7 @@
     "date": "2026-09-26",
     "location": "Nantes → Montaigu-Vendée, Loire-Atlantique/Vendée",
     "description": "Trail de la Digue 53 km de Trail de Nantes à Montaigu, Nantes → Montaigu-Vendée, Loire-Atlantique/Vendée. Bords de Sèvre et Maine, vignoble nantais.",
-    "distance": 53.0,
+    "distance": 54,
     "elevationGain": 630,
     "elevationLoss": null,
     "maxElevation": null,
@@ -3082,11 +3467,13 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["nantesmontaigu-2026-ultra"],
+    "relatedRaces": [
+      "nantesmontaigu-2026-ultra"
+    ],
     "sourceUrl": "https://www.lesrunnersdeladigue.com/copie-de-ultra-castle-tour-1",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié via la même déclaration officielle de manifestation sportive et le site officiel (lesrunnersdeladigue.com) : 53 km / 630 m D+, départ 11h00 des Machines de l'Île, Nantes.",
+    "notes": "54 km / 630 m D+ confirmés sur le site officiel (lesrunnersdeladigue.com). Départ Nantes 11h00, barrières intermédiaires connues (15h15/km33, 16h50/km45) mais pas de barrière horaire totale explicite à l'arrivée : non renseignée par prudence.",
     "shortName": "Nantes à Montaigu"
   },
   {
@@ -3115,9 +3502,9 @@
     "aidStations": [],
     "relatedRaces": [],
     "sourceUrl": "https://raidvalleepoupet.fr/festitrail/#pratiques",
-    "verificationDate": "2026-09-18",
+    "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "CORRECTION : vérifié directement sur le site officiel (raidvalleepoupet.fr/festitrail/) : « Le Festi-Sèvre sera bien de retour en 2026. Avec environ 1000 m de dénivelé sur 45 kms ». Corrige les 42 km / 420 m D+ précédemment retenus, qui ne correspondaient pas au programme actuel de l'épreuve (le format s'appelle désormais Festi-Sèvre, pas « Festi-Trail 42 km »). Départ 7h30, Théâtre de Verdure de Poupet."
+    "notes": "Format renommé « Festi-Sèvre » par l'organisateur : 45 km / 1000 m D+ confirmés sur la page officielle (raidvalleepoupet.fr/festitrail), remplace l'ancien format 42km/420m D+ qui ne correspond plus au programme actuel."
   },
   {
     "id": "vignoblenantais-2027-utvn",
@@ -3143,7 +3530,9 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["vignoblenantais-2027-44km"],
+    "relatedRaces": [
+      "vignoblenantais-2027-44km"
+    ],
     "sourceUrl": "https://trailduvignoblenantais.com/75-km/",
     "verificationDate": "2026-09-18",
     "status": "VERIFIED",
@@ -3174,11 +3563,236 @@
     "gpxDistance": null,
     "gpxElevationGain": null,
     "aidStations": [],
-    "relatedRaces": ["vignoblenantais-2027-utvn"],
+    "relatedRaces": [
+      "vignoblenantais-2027-utvn"
+    ],
     "sourceUrl": "https://trailduvignoblenantais.com/super-trail-nantais-44-km/",
     "verificationDate": "2026-09-18",
     "status": "VERIFIED",
     "notes": "Vérifié directement sur le site officiel (trailduvignoblenantais.com/super-trail-nantais-44-km/) : 44 km / 550 m D+, départ 8h00 le dimanche. Corrige les 580 m D+ précédemment retenus (écart mineur). Seule course du TVN réalisable en relais.",
     "shortName": "Vignoble Nantais"
+  },
+  {
+    "id": "vvx-2027-pierredelave",
+    "name": "Volvic Volcanic Experience",
+    "slug": "vvx",
+    "organizer": "Volvic Volcanic Experience",
+    "officialSite": "https://www.volvic-vvx.com/",
+    "season": 2027,
+    "edition": 2027,
+    "formatName": "Expérience Pierre de Lave 17 km",
+    "date": "2027-05-06",
+    "location": "Volvic, Puy-de-Dôme",
+    "description": "Format de 17 km et 360 m D+ de la Volvic Volcanic Experience, à travers la Chaîne des Puys et les failles volcaniques du Parc Naturel Régional des Volcans d'Auvergne.",
+    "distance": 17,
+    "elevationGain": 360,
+    "elevationLoss": null,
+    "maxElevation": null,
+    "terrainType": "Chaîne des Puys, failles volcaniques, Parc Naturel Régional des Volcans d'Auvergne (moyenne montagne roulante à vallonnée)",
+    "technicalDifficulty": 2,
+    "difficulty": 2,
+    "gpxAvailable": false,
+    "gpxUrl": null,
+    "gpxDistance": null,
+    "gpxElevationGain": null,
+    "aidStations": [],
+    "relatedRaces": [
+      "vvx-2027-volcanique",
+      "vvx-2027-impluvium",
+      "vvx-2027-terravolcana",
+      "vvx-2027-chainedespuys",
+      "vvx-2026-xgtv"
+    ],
+    "sourceUrl": "https://www.volvic-vvx.com/evenements/experience-pierre-de-lave-trail-15km/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "17 km / 360 m D+ confirmés sur le site officiel (volvic-vvx.com), jeudi 06/05/2027, départ 13h30. Barrière horaire non publiée sur la page.",
+    "shortName": "VVX"
+  },
+  {
+    "id": "vvx-2027-volcanique",
+    "name": "Volvic Volcanic Experience",
+    "slug": "vvx",
+    "organizer": "Volvic Volcanic Experience",
+    "officialSite": "https://www.volvic-vvx.com/",
+    "season": 2027,
+    "edition": 2027,
+    "formatName": "Expérience Volcanique 26 km",
+    "date": "2027-05-07",
+    "location": "Volvic, Puy-de-Dôme",
+    "description": "Format de 26 km et 580 m D+ de la Volvic Volcanic Experience, à travers la Chaîne des Puys et les failles volcaniques du Parc Naturel Régional des Volcans d'Auvergne.",
+    "distance": 26,
+    "elevationGain": 580,
+    "elevationLoss": null,
+    "maxElevation": null,
+    "terrainType": "Chaîne des Puys, failles volcaniques, Parc Naturel Régional des Volcans d'Auvergne (moyenne montagne roulante à vallonnée)",
+    "technicalDifficulty": 2,
+    "difficulty": 2,
+    "gpxAvailable": false,
+    "gpxUrl": null,
+    "gpxDistance": null,
+    "gpxElevationGain": null,
+    "aidStations": [],
+    "relatedRaces": [
+      "vvx-2027-pierredelave",
+      "vvx-2027-impluvium",
+      "vvx-2027-terravolcana",
+      "vvx-2027-chainedespuys",
+      "vvx-2026-xgtv"
+    ],
+    "sourceUrl": "https://www.volvic-vvx.com/evenements/experience-volcanique-trail-24km/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "26 km / 580 m D+ confirmés sur le site officiel (volvic-vvx.com), vendredi 07/05/2027, départ 9h00. Barrière horaire non publiée sur la page.",
+    "shortName": "VVX"
+  },
+  {
+    "id": "vvx-2027-impluvium",
+    "name": "Volvic Volcanic Experience",
+    "slug": "vvx",
+    "organizer": "Volvic Volcanic Experience",
+    "officialSite": "https://www.volvic-vvx.com/",
+    "season": 2027,
+    "edition": 2027,
+    "formatName": "Expérience Impluvium de Volvic 46 km",
+    "date": "2027-05-07",
+    "location": "Volvic, Puy-de-Dôme",
+    "description": "Format de 46 km et 1300 m D+ de la Volvic Volcanic Experience, à travers la Chaîne des Puys et les failles volcaniques du Parc Naturel Régional des Volcans d'Auvergne.",
+    "distance": 46,
+    "elevationGain": 1300,
+    "elevationLoss": null,
+    "maxElevation": null,
+    "terrainType": "Chaîne des Puys, failles volcaniques, Parc Naturel Régional des Volcans d'Auvergne (moyenne montagne roulante à vallonnée)",
+    "technicalDifficulty": 3,
+    "difficulty": 3,
+    "gpxAvailable": false,
+    "gpxUrl": null,
+    "gpxDistance": null,
+    "gpxElevationGain": null,
+    "aidStations": [],
+    "relatedRaces": [
+      "vvx-2027-pierredelave",
+      "vvx-2027-volcanique",
+      "vvx-2027-terravolcana",
+      "vvx-2027-chainedespuys",
+      "vvx-2026-xgtv"
+    ],
+    "sourceUrl": "https://www.volvic-vvx.com/evenements/experience-impluvium-de-volvic-trail-43km/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "46 km / 1300 m D+ confirmés sur le site officiel (volvic-vvx.com), vendredi 07/05/2027, départ 8h00. Barrière horaire non publiée sur la page.",
+    "shortName": "VVX"
+  },
+  {
+    "id": "vvx-2027-terravolcana",
+    "name": "Volvic Volcanic Experience",
+    "slug": "vvx",
+    "organizer": "Volvic Volcanic Experience",
+    "officialSite": "https://www.volvic-vvx.com/",
+    "season": 2027,
+    "edition": 2027,
+    "formatName": "Expérience Terra Volcana 85 km",
+    "date": "2027-05-07",
+    "location": "Volvic, Puy-de-Dôme",
+    "description": "Format de 85 km et 2750 m D+ de la Volvic Volcanic Experience, à travers la Chaîne des Puys et les failles volcaniques du Parc Naturel Régional des Volcans d'Auvergne.",
+    "distance": 85,
+    "elevationGain": 2750,
+    "elevationLoss": null,
+    "maxElevation": null,
+    "terrainType": "Chaîne des Puys, failles volcaniques, Parc Naturel Régional des Volcans d'Auvergne (moyenne montagne roulante à vallonnée)",
+    "technicalDifficulty": 3,
+    "difficulty": 4,
+    "gpxAvailable": false,
+    "gpxUrl": null,
+    "gpxDistance": null,
+    "gpxElevationGain": null,
+    "aidStations": [],
+    "relatedRaces": [
+      "vvx-2027-pierredelave",
+      "vvx-2027-volcanique",
+      "vvx-2027-impluvium",
+      "vvx-2027-chainedespuys",
+      "vvx-2026-xgtv"
+    ],
+    "sourceUrl": "https://www.volvic-vvx.com/evenements/experience-terra-volcana-trail-80km/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "85 km / 2750 m D+ confirmés sur le site officiel (volvic-vvx.com), vendredi 7 mai (année non explicitement indiquée sur cette page mais cohérente avec les autres formats 2027), départ 6h00. Barrière horaire non publiée sur la page. Existe aussi en relais (non retenu, calculateur pour coureur individuel).",
+    "shortName": "VVX"
+  },
+  {
+    "id": "vvx-2027-chainedespuys",
+    "name": "Volvic Volcanic Experience",
+    "slug": "vvx",
+    "organizer": "Volvic Volcanic Experience",
+    "officialSite": "https://www.volvic-vvx.com/",
+    "season": 2027,
+    "edition": 2027,
+    "formatName": "Expérience Chaîne des Puys-Faille de Limagne 111 km",
+    "date": "2027-05-07",
+    "location": "Volvic, Puy-de-Dôme",
+    "description": "Format de 111 km et 2800 m D+ de la Volvic Volcanic Experience, à travers la Chaîne des Puys et les failles volcaniques du Parc Naturel Régional des Volcans d'Auvergne.",
+    "distance": 111,
+    "elevationGain": 2800,
+    "elevationLoss": null,
+    "maxElevation": null,
+    "terrainType": "Chaîne des Puys, failles volcaniques, Parc Naturel Régional des Volcans d'Auvergne (moyenne montagne roulante à vallonnée)",
+    "technicalDifficulty": 3,
+    "difficulty": 4,
+    "gpxAvailable": false,
+    "gpxUrl": null,
+    "gpxDistance": null,
+    "gpxElevationGain": null,
+    "aidStations": [],
+    "relatedRaces": [
+      "vvx-2027-pierredelave",
+      "vvx-2027-volcanique",
+      "vvx-2027-impluvium",
+      "vvx-2027-terravolcana",
+      "vvx-2026-xgtv"
+    ],
+    "sourceUrl": "https://www.volvic-vvx.com/evenements/experience-chaine-des-puys-faille-de-limagne-trail-111km/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "111 km / 2800 m D+ confirmés sur le site officiel (volvic-vvx.com), vendredi 07/05/2027, départ 4h00. Barrière horaire non publiée sur la page. Existe aussi en relais (non retenu, calculateur pour coureur individuel).",
+    "shortName": "VVX"
+  },
+  {
+    "id": "vvx-2026-xgtv",
+    "name": "Volvic Volcanic Experience",
+    "slug": "vvx",
+    "organizer": "Volvic Volcanic Experience",
+    "officialSite": "https://www.volvic-vvx.com/",
+    "season": 2026,
+    "edition": 2026,
+    "formatName": "L'Expérience Grande Traversée Volcanic (XGTV) 224 km",
+    "date": "2026-05-13",
+    "location": "Volvic, Puy-de-Dôme",
+    "description": "Format de 224 km et 8400 m D+ de la Volvic Volcanic Experience, à travers la Chaîne des Puys et les failles volcaniques du Parc Naturel Régional des Volcans d'Auvergne.",
+    "distance": 224,
+    "elevationGain": 8400,
+    "elevationLoss": null,
+    "maxElevation": null,
+    "terrainType": "Chaîne des Puys, failles volcaniques, Parc Naturel Régional des Volcans d'Auvergne (moyenne montagne roulante à vallonnée)",
+    "technicalDifficulty": 3,
+    "difficulty": 5,
+    "gpxAvailable": false,
+    "gpxUrl": null,
+    "gpxDistance": null,
+    "gpxElevationGain": null,
+    "aidStations": [],
+    "relatedRaces": [
+      "vvx-2027-pierredelave",
+      "vvx-2027-volcanique",
+      "vvx-2027-impluvium",
+      "vvx-2027-terravolcana",
+      "vvx-2027-chainedespuys"
+    ],
+    "sourceUrl": "https://www.volvic-vvx.com/evenements/lexperience-grande-traversee-volcanic-xgtv/",
+    "verificationDate": "2026-09-22",
+    "status": "VERIFIED",
+    "notes": "224 km / 8400 m D+ confirmés sur le site officiel (volvic-vvx.com). Édition 2026 (13/05/2026) déjà disputée ; page officielle pas encore mise à jour avec la date 2027 au moment de la vérification (programme complet 2027 annoncé « à M-1 de l'événement » sur volvic-vvx.com/programme-2027). Données 2026 [confirmées le 22/09/2026] reprises en attendant l'annonce, car <1 an. Barrière horaire officielle : 62h pour les formats solo et duo. Existe aussi en duo (non retenu, calculateur pour coureur individuel).",
+    "shortName": "VVX",
+    "cutoffHours": 62
   }
 ]

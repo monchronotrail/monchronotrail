@@ -105,6 +105,11 @@
   .tc-disclaimer{
     margin-top:14px;font-size:12px;color:#9FB5A5;line-height:1.5;
   }
+  .tc-cutoff-warning{
+    margin-top:14px;padding:12px 14px;background:rgba(224,122,95,.12);
+    border:1px solid rgba(224,122,95,.4);border-radius:6px;
+    font-size:13.5px;color:#F4D9D0;line-height:1.55;
+  }
   .tc-calib-toggle{
     margin-top:12px;font-size:13px;color:#CFE0D3;
   }
@@ -307,6 +312,7 @@
         <div class="tc-pace" id="tc-pace-display"></div>
       </div>
       <div class="tc-range" id="tc-range-display"></div>
+      <div class="tc-cutoff-warning" id="tc-cutoff-warning" style="display:none;"></div>
       <div class="tc-calib-toggle" id="tc-calib-toggle" style="display:none;">
         <label><input type="checkbox" id="tc-calib-checkbox" checked> <span id="tc-calib-label"></span></label>
       </div>
@@ -784,6 +790,15 @@
     const pct = rangePct(lastDtarget);
     const low = running*(1-pct/100), high = running*(1+pct/100);
     root.querySelector('#tc-range-display').textContent = 'Fourchette indicative : '+formatTime(low)+' – '+formatTime(high);
+
+    const cutoffEl = root.querySelector('#tc-cutoff-warning');
+    const cutoffHours = (typeof window!=='undefined' && window.MCT_RACE_CUTOFF_HOURS) ? window.MCT_RACE_CUTOFF_HOURS : null;
+    if(cutoffHours && running > cutoffHours*3600){
+      cutoffEl.style.display = 'block';
+      cutoffEl.innerHTML = '⏱️ Votre estimation ('+formatTime(running)+') dépasse la barrière horaire officielle de cette course ('+cutoffHours+'h). Ce format n\'est probablement pas encore accessible avec votre niveau actuel — mieux vaut viser un objectif plus court ou progresser avant de vous y engager.';
+    } else {
+      cutoffEl.style.display = 'none';
+    }
 
     const stepsEl = root.querySelector('#tc-steps');
     stepsEl.innerHTML = lastSteps.map(([label,sub,val])=>
