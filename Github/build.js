@@ -214,14 +214,10 @@ copyFile('mentions-legales.html', 'mentions-legales.html');
 copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
 copyFile('favicon.svg', 'favicon.svg');
 copyFile('og-image.png', 'og-image.png');
-// Le fichier _redirects (préparé pour rediriger l'ancien Netlify vers le
-// nouveau domaine) a été retiré : il cassait systématiquement le déploiement
-// Cloudflare (parseur plus strict que Netlify sur la syntaxe des redirections),
-// et la détection d'environnement censée l'exclure du build Cloudflare ne
-// fonctionne pas de façon fiable dans cet environnement. La redirection
-// Netlify → monchronotrail.fr sera configurée plus tard directement depuis
-// le tableau de bord Netlify (indépendant d'un fichier commité), une fois
-// Netlify de nouveau actif.
+// Le fichier _redirects a été retiré définitivement : il cassait le déploiement
+// Cloudflare (parseur plus strict que Netlify sur la syntaxe des redirections).
+// Netlify n'est plus utilisé (site supprimé le 25/09/2026) — Cloudflare
+// (monchronotrail.fr) est désormais le seul hébergement actif.
 
 // ---------------------------------------------------------------------
 // 4. Pages de courses — générées depuis races.json
@@ -673,8 +669,8 @@ const aboutBody = `
 write('a-propos/index.html', page(aboutHead, aboutBody));
 
 // ---------------------------------------------------------------------
-// 6quater. Page 404 personnalisée (Netlify la sert automatiquement si
-//          nommée 404.html à la racine du site publié).
+// 6quater. Page 404 personnalisée (servie automatiquement pour toute route
+//          inconnue si nommée 404.html à la racine du site publié).
 // ---------------------------------------------------------------------
 const notFoundHead = headTags({
   title: 'Page introuvable | Monchronotrail',
