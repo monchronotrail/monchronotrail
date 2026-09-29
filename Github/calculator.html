@@ -405,7 +405,8 @@
         Étape A — Distance-effort = D_trail + D+ / 100 (1 km-effort = 1 km à plat, ou 100 m de D+)<br>
         Étape B — T_base = T_réf × (Distance-effort_trail / Distance-effort_réf)^b, avec b variable selon la catégorie ITRA/FFA de la course : ≤115 km-effort → 1,06 · 115–210 km-effort (ultra-trail / FFA "XL") → 1,11 · &gt;210 km-effort (FFA "XXL", 100 miles et +) → 1,17<br>
         Étape C — coefficient technicité : 🟢 Roulant 1,00 · 🔴 Technique 1,10 · 🏔️ Haute montagne 1,18<br>
-        Temps final = T_base × Coef. technicité
+        Étape D (optionnelle) — facteur spécifique à certaines courses : climat, isolement ou technicité exceptionnels non captés par le km-effort seul (ex. Diagonale des Fous, ×1,25) — absent par défaut (×1,00)<br>
+        Temps final = T_base × Coef. technicité × Coef. spécifique (si applicable)
       </p>
     </details>
   </div>
@@ -444,38 +445,8 @@
   };
 
 
-  function parseTime(str){
-    if(!str) return null;
-    const parts = str.trim().split(':').map(s=>s.trim());
-    if(parts.some(p=>p==='' || isNaN(Number(p)))) return null;
-    let h=0,m=0,s=0;
-    if(parts.length===3){ [h,m,s]=parts.map(Number); }
-    else if(parts.length===2){ [h,m]=parts.map(Number); }
-    else if(parts.length===1){ h=Number(parts[0]); }
-    else return null;
-    return h*3600+m*60+s;
-  }
-  function formatTime(totalSeconds){
-    if(!isFinite(totalSeconds) || totalSeconds<=0) return '--:--:--';
-    const s = Math.round(totalSeconds);
-    const h = Math.floor(s/3600);
-    const m = Math.floor((s%3600)/60);
-    return h+'h'+String(m).padStart(2,'0');
-  }
-  function formatHM(totalSeconds){
-    const s = Math.round(totalSeconds);
-    const h = Math.floor(s/3600);
-    const m = Math.floor((s%3600)/60);
-    const sec = s%60;
-    return String(h)+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
-  }
-  function formatPace(secPerKm){
-    if(!isFinite(secPerKm) || secPerKm<=0) return '';
-    let m = Math.floor(secPerKm/60);
-    let s = Math.round(secPerKm%60);
-    if(s===60){ s=0; m+=1; }
-    return m+"'"+String(s).padStart(2,'0')+'/km';
-  }
+  // parseTime, formatTime, formatHM, formatPace : fournis globalement par
+  // engine.js, injecté juste avant ce script (voir build.js / CALCULATOR).
 
   // ---------- GPX parsing: distance (haversine) + smoothed elevation gain ----------
   function parseGPX(xmlText){
@@ -572,42 +543,10 @@
   }
 
   // ---------- Moteur de calcul : méthode du "kilomètre-effort" (ITRA) ----------
-  // 1 km-effort = 1 km à plat, ou 100 m de D+. C'est la référence utilisée par
-  // l'ITRA pour normaliser la difficulté d'un parcours. On applique Riegel sur
-  // cette distance-effort plutôt que sur la distance brute : la pénalité liée
-  // au dénivelé est donc directement intégrée à la projection d'endurance,
-  // au lieu d'être ajoutée par-dessus via des coefficients séparés (l'ancien
-  // système empilait 4 tables indépendantes, ce qui écrasait les estimations
-  // sur les parcours montagneux — voir le retour utilisateur sur le Trail du
-  // Sancy : 12h19 prédits pour un profil qui se classe en réalité vers le
-  // milieu de peloton, pas en queue de course).
-  // Reste un seul facteur indépendant : la technicité du terrain (l'aspect
-  // "pénible à courir" indépendant du volume de D+, déjà capté par le
-  // kilomètre-effort).
-  const TERRAIN = { roulant:1.00, technique:1.10, montagne:1.18 };
-  const TERRAIN_LABEL = { roulant:'🟢 Roulant', technique:'🔴 Technique', montagne:'🏔️ Haute montagne' };
-
-  function effortKm(D, Dplus){
-    return D + (Dplus||0)/100;
-  }
-
-  // L'exposant de Riegel (1,06) n'a été validé par son auteur que jusqu'au
-  // marathon (~3h50 d'effort) — au-delà, la perte de rythme n'est plus
-  // linéaire de la même façon. On fait donc varier l'exposant par palier,
-  // aligné sur les catégories OFFICIELLES ITRA/FFA basées sur le km-effort
-  // (pas un chiffre inventé) :
-  //   ≤ 115 km-effort  : format standard (seuil ITRA "ultra-trail")   → 1,06
-  //   115–210 km-effort : ultra-trail / catégorie FFA "XL"            → 1,11
-  //   > 210 km-effort   : catégorie FFA "XXL" (100 miles et plus)     → 1,17
-  function riegelExponent(effortTarget){
-    if(effortTarget <= 115) return 1.06;
-    if(effortTarget <= 210) return 1.11;
-    return 1.17;
-  }
-
-  function riegel(TrefSec, effortRef, effortTarget){
-    return TrefSec * Math.pow(effortTarget/effortRef, riegelExponent(effortTarget));
-  }
+  // TERRAIN, TERRAIN_LABEL, effortKm, riegelExponent, riegel : fournis
+  // globalement par engine.js (SOURCE UNIQUE du moteur), injecté juste avant
+  // ce script — voir engine.js pour le détail et les commentaires sur la
+  // méthode (km-effort, exposant de Riegel variable par palier ITRA/FFA).
 
   function getRefDistance(){
     const sel = root.querySelector('#tc-ref-dist').value;
@@ -676,13 +615,7 @@
   });
   root.querySelector('#tc-terrain-group input:checked').closest('label').classList.add('checked');
 
-  function predict(TrefSec, effortRef, Dtarget, Dplus, terrain, extra){
-    const effortTarget = effortKm(Dtarget, Dplus);
-    const Tbase = riegel(TrefSec, effortRef, effortTarget);
-    const Ct = TERRAIN[terrain] ?? 1.00;
-    const Cx = extra || 1.00;
-    return { total: Tbase*Ct*Cx, Tbase, Ct, Cx, effortTarget, density: Dtarget>0 ? Dplus/Dtarget : 0 };
-  }
+  // predict : fournie globalement par engine.js (voir ci-dessus).
 
   // ---------- uncertainty range ----------
   function baseUncertaintyPct(D){
@@ -1195,7 +1128,7 @@
       '</div>'
     ).join('');
 
-    const totalSeg = cum;
+    const totalSeg = segs.length ? segs[segs.length-1].cumDist : 0;
     const diffPct = Math.abs(totalSeg-lastResult.Dtarget)/lastResult.Dtarget*100;
     if(diffPct>5){
       resultEl.innerHTML += '<p class="tc-splits-warning">⚠️ Le total de vos segments ('+totalSeg.toFixed(1)+' km) diffère de la distance de la course ('+lastResult.Dtarget+' km) — les temps restent proportionnels entre eux, mais vérifiez vos distances pour un résultat plus fiable.</p>';
@@ -1210,9 +1143,8 @@
     }
   });
 
-  // Expose le moteur de calcul existant pour que les pages course générées
-  // (voir build.js) puissent l'appeler directement — jamais de second moteur.
-  window.MCT = { predict, riegel, effortKm, TERRAIN, TERRAIN_LABEL, formatTime, formatHM, formatPace, parseTime };
+  // window.MCT est déjà exposé par engine.js (injecté juste avant ce script) —
+  // pas besoin de le refaire ici.
 })();
 
 </script>

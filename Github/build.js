@@ -29,7 +29,15 @@ function esc(s){
   return String(s==null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-const CALCULATOR = read('calculator.html');
+// engine.js est la SOURCE UNIQUE du moteur de calcul : on l'importe ici en
+// Node pour pré-calculer statiquement le tableau "Quel temps selon votre
+// niveau ?" (voir profilesTableHtml plus bas), et on l'injecte aussi tel
+// quel comme <script> avant celui de calculator.html, pour que ses appels
+// (predict, riegel, TERRAIN, formatTime...) continuent de fonctionner côté
+// navigateur sans jamais dupliquer la logique.
+const engine = require('./engine.js');
+const ENGINE_JS = read('engine.js');
+const CALCULATOR = `<script>\n${ENGINE_JS}\n</script>\n` + read('calculator.html');
 
 function headTags({ title, description, canonical, ogImage }){
   return `<meta charset="UTF-8">
@@ -231,7 +239,7 @@ races.forEach(race => {
   const title = `${displayName} ${distRound}km ${race.edition} : temps | Monchronotrail`;
   const description = `${displayName} ${distRound}km / ${race.elevationGain}m D+ : estimez votre temps avec Monchronotrail, calculateur gratuit selon votre niveau et le profil du parcours.`;
 
-  const formatButtons = bySlug[race.slug].map(r => {
+  const formatButtons = bySlug[race.slug].filter(r => r.edition === race.edition).map(r => {
     const active = r.id === race.id;
     return `<a href="${raceUrlPath(r)}" class="tc-btn${active ? '' : ' secondary'}" style="text-decoration:none;display:inline-block;margin:0 8px 8px 0;">${esc(r.formatName || r.distance + ' km')}</a>`;
   }).join('');
@@ -278,39 +286,31 @@ races.forEach(race => {
 })();
 </script>`;
 
-  // "Profils types" : réutilise le moteur déjà chargé sur la page (window.MCT,
-  // exposé par le calculateur lui-même) — aucun second moteur de calcul.
-  const profilesScript = `
-<script>
-(function(){
-  function renderProfiles(){
-    var el = document.getElementById('tc-profiles-table');
-    if(!el) return;
-    if(!window.MCT){ el.innerHTML = '<p style="font-size:13px;color:#5C6B66;">Calculateur non disponible.</p>'; return; }
-    var profiles = [
+  // "Profils types" : pré-calculé ici en Node, avec le même moteur (engine.js)
+  // que celui embarqué côté client — jamais un second moteur de calcul, juste
+  // le même code exécuté au build plutôt qu'au chargement de la page. Ça rend
+  // ce tableau visible dans le HTML statique (donc pour les moteurs de
+  // recherche), alors qu'il ne l'était pas quand il dépendait du JS client.
+  function profilesTableHtml(race){
+    const profiles = [
       {label:"Marathon en 2h45", h:2, m:45},
       {label:"Marathon en 3h00", h:3, m:0},
       {label:"Marathon en 3h30", h:3, m:30},
       {label:"Marathon en 4h00", h:4, m:0},
       {label:"Marathon en 4h20", h:4, m:20}
     ];
-    var terrainMap = {1:'roulant',2:'roulant',3:'technique',4:'technique',5:'montagne'};
-    var terrain = terrainMap[${JSON.stringify(race.technicalDifficulty || 3)}] || 'technique';
-    var extra = ${JSON.stringify(race.extraDifficultyFactor || 1.00)};
-    var rows = profiles.map(function(p){
-      var refSec = p.h*3600 + p.m*60;
-      var r = window.MCT.predict(refSec, 42.195, ${JSON.stringify(race.distance)}, ${JSON.stringify(race.elevationGain)}, terrain, extra);
-      return '<div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #D8DED4;font-size:13.5px;">'+
-        '<span>'+p.label+'</span>'+
-        '<span style="color:#2F4A3C;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">'+window.MCT.formatTime(r.total)+'</span>'+
-      '</div>';
+    const terrainMap = {1:'roulant',2:'roulant',3:'technique',4:'technique',5:'montagne'};
+    const terrain = terrainMap[race.technicalDifficulty || 3] || 'technique';
+    const extra = race.extraDifficultyFactor || 1.00;
+    return profiles.map(p => {
+      const refSec = p.h*3600 + p.m*60;
+      const r = engine.predict(refSec, 42.195, race.distance, race.elevationGain, terrain, extra);
+      return `<div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #D8DED4;font-size:13.5px;">`+
+        `<span>${esc(p.label)}</span>`+
+        `<span style="color:#2F4A3C;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">${engine.formatTime(r.total)}</span>`+
+      `</div>`;
     }).join('');
-    el.innerHTML = rows;
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', renderProfiles);
-  else renderProfiles();
-})();
-</script>`;
 
   // Balisage Schema.org (SportsEvent) — aide Google à comprendre qu'il s'agit
   // d'un événement sportif. La date n'est incluse que si elle est confirmée
@@ -417,7 +417,7 @@ ${CALCULATOR}
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;">Quel temps selon votre niveau ?</h2>
   <p style="font-size:13px;color:#5C6B66;">Estimation calculée par le même moteur que le calculateur ci-dessus, pour un coureur de référence sur marathon (sans historique personnel, donc à ajuster selon votre profil).</p>
   <div id="tc-profiles-table">
-    <p style="font-size:13px;color:#5C6B66;font-style:italic;">Calcul en cours…</p>
+    ${profilesTableHtml(race)}
   </div>
 
   ${aidStationsHtml ? `<h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Temps de passage estimés</h2>
@@ -438,7 +438,6 @@ ${CALCULATOR}
   <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>
 ${prefillScript}
-${profilesScript}
 `;
 
   const head = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.fr/og-image.png' });
