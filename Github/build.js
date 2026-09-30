@@ -435,7 +435,7 @@ ${CALCULATOR}
 
   ${relatedHtml ? `<h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Vous préparez une autre course ?</h2><p style="font-size:14px;">${relatedHtml}</p>` : ''}
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>
 ${prefillScript}
 `;
@@ -481,7 +481,7 @@ Object.values(byEventEdition).forEach(list => {
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Choisissez votre format</h2>
   ${formatCards}
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 
   const head2 = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.fr/og-image.png' });
@@ -523,7 +523,7 @@ const calendarBody = `
   <div style="margin:16px 0;">${monthNav}</div>
   ${monthSections}
   ${undatedSection}
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 write('calendrier-trails-2026/index.html', page(calendarHead, calendarBody));
 
@@ -643,7 +643,7 @@ const methodoBody = `
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Les limites, honnêtement</h2>
   <p style="font-size:14px;">Le modèle reste une estimation mathématique. Il ne remplace pas l'expérience, un avis médical, ou une bonne préparation. Certaines données de courses affichées sur le site sont encore au statut "à vérifier" — c'est indiqué explicitement sur chaque page concernée plutôt que masqué.</p>
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 write('methodologie/index.html', page(methodoHead, methodoBody));
 
@@ -663,9 +663,96 @@ const aboutBody = `
   <p style="font-size:14px;">Monchronotrail est gratuit, sans publicité, et le restera pendant sa phase de test. Le modèle de calcul évolue au fil des retours réels de coureurs — s'il vous semble faux sur une course en particulier, c'est justement ce genre de retour qui permet de l'améliorer.</p>
   <p style="font-size:14px;">Pour comprendre comment le calcul fonctionne en détail, voir la <a href="/methodologie/" style="color:#2F4A3C;">page méthodologie</a>.</p>
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 write('a-propos/index.html', page(aboutHead, aboutBody));
+
+// ---------------------------------------------------------------------
+// 6quinquies. Article "linkable asset" : classement des barrières
+//   horaires les plus serrées parmi les courses suivies. Contenu éditorial
+//   ponctuel (pas généré depuis races.json comme les pages course), mais
+//   dont les chiffres proviennent tous de races.json / cutoffHours pour
+//   rester cohérents avec les pages course elles-mêmes. Périmètre volontai-
+//   rement honnête dans le texte : "parmi les courses suivies", jamais
+//   "les plus dures de France" (voir discussion stratégie backlinks).
+// ---------------------------------------------------------------------
+const cutoffRankingRows = [
+  { rank: 1, name: 'Diagonale des Fous', url: '/diagonale-des-fous/2026/la-diagonale-des-fous/', dist: '180 km', cutoff: '66 h', pace: '2,73 km/h' },
+  { rank: 2, name: 'Verbier St-Bernard (X-Traversée)', url: '/verbier/2027/x-traversee-77-km/', dist: '77 km', cutoff: '26 h', pace: '2,96 km/h' },
+  { rank: 3, name: 'UTMB — TDS', url: '/utmb/2026/tds-sur-les-traces-des-ducs-de-savoie/', dist: '145 km', cutoff: '44h10', pace: '3,28 km/h' },
+  { rank: 4, name: 'Restonica Trail (Tavignanu)', url: '/restonica/2026/tavignanu-trail-33-km/', dist: '33 km', cutoff: '9h30', pace: '3,47 km/h' },
+  { rank: 5, name: 'Grand Raid des Pyrénées', url: '/grand-raid-pyrenees/2026/ultra-tour-160-km/', dist: '174,2 km', cutoff: '50 h', pace: '3,48 km/h' },
+  { rank: 6, name: 'Marathon du Mont-Blanc (90 km)', url: '/marathon-du-mont-blanc/2026/90-km-du-mont-blanc/', dist: '90 km', cutoff: '25 h', pace: '3,60 km/h' },
+  { rank: 7, name: 'VVX (Volvic Volcanic Experience)', url: '/vvx/2026/l-experience-grande-traversee-volcanic-xgtv-224-km/', dist: '224 km', cutoff: '62 h', pace: '3,61 km/h' },
+  { rank: 8, name: "Nice Côte d'Azur by UTMB (100K)", url: '/nice-utmb/2026/100k-roubion-nice/', dist: '113 km', cutoff: '31 h', pace: '3,65 km/h' },
+  { rank: 9, name: 'MaXi-Race (tOur du Lac)', url: '/maxi-race/2026/tour-du-lac-100k/', dist: '100 km', cutoff: '24 h', pace: '4,17 km/h' },
+  { rank: 10, name: 'La Barjo', url: '/labarjo/2026/ultra-trail-80-km/', dist: '81 km', cutoff: '13h50', pace: '5,86 km/h' },
+];
+const cutoffRankingTableRows = cutoffRankingRows.map(r =>
+  `<tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">${r.rank}</td><td style="padding:7px 0;border-bottom:1px solid #D8DED4;"><a href="${r.url}" style="color:#2F4A3C;font-weight:600;">${esc(r.name)}</a></td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${r.dist}</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${r.cutoff}</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${r.pace}</td></tr>`
+).join('\n    ');
+
+const cutoffRankingHead = headTags({
+  title: 'Barrières horaires : le classement des 10 trails les plus exigeants | Monchronotrail',
+  description: "Classement par rythme minimum à tenir (distance / barrière horaire) des 10 courses les plus serrées parmi les trails suivis par Monchronotrail : Diagonale des Fous, Verbier, UTMB, Grand Raid des Pyrénées...",
+  canonical: 'https://monchronotrail.fr/classements/barrieres-horaires-les-plus-serrees/',
+  ogImage: 'https://monchronotrail.fr/og-image.png'
+});
+const cutoffRankingBody = `
+<div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;line-height:1.6;">
+  <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
+  <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:26px;line-height:1.3;">Barrières horaires : le classement des 10 trails les plus exigeants parmi les courses suivies par Monchronotrail</h1>
+
+  <p style="font-size:14.5px;">Sur le papier, une barrière horaire généreuse en heures peut donner une fausse impression de confort. Le vrai indicateur de difficulté, c'est le rythme minimum à tenir sur toute la course — distance divisée par temps limite. C'est ce ratio (en km/h) qui sert de base à ce classement.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">Méthode et périmètre</h2>
+  <p style="font-size:14px;">Ce classement porte sur les courses suivies par Monchronotrail dont la barrière horaire officielle est vérifiée auprès d'une source directe (site ou règlement de l'organisateur) — 26 formats à ce jour, un par événement (le format le plus serré est retenu quand une course en propose plusieurs). Il ne prétend pas être exhaustif sur l'ensemble du trail français ; il sera mis à jour à mesure que de nouvelles données officielles sont vérifiées.</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:14px;margin:18px 0;">
+    <thead>
+      <tr><th style="text-align:left;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">#</th><th style="text-align:left;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Course</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Distance</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Barrière</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Rythme à tenir</th></tr>
+    </thead>
+    <tbody>
+    ${cutoffRankingTableRows}
+    </tbody>
+  </table>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:24px;">1. Diagonale des Fous — un piège plus qu'un cadeau</h2>
+  <p style="font-size:14px;">Avec 66 heures allouées pour 180 km et 10 200 m de D+ à La Réunion, sa barrière paraît large — c'est d'ailleurs ce qu'on croit en la découvrant. En pratique, elle exige de ne quasiment jamais s'arrêter : à 2,73 km/h de moyenne minimum sur un terrain aussi technique, la marge réelle est bien plus fine qu'elle n'y paraît sur le papier.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">2. Verbier St-Bernard, X-Traversée 77 km — cinq cols, aucune marge</h2>
+  <p style="font-size:14px;">5 300 m de D+ entre La Fouly et Verbier, en passant notamment par le col du Grand-Saint-Bernard : sur ce parcours de haute montagne alpine, 26 heures suffisent tout juste à moins de 3 km/h de moyenne.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">3. UTMB — TDS, l'itinéraire le plus technique du massif</h2>
+  <p style="font-size:14px;">145 km et 9 500 m de D+ entre Courmayeur et Chamonix, sur un terrain classé "très technique" par l'organisation elle-même : 44h10 de barrière pour un format souvent considéré comme le plus exigeant de la semaine UTMB, devant l'UTMB lui-même.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">4. Restonica Trail (Tavignanu 33 km) — la Corse ne fait pas de cadeau</h2>
+  <p style="font-size:14px;">Un format court sur le papier, mais 2 400 m de D+ sur seulement 33 km, dont 1 400 m sur les 6,2 premiers kilomètres. C'est la densité de dénivelé, pas la distance, qui justifie sa 4ᵉ place.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">5. Grand Raid des Pyrénées — une entrée méritée</h2>
+  <p style="font-size:14px;">174 km et plus de 10 000 m de D+ en haute montagne pyrénéenne, à tenir en 50 heures — un profil d'exigence comparable à l'UTMB, mais sur un terrain moins médiatisé.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">6. Marathon du Mont-Blanc (90 km) — l'altitude comme obstacle</h2>
+  <p style="font-size:14px;">6 300 m de D+ dans la vallée de Chamonix pour 25 heures de barrière : un rythme qui laisse peu de place à la gestion de l'altitude et des passages techniques du massif.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">7. VVX — la traversée volcanique auvergnate</h2>
+  <p style="font-size:14px;">224 km et 8 400 m de D+ à travers la Chaîne des Puys, en 62 heures. Le format le plus long de ce classement, sur un terrain qui reste globalement roulant mais où la durée seule use les organismes.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">8. Nice Côte d'Azur by UTMB (100K) — de la montagne à la mer</h2>
+  <p style="font-size:14px;">113 km entre Roubion et Nice, avec un profil qui bascule de la moyenne/haute montagne au littoral méditerranéen, à tenir en 31 heures.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">9. MaXi-Race (tOur du Lac, 100 km) — le tour du lac d'Annecy en continu</h2>
+  <p style="font-size:14px;">5 400 m de D+ autour du lac, avec une barrière de 24 heures qui impose de garder plus de 4 km/h de moyenne malgré le relief alpin.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">10. La Barjo — le littoral de la Hague sous pression</h2>
+  <p style="font-size:14px;">2 200 m de D+ sur 81 km de falaises et sentiers côtiers dans la Manche, en 13h50 : la seule entrée du top 10 hors montagne, portée par un terrain technique en bord de mer plutôt que par l'altitude.</p>
+
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">Où vous situez-vous par rapport à ces barrières ?</h2>
+  <p style="font-size:14px;">Sur chaque page course listée ci-dessus, le calculateur Monchronotrail affiche une alerte quand votre estimation dépasse la barrière horaire officielle — un repère utile avant de vous engager sur l'un de ces formats.</p>
+
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+</div>`;
+write('classements/barrieres-horaires-les-plus-serrees/index.html', page(cutoffRankingHead, cutoffRankingBody));
 
 // ---------------------------------------------------------------------
 // 6quater. Page 404 personnalisée (servie automatiquement pour toute route
@@ -695,6 +782,7 @@ const urls = [
   'https://monchronotrail.fr/calendrier-trails-2026/',
   'https://monchronotrail.fr/methodologie/',
   'https://monchronotrail.fr/a-propos/',
+  'https://monchronotrail.fr/classements/barrieres-horaires-les-plus-serrees/',
   ...eventUrls,
   ...races.map(r => 'https://monchronotrail.fr' + raceUrlPath(r))
 ];
