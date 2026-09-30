@@ -905,6 +905,7 @@
     "terrainType": "Haute montagne pyrénéenne",
     "technicalDifficulty": 5,
     "difficulty": 5,
+    "cutoffHours": 50,
     "gpxAvailable": false,
     "gpxUrl": null,
     "gpxDistance": null,
@@ -918,7 +919,7 @@
     "sourceUrl": "https://www.grandraidpyrenees.com/coursesgrp/ultra-tour-solo/",
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
-    "notes": "Vérifié via le roadbook officiel (grandraidpyrenees.com) : le total du roadbook aboutit à 174,2 km / 10406 m D+, départ vendredi 21 août 2026 à 5h00, Vielle-Aure. L'organisateur continue de commercialiser ce format sous le nom « Ultra Tour 160 km » (description : « environ 174 km et 10400 m D+ ») ; nom de format conservé, distance/D+ mis à jour sur la base du roadbook chiffré, confirmant l'écart entre distance annoncée et distance réelle déjà signalé en note."
+    "notes": "Vérifié via le roadbook officiel (grandraidpyrenees.com) : le total du roadbook aboutit à 174,2 km / 10406 m D+, départ vendredi 21 août 2026 à 5h00, Vielle-Aure. L'organisateur continue de commercialiser ce format sous le nom « Ultra Tour 160 km » (description : « environ 174 km et 10400 m D+ ») ; nom de format conservé, distance/D+ mis à jour sur la base du roadbook chiffré, confirmant l'écart entre distance annoncée et distance réelle déjà signalé en note. Barrière horaire (50h) confirmée sur la page officielle du format (grandraidpyrenees.com/coursesgrp/ultra-tour-solo-160-km/) : « le temps limite est fixé pour que les derniers coureurs terminent en moins de 50 heures », départ vendredi 5h00."
   },
   {
     "id": "grp-2026-cirques",
