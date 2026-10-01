@@ -750,7 +750,7 @@ const cutoffRankingBody = `
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">Où vous situez-vous par rapport à ces barrières ?</h2>
   <p style="font-size:14px;">Sur chaque page course listée ci-dessus, le calculateur Monchronotrail affiche une alerte quand votre estimation dépasse la barrière horaire officielle — un repère utile avant de vous engager sur l'un de ces formats.</p>
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 write('classements/barrieres-horaires-les-plus-serrees/index.html', page(cutoffRankingHead, cutoffRankingBody));
 
