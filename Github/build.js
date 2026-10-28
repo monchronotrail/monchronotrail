@@ -676,79 +676,111 @@ write('a-propos/index.html', page(aboutHead, aboutBody));
 //   rement honnête dans le texte : "parmi les courses suivies", jamais
 //   "les plus dures de France" (voir discussion stratégie backlinks).
 // ---------------------------------------------------------------------
-const cutoffRankingRows = [
-  { rank: 1, name: 'Diagonale des Fous', url: '/diagonale-des-fous/2026/la-diagonale-des-fous/', dist: '180 km', cutoff: '66 h', pace: '2,73 km/h' },
-  { rank: 2, name: 'Verbier St-Bernard (X-Traversée)', url: '/verbier/2027/x-traversee-77-km/', dist: '77 km', cutoff: '26 h', pace: '2,96 km/h' },
-  { rank: 3, name: 'UTMB — TDS', url: '/utmb/2026/tds-sur-les-traces-des-ducs-de-savoie/', dist: '145 km', cutoff: '44h10', pace: '3,28 km/h' },
-  { rank: 4, name: 'Restonica Trail (Tavignanu)', url: '/restonica/2026/tavignanu-trail-33-km/', dist: '33 km', cutoff: '9h30', pace: '3,47 km/h' },
-  { rank: 5, name: 'Grand Raid des Pyrénées', url: '/grand-raid-pyrenees/2026/ultra-tour-160-km/', dist: '174,2 km', cutoff: '50 h', pace: '3,48 km/h' },
-  { rank: 6, name: 'Marathon du Mont-Blanc (90 km)', url: '/marathon-du-mont-blanc/2026/90-km-du-mont-blanc/', dist: '90 km', cutoff: '25 h', pace: '3,60 km/h' },
-  { rank: 7, name: 'VVX (Volvic Volcanic Experience)', url: '/vvx/2026/l-experience-grande-traversee-volcanic-xgtv-224-km/', dist: '224 km', cutoff: '62 h', pace: '3,61 km/h' },
-  { rank: 8, name: "Nice Côte d'Azur by UTMB (100K)", url: '/nice-utmb/2026/100k-roubion-nice/', dist: '113 km', cutoff: '31 h', pace: '3,65 km/h' },
-  { rank: 9, name: 'MaXi-Race (tOur du Lac)', url: '/maxi-race/2026/tour-du-lac-100k/', dist: '100 km', cutoff: '24 h', pace: '4,17 km/h' },
-  { rank: 10, name: 'La Barjo', url: '/labarjo/2026/ultra-trail-80-km/', dist: '81 km', cutoff: '13h50', pace: '5,86 km/h' },
-];
-const cutoffRankingTableRows = cutoffRankingRows.map(r =>
-  `<tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">${r.rank}</td><td style="padding:7px 0;border-bottom:1px solid #D8DED4;"><a href="${r.url}" style="color:#2F4A3C;font-weight:600;">${esc(r.name)}</a></td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${r.dist}</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${r.cutoff}</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${r.pace}</td></tr>`
-).join('\n    ');
+// Classement généré depuis races.json : pour chaque événement ayant au moins un
+// format à barrière horaire vérifiée (cutoffHours), on retient le format le plus
+// serré (rythme distance / barrière le plus ÉLEVÉ), puis on trie les événements
+// du plus serré (rythme le plus élevé) au moins serré. Rythme élevé = barrière serrée.
+const cutoffByEvent = {};
+races.filter(r => r.cutoffHours != null && r.status === 'VERIFIED').forEach(r => {
+  (cutoffByEvent[r.slug] = cutoffByEvent[r.slug] || []).push(r);
+});
+const CUTOFF_EVENT_NAMES = {
+  'radicatrail': 'Le Radicatrail',
+  'labarjo': 'La Barjo',
+  'maxi-race': 'MaXi-Race',
+  'restonica': 'Restonica Trail',
+  'nice-utmb': "Nice Côte d'Azur by UTMB",
+  'marathon-du-mont-blanc': 'Marathon du Mont-Blanc',
+  'utmb': 'UTMB',
+  'verbier': 'Verbier St-Bernard',
+  'vvx': 'VVX (Volvic Volcanic Experience)',
+  'grand-raid-pyrenees': 'Grand Raid des Pyrénées',
+  'diagonale-des-fous': 'Diagonale des Fous'
+};
+function fmtHM(h){
+  let hh = Math.floor(h + 1e-9), mm = Math.round((h - hh) * 60);
+  if (mm === 60){ hh += 1; mm = 0; }
+  return mm === 0 ? `${hh} h` : `${hh}h${String(mm).padStart(2, '0')}`;
+}
+function fmtNum(n, d){ return n.toFixed(d).replace('.', ','); }
+function fmtThousands(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f'); }
+function fmtMinKm(h, km){
+  const t = h * 60 / km; let m = Math.floor(t), s = Math.round((t - m) * 60);
+  if (s === 60){ m += 1; s = 0; }
+  return `${m} min ${String(s).padStart(2, '0')} s/km`;
+}
+const cutoffRankingRows = Object.keys(cutoffByEvent).map(slug => {
+  const best = cutoffByEvent[slug].slice().sort((a, b) => (b.distance / b.cutoffHours) - (a.distance / a.cutoffHours))[0];
+  return { slug, race: best, speed: best.distance / best.cutoffHours };
+}).sort((a, b) => b.speed - a.speed).map((e, i) => ({ rank: i + 1, ...e }));
+
+const cutoffRankingTableRows = cutoffRankingRows.map(e => {
+  const r = e.race;
+  const td = 'padding:7px 0;border-bottom:1px solid #D8DED4;';
+  const fmtLabel = r.formatName || (r.distance + ' km');
+  return `<tr><td style="${td}color:#5C6B66;">${e.rank}</td><td style="${td}"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;">${esc(CUTOFF_EVENT_NAMES[e.slug] || r.name)}</a><br><small style="color:#5C6B66;font-size:11.5px;">${esc(fmtLabel)}</small></td><td style="${td}text-align:right;">${fmtNum(r.distance, r.distance % 1 ? 1 : 0)} km<br><small style="color:#5C6B66;font-size:11.5px;">${fmtThousands(r.elevationGain)} m D+</small></td><td style="${td}text-align:right;">${fmtHM(r.cutoffHours)}</td><td style="${td}text-align:right;font-weight:600;">${fmtNum(e.speed, 2)} km/h<br><small style="color:#5C6B66;font-size:11.5px;font-weight:normal;">${fmtMinKm(r.cutoffHours, r.distance)}</small></td></tr>`;
+}).join('\n    ');
+
+// Commentaires éditoriaux par événement (chiffres : races.json).
+const cutoffTexts = {
+  'radicatrail': "36 km pour 1 000 m de D+ en 5h40 : sur des bords de Seine, des sous-bois et des falaises normandes, la barrière n'est pas imposée par la montagne mais par le rythme. Il faut courir une grande partie du parcours, et c'est ce qui la place en tête. Son format de 62 km (10h10) est à peine moins serré.",
+  'labarjo': "2 200 m de D+ sur 81 km de falaises et sentiers côtiers dans la Manche, en 13h50 : environ 10 min 15 par kilomètre à tenir de bout en bout, sur un terrain technique en bord de mer. C'est la barrière la plus serrée parmi les ultras de ce classement.",
+  'maxi-race': "Le Demi-tOur du Lac, 55 km et 3 350 m de D+ en 11 h, est le format le plus serré de MaXi-Race. Même le tOur du Lac complet (100 km, 24 h, 5 400 m de D+) reste à plus de 4 km/h : le relief alpin ne laisse pas beaucoup de temps pour marcher.",
+  'restonica': "Le plus court format de ce classement, le Giru di Tumbone (17 km, 650 m de D+, 3h30), demande environ 12 min 20 par kilomètre sur des sentiers corses rocailleux. Le Tavignanu Trail de 33 km et 2 400 m de D+ (9h30) est plus indulgent sur le papier, à 3,47 km/h, mais c'est un trail de montagne exigeant.",
+  'nice-utmb': "Le 20K (23 km, 680 m de D+) se court en 5 h maximum, soit un peu plus de 13 min par kilomètre sur des sentiers côtiers. Le format 100K Roubion–Nice (113 km, 31 h) est à 3,65 km/h.",
+  'marathon-du-mont-blanc': "Le 42 km du Mont-Blanc, 2 540 m de D+ en 10 h : environ 14 min par kilomètre en haute montagne alpine. Le 90 km (6 300 m de D+, 25 h) descend à 3,60 km/h.",
+  'utmb': "L'OCC (60 km, 3 500 m de D+, 14h30) est le format UTMB suivi ici dont la barrière est la plus serrée. Le TDS (145 km, 9 500 m de D+, 44h10) tombe à 3,28 km/h : la barrière paraît plus large, mais la course est bien plus longue.",
+  'verbier': "Le X-Plore (28 km, 1 700 m de D+, 7 h) est le plus serré des formats de Verbier. Plus la distance augmente, plus la barrière se détend en rythme : la X-Traversée de 77 km (5 300 m de D+, 26 h) est à 2,96 km/h.",
+  'vvx': "224 km et 8 400 m de D+ à travers la Chaîne des Puys en 62 h : le format le plus long de ce classement, sur un terrain de moyenne montagne vallonnée. Le rythme à tenir est modéré, mais c'est la durée de l'effort qui use.",
+  'grand-raid-pyrenees': "174 km et plus de 10 000 m de D+ en haute montagne pyrénéenne, à boucler en 50 h. Le rythme moyen à tenir (3,48 km/h) paraît modeste : c'est le dénivelé et le terrain qui font la course."
+};
+const cutoffSectionsHtml = cutoffRankingRows.filter(e => e.slug !== 'diagonale-des-fous').map(e => {
+  const name = CUTOFF_EVENT_NAMES[e.slug] || e.race.name;
+  return `<h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">${e.rank}. ${esc(name)} — ${fmtNum(e.speed, 2)} km/h</h2>\n  <p style="font-size:14px;">${cutoffTexts[e.slug] || ''}</p>`;
+}).join('\n\n  ');
+
+const dfRow = cutoffRankingRows.find(e => e.slug === 'diagonale-des-fous');
+const dfKmEffort = dfRow.race.distance + dfRow.race.elevationGain / 100;
+const bjRow = cutoffRankingRows.find(e => e.slug === 'labarjo');
+const bjKmEffort = bjRow.race.distance + bjRow.race.elevationGain / 100;
 
 const cutoffRankingHead = headTags({
-  title: 'Barrières horaires : le classement des 10 trails les plus exigeants | Monchronotrail',
-  description: "Classement par rythme minimum à tenir (distance / barrière horaire) des 10 courses les plus serrées parmi les trails suivis par Monchronotrail : Diagonale des Fous, Verbier, UTMB, Grand Raid des Pyrénées...",
+  title: 'Barrières horaires : les courses de trail les plus serrées | Monchronotrail',
+  description: "Classement des barrières horaires les plus serrées (rythme minimum = distance / barrière) parmi les trails suivis par Monchronotrail, et pourquoi la Diagonale des Fous, dernière du classement, reste l'une des courses les plus dures.",
   canonical: 'https://monchronotrail.fr/classements/barrieres-horaires-les-plus-serrees/',
   ogImage: 'https://monchronotrail.fr/og-image.png'
 });
 const cutoffRankingBody = `
 <div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;line-height:1.6;">
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
-  <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:26px;line-height:1.3;">Barrières horaires : le classement des 10 trails les plus exigeants parmi les courses suivies par Monchronotrail</h1>
+  <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:26px;line-height:1.3;">Barrières horaires : les courses de trail les plus serrées parmi celles suivies par Monchronotrail</h1>
 
-  <p style="font-size:14.5px;">Sur le papier, une barrière horaire généreuse en heures peut donner une fausse impression de confort. Le vrai indicateur de difficulté, c'est le rythme minimum à tenir sur toute la course — distance divisée par temps limite. C'est ce ratio (en km/h) qui sert de base à ce classement.</p>
+  <p style="font-size:14.5px;">Une barrière horaire se lit mal en heures : 66 h semblent beaucoup, 5h40 semblent peu, mais ce n'est pas la même distance. Pour comparer, on divise la distance par le temps limite et on obtient le <strong>rythme minimum à tenir</strong>, en km/h et en min/km. Plus ce rythme est élevé, plus la barrière est serrée. Cet indicateur mesure la marge de temps, pas la difficulté du parcours : on y revient plus bas avec la Diagonale des Fous.</p>
 
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">Méthode et périmètre</h2>
-  <p style="font-size:14px;">Ce classement porte sur les courses suivies par Monchronotrail dont la barrière horaire officielle est vérifiée auprès d'une source directe (site ou règlement de l'organisateur) — 26 formats à ce jour, un par événement (le format le plus serré est retenu quand une course en propose plusieurs). Il ne prétend pas être exhaustif sur l'ensemble du trail français ; il sera mis à jour à mesure que de nouvelles données officielles sont vérifiées.</p>
+  <p style="font-size:14px;">Ce classement porte sur les courses suivies par Monchronotrail dont la barrière horaire officielle est vérifiée auprès d'une source directe (site ou règlement de l'organisateur) : ${Object.keys(cutoffByEvent).length} événements. Quand un événement propose plusieurs formats, on retient celui dont le rythme à tenir est le plus élevé. Le classement va de la barrière la plus serrée (rythme le plus élevé) à la plus large. Il ne prétend pas être exhaustif sur l'ensemble du trail français et sera mis à jour à mesure que de nouvelles données officielles seront vérifiées.</p>
 
   <table style="width:100%;border-collapse:collapse;font-size:14px;margin:18px 0;">
     <thead>
-      <tr><th style="text-align:left;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">#</th><th style="text-align:left;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Course</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Distance</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Barrière</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Rythme à tenir</th></tr>
+      <tr><th style="text-align:left;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">#</th><th style="text-align:left;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Course (format le plus serré)</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Distance</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Barrière</th><th style="text-align:right;color:#5C6B66;font-weight:normal;font-size:12px;padding:6px 0;border-bottom:1px solid #D8DED4;">Rythme minimum</th></tr>
     </thead>
     <tbody>
     ${cutoffRankingTableRows}
     </tbody>
   </table>
 
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:24px;">1. Diagonale des Fous — un piège plus qu'un cadeau</h2>
-  <p style="font-size:14px;">Avec 66 heures allouées pour 180 km et 10 200 m de D+ à La Réunion, sa barrière paraît large — c'est d'ailleurs ce qu'on croit en la découvrant. En pratique, elle exige de ne quasiment jamais s'arrêter : à 2,73 km/h de moyenne minimum sur un terrain aussi technique, la marge réelle est bien plus fine qu'elle n'y paraît sur le papier.</p>
+  ${cutoffSectionsHtml}
 
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">2. Verbier St-Bernard, X-Traversée 77 km — cinq cols, aucune marge</h2>
-  <p style="font-size:14px;">5 300 m de D+ entre La Fouly et Verbier, en passant notamment par le col du Grand-Saint-Bernard : sur ce parcours de haute montagne alpine, 26 heures suffisent tout juste à moins de 3 km/h de moyenne.</p>
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:26px;">${dfRow.rank}. Diagonale des Fous — dernière du classement, mais pas la plus facile</h2>
+  <p style="font-size:14px;">Avec ${fmtHM(dfRow.race.cutoffHours)} pour ${dfRow.race.distance} km, la Diagonale demande seulement ${fmtNum(dfRow.speed, 2)} km/h, soit ${fmtMinKm(dfRow.race.cutoffHours, dfRow.race.distance)}. Sur le papier, c'est la barrière la plus généreuse de ce classement. Et pourtant, elle compte parmi les ultras les plus durs du monde : un rythme moyen faible ne dit rien du terrain sur lequel il faut le tenir.</p>
+  <p style="font-size:14px;">Le parcours cumule ${fmtThousands(dfRow.race.elevationGain)} m de D+ sur un terrain volcanique tropical, extrêmement technique (racines, roches, marches, ravines), où les descentes ne se rattrapent pas en courant. Le départ est donné à 22 h : on attaque la course de nuit, et les derniers passent jusqu'à trois nuits dehors. Les 22 min/km sont une moyenne théorique : elle englobe des kilomètres rapides et d'autres très lents, que les arrêts et la fatigue ralentissent encore.</p>
+  <p style="font-size:14px;">Si on ramène la distance en kilomètres-effort (1 km + 100 m de D+), la Diagonale représente ${fmtNum(dfKmEffort, 0)} km-effort à parcourir en ${dfRow.race.cutoffHours} h, soit ${fmtNum(dfKmEffort / dfRow.race.cutoffHours, 2)} km-effort/h, contre ${fmtNum(bjKmEffort / bjRow.race.cutoffHours, 2)} pour La Barjo. Cette lecture rapproche les courses courtes et les ultras, mais elle ne mesure toujours ni la technicité, ni la durée, ni les nuits. Le modèle de Monchronotrail applique d'ailleurs à la Diagonale un coefficient de difficulté supplémentaire de ${fmtNum(dfRow.race.extraDifficultyFactor || 1, 2)} pour cette raison.</p>
+  <p style="font-size:14px;">À retenir : une barrière large n'est pas une course facile. La marge de temps et la difficulté sont deux choses distinctes, et la Diagonale est l'exemple le plus extrême de cet écart.</p>
 
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">3. UTMB — TDS, l'itinéraire le plus technique du massif</h2>
-  <p style="font-size:14px;">145 km et 9 500 m de D+ entre Courmayeur et Chamonix, sur un terrain classé "très technique" par l'organisation elle-même : 44h10 de barrière pour un format souvent considéré comme le plus exigeant de la semaine UTMB, devant l'UTMB lui-même.</p>
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:24px;">Où vous situez-vous par rapport à ces barrières ?</h2>
+  <p style="font-size:14px;">Sur chaque page course listée ci-dessus, le calculateur Monchronotrail affiche une alerte quand votre estimation dépasse la barrière horaire officielle, un repère utile avant de vous engager sur l'un de ces formats.</p>
 
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">4. Restonica Trail (Tavignanu 33 km) — la Corse ne fait pas de cadeau</h2>
-  <p style="font-size:14px;">Un format court sur le papier, mais 2 400 m de D+ sur seulement 33 km, dont 1 400 m sur les 6,2 premiers kilomètres. C'est la densité de dénivelé, pas la distance, qui justifie sa 4ᵉ place.</p>
-
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">5. Grand Raid des Pyrénées — une entrée méritée</h2>
-  <p style="font-size:14px;">174 km et plus de 10 000 m de D+ en haute montagne pyrénéenne, à tenir en 50 heures — un profil d'exigence comparable à l'UTMB, mais sur un terrain moins médiatisé.</p>
-
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">6. Marathon du Mont-Blanc (90 km) — l'altitude comme obstacle</h2>
-  <p style="font-size:14px;">6 300 m de D+ dans la vallée de Chamonix pour 25 heures de barrière : un rythme qui laisse peu de place à la gestion de l'altitude et des passages techniques du massif.</p>
-
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">7. VVX — la traversée volcanique auvergnate</h2>
-  <p style="font-size:14px;">224 km et 8 400 m de D+ à travers la Chaîne des Puys, en 62 heures. Le format le plus long de ce classement, sur un terrain qui reste globalement roulant mais où la durée seule use les organismes.</p>
-
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">8. Nice Côte d'Azur by UTMB (100K) — de la montagne à la mer</h2>
-  <p style="font-size:14px;">113 km entre Roubion et Nice, avec un profil qui bascule de la moyenne/haute montagne au littoral méditerranéen, à tenir en 31 heures.</p>
-
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">9. MaXi-Race (tOur du Lac, 100 km) — le tour du lac d'Annecy en continu</h2>
-  <p style="font-size:14px;">5 400 m de D+ autour du lac, avec une barrière de 24 heures qui impose de garder plus de 4 km/h de moyenne malgré le relief alpin.</p>
-
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">10. La Barjo — le littoral de la Hague sous pression</h2>
-  <p style="font-size:14px;">2 200 m de D+ sur 81 km de falaises et sentiers côtiers dans la Manche, en 13h50 : la seule entrée du top 10 hors montagne, portée par un terrain technique en bord de mer plutôt que par l'altitude.</p>
-
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:18px;margin-top:22px;">Où vous situez-vous par rapport à ces barrières ?</h2>
-  <p style="font-size:14px;">Sur chaque page course listée ci-dessus, le calculateur Monchronotrail affiche une alerte quand votre estimation dépasse la barrière horaire officielle — un repère utile avant de vous engager sur l'un de ces formats.</p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:24px;">Mise à jour du 27 octobre 2026 : la première version de ce classement était triée dans le mauvais sens (de la barrière la plus large à la plus serrée) et ne retenait pas le format le plus serré de chaque événement. Merci aux lecteurs qui nous l'ont signalé.</p>
 
   <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
