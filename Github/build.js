@@ -130,12 +130,95 @@ races.forEach(r => {
 const monthsPresent = Object.keys(byMonth).map(Number).sort((a,b)=>a-b);
 
 // ---------------------------------------------------------------------
+// 1bis. Éditions passées, brouillons d'édition, enrichissement des fiches.
+//   - isPastEdition : calculé à la date du build (relancer le build
+//     régulièrement pour que les bandeaux restent à jour).
+//   - race.draft === true : édition préparée à partir de la précédente,
+//     non confirmée (voir scripts/draft-2027.js).
+//   - race.previousResults (optionnel) : { year, winnerTime, lastFinisherTime,
+//     finishers, starters, source } → bloc "Résultats de l'édition passée".
+// ---------------------------------------------------------------------
+const BUILD_ISO = new Date().toISOString().slice(0, 10);
+function isPastEdition(r){ return /^\d{4}-\d{2}-\d{2}$/.test(r.date || '') && r.date < BUILD_ISO; }
+function fmtDateFr(iso){
+  const m = (iso || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  return m ? `${parseInt(m[3], 10)} ${MONTHS[parseInt(m[2], 10) - 1]} ${m[1]}` : (iso || 'date à confirmer');
+}
+function nextEditionOf(r){
+  const later = (bySlug[r.slug] || []).filter(x => x.edition > r.edition);
+  if(!later.length) return null;
+  const minEd = Math.min(...later.map(x => x.edition));
+  const same = later.filter(x => x.edition === minEd);
+  const match = same.find(x => (x.formatName || '') === (r.formatName || '')) ||
+                same.find(x => Math.abs(x.distance - r.distance) <= r.distance * 0.1);
+  return { edition: minEd, url: match ? raceUrlPath(match) : eventUrlPath(r.slug, minEd) };
+}
+const BANNER_STYLE = 'background:#FFF4E0;border:1px solid #F0C179;border-radius:8px;padding:10px 14px;margin:12px 0;font-size:13.5px;line-height:1.5;color:#16211C;';
+function editionBannerHtml(r){
+  const msgs = [];
+  if(isPastEdition(r)){
+    const nx = nextEditionOf(r);
+    msgs.push(`Cette édition ${r.edition} a eu lieu le ${esc(fmtDateFr(r.date))}. ` + (nx
+      ? `<a href="${nx.url}" style="color:#2F4A3C;font-weight:600;">Voir l'édition ${nx.edition} →</a>`
+      : `L'édition ${r.edition + 1} sera ajoutée dès que l'organisateur aura confirmé le parcours et la date.`));
+  }
+  if(r.draft){
+    msgs.push(`Édition ${r.edition} non confirmée : date et parcours sont repris de l'édition précédente et seront mis à jour dès l'annonce officielle de l'organisateur.`);
+  }
+  return msgs.length ? `<div style="${BANNER_STYLE}">${msgs.join('<br>')}</div>` : '';
+}
+function otherEditionsHtml(r){
+  const eds = [...new Set((bySlug[r.slug] || []).map(x => x.edition))].filter(e => e !== r.edition).sort();
+  if(!eds.length) return '';
+  return `<p style="font-size:13.5px;margin-top:18px;">Autres éditions : ${eds.map(e => `<a href="${eventUrlPath(r.slug, e)}" style="color:#2F4A3C;">${e}</a>`).join(' · ')}</p>`;
+}
+function cutoffMarginHtml(race, totalSec){
+  if(!race.cutoffHours) return '';
+  const margin = race.cutoffHours * 3600 - totalSec;
+  return margin >= 0
+    ? ` <small style="color:#5C6B66;font-weight:normal;">(marge ${fmtHM(margin / 3600)})</small>`
+    : ` <small style="color:#B3261E;font-weight:normal;">(hors barrière)</small>`;
+}
+function raceInsightHtml(race){
+  const h2 = 'font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;';
+  const terrainMap = {1:'roulant',2:'roulant',3:'technique',4:'technique',5:'montagne'};
+  const terrain = terrainMap[race.technicalDifficulty || 3] || 'technique';
+  const extra = race.extraDifficultyFactor || 1.00;
+  const ke = race.distance + (race.elevationGain || 0) / 100;
+  const t35 = engine.predict(12600, 42.195, race.distance, race.elevationGain, terrain, extra).total;
+  const t4  = engine.predict(14400, 42.195, race.distance, race.elevationGain, terrain, extra).total;
+  const parts = [];
+  parts.push(`Pour un coureur qui boucle un marathon sur route en 3h30, Monchronotrail estime environ ${fmtHM(t35 / 3600)} sur ce format, soit à peu près ${fmtNum(t35 / 12600, 1)} fois la durée de son marathon (${ke.toFixed(0)} km-effort).`);
+  if(race.cutoffHours){
+    parts.push(`La barrière horaire de ${fmtHM(race.cutoffHours)} impose de tenir en moyenne ${fmtNum(race.distance / race.cutoffHours, 2)} km/h, soit ${fmtMinKm(race.cutoffHours, race.distance)}, arrêts compris.`);
+    const margin = race.cutoffHours * 3600 - t4;
+    parts.push(margin >= 0
+      ? `Avec un marathon en 4h00, l'estimation (environ ${fmtHM(t4 / 3600)}) laisse une marge théorique d'environ ${fmtHM(margin / 3600)} sur cette barrière.`
+      : `Avec un marathon en 4h00, l'estimation (environ ${fmtHM(t4 / 3600)}) dépasse la barrière horaire : ce format demande un niveau de référence supérieur.`);
+  }
+  let html = `<h2 style="${h2}">Ce que ce format demande vraiment</h2>\n  <p style="font-size:14px;line-height:1.6;">${parts.join(' ')}</p>`;
+  const pr = race.previousResults;
+  if(pr && (pr.winnerTime || pr.lastFinisherTime || pr.finishers)){
+    const items = [];
+    if(pr.winnerTime) items.push(`Temps du vainqueur : <strong>${esc(pr.winnerTime)}</strong>`);
+    if(pr.lastFinisherTime) items.push(`Dernier finisher : <strong>${esc(pr.lastFinisherTime)}</strong>`);
+    if(pr.finishers && pr.starters) items.push(`Finishers : <strong>${pr.finishers}</strong> sur ${pr.starters} partants (${Math.round(pr.finishers / pr.starters * 100)} %)`);
+    else if(pr.finishers) items.push(`Finishers : <strong>${pr.finishers}</strong>`);
+    html += `\n  <h2 style="${h2}">Résultats de l'édition ${esc(pr.year || '')} (officiels)</h2>\n  <ul style="font-size:14px;line-height:1.7;padding-left:20px;">${items.map(i => `<li>${i}</li>`).join('')}</ul>` +
+      (pr.source ? `\n  <p style="font-size:12px;color:#5C6B66;"><a href="${esc(pr.source)}" style="color:#2F4A3C;">Source des résultats</a></p>` : '');
+  }
+  return html;
+}
+
+// ---------------------------------------------------------------------
 // 2. Page d'accueil — le calculateur identique à avant, plus un calendrier
 //    par mois généré automatiquement depuis races.json (remplace l'ancienne
 //    liste plate "Courses disponibles", qui ne passait pas bien à l'échelle).
 // ---------------------------------------------------------------------
-const homeMonthsHtml = monthsPresent.map(m =>
-  `<a href="/calendrier-trails-2026/#${MONTH_SLUGS[m]}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 14px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${MONTHS[m].charAt(0).toUpperCase()+MONTHS[m].slice(1)} <span style="opacity:.7;">(${byMonth[m].length})</span></a>`
+const HOME_CAL_YEARS = [...new Set(races.map(r => r.edition))].sort((a, b) => b - a);
+const HOME_CAL_YEAR = HOME_CAL_YEARS[0];
+const homeMonthsHtml = HOME_CAL_YEARS.map(y =>
+  `<a href="/calendrier-trails-${y}/" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 14px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">Calendrier ${y} <span style="opacity:.7;">(${races.filter(r => r.edition === y).length})</span></a>`
 ).join('');
 
 // Sélection resserrée de courses "phares" mises en avant à gauche du bandeau
@@ -144,7 +227,7 @@ const FEATURED_SLUGS = ['utmb', 'diagonale-des-fous', 'marathon-du-mont-blanc', 
 const homeFeaturedHtml = FEATURED_SLUGS
   .filter(slug => bySlug[slug])
   .map(slug => {
-    const first = bySlug[slug][0];
+    const first = bySlug[slug].slice().sort((a, b) => b.edition - a.edition)[0];
     return `<a href="${eventUrlPath(first.slug, first.edition)}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 14px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${esc(first.name)} →</a>`;
   }).join('');
 
@@ -159,7 +242,7 @@ const heroCoursesBar = `
       <div style="flex:1;min-width:220px;">
         <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9FB5A5;margin-bottom:10px;">Calendrier</div>
         <div>${homeMonthsHtml || '<span style="color:#9FB5A5;font-size:13.5px;">Aucune course ajoutée pour le moment.</span>'}</div>
-        <div style="margin-top:4px;"><a href="/calendrier-trails-2026/" style="color:#F0C179;font-size:13px;text-decoration:none;">Voir le calendrier complet →</a></div>
+        <div style="margin-top:4px;"><a href="/calendrier-trails-${HOME_CAL_YEAR}/" style="color:#F0C179;font-size:13px;text-decoration:none;">Voir le calendrier complet →</a></div>
       </div>
     </div>
   </div>
@@ -213,7 +296,10 @@ const homeFaqSection = `
   ${homeFaqHtml}
 </div>`;
 
-write('index.html', page(homeHead, homeCalculator + homeFaqSection));
+// 2bis. Pages par distance + guides + bloc d'accueil (seo-pages.js)
+const seo = require('./seo-pages.js')({ races, engine, write, page, headTags, esc, raceUrlPath, eventUrlPath, fmtNum, isPastEdition, buildIso: BUILD_ISO });
+
+write('index.html', page(homeHead, homeCalculator + seo.homeSectionHtml + homeFaqSection));
 
 // ---------------------------------------------------------------------
 // 3. Pages statiques copiées telles quelles
@@ -307,7 +393,7 @@ races.forEach(race => {
       const r = engine.predict(refSec, 42.195, race.distance, race.elevationGain, terrain, extra);
       return `<div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #D8DED4;font-size:13.5px;">`+
         `<span>${esc(p.label)}</span>`+
-        `<span style="color:#2F4A3C;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">${engine.formatTime(r.total)}</span>`+
+        `<span style="color:#2F4A3C;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">${engine.formatTime(r.total)}${cutoffMarginHtml(race, r.total)}</span>`+
       `</div>`;
     }).join('');
   }
@@ -392,6 +478,7 @@ ${breadcrumbScript}
 <div style="max-width:720px;margin:0 auto 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;">
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a> · <a href="${eventUrlPath(race.slug, race.edition)}" style="color:#2F4A3C;">${esc(race.name)} ${race.edition} — tous les formats</a></p>
   <h1 style="font-family:Georgia,'Iowan Old Style',serif;font-weight:normal;font-size:26px;line-height:1.3;">${esc(race.name)} ${esc(formatLabel)} ${race.edition} : estimez votre temps de course</h1>
+  ${editionBannerHtml(race)}
   <p style="font-size:14.5px;line-height:1.6;">${esc(race.description || '')} Utilisez le calculateur ci-dessous pour obtenir une estimation personnalisée de votre temps de course.</p>
 
   <div>${formatButtons}</div>
@@ -424,6 +511,8 @@ ${CALCULATOR}
   <p style="font-size:13px;color:#5C6B66;">Utilisez le bouton "➕ Calculer mes temps de passage" ci-dessus avec les ravitaillements officiels de ${esc(race.name)} :</p>
   <div>${aidStationsHtml}</div>` : ''}
 
+  ${raceInsightHtml(race)}
+
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Comment Monchronotrail estime votre temps ?</h2>
   <p style="font-size:14px;line-height:1.6;">L'estimation tient compte de votre niveau (via un chrono de référence route ou trail), de la distance, du dénivelé positif, du profil du parcours et de sa technicité. Ce n'est pas une prédiction exacte, mais une aide pour préparer votre course et fixer un objectif réaliste.</p>
 
@@ -435,7 +524,7 @@ ${CALCULATOR}
 
   ${relatedHtml ? `<h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Vous préparez une autre course ?</h2><p style="font-size:14px;">${relatedHtml}</p>` : ''}
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/temps-trail/" style="color:#5C6B66;">Temps par distance</a> · <a href="/guides/" style="color:#5C6B66;">Guides</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>
 ${prefillScript}
 `;
@@ -475,13 +564,15 @@ Object.values(byEventEdition).forEach(list => {
 <div style="max-width:720px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;">
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
   <h1 style="font-family:Georgia,'Iowan Old Style',serif;font-weight:normal;font-size:28px;">${esc(first.name)} ${first.edition}</h1>
+  ${editionBannerHtml(first)}
   <p style="font-size:14.5px;line-height:1.6;">${esc(first.description || '')}</p>
   <p style="font-size:13.5px;color:#5C6B66;">${esc(first.location || '')}</p>
 
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Choisissez votre format</h2>
   ${formatCards}
+  ${otherEditionsHtml(first)}
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/temps-trail/" style="color:#5C6B66;">Temps par distance</a> · <a href="/guides/" style="color:#5C6B66;">Guides</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 
   const head2 = headTags({ title, description, canonical: url, ogImage: 'https://monchronotrail.fr/og-image.png' });
@@ -490,42 +581,53 @@ Object.values(byEventEdition).forEach(list => {
 // ---------------------------------------------------------------------
 // 6. Page calendrier (liste tous les formats)
 // ---------------------------------------------------------------------
+function raceRow(r){
+  return `<li style="margin-bottom:8px;"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;text-decoration:none;">${esc(r.name)} ${esc(r.formatName || r.distance+' km')}</a> — ${esc(r.date || 'date à confirmer')}${isPastEdition(r) ? ' (terminée)' : ''}${r.location ? ', '+esc(r.location) : ''}</li>`;
+}
+
+function buildCalendar(year){
+  const bmY = {}, undatedY = [];
+  races.filter(r => r.edition === year).forEach(r => {
+    const m = monthIndexOf(r.date);
+    if(m === null){ undatedY.push(r); return; }
+    (bmY[m] = bmY[m] || []).push(r);
+  });
+  const mpY = Object.keys(bmY).map(Number).sort((a, b) => a - b);
 const calendarHead = headTags({
-  title: 'Calendrier des trails 2026 | Monchronotrail',
-  description: 'Les principales courses de trail disponibles sur Monchronotrail, classées par mois, avec calculateur de temps intégré pour chacune.',
-  canonical: 'https://monchronotrail.fr/calendrier-trails-2026/',
+  title: `Calendrier des trails ${year} | Monchronotrail`,
+  description: `Les courses de trail ${year} disponibles sur Monchronotrail, classées par mois, avec calculateur de temps intégré pour chacune.`,
+  canonical: `https://monchronotrail.fr/calendrier-trails-${year}/`,
   ogImage: 'https://monchronotrail.fr/og-image.png'
 });
 
-function raceRow(r){
-  return `<li style="margin-bottom:8px;"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;text-decoration:none;">${esc(r.name)} ${esc(r.formatName || r.distance+' km')}</a> — ${esc(r.date || 'date à confirmer')}${r.location ? ', '+esc(r.location) : ''}</li>`;
-}
 
-const monthNav = monthsPresent.map(m =>
+const monthNav = mpY.map(m =>
   `<a href="#${MONTH_SLUGS[m]}" style="color:#2F4A3C;font-size:13px;text-decoration:none;border:1px solid #D8DED4;border-radius:20px;padding:5px 12px;margin:0 6px 6px 0;display:inline-block;">${MONTHS[m].charAt(0).toUpperCase()+MONTHS[m].slice(1)}</a>`
 ).join('');
 
-const monthSections = monthsPresent.map(m => `
+const monthSections = mpY.map(m => `
   <h2 id="${MONTH_SLUGS[m]}" style="font-family:Georgia,serif;font-weight:normal;font-size:20px;margin-top:30px;border-top:1px solid #D8DED4;padding-top:20px;">${MONTHS[m].charAt(0).toUpperCase()+MONTHS[m].slice(1)}</h2>
-  <ul style="font-size:14.5px;line-height:1.6;padding-left:20px;">${byMonth[m].map(raceRow).join('\n')}</ul>
+  <ul style="font-size:14.5px;line-height:1.6;padding-left:20px;">${bmY[m].map(raceRow).join('\n')}</ul>
 `).join('');
 
-const undatedSection = undatedRaces.length ? `
+const undatedSection = undatedY.length ? `
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:20px;margin-top:30px;border-top:1px solid #D8DED4;padding-top:20px;">Dates à confirmer</h2>
-  <ul style="font-size:14.5px;line-height:1.6;padding-left:20px;">${undatedRaces.map(raceRow).join('\n')}</ul>
+  <ul style="font-size:14.5px;line-height:1.6;padding-left:20px;">${undatedY.map(raceRow).join('\n')}</ul>
 ` : '';
 
 const calendarBody = `
 <div style="max-width:720px;margin:0 auto;font-family:-apple-system,sans-serif;color:#16211C;">
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
-  <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:26px;">Calendrier des trails 2026</h1>
+  <h1 style="font-family:Georgia,serif;font-weight:normal;font-size:26px;">Calendrier des trails ${year}</h1>
   <p style="font-size:14px;">Les courses disponibles sur Monchronotrail, classées par mois, avec calculateur de temps personnalisé pour chacune.</p>
   <div style="margin:16px 0;">${monthNav}</div>
   ${monthSections}
   ${undatedSection}
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/temps-trail/" style="color:#5C6B66;">Temps par distance</a> · <a href="/guides/" style="color:#5C6B66;">Guides</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
-write('calendrier-trails-2026/index.html', page(calendarHead, calendarBody));
+write(`calendrier-trails-${year}/index.html`, page(calendarHead, calendarBody));
+}
+[...new Set(races.map(r => r.edition))].sort().forEach(buildCalendar);
 
 // ---------------------------------------------------------------------
 // 6bis. Page "Courses" — recherche par nom / distance / D+, entièrement
@@ -643,7 +745,7 @@ const methodoBody = `
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:24px;">Les limites, honnêtement</h2>
   <p style="font-size:14px;">Le modèle reste une estimation mathématique. Il ne remplace pas l'expérience, un avis médical, ou une bonne préparation. Certaines données de courses affichées sur le site sont encore au statut "à vérifier" — c'est indiqué explicitement sur chaque page concernée plutôt que masqué.</p>
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/temps-trail/" style="color:#5C6B66;">Temps par distance</a> · <a href="/guides/" style="color:#5C6B66;">Guides</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 write('methodologie/index.html', page(methodoHead, methodoBody));
 
@@ -663,7 +765,7 @@ const aboutBody = `
   <p style="font-size:14px;">Monchronotrail est gratuit, sans publicité, et le restera pendant sa phase de test. Le modèle de calcul évolue au fil des retours réels de coureurs — s'il vous semble faux sur une course en particulier, c'est justement ce genre de retour qui permet de l'améliorer.</p>
   <p style="font-size:14px;">Pour comprendre comment le calcul fonctionne en détail, voir la <a href="/methodologie/" style="color:#2F4A3C;">page méthodologie</a>.</p>
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/classements/barrieres-horaires-les-plus-serrees/" style="color:#5C6B66;">Barrières horaires : le classement</a> · <a href="/temps-trail/" style="color:#5C6B66;">Temps par distance</a> · <a href="/guides/" style="color:#5C6B66;">Guides</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 write('a-propos/index.html', page(aboutHead, aboutBody));
 
@@ -782,7 +884,7 @@ const cutoffRankingBody = `
 
   <p style="font-size:12.5px;color:#5C6B66;margin-top:24px;">Mise à jour du 27 octobre 2026 : la première version de ce classement était triée dans le mauvais sens (de la barrière la plus large à la plus serrée) et ne retenait pas le format le plus serré de chaque événement. Merci aux lecteurs qui nous l'ont signalé.</p>
 
-  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
+  <p style="font-size:12.5px;color:#5C6B66;margin-top:28px;border-top:1px solid #D8DED4;padding-top:14px;"><a href="/methodologie/" style="color:#5C6B66;">Méthodologie</a> · <a href="/a-propos/" style="color:#5C6B66;">À propos</a> · <a href="/temps-trail/" style="color:#5C6B66;">Temps par distance</a> · <a href="/guides/" style="color:#5C6B66;">Guides</a> · <a href="/mentions-legales.html" style="color:#5C6B66;">Mentions légales</a> · <a href="/politique-confidentialite.html" style="color:#5C6B66;">Politique de confidentialité</a></p>
 </div>`;
 write('classements/barrieres-horaires-les-plus-serrees/index.html', page(cutoffRankingHead, cutoffRankingBody));
 
@@ -811,7 +913,8 @@ const eventUrls = Object.values(byEventEdition).map(list => 'https://monchronotr
 const urls = [
   'https://monchronotrail.fr/',
   'https://monchronotrail.fr/courses/',
-  'https://monchronotrail.fr/calendrier-trails-2026/',
+  ...[...new Set(races.map(r => r.edition))].sort().map(y => 'https://monchronotrail.fr/calendrier-trails-' + y + '/'),
+  ...seo.urls,
   'https://monchronotrail.fr/methodologie/',
   'https://monchronotrail.fr/a-propos/',
   'https://monchronotrail.fr/classements/barrieres-horaires-les-plus-serrees/',
