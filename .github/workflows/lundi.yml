@@ -1,0 +1,60 @@
+name: Revue du lundi
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'   # lundi 05:00 UTC = 06:00 ou 07:00 à Paris
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lundi:
+    runs-on: ubuntu-latest
+    env:
+      # Dossier qui contient build.js : "." si c'est la racine du dépôt,
+      # sinon le nom du sous-dossier (ex. "Github").
+      SITE_DIR: .
+    defaults:
+      run:
+        working-directory: ${{ env.SITE_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build de contrôle
+        run: node build.js 2>&1 | tee build.log
+
+      - name: Rapport
+        run: |
+          node scripts/weekly-report.js > report.md
+          echo "" >> report.md
+          node scripts/check-redirects.js >> report.md || true
+          if grep -q "⚠️" build.log; then
+            { echo ""; echo "### Avertissements du build"; grep "⚠️" build.log | sed 's/^/- /'; } >> report.md
+          fi
+          cat report.md
+
+      - name: Ouvrir le ticket si une action est à faire
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if grep -q "^- \[ \]" report.md || grep -q "Avertissements du build" report.md; then
+            gh issue create --title "Revue du lundi — $(date +%F)" --body-file report.md
+          else
+            echo "Rien à signaler : pas de ticket."
+          fi
+
+      - name: Déclencher le rebuild de l'hébergeur (optionnel)
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
+        run: |
+          if [ -n "$DEPLOY_HOOK_URL" ]; then
+            curl -fsS -X POST "$DEPLOY_HOOK_URL"
+          else
+            echo "Secret DEPLOY_HOOK_URL absent : pas de rebuild déclenché."
+          fi
