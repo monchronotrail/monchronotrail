@@ -33,7 +33,9 @@ jobs:
           node-version: 20
 
       - name: Build de contrôle
-        run: node build.js 2>&1 | tee build.log
+        run: |
+          set -o pipefail
+          node build.js 2>&1 | tee build.log
 
       - name: Rapport
         run: |
