@@ -283,7 +283,7 @@ ${breadcrumb([['Monchronotrail', '/'], ['Temps par distance', '/temps-trail/']])
       intro: "Connaître son chrono final ne suffit pas : on veut savoir quand on arrivera à chaque ravitaillement, pour s'organiser et surveiller les barrières horaires. Voici une méthode simple et ses limites.",
       faq: [
         { q: 'Comment répartir son temps entre les ravitaillements ?', a: "En proportion du kilomètre-effort de chaque tronçon (distance + D+/100), puis en ajoutant un temps d'arrêt à chaque ravitaillement." },
-        { q: 'Faut-il compter la fatigue dans les temps de passage ?', a: "Oui, au moins qualitativement : on ralentit davantage en fin de course, donc les derniers tronçons demandent plus de temps que leur km-effort ne le laisse penser. Gardez une marge, surtout vers l'arrivée." }
+        { q: 'Faut-il compter la fatigue dans les temps de passage ?', a: "Oui : on ralentit davantage en fin de course. Le calculateur Monchronotrail applique une fatigue croissante sur les tronçons successifs." }
       ],
       sections: () => `
   <h2 style="${H2}">Principe : découper en tronçons de km-effort</h2>
@@ -293,7 +293,7 @@ ${breadcrumb([['Monchronotrail', '/'], ['Temps par distance', '/temps-trail/']])
   ${table(['Point', 'Tronçon', 'Km-effort', 'Passage (cumulé)'], segRows)}
   <p style="font-size:12.5px;color:#5C6B66;">Exemple pédagogique : les ravitaillements et le profil sont inventés pour illustrer la méthode. Pour une vraie course, utilisez les distances et D+ officiels de l'organisateur.</p>
   <h2 style="${H2}">Ce que ce découpage simple oublie</h2>
-  <p style="${P}">Deux choses : les <strong>arrêts</strong> aux ravitaillements (quelques minutes chacun selon votre habitude, à ajouter) et la <strong>fatigue croissante</strong> : les derniers tronçons sont en pratique plus lents que leur km-effort ne le prévoit. Le bouton « Calculer mes temps de passage » du <a href="/" style="${LINK}">calculateur</a> donne une estimation à chaque ravitaillement ; gardez malgré tout une marge sur les derniers tronçons.</p>
+  <p style="${P}">Deux choses : les <strong>arrêts</strong> aux ravitaillements (quelques minutes chacun selon votre habitude, à ajouter) et la <strong>fatigue croissante</strong> : les derniers tronçons sont en pratique plus lents que leur km-effort ne le prévoit. Le bouton « Calculer mes temps de passage » du <a href="/" style="${LINK}">calculateur</a> tient compte de la fatigue croissante au fil de la course, pas seulement de la distance.</p>
   <h2 style="${H2}">Pourquoi c'est utile</h2>
   <p style="${P}">Les temps de passage permettent de comparer votre progression à votre plan, de prévenir vos proches et surtout de vérifier votre marge sur les <a href="/classements/barrieres-horaires-les-plus-serrees/" style="${LINK}">barrières horaires</a>, qui sont souvent le vrai juge de paix sur un ultra.</p>`
     },
@@ -362,17 +362,13 @@ ${breadcrumb([['Monchronotrail', '/'], ['Guides', '/guides/']])}
   }), guidesHubBody));
 
   // ---------- 3. Bloc d'accueil (maillage interne + WebApplication) ----------
-  const pill = 'display:inline-block;border:1px solid #D8DED4;border-radius:20px;padding:5px 12px;margin:0 6px 8px 0;font-size:13px;text-decoration:none;color:#2F4A3C;';
   const homeSectionHtml = `
 ${ld({ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Monchronotrail',
   url: SITE + '/', applicationCategory: 'SportsApplication', operatingSystem: 'Any', inLanguage: 'fr',
   description: "Calculateur gratuit de temps de course pour trail et ultra-trail, selon le niveau, le dénivelé et le terrain.",
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' } })}
-<div class="tc-section" style="max-width:720px;margin:0 auto;">
-  <h2>Estimer son temps selon la distance</h2>
-  <p class="tc-sub">Un tableau par distance, du 20 km à l'ultra de 160 km :</p>
-  <div>${DISTANCES.map(d => `<a href="${distUrl(d.km)}" style="${pill}">${d.km} km</a>`).join('')}</div>
-  <h2 style="margin-top:20px;">Guides</h2>
+<div class="tc-section">
+  <h2>Guides pour estimer son temps</h2>
   <ul class="tc-sub" style="padding-left:20px;">${guides.map(g => `<li><a href="/guides/${g.slug}/" style="color:#2F4A3C;">${esc(g.h1)}</a></li>`).join('')}</ul>
 </div>`;
 
@@ -380,5 +376,5 @@ ${ld({ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Monch
     SITE + '/temps-trail/', ...DISTANCES.map(d => SITE + distUrl(d.km)),
     SITE + '/guides/', ...guides.map(g => SITE + '/guides/' + g.slug + '/')
   ];
-  return { urls, homeSectionHtml };
+  return { urls, homeSectionHtml, distances: DISTANCES.map(d => ({ km: d.km, url: distUrl(d.km) })) };
 };

@@ -215,6 +215,9 @@ function raceInsightHtml(race){
 //    par mois généré automatiquement depuis races.json (remplace l'ancienne
 //    liste plate "Courses disponibles", qui ne passait pas bien à l'échelle).
 // ---------------------------------------------------------------------
+// 2bis. Pages par distance + guides + bloc d'accueil (seo-pages.js)
+const seo = require('./seo-pages.js')({ races, engine, write, page, headTags, esc, raceUrlPath, eventUrlPath, fmtNum, isPastEdition, buildIso: BUILD_ISO });
+
 const HOME_CAL_YEARS = [...new Set(races.map(r => r.edition))].sort((a, b) => b - a);
 const HOME_CAL_YEAR = HOME_CAL_YEARS[0];
 const homeMonthsHtml = HOME_CAL_YEARS.map(y =>
@@ -238,6 +241,11 @@ const heroCoursesBar = `
         <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9FB5A5;margin-bottom:10px;">Courses phares</div>
         <div>${homeFeaturedHtml || '<span style="color:#9FB5A5;font-size:13.5px;">Aucune course ajoutée pour le moment.</span>'}</div>
         <div style="margin-top:4px;"><a href="/courses/" style="color:#F0C179;font-size:13px;text-decoration:none;">Rechercher une course par nom →</a></div>
+      </div>
+      <div style="flex:1;min-width:220px;">
+        <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9FB5A5;margin-bottom:10px;">Par distance</div>
+        <div>${seo.distances.map(d => `<a href="${d.url}" style="background:rgba(255,255,255,.08);border:1px solid rgba(240,193,121,.4);color:#F0C179;padding:6px 14px;border-radius:20px;font-size:13.5px;text-decoration:none;margin:0 8px 8px 0;display:inline-block;">${d.km} km</a>`).join('')}</div>
+        <div style="margin-top:4px;"><a href="/temps-trail/" style="color:#F0C179;font-size:13px;text-decoration:none;">Temps estimés par distance →</a></div>
       </div>
       <div style="flex:1;min-width:220px;">
         <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9FB5A5;margin-bottom:10px;">Calendrier</div>
@@ -296,10 +304,16 @@ const homeFaqSection = `
   ${homeFaqHtml}
 </div>`;
 
-// 2bis. Pages par distance + guides + bloc d'accueil (seo-pages.js)
-const seo = require('./seo-pages.js')({ races, engine, write, page, headTags, esc, raceUrlPath, eventUrlPath, fmtNum, isPastEdition, buildIso: BUILD_ISO });
+// Bloc « Guides » : placé après le calculateur (résultat + historique), juste avant
+// la formule et le pied de page ; à défaut de repère, il est ajouté à la suite.
+const FORMULA_MARKER = '<div class="tc-section">\n    <details class="tc-formula-details">';
+if(homeCalculator.includes(FORMULA_MARKER)){
+  homeCalculator = homeCalculator.replace(FORMULA_MARKER, () => seo.homeSectionHtml + '\n  ' + FORMULA_MARKER);
+}else{
+  homeCalculator += seo.homeSectionHtml;
+}
 
-write('index.html', page(homeHead, homeCalculator + seo.homeSectionHtml + homeFaqSection));
+write('index.html', page(homeHead, homeCalculator + homeFaqSection));
 
 // ---------------------------------------------------------------------
 // 3. Pages statiques copiées telles quelles
