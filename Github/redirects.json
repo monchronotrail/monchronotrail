@@ -1,0 +1,10 @@
+[
+  { "from": "/maxi-race/2026/",                              "to": "/maxi-race/2027/" },
+  { "from": "/maxi-race/2026/tour-du-lac-100k/",             "to": "/maxi-race/2027/tour-du-lac-100k/" },
+  { "from": "/maxi-race/2026/shokz-demi-tour-du-lac/",       "to": "/maxi-race/2027/shokz-demi-tour-du-lac/" },
+  { "from": "/maxi-race/2026/marathon-experience/",          "to": "/maxi-race/2027/marathon-experience/" },
+  { "from": "/restonica/2026/giru-di-tumbone-17-km/",        "to": "/restonica/2027/giru-di-tumbone-17-km/" },
+  { "from": "/restonica/2026/tavignanu-trail-33-km/",        "to": "/restonica/2027/tavignanu-trail-33-km/" },
+  { "from": "/vignoblenantais/2027/",                        "to": "/vignoblenantais/2026/" },
+  { "from": "/vignoblenantais/2027/utvn-ultra-trail-du-vignoble-nantais-75-km/", "to": "/vignoblenantais/2026/utvn-ultra-trail-du-vignoble-nantais-75-km/" }
+]

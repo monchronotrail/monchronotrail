@@ -330,10 +330,9 @@ copyFile('mentions-legales.html', 'mentions-legales.html');
 copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
 copyFile('favicon.svg', 'favicon.svg');
 copyFile('og-image.png', 'og-image.png');
-// Le fichier _redirects a été retiré définitivement : il cassait le déploiement
-// Cloudflare (parseur plus strict que Netlify sur la syntaxe des redirections).
-// Netlify n'est plus utilisé (site supprimé le 25/09/2026) — Cloudflare
-// (monchronotrail.fr) est désormais le seul hébergement actif.
+// Hébergement : OVHcloud (Apache), déploiement depuis GitHub. Netlify puis Cloudflare
+// ont été abandonnés : pas de fichier _redirects (format Netlify/Cloudflare, sans effet
+// sur OVH). Les redirections passent par .htaccess — voir la section 9 en fin de fichier.
 
 // ---------------------------------------------------------------------
 // 4. Pages de courses — générées depuis races.json
@@ -953,5 +952,50 @@ ${urls.map(u => `  <url><loc>${u}</loc><changefreq>monthly</changefreq></url>`).
 // 8. robots.txt
 // ---------------------------------------------------------------------
 write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: https://monchronotrail.fr/sitemap.xml\n`);
+
+// ---------------------------------------------------------------------
+// 9. Redirections (pages déplacées ou renommées) — redirects.json
+// ---------------------------------------------------------------------
+// Format : [ { "from": "/ancienne/url/", "to": "/nouvelle/url/" }, ... ]
+// Deux filets de sécurité complémentaires :
+//   1. dist/.htaccess : VRAIES redirections 301 (OVHcloud = Apache). Si un fichier
+//      htaccess.base existe à côté de build.js (règles HTTPS, www, page 404…), son
+//      contenu est placé en tête du .htaccess généré.
+//   2. une page statique à l'ancienne adresse (meta refresh à 0 s + canonical), utile
+//      si le .htaccess n'était pas pris en compte.
+// Une redirection dont la cible n'existe pas est ignorée avec un avertissement, pour ne
+// jamais renvoyer un visiteur vers une 404.
+if(fs.existsSync(path.join(ROOT, 'redirects.json'))){
+  let redirectsList = [];
+  try { redirectsList = JSON.parse(read('redirects.json')); }
+  catch(e){ console.warn('⚠️  redirects.json illisible : ' + e.message); }
+  const reEscape = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const htaccessLines = [];
+  let redirectCount = 0;
+  redirectsList.forEach(({ from, to }) => {
+    const f = String(from || '').replace(/^\/+|\/+$/g, ''), t = String(to || '').replace(/^\/+|\/+$/g, '');
+    if(!f || !t || f === t){ console.warn(`⚠️  Redirection invalide : ${from} → ${to}`); return; }
+    if(!fs.existsSync(path.join(OUT, t, 'index.html'))){ console.warn(`⚠️  Redirection ignorée (la cible n'existe pas) : ${from} → ${to}`); return; }
+    if(fs.existsSync(path.join(OUT, f, 'index.html'))){ console.warn(`⚠️  Redirection ignorée (une page existe déjà à l'ancienne adresse) : ${from}`); return; }
+    const dest = 'https://monchronotrail.fr/' + t + '/';
+    htaccessLines.push(`RedirectMatch 301 ^/${reEscape(f)}/?$ ${dest}`);
+    write(f + '/index.html', `<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<title>Page déplacée | Monchronotrail</title>
+<link rel="canonical" href="${dest}">
+<meta http-equiv="refresh" content="0; url=/${t}/">
+<script>location.replace('/${t}/');</script>
+</head><body><p>Cette page a été déplacée : <a href="/${t}/">continuer vers la nouvelle adresse</a>.</p></body></html>`);
+    redirectCount++;
+  });
+  if(htaccessLines.length){
+    const baseFile = path.join(ROOT, 'htaccess.base');
+    const base = fs.existsSync(baseFile) ? fs.readFileSync(baseFile, 'utf-8').trimEnd() + '\n\n' : '';
+    write('.htaccess', base +
+      '# >>> Redirections 301 générées par build.js depuis redirects.json (ne pas modifier à la main)\n' +
+      htaccessLines.join('\n') + '\n# <<< fin des redirections\n');
+  }
+  console.log(`Redirections : ${redirectCount} (301 dans .htaccess + page de secours)`);
+}
 
 console.log(`Build terminé : ${urls.length} pages générées dans dist/`);
