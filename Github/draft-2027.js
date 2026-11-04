@@ -31,7 +31,9 @@ const file = path.join(__dirname, '..', 'races.json');
 const races = JSON.parse(fs.readFileSync(file, 'utf-8'));
 const MONTHS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 
-const hasTarget = new Set(races.filter(r => r.edition === TO).map(r => r.slug));
+// Un événement est déjà couvert s'il a une édition TO, OU une fiche dont la date officielle tombe en TO
+// (cas d'une fiche étiquetée N mais portant déjà la date N+1 : inutile de créer un doublon).
+const hasTarget = new Set(races.filter(r => r.edition === TO || String(r.date || '').startsWith(String(TO) + '-')).map(r => r.slug));
 const sources = races.filter(r => r.edition === FROM && !hasTarget.has(r.slug));
 const events = [...new Set(sources.map(r => r.slug))];
 

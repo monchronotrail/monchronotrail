@@ -158,15 +158,23 @@ function editionBannerHtml(r){
   const msgs = [];
   if(isPastEdition(r)){
     const nx = nextEditionOf(r);
-    msgs.push(`Cette édition ${r.edition} a eu lieu le ${esc(fmtDateFr(r.date))}. ` + (nx
+    // Le texte se base sur la DATE réelle (pas sur le champ edition) pour ne jamais afficher d'incohérence.
+    const dateYear = parseInt(r.date.slice(0, 4), 10);
+    msgs.push(`Cette édition a eu lieu le ${esc(fmtDateFr(r.date))}. ` + (nx
       ? `<a href="${nx.url}" style="color:#2F4A3C;font-weight:600;">Voir l'édition ${nx.edition} →</a>`
-      : `L'édition ${r.edition + 1} sera ajoutée dès que l'organisateur aura confirmé le parcours et la date.`));
+      : `L'édition ${dateYear + 1} sera ajoutée dès que l'organisateur aura confirmé le parcours et la date.`));
   }
   if(r.draft){
     msgs.push(`Édition ${r.edition} non confirmée : date et parcours sont repris de l'édition précédente et seront mis à jour dès l'annonce officielle de l'organisateur.`);
   }
   return msgs.length ? `<div style="${BANNER_STYLE}">${msgs.join('<br>')}</div>` : '';
 }
+// Contrôle de cohérence des données au build : signale (sans bloquer) les fiches dont
+// l'année de la date ne correspond pas au champ edition.
+races.forEach(r => {
+  const m = String(r.date || '').match(/^(\d{4})-/);
+  if(m && parseInt(m[1], 10) !== r.edition) console.warn(`⚠️  Incohérence : ${r.id} — edition ${r.edition} mais date ${r.date}`);
+});
 function otherEditionsHtml(r){
   const eds = [...new Set((bySlug[r.slug] || []).map(x => x.edition))].filter(e => e !== r.edition).sort();
   if(!eds.length) return '';
