@@ -1,3 +1,9 @@
+# Revue du lundi : chaque lundi matin (les courses ont souvent lieu le week-end),
+# ouvre un ticket GitHub avec les actions à faire sur les données du site.
+# Le rebuild du site est déclenché en dernière étape UNIQUEMENT si le secret DEPLOY_HOOK_URL
+# existe (URL de « deploy hook » de l'hébergeur, ex. Cloudflare Pages). Sinon, ajoute plutôt un
+# déclencheur planifié à ton workflow de déploiement existant.
+# Lancement manuel possible : onglet Actions → « Revue du lundi » → Run workflow.
 name: Revue du lundi
 
 on:
@@ -15,7 +21,7 @@ jobs:
     env:
       # Dossier qui contient build.js : "." si c'est la racine du dépôt,
       # sinon le nom du sous-dossier (ex. "Github").
-      SITE_DIR: Github.
+      SITE_DIR: .
     defaults:
       run:
         working-directory: ${{ env.SITE_DIR }}
@@ -27,7 +33,9 @@ jobs:
           node-version: 20
 
       - name: Build de contrôle
-        run: node build.js 2>&1 | tee build.log
+        run: |
+          set -o pipefail
+          node build.js 2>&1 | tee build.log
 
       - name: Rapport
         run: |
