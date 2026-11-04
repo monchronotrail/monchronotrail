@@ -330,9 +330,10 @@ copyFile('mentions-legales.html', 'mentions-legales.html');
 copyFile('politique-confidentialite.html', 'politique-confidentialite.html');
 copyFile('favicon.svg', 'favicon.svg');
 copyFile('og-image.png', 'og-image.png');
-// Hébergement : OVHcloud (Apache), déploiement depuis GitHub. Netlify puis Cloudflare
-// ont été abandonnés : pas de fichier _redirects (format Netlify/Cloudflare, sans effet
-// sur OVH). Les redirections passent par .htaccess — voir la section 9 en fin de fichier.
+// Hébergement : le domaine est chez OVHcloud (simple bureau d'enregistrement, DNS
+// personnalisés) ; l'hébergeur web se trouve derrière ces DNS et le déploiement part de
+// GitHub. Pas de fichier _redirects (il avait cassé un déploiement) : les redirections
+// sont des pages statiques, valables chez n'importe quel hébergeur — voir la section 9.
 
 // ---------------------------------------------------------------------
 // 4. Pages de courses — générées depuis races.json
@@ -957,12 +958,13 @@ write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: https://monchronotrail.
 // 9. Redirections (pages déplacées ou renommées) — redirects.json
 // ---------------------------------------------------------------------
 // Format : [ { "from": "/ancienne/url/", "to": "/nouvelle/url/" }, ... ]
-// Deux filets de sécurité complémentaires :
-//   1. dist/.htaccess : VRAIES redirections 301 (OVHcloud = Apache). Si un fichier
-//      htaccess.base existe à côté de build.js (règles HTTPS, www, page 404…), son
-//      contenu est placé en tête du .htaccess généré.
-//   2. une page statique à l'ancienne adresse (meta refresh à 0 s + canonical), utile
-//      si le .htaccess n'était pas pris en compte.
+// Mécanisme principal : une page statique à l'ancienne adresse (meta refresh à 0 s +
+// canonical + JS), que Google traite comme une redirection et qui marche sur tout
+// hébergement statique.
+// Option Apache (uniquement si l'hébergeur est un Apache / OVH Web Hosting) : avec la
+// variable d'environnement GENERATE_HTACCESS=1, ou si un fichier htaccess.base existe à
+// côté de build.js, un dist/.htaccess avec de VRAIES redirections 301 est aussi généré
+// (le contenu de htaccess.base — HTTPS, www, page 404… — est placé en tête).
 // Une redirection dont la cible n'existe pas est ignorée avec un avertissement, pour ne
 // jamais renvoyer un visiteur vers une 404.
 if(fs.existsSync(path.join(ROOT, 'redirects.json'))){
@@ -988,14 +990,14 @@ if(fs.existsSync(path.join(ROOT, 'redirects.json'))){
 </head><body><p>Cette page a été déplacée : <a href="/${t}/">continuer vers la nouvelle adresse</a>.</p></body></html>`);
     redirectCount++;
   });
-  if(htaccessLines.length){
+  if(htaccessLines.length && (process.env.GENERATE_HTACCESS === '1' || fs.existsSync(path.join(ROOT, 'htaccess.base')))){
     const baseFile = path.join(ROOT, 'htaccess.base');
     const base = fs.existsSync(baseFile) ? fs.readFileSync(baseFile, 'utf-8').trimEnd() + '\n\n' : '';
     write('.htaccess', base +
       '# >>> Redirections 301 générées par build.js depuis redirects.json (ne pas modifier à la main)\n' +
       htaccessLines.join('\n') + '\n# <<< fin des redirections\n');
   }
-  console.log(`Redirections : ${redirectCount} (301 dans .htaccess + page de secours)`);
+  console.log(`Redirections : ${redirectCount} page(s) de redirection générée(s)`);
 }
 
 console.log(`Build terminé : ${urls.length} pages générées dans dist/`);

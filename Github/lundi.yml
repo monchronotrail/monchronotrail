@@ -1,8 +1,8 @@
 # Revue du lundi : chaque lundi matin (les courses ont souvent lieu le week-end),
 # ouvre un ticket GitHub avec les actions à faire sur les données du site.
-# Ce workflow NE déploie PAS : le rebuild + déploiement vers OVHcloud se fait avec ton
-# workflow de déploiement existant, auquel on ajoute simplement un déclencheur planifié
-# (voir les instructions fournies avec ce fichier).
+# Le rebuild du site est déclenché en dernière étape UNIQUEMENT si le secret DEPLOY_HOOK_URL
+# existe (URL de « deploy hook » de l'hébergeur, ex. Cloudflare Pages). Sinon, ajoute plutôt un
+# déclencheur planifié à ton workflow de déploiement existant.
 # Lancement manuel possible : onglet Actions → « Revue du lundi » → Run workflow.
 name: Revue du lundi
 
@@ -53,4 +53,14 @@ jobs:
             gh issue create --title "Revue du lundi — $(date +%F)" --body-file report.md
           else
             echo "Rien à signaler : pas de ticket."
+          fi
+
+      - name: Déclencher le rebuild de l'hébergeur (optionnel)
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
+        run: |
+          if [ -n "$DEPLOY_HOOK_URL" ]; then
+            curl -fsS -X POST "$DEPLOY_HOOK_URL"
+          else
+            echo "Secret DEPLOY_HOOK_URL absent : pas de rebuild déclenché."
           fi
