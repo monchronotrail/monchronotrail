@@ -19,9 +19,8 @@ jobs:
   lundi:
     runs-on: ubuntu-latest
     env:
-      # Dossier qui contient build.js : "." si c'est la racine du dépôt,
-      # sinon le nom du sous-dossier (ex. "Github").
-      SITE_DIR: .
+      # Dossier qui contient build.js (ici le sous-dossier « Github » du dépôt).
+      SITE_DIR: Github
     defaults:
       run:
         working-directory: ${{ env.SITE_DIR }}
@@ -39,9 +38,9 @@ jobs:
 
       - name: Rapport
         run: |
-          node scripts/weekly-report.js > report.md
+          node weekly-report.js > report.md
           echo "" >> report.md
-          node scripts/check-redirects.js >> report.md || true
+          node check-redirects.js >> report.md || true
           if grep -q "⚠️" build.log; then
             { echo ""; echo "### Avertissements du build"; grep "⚠️" build.log | sed 's/^/- /'; } >> report.md
           fi
