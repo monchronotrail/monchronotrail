@@ -9,7 +9,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const ROOT = path.join(__dirname, '..');
+const ROOT = fs.existsSync(path.join(__dirname, 'races.json')) ? __dirname : path.join(__dirname, '..'); // fonctionne à côté de build.js ou dans scripts/
 const SITE = 'https://monchronotrail.fr';
 const arg = k => { const a = process.argv.find(x => x.startsWith('--' + k + '=')); return a ? a.slice(k.length + 3) : null; };
 

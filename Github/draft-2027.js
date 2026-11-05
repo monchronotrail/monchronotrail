@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// scripts/draft-2027.js — prépare les éditions N+1 en BROUILLON à partir de l'édition N.
+// draft-2027.js — prépare les éditions N+1 en BROUILLON à partir de l'édition N.
 //
 // Pourquoi : les gens cherchent « [course] 2027 » dès l'automne, avant que les
 // organisateurs aient confirmé dates et parcours. On crée la fiche tout de suite,
@@ -8,9 +8,9 @@
 // elle reste « à confirmer, habituellement en <mois> ».
 //
 // Usage (depuis la racine du dépôt) :
-//   node scripts/draft-2027.js                       → liste les événements sans édition 2027 (aperçu)
-//   node scripts/draft-2027.js utmb vvx --write      → ajoute les brouillons 2027 de ces événements à races.json
-//   node scripts/draft-2027.js --all --write         → tous les événements sans 2027
+//   node draft-2027.js                       → liste les événements sans édition 2027 (aperçu)
+//   node draft-2027.js utmb vvx --write      → ajoute les brouillons 2027 de ces événements à races.json
+//   node draft-2027.js --all --write         → tous les événements sans 2027
 //   options : --from=2026 --to=2027 (par défaut)
 //
 // Les brouillons sont en status TO_VERIFY → ils n'entrent PAS dans le classement
@@ -27,7 +27,8 @@ const WRITE = args.includes('--write');
 const ALL = args.includes('--all');
 const slugs = args.filter(a => !a.startsWith('--'));
 
-const file = path.join(__dirname, '..', 'races.json');
+const ROOT = fs.existsSync(path.join(__dirname, 'races.json')) ? __dirname : path.join(__dirname, '..'); // fonctionne à côté de build.js ou dans scripts/
+const file = path.join(ROOT, 'races.json');
 const races = JSON.parse(fs.readFileSync(file, 'utf-8'));
 const MONTHS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 
@@ -40,7 +41,7 @@ const events = [...new Set(sources.map(r => r.slug))];
 if(!WRITE){
   console.log(`${events.length} événement(s) avec une édition ${FROM} et sans édition ${TO} :`);
   events.forEach(s => console.log(`  ${s}  (${sources.filter(r => r.slug === s).length} format(s))`));
-  console.log('\nAjouter : node scripts/draft-2027.js <slug...> --write   (ou --all --write)');
+  console.log('\nAjouter : node draft-2027.js <slug...> --write   (ou --all --write)');
   process.exit(0);
 }
 

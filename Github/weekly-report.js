@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 // scripts/weekly-report.js — « Revue du lundi » : ce qui demande une action humaine cette semaine.
 // Lit races.json uniquement (aucun accès réseau). Sortie : Markdown avec cases à cocher.
-//   node scripts/weekly-report.js              → à la date du jour
-//   node scripts/weekly-report.js --date=2027-05-31   → simulation à une autre date
+//   node weekly-report.js              → à la date du jour
+//   node weekly-report.js --date=2027-05-31   → simulation à une autre date
 
 const fs = require('fs');
 const path = require('path');
-const races = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'races.json'), 'utf-8'));
+const ROOT = fs.existsSync(path.join(__dirname, 'races.json')) ? __dirname : path.join(__dirname, '..'); // fonctionne à côté de build.js ou dans scripts/
+const HERE = path.basename(__dirname) === 'scripts' ? 'scripts/' : ''; // pour afficher les bonnes commandes
+const races = JSON.parse(fs.readFileSync(path.join(ROOT, 'races.json'), 'utf-8'));
 const dateArg = (process.argv.find(a => a.startsWith('--date=')) || '').slice(7);
 const TODAY = new Date((dateArg || new Date().toISOString().slice(0, 10)) + 'T00:00:00Z');
 const iso = d => d.toISOString().slice(0, 10);
@@ -57,7 +59,7 @@ const noNext = Object.keys(bySlug).filter(slug => {
 });
 section('Événements sans édition à venir', noNext.map(slug => {
   const last = Math.max(...bySlug[slug].map(r => r.edition));
-  return `- [ ] ${bySlug[slug][0].name} (dernière édition ${last}) → \`node scripts/draft-2027.js ${slug} --from=${last} --write\``;
+  return `- [ ] ${bySlug[slug][0].name} (dernière édition ${last}) → \`node ${HERE}draft-2027.js ${slug} --from=${last} --write\``;
 }), 'Créer un brouillon de la prochaine édition pour capter les recherches « [course] + année ».');
 
 // 5. Données VERIFIED à re-vérifier (> 120 jours, édition à venir)
