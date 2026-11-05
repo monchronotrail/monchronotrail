@@ -782,13 +782,13 @@
     "notes": "Vérifié sur le site officiel (ecotrailparis.com) et recoupé (UTMB Index 2025 : 80,90 km / 1200 m D+, correspondant à la distance UTMB 50K). Confirme 83 km / 1200 m D+ (la distance exacte varie légèrement chaque année, 80-83 km selon le tracé)."
   },
   {
-    "id": "maxirace-2026-tourdulac",
+    "id": "maxirace-2027-tourdulac",
     "name": "adidas TERREX MaXi-Race",
     "slug": "maxi-race",
     "organizer": "MaXi-Race / adidas TERREX",
     "officialSite": "https://www.maxi-race.org",
-    "season": 2026,
-    "edition": 2026,
+    "season": 2027,
+    "edition": 2027,
     "formatName": "tOur du Lac (100K)",
     "date": "2027-05-29",
     "location": "Lac d'Annecy",
@@ -806,8 +806,8 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [
-      "maxirace-2026-demitour",
-      "maxirace-2026-marathon"
+      "maxirace-2027-demitour",
+      "maxirace-2027-marathon"
     ],
     "sourceUrl": "https://www.maxi-race.org/en/tour-du-lac-solo/",
     "verificationDate": "2026-09-22",
@@ -817,13 +817,13 @@
     "cutoffHours": 24
   },
   {
-    "id": "maxirace-2026-demitour",
+    "id": "maxirace-2027-demitour",
     "name": "adidas TERREX MaXi-Race",
     "slug": "maxi-race",
     "organizer": "MaXi-Race / adidas TERREX",
     "officialSite": "https://www.maxi-race.org",
-    "season": 2026,
-    "edition": 2026,
+    "season": 2027,
+    "edition": 2027,
     "formatName": "Shokz Demi-tOur du Lac",
     "date": "2027-05-30",
     "location": "Doussard → Annecy",
@@ -841,8 +841,8 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [
-      "maxirace-2026-tourdulac",
-      "maxirace-2026-marathon"
+      "maxirace-2027-tourdulac",
+      "maxirace-2027-marathon"
     ],
     "sourceUrl": "https://www.maxi-race.org/en/demi-tour/",
     "verificationDate": "2026-09-22",
@@ -852,13 +852,13 @@
     "cutoffHours": 11
   },
   {
-    "id": "maxirace-2026-marathon",
+    "id": "maxirace-2027-marathon",
     "name": "adidas TERREX MaXi-Race",
     "slug": "maxi-race",
     "organizer": "MaXi-Race / adidas TERREX",
     "officialSite": "https://www.maxi-race.org",
-    "season": 2026,
-    "edition": 2026,
+    "season": 2027,
+    "edition": 2027,
     "formatName": "Marathon-eXperience",
     "date": "2027-05-30",
     "location": "Lac d'Annecy",
@@ -876,8 +876,8 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [
-      "maxirace-2026-tourdulac",
-      "maxirace-2026-demitour"
+      "maxirace-2027-tourdulac",
+      "maxirace-2027-demitour"
     ],
     "sourceUrl": "https://www.maxi-race.org/en/marathon-experience/",
     "verificationDate": "2026-09-22",
@@ -2381,13 +2381,13 @@
     "cutoffHours": 7
   },
   {
-    "id": "restonica-2026-giru",
+    "id": "restonica-2027-giru",
     "name": "Restonica Trail by UTMB",
     "slug": "restonica",
     "organizer": "UTMB World",
     "officialSite": "https://restonica.utmb.world/",
-    "season": 2026,
-    "edition": 2026,
+    "season": 2027,
+    "edition": 2027,
     "formatName": "Giru di Tumbone 17 km",
     "date": "2027-07-09",
     "location": "Corte, Haute-Corse",
@@ -2405,7 +2405,7 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [
-      "restonica-2026-tavignanu",
+      "restonica-2027-tavignanu",
       "restonica-2026-restonicatrail",
       "restonica-2026-ultratraildicorsica"
     ],
@@ -2417,13 +2417,13 @@
     "cutoffHours": 3.5
   },
   {
-    "id": "restonica-2026-tavignanu",
+    "id": "restonica-2027-tavignanu",
     "name": "Restonica Trail by UTMB",
     "slug": "restonica",
     "organizer": "UTMB World",
     "officialSite": "https://restonica.utmb.world/",
-    "season": 2026,
-    "edition": 2026,
+    "season": 2027,
+    "edition": 2027,
     "formatName": "Tavignanu Trail 33 km",
     "date": "2027-07-10",
     "location": "Corte, Haute-Corse",
@@ -2441,7 +2441,7 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [
-      "restonica-2026-giru",
+      "restonica-2027-giru",
       "restonica-2026-restonicatrail",
       "restonica-2026-ultratraildicorsica"
     ],
@@ -2477,8 +2477,8 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [
-      "restonica-2026-giru",
-      "restonica-2026-tavignanu",
+      "restonica-2027-giru",
+      "restonica-2027-tavignanu",
       "restonica-2026-ultratraildicorsica"
     ],
     "sourceUrl": "https://restonica.utmb.world/fr/races/RT100K",
@@ -2512,8 +2512,8 @@
     "gpxElevationGain": null,
     "aidStations": [],
     "relatedRaces": [
-      "restonica-2026-giru",
-      "restonica-2026-tavignanu",
+      "restonica-2027-giru",
+      "restonica-2027-tavignanu",
       "restonica-2026-restonicatrail"
     ],
     "sourceUrl": "https://restonica.utmb.world/fr/races/UTC100M",
