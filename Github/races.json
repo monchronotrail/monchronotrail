@@ -205,7 +205,13 @@
     "verificationDate": "2026-09-22",
     "status": "VERIFIED",
     "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/UTMB) et recoupé avec plusieurs sources indépendantes : 174 km / 9900 m D+, départ vendredi 28 août 2026 à 17h45, Chamonix. Confirme les valeurs déjà retenues (passage en VERIFIED, accès direct à la page officielle désormais possible). Barrière horaire officielle trouvée : 46h30 (source : thepostrace.com, reprenant le règlement officiel UTMB).",
-    "cutoffHours": 46.5
+    "cutoffHours": 46.5,
+    "results": {
+      "winnerTime": "18:16:29",
+      "finishers": 1681,
+      "starters": 2407,
+      "source": "https://www.owaka.com/news/utmb-2026-resultats-chiffres-cles"
+    }
   },
   {
     "id": "utmb-2026-mcc",
@@ -309,7 +315,13 @@
     "sourceUrl": "https://www.festivaldestempliers.com/courses/grand-trail-des-templiers#parcours",
     "verificationDate": "2026-09-22",
     "status": "VERIFIED",
-    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 80,7 km / 3439-3443 m D+ selon la page consultée (écarts mineurs). Valeurs conservées. Barrière horaire non publiée publiquement dans le règlement (communiquée individuellement avec le dossard) : non renseignée par prudence."
+    "notes": "Vérifié sur le site officiel (festivaldestempliers.com) : 80,7 km / 3439-3443 m D+ selon la page consultée (écarts mineurs). Valeurs conservées. Barrière horaire non publiée publiquement dans le règlement (communiquée individuellement avec le dossard) : non renseignée par prudence.",
+    "results": {
+      "winnerTime": "06:32:20",
+      "finishers": 2297,
+      "starters": 2483,
+      "source": "https://utmb.world/fr/utmb-index/races/78.festivaldestempliersgrandtraildestempliers.2026"
+    }
   },
   {
     "id": "templiers-2026-integrale",
@@ -619,7 +631,13 @@
     "notes": "Vérifié sur le site officiel grandraid-reunion.com : 180 km / 10200 m D+, départ jeudi 15 octobre 2026 à 22h00, Ravine Blanche Saint-Pierre. Nouveau tracé 2026 via le cirque de Salazie (le parcours ne passe plus par Cilaos). Remplace la fourchette tierce (165-178 km / 9890-12107 m D+) précédemment retenue.",
     "extraDifficultyFactor": 1.25,
     "shortName": "Diagonale des Fous",
-    "cutoffHours": 66
+    "cutoffHours": 66,
+    "results": {
+      "winnerTime": "22:54:19",
+      "finishers": 2126,
+      "starters": 2766,
+      "source": "https://thepostrace.com/blog/resultats-de-la-diagonale-des-fous-2026/"
+    }
   },
   {
     "id": "saintelyon-2026-80km",
@@ -1056,7 +1074,11 @@
     "verificationDate": "2026-09-16",
     "status": "VERIFIED",
     "notes": "Conflit résolu : le site officiel ultra-marin.fr indique 175 km / 1430 m D+ environ pour le Grand Raid. L'édition 2026 (dernière connue, tenue le 26 juin 2026) a eu lieu à cette date ; l'édition 2027 n'est pas encore annoncée sur le site officiel (date « communiquée prochainement ») — données de l'édition 2026 reprises en attendant l'annonce, conformément à la règle des éditions de moins d'un an.",
-    "shortName": "Ultra Marin"
+    "shortName": "Ultra Marin",
+    "results": {
+      "winnerTime": "14:23:11",
+      "source": "https://utmb.world/utmb-index/races/98.l-ultramarin-r-grandraid175km.2026"
+    }
   },
   {
     "id": "ultramarin-2026-raid",

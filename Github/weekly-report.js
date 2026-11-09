@@ -32,7 +32,12 @@ const section = (title, lines, hint) => {
 // 1. Courses courues les 7 derniers jours
 const justRun = races.filter(r => isIso(r.date) && dayDiff(r) < 0 && dayDiff(r) >= -7);
 section('Courses courues cette semaine', justRun.map(r => `- [ ] ${label(r)} (${r.date})${site(r)}`),
-  "Récupérer les résultats officiels (vainqueur, dernier finisher, finishers) et les mettre dans `previousResults` de l'édition suivante ; vérifier si la date de l'édition suivante est annoncée.");
+  "Récupérer les résultats officiels (premier au scratch, finishers, partants) et les mettre dans `results` de la fiche de cette édition (l'édition suivante les affichera toute seule) ; vérifier si la date de l'édition suivante est annoncée.");
+
+// 1bis. Éditions courues dans les 45 derniers jours, sans résultats enregistrés
+const noResults = races.filter(r => isIso(r.date) && !r.draft && dayDiff(r) < -7 && dayDiff(r) >= -45 && !r.results);
+section('Éditions courues sans résultats', noResults.map(r => `- [ ] ${label(r)} (${r.date})${site(r)}`),
+  'Ajouter `results` (winnerTime, finishers, starters, source) quand les résultats officiels sont publiés.');
 
 // 2. Courses des 21 prochains jours
 const soon = races.filter(r => isIso(r.date) && dayDiff(r) >= 0 && dayDiff(r) <= 21);

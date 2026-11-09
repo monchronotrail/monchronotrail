@@ -153,6 +153,14 @@ function nextEditionOf(r){
                 same.find(x => Math.abs(x.distance - r.distance) <= r.distance * 0.1);
   return { edition: minEd, url: match ? raceUrlPath(match) : eventUrlPath(r.slug, minEd) };
 }
+function previousEditionOf(r){
+  const earlier = (bySlug[r.slug] || []).filter(x => x.edition < r.edition);
+  if(!earlier.length) return null;
+  const maxEd = Math.max(...earlier.map(x => x.edition));
+  const same = earlier.filter(x => x.edition === maxEd);
+  return same.find(x => (x.formatName || '') === (r.formatName || '')) ||
+         same.find(x => Math.abs(x.distance - r.distance) <= r.distance * 0.1) || null;
+}
 const BANNER_STYLE = 'background:#FFF4E0;border:1px solid #F0C179;border-radius:8px;padding:10px 14px;margin:12px 0;font-size:13.5px;line-height:1.5;color:#16211C;';
 function editionBannerHtml(r){
   const msgs = [];
@@ -205,16 +213,28 @@ function raceInsightHtml(race){
       : `Avec un marathon en 4h00, l'estimation (environ ${fmtHM(t4 / 3600)}) dépasse la barrière horaire : ce format demande un niveau de référence supérieur.`);
   }
   let html = `<h2 style="${h2}">Ce que ce format demande vraiment</h2>\n  <p style="font-size:14px;line-height:1.6;">${parts.join(' ')}</p>`;
-  const pr = race.previousResults;
+  // Résultats : champ `results` sur la fiche de l'édition COURUE ; l'édition suivante
+  // (même format) affiche automatiquement ceux de l'édition précédente.
+  // Format : "results": { "winnerTime": "18:16:29", "lastFinisherTime": "45:53:00",
+  //                       "finishers": 1681, "starters": 2407, "source": "https://…" }
+  // (`previousResults` + `year` reste accepté pour compatibilité.)
+  let pr = null, prYear = null;
+  if(race.previousResults){ pr = race.previousResults; prYear = pr.year; }
+  else if(isPastEdition(race) && race.results){ pr = race.results; prYear = race.edition; }
+  else {
+    const prev = previousEditionOf(race);
+    if(prev && prev.results){ pr = prev.results; prYear = prev.edition; }
+  }
   if(pr && (pr.winnerTime || pr.lastFinisherTime || pr.finishers)){
     const items = [];
-    if(pr.winnerTime) items.push(`Temps du vainqueur : <strong>${esc(pr.winnerTime)}</strong>`);
+    if(pr.winnerTime) items.push(`Premier au scratch : <strong>${esc(pr.winnerTime)}</strong>`);
     if(pr.lastFinisherTime) items.push(`Dernier finisher : <strong>${esc(pr.lastFinisherTime)}</strong>`);
     if(pr.finishers && pr.starters) items.push(`Finishers : <strong>${pr.finishers}</strong> sur ${pr.starters} partants (${Math.round(pr.finishers / pr.starters * 100)} %)`);
     else if(pr.finishers) items.push(`Finishers : <strong>${pr.finishers}</strong>`);
-    html += `\n  <h2 style="${h2}">Résultats de l'édition ${esc(pr.year || '')} (officiels)</h2>\n  <ul style="font-size:14px;line-height:1.7;padding-left:20px;">${items.map(i => `<li>${i}</li>`).join('')}</ul>` +
+    html += `\n  <h2 style="${h2}">Résultats de l'édition ${esc(prYear || '')}</h2>\n  <ul style="font-size:14px;line-height:1.7;padding-left:20px;">${items.map(i => `<li>${i}</li>`).join('')}</ul>` +
       (pr.source ? `\n  <p style="font-size:12px;color:#5C6B66;"><a href="${esc(pr.source)}" style="color:#2F4A3C;">Source des résultats</a></p>` : '');
   }
+
   return html;
 }
 
