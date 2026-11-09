@@ -161,6 +161,16 @@ function previousEditionOf(r){
   return same.find(x => (x.formatName || '') === (r.formatName || '')) ||
          same.find(x => Math.abs(x.distance - r.distance) <= r.distance * 0.1) || null;
 }
+// Nom complet d'une course pour l'affichage : évite « UTMB UTMB (tour complet…) » quand le
+// nom du format contient déjà le nom de l'événement.
+function normTxt(s){ return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
+function raceFullName(r){
+  const f = r.formatName || (r.distance + ' km');
+  const core = normTxt(r.name).replace(/^(le|la|les|l|the) /, ''); // sans article initial
+  const fCore = normTxt(f).replace(/^(le|la|les|l|the) /, '');
+  // le format contient le nom, ou le nom contient déjà le format (ex. « … — Diagonale des Fous » / « La Diagonale des Fous »)
+  return (normTxt(f).includes(core) || (fCore.length >= 8 && normTxt(r.name).includes(fCore))) ? f : `${r.name} ${f}`;
+}
 const BANNER_STYLE = 'background:#FFF4E0;border:1px solid #F0C179;border-radius:8px;padding:10px 14px;margin:12px 0;font-size:13.5px;line-height:1.5;color:#16211C;';
 function editionBannerHtml(r){
   const msgs = [];
@@ -386,7 +396,7 @@ races.forEach(race => {
   const relatedHtml = (race.relatedRaces || []).map(id => {
     const rr = races.find(x => x.id === id);
     if (!rr) return '';
-    return `<a href="${raceUrlPath(rr)}" style="color:var(--forest);">${esc(rr.name)} ${esc(rr.formatName || rr.distance + ' km')}</a>`;
+    return `<a href="${raceUrlPath(rr)}" style="color:var(--forest);">${esc(raceFullName(rr))}</a>`;
   }).filter(Boolean).join(' · ');
 
   const density = race.distance > 0 ? (race.elevationGain / race.distance) : 0;
@@ -447,7 +457,7 @@ races.forEach(race => {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'SportsEvent',
-    name: `${race.name} ${formatLabel} ${race.edition}`,
+    name: `${raceFullName(race)} ${race.edition}`,
     sport: 'Trail running',
     description: race.description || undefined,
     ...(isoDateMatch ? { startDate: race.date } : {}),
@@ -483,11 +493,11 @@ races.forEach(race => {
   const tailoredQ = isUltra
     ? { q: `Ce format de ${race.name} est-il adapté pour un premier ultra-trail ?`,
         a: `Avec ${race.distance} km et ${race.elevationGain} m D+ (difficulté ${race.difficulty}/5 sur l'échelle Monchronotrail), ${isAccessible ? "c'est un format qui reste envisageable pour une première expérience longue, à condition d'avoir déjà couru un marathon ou un trail de 50-60 km." : "c'est un format exigeant, plutôt recommandé après une première expérience réussie sur un ultra plus court ou moins technique."}` }
-    : { q: `${race.name} ${formatLabel} est-il accessible à un coureur qui découvre le trail long ?`,
+    : { q: `${raceFullName(race)} est-il accessible à un coureur qui découvre le trail long ?`,
         a: `Avec ${race.distance} km et ${race.elevationGain} m D+ (${density.toFixed(0)} m/km, difficulté ${race.difficulty}/5), ${isAccessible ? "ce format est raisonnablement accessible si vous avez déjà une base d'endurance (marathon ou trail court)." : "ce format demande déjà une vraie expérience de la distance et du dénivelé — mieux vaut avoir couru un premier trail long avant de s'y engager."}` };
 
   const faqItems = [
-    { q: `Quel temps faut-il pour terminer ${race.name} ${formatLabel} ?`,
+    { q: `Quel temps faut-il pour terminer ${raceFullName(race)} ?`,
       a: `Sur ce parcours de ${race.distance} km et ${race.elevationGain} m D+ (soit environ ${density.toFixed(0)} m/km), le temps dépend surtout de votre niveau. Utilisez le calculateur ci-dessus avec un chrono récent pour une estimation personnalisée, ou repérez-vous dans les profils par niveau ci-dessous.` },
     { q: `Le dénivelé est-il pris en compte ?`,
       a: `Oui : à ${density.toFixed(0)} m/km, ce parcours est classé ${race.difficulty}/5 sur l'échelle Monchronotrail. Le D+ est intégré au calcul via la méthode du "kilomètre-effort" (référence ITRA : 100 m de D+ = 1 km-effort), avec la technicité du terrain en complément.` },
@@ -519,7 +529,7 @@ ${faqStructuredDataScript}
 ${breadcrumbScript}
 <div style="max-width:720px;margin:0 auto 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#16211C;">
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a> · <a href="${eventUrlPath(race.slug, race.edition)}" style="color:#2F4A3C;">${esc(race.name)} ${race.edition} — tous les formats</a></p>
-  <h1 style="font-family:Georgia,'Iowan Old Style',serif;font-weight:normal;font-size:26px;line-height:1.3;">${esc(race.name)} ${esc(formatLabel)} ${race.edition} : estimez votre temps de course</h1>
+  <h1 style="font-family:Georgia,'Iowan Old Style',serif;font-weight:normal;font-size:26px;line-height:1.3;">${esc(raceFullName(race))} ${race.edition} : estimez votre temps de course</h1>
   ${editionBannerHtml(race)}
   <p style="font-size:14.5px;line-height:1.6;">${esc(race.description || '')} Utilisez le calculateur ci-dessous pour obtenir une estimation personnalisée de votre temps de course.</p>
 
@@ -537,7 +547,7 @@ ${breadcrumbScript}
     <tr><td style="padding:7px 0;color:#5C6B66;border-bottom:1px solid #D8DED4;">Date</td><td style="padding:7px 0;text-align:right;border-bottom:1px solid #D8DED4;">${esc(race.date || 'à confirmer')}</td></tr>
     <tr><td style="padding:7px 0;color:#5C6B66;">Lieu</td><td style="padding:7px 0;text-align:right;">${esc(race.location || '—')}</td></tr>
   </table>
-  <p style="font-size:12px;color:#5C6B66;line-height:1.5;">Statut des données : ${STATUS_LABELS[race.status] || esc(race.status)} — vérifié le ${race.verificationDate || '—'}.${race.notes ? ' ' + esc(race.notes) : ''} ${race.sourceUrl ? `<a href="${esc(race.sourceUrl)}" style="color:#2F4A3C;">Source</a>` : ''}</p>
+  <p style="font-size:12px;color:#5C6B66;line-height:1.5;">Statut des données : ${STATUS_LABELS[race.status] || esc(race.status)}${race.verificationDate ? ' — vérifié le ' + race.verificationDate : ''}.${race.notes ? ' ' + esc(race.notes) : ''} ${race.sourceUrl ? `<a href="${esc(race.sourceUrl)}" style="color:#2F4A3C;">Source</a>` : ''}</p>
 </div>
 
 ${CALCULATOR}
@@ -558,7 +568,7 @@ ${CALCULATOR}
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Comment Monchronotrail estime votre temps ?</h2>
   <p style="font-size:14px;line-height:1.6;">L'estimation tient compte de votre niveau (via un chrono de référence route ou trail), de la distance, du dénivelé positif, du profil du parcours et de sa technicité. Ce n'est pas une prédiction exacte, mais une aide pour préparer votre course et fixer un objectif réaliste.</p>
 
-  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Quelle est la difficulté de ${esc(race.name)} ${esc(formatLabel)} ?</h2>
+  <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Quelle est la difficulté de ${esc(raceFullName(race))} ?</h2>
   <p style="font-size:14px;line-height:1.6;">Avec ${race.elevationGain} m de D+ sur ${race.distance} km (soit environ ${density.toFixed(0)} m/km, ${effortKmValue.toFixed(0)} km-effort), ce format est classé ${race.difficulty}/5 sur l'échelle Monchronotrail : ${DIFFICULTY_LABELS[race.difficulty] || '—'}.</p>
 
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">FAQ</h2>
@@ -594,6 +604,15 @@ Object.values(byEventEdition).forEach(list => {
   const distances = list.map(r => Math.round(r.distance) + 'km').join(', ');
   const description = `${displayName} ${first.edition} : ${list.length} format${list.length>1?'s':''} disponible${list.length>1?'s':''} (${distances}). Estimez votre temps avec Monchronotrail, calculateur gratuit.`;
 
+  // Texte et lieu de la page événement : ceux du format s'il n'y en a qu'un ; sinon une présentation
+  // calculée (ou eventDescription si fournie) et le lieu seulement s'il est commun à tous les formats.
+  const kmMin = Math.min(...list.map(r => r.distance)), kmMax = Math.max(...list.map(r => r.distance));
+  const dpMin = Math.min(...list.map(r => r.elevationGain || 0)), dpMax = Math.max(...list.map(r => r.elevationGain || 0));
+  const eventIntro = list.length === 1 ? (first.description || '')
+    : (first.eventDescription || `${displayName} propose ${list.length} formats, de ${Math.round(kmMin)} à ${Math.round(kmMax)} km et de ${dpMin} à ${dpMax} m de D+. Choisissez votre format pour estimer votre temps de course.`);
+  const places = [...new Set(list.map(r => r.location).filter(Boolean))];
+  const eventPlace = places.length === 1 ? places[0] : '';
+
   const formatCards = list.map(r => {
     const density = r.distance > 0 ? (r.elevationGain / r.distance) : 0;
     return `<a href="${raceUrlPath(r)}" style="display:block;text-decoration:none;color:#16211C;border:1px solid #D8DED4;border-radius:8px;padding:16px 18px;margin-bottom:12px;">
@@ -607,8 +626,8 @@ Object.values(byEventEdition).forEach(list => {
   <p style="font-size:13px;"><a href="/" style="color:#2F4A3C;">← Monchronotrail</a></p>
   <h1 style="font-family:Georgia,'Iowan Old Style',serif;font-weight:normal;font-size:28px;">${esc(first.name)} ${first.edition}</h1>
   ${editionBannerHtml(first)}
-  <p style="font-size:14.5px;line-height:1.6;">${esc(first.description || '')}</p>
-  <p style="font-size:13.5px;color:#5C6B66;">${esc(first.location || '')}</p>
+  <p style="font-size:14.5px;line-height:1.6;">${esc(eventIntro)}</p>
+  ${eventPlace ? `<p style="font-size:13.5px;color:#5C6B66;">${esc(eventPlace)}</p>` : ''}
 
   <h2 style="font-family:Georgia,serif;font-weight:normal;font-size:19px;margin-top:26px;">Choisissez votre format</h2>
   ${formatCards}
@@ -624,7 +643,7 @@ Object.values(byEventEdition).forEach(list => {
 // 6. Page calendrier (liste tous les formats)
 // ---------------------------------------------------------------------
 function raceRow(r){
-  return `<li style="margin-bottom:8px;"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;text-decoration:none;">${esc(r.name)} ${esc(r.formatName || r.distance+' km')}</a> — ${esc(r.date || 'date à confirmer')}${isPastEdition(r) ? ' (terminée)' : ''}${r.location ? ', '+esc(r.location) : ''}</li>`;
+  return `<li style="margin-bottom:8px;"><a href="${raceUrlPath(r)}" style="color:#2F4A3C;font-weight:600;text-decoration:none;">${esc(raceFullName(r))}</a> — ${esc(r.date || 'date à confirmer')}${isPastEdition(r) ? ' (terminée)' : ''}${r.location ? ', '+esc(r.location) : ''}</li>`;
 }
 
 function buildCalendar(year){
