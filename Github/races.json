@@ -656,7 +656,7 @@
     "name": "SaintéLyon",
     "slug": "saintelyon",
     "organizer": "ASICS SaintéLyon",
-    "officialSite": null,
+    "officialSite": "https://www.saintelyon.com/races/80km-saintelyon",
     "season": 2026,
     "edition": 2026,
     "formatName": "80 km (course principale)",
@@ -664,7 +664,7 @@
     "location": "Saint-Étienne → Lyon",
     "description": "La plus grande course nature de France : une traversée nocturne de Saint-Étienne à Lyon à travers les Monts du Lyonnais, à la frontale.",
     "distance": 80,
-    "elevationGain": 2000,
+    "elevationGain": 2500,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Moyenne montagne, course de nuit",
@@ -679,16 +679,16 @@
       "saintelyon-2026-45km"
     ],
     "sourceUrl": "https://www.saintelyon.com/races/80km-saintelyon",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-11-10",
     "status": "VERIFIED",
-    "notes": "Date et lieu vérifiés sur le site officiel saintelyon.com : départ 28 novembre 2026 à 23h30, Saint-Étienne. L'organisateur annonce un tracé qui varie chaque année, « autour de 80 km » pour un D+ minimum de 2000 m ; le D+ précis 2026 reste « à venir » (trace GPX non encore publiée) — valeur de 2000 m conservée dans l'attente."
+    "notes": "Vérifié le 10/11/2026 sur le site officiel saintelyon.com : départ samedi 28 novembre 2026 à 23h30, Saint-Étienne, 80 km et 2 500 m D+ (la page officielle de l'épreuve affiche 2500 m ; la trace officielle publiée le 29 octobre 2026 mesure 80,6 km). Le tracé est renouvelé à 40 % par rapport à 2025. Barrière à l'arrivée à Lyon : 16h30 le dimanche 29 novembre (soit 17 h après le départ), relevée dans des sources secondaires — à confirmer sur le site officiel avant de renseigner cutoffHours (non saisi ici pour ne pas modifier le classement des barrières horaires)."
   },
   {
     "id": "saintelyon-2026-45km",
     "name": "SaintéLyon",
     "slug": "saintelyon",
     "organizer": "ASICS SaintéLyon",
-    "officialSite": null,
+    "officialSite": "https://www.saintelyon.com/",
     "season": 2026,
     "edition": 2026,
     "formatName": "45 km (format marathon)",
@@ -711,9 +711,9 @@
       "saintelyon-2026-80km"
     ],
     "sourceUrl": "https://www.saintelyon.com/races/45km-saint-express",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-11-10",
     "status": "VERIFIED",
-    "notes": "Distance et date vérifiées sur le site officiel saintelyon.com : 45 km, départ 28 novembre 2026 à 23h00, Sainte-Catherine. Le D+ précis 2026 reste « à venir » sur le site officiel (trace GPX non encore publiée) ; valeur de 950 m conservée dans l'attente d'une publication officielle."
+    "notes": "Distance et date vérifiées sur le site officiel saintelyon.com : 45 km (nom officiel du format : SaintExpress), départ samedi 28 novembre 2026 à 23h00, Sainte-Catherine, arrivée à Lyon. Contrôle du 10/11/2026 : le D+ précis 2026 n'est toujours pas publié sur ce qu'on a pu consulter ; ordre de grandeur cohérent dans les sources secondaires (environ 900 à 950 m D+ en 2025), valeur de 950 m conservée en attendant la trace officielle."
   },
   {
     "id": "mmb-2026-90km",
@@ -3175,7 +3175,7 @@
     "location": "Château de Blois → Saint-Cyr-sur-Loire, Indre-et-Loire",
     "description": "126 km (épreuve reine) de Épopée Royale, Château de Blois → Saint-Cyr-sur-Loire, Indre-et-Loire. Val de Loire : chemins roulants, pistes forestières, voies vertes, halages — très faible dénivelé (« Gravel Running »).",
     "distance": 126,
-    "elevationGain": 800,
+    "elevationGain": 850,
     "elevationLoss": null,
     "maxElevation": null,
     "terrainType": "Val de Loire : chemins roulants, pistes forestières, voies vertes, halages — très faible dénivelé (« Gravel Running »)",
@@ -3188,9 +3188,9 @@
     "aidStations": [],
     "relatedRaces": [],
     "sourceUrl": "https://www.epopeeroyale.fr/126-km-epopee-royale/#trace126km",
-    "verificationDate": "2026-09-16",
+    "verificationDate": "2026-11-10",
     "status": "SECONDARY_SOURCE",
-    "notes": "ATTENTION : ce n'est pas un trail au sens classique mais un événement de « Gravel Running » (premier du genre en France), un compromis entre course sur route et trail, à très faible dénivelé (800 m D+ sur 126 km) — comme le Marathon du Vignoble d'Alsace, sa pertinence pour ce calculateur de trail est à évaluer. 126 km / 800 m D+ confirmés par plusieurs sources convergentes (followmysport, running.life, running-attitude.com) pour la 2e édition, vendredi-samedi 20-22 novembre 2026, départ Château Royal de Blois, arrivée Saint-Cyr-sur-Loire. Autres formats existants : 75 km/600 m D+, 55 km/450 m D+, 49 km/250-350 m D+, 33 km/180 m D+, 13 km/100-130 m D+ (non ajoutés)."
+    "notes": "ATTENTION : ce n'est pas un trail au sens classique mais un événement de « Gravel Running » (premier du genre en France), un compromis entre course sur route et trail, à très faible dénivelé (800 m D+ sur 126 km) — comme le Marathon du Vignoble d'Alsace, sa pertinence pour ce calculateur de trail est à évaluer. 126 km / 800 m D+ confirmés par plusieurs sources convergentes (followmysport, running.life, running-attitude.com) pour la 2e édition, vendredi-samedi 20-22 novembre 2026, départ Château Royal de Blois, arrivée Saint-Cyr-sur-Loire. Autres formats existants : 75 km/600 m D+, 55 km/450 m D+, 49 km/250-350 m D+, 33 km/180 m D+, 13 km/100-130 m D+ (non ajoutés). Mise à jour du 10/11/2026 : la communication de l'organisateur relayée par la presse spécialisée (communiqué du 10 septembre 2026) annonce 126 km (Épopée Royale SOLO) et 850 m D+, et non 800 m ; événement le samedi 21 novembre 2026, avec jusqu'à 22 h pour rallier l'arrivée selon le format. À confirmer sur epopeeroyale.fr avant de passer en VERIFIED."
   },
   {
     "id": "beauxmonts-2026-42km",
