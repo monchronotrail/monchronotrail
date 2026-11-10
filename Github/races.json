@@ -97,7 +97,11 @@
     "verificationDate": "2026-09-22",
     "status": "VERIFIED",
     "notes": "Vérifié directement sur la page officielle de la course (montblanc.utmb.world/races/OCC) : 60 km / 3500 m D+, départ jeudi 27 août 2026 à 8h15, Orsières. Confirme les valeurs déjà retenues. Barrière horaire officielle trouvée : 14h30 (source : thepostrace.com, règlement officiel UTMB).",
-    "cutoffHours": 14.5
+    "cutoffHours": 14.5,
+    "results": {
+      "winnerTime": "05:10:08",
+      "source": "https://reference-trail.fr/resultats-utmb-2026-frederic-tranchand-remporte-locc-2026-avec-un-temps-de-folie/"
+    }
   },
   {
     "id": "utmb-2026-ccc",
@@ -133,7 +137,11 @@
     "verificationDate": "2026-09-22",
     "status": "VERIFIED",
     "notes": "Distance/D+ déjà à jour et confirmés officiels (108 km / 6200 m D+, montblanc.utmb.world/races/CCC). Barrière horaire officielle ajoutée : 26h30 (source : thepostrace.com, règlement officiel UTMB). Départ vendredi 28 août 2026 à 9h00, Courmayeur.",
-    "cutoffHours": 26.5
+    "cutoffHours": 26.5,
+    "results": {
+      "winnerTime": "10:21:48",
+      "source": "https://reference-trail.fr/utmb-2026-resultats-et-classement-officiel-de-la-ccc/"
+    }
   },
   {
     "id": "utmb-2026-tds",
@@ -169,7 +177,11 @@
     "verificationDate": "2026-09-22",
     "status": "VERIFIED",
     "notes": "Distance/D+ déjà à jour et confirmés officiels (145 km / 9500 m D+, montblanc.utmb.world/races/TDS). Barrière horaire officielle ajoutée : 44h10 (source : thepostrace.com, règlement officiel UTMB). Départ lundi 24 août 2026 à 23h50, Courmayeur.",
-    "cutoffHours": 44.17
+    "cutoffHours": 44.17,
+    "results": {
+      "winnerTime": "19:28:43",
+      "source": "https://www.cimalp.com/en/blogs/the-cimalp-blog/tds-2026-remy-brassac-victory"
+    }
   },
   {
     "id": "utmb-2026-utmb",
