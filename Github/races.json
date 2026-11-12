@@ -681,21 +681,22 @@
     "sourceUrl": "https://www.saintelyon.com/races/80km-saintelyon",
     "verificationDate": "2026-11-10",
     "status": "VERIFIED",
-    "notes": "Vérifié le 10/11/2026 sur le site officiel saintelyon.com : départ samedi 28 novembre 2026 à 23h30, Saint-Étienne, 80 km et 2 500 m D+ (la page officielle de l'épreuve affiche 2500 m ; la trace officielle publiée le 29 octobre 2026 mesure 80,6 km). Le tracé est renouvelé à 40 % par rapport à 2025. Barrière à l'arrivée à Lyon : 16h30 le dimanche 29 novembre (soit 17 h après le départ), relevée dans des sources secondaires — à confirmer sur le site officiel avant de renseigner cutoffHours (non saisi ici pour ne pas modifier le classement des barrières horaires)."
+    "notes": "Vérifié le 10/11/2026 sur le site officiel saintelyon.com (page de l'épreuve et règlement) : départ samedi 28 novembre 2026 en 6 vagues de 23h30 à 00h30 depuis Saint-Étienne, arrivée à la Halle Tony Garnier (Lyon), 80 km et 2 500 m D+ (trace officielle publiée le 29 octobre 2026 : 80,6 km ; tracé renouvelé à 40 % par rapport à 2025). Barrière horaire éliminatoire à Lyon : dimanche 29 novembre à 16h30, calculée sur la base du dernier départ (00h30) avec une allure de référence de 5,2 km/h, soit 16 h pour la dernière vague (17 h pour la première, partie à 23h30) ; cutoffHours = 16. 5 ravitaillements solide/liquide ; les barrières intermédiaires sont publiées sur le site de l'épreuve.",
+    "cutoffHours": 16
   },
   {
     "id": "saintelyon-2026-45km",
     "name": "SaintéLyon",
     "slug": "saintelyon",
     "organizer": "ASICS SaintéLyon",
-    "officialSite": "https://www.saintelyon.com/",
+    "officialSite": "https://www.saintelyon.com/races/saintexpress",
     "season": 2026,
     "edition": 2026,
-    "formatName": "45 km (format marathon)",
+    "formatName": "SaintExpress 46 km",
     "date": "2026-11-28",
     "location": "Monts du Lyonnais → Lyon",
     "description": "Le format « marathon » de la SaintéLyon, sur un tracé plus court mais dans la même ambiance nocturne.",
-    "distance": 45,
+    "distance": 46,
     "elevationGain": 950,
     "elevationLoss": null,
     "maxElevation": null,
@@ -712,8 +713,8 @@
     ],
     "sourceUrl": "https://www.saintelyon.com/races/45km-saint-express",
     "verificationDate": "2026-11-10",
-    "status": "VERIFIED",
-    "notes": "Distance et date vérifiées sur le site officiel saintelyon.com : 45 km (nom officiel du format : SaintExpress), départ samedi 28 novembre 2026 à 23h00, Sainte-Catherine, arrivée à Lyon. Contrôle du 10/11/2026 : le D+ précis 2026 n'est toujours pas publié sur ce qu'on a pu consulter ; ordre de grandeur cohérent dans les sources secondaires (environ 900 à 950 m D+ en 2025), valeur de 950 m conservée en attendant la trace officielle."
+    "status": "SECONDARY_SOURCE",
+    "notes": "Vérifié le 10/11/2026 sur le règlement officiel saintelyon.com : SaintExpress, 46 km (et non 45), départ samedi 28 novembre 2026 en 4 vagues de 23h00 à 23h20 depuis Sainte-Catherine, arrivée à Lyon, 3 ravitaillements solide/liquide ; tous les parcours sont fermés dimanche à 16h30 (soit environ 17h30 pour la première vague). Le dénivelé 2026 n'apparaît pas dans le règlement : les 950 m D+ restent une estimation issue de sources secondaires (environ 900 à 950 m en 2025), à remplacer dès la publication de la trace officielle."
   },
   {
     "id": "mmb-2026-90km",
